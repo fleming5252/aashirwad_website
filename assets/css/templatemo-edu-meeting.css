@@ -789,13 +789,15 @@ services
 }
 
 .services .item {
+  position: relative;
   background-image: url(../images/service-item-bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+  border: 2px solid #D6B46D;
   border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
   text-align: center;
-  color: #fff;
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -807,6 +809,8 @@ services
   justify-content: space-between;
   flex: 1;
   overflow-y: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .services .down-content {
@@ -814,11 +818,21 @@ services
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
 
 .services .item .icon {
   max-width: 60px;
   margin: 0 auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1.5px solid #D6B46D;
+  background: rgba(245, 164, 37, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .services .item h4 {
@@ -826,10 +840,11 @@ services
   margin-bottom: 15px;
   font-size: 18px;
   font-weight: 600;
+  color: #2C2C2C;
 }
 
 .services .item p {
-  color: #fff;
+  color: #555555;
   font-size: 13px;
 }
 
@@ -2218,7 +2233,7 @@ responsive
    Section wrapper
 --------------------------------------------------------------- */
 .app-showcase {
-  background: #1f272b;
+  background: #17232B;
   padding: 0;
   font-family: 'Poppins', sans-serif;
 }
@@ -2227,13 +2242,13 @@ responsive
 --------------------------------------------------------------- */
 .app-intro-panel {
   padding: 80px 0 60px;
-  background: #FDFBF7;
+  background: #17232B;
 }
 
 .app-intro-panel h2 {
   font-size: 32px;
   font-weight: 700;
-  color: #2C2C2C;
+  color: #FFFFFF;
   margin-bottom: 10px;
   line-height: 1.3;
 }
@@ -2245,7 +2260,7 @@ responsive
 .app-intro-divider {
   width: 60px;
   height: 4px;
-  background: #E58A00;
+  background: linear-gradient(90deg, #F5A425, #A12C2F);
   border-radius: 2px;
   margin: 18px 0 28px;
 }
@@ -2253,7 +2268,7 @@ responsive
 .app-intro-panel .intro-text {
   font-size: 15px;
   line-height: 1.9;
-  color: #555555;
+  color: rgba(255,255,255,0.85);
   max-width: 95%;
   text-align: justify;
   text-justify: inter-word;
@@ -2279,7 +2294,7 @@ responsive
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: #F8F5EF;
+  background: #17232B;
   z-index: 10;
 }
 
@@ -2336,7 +2351,7 @@ responsive
 .mode-card h3 {
   font-size: 26px;
   font-weight: 700;
-  color: #E58A00;
+  color: #FFFFFF;
   margin-bottom: 14px;
   line-height: 1.3;
 }
@@ -2348,13 +2363,13 @@ responsive
 .mode-card p {
   font-size: 15px;
   line-height: 1.85;
-  color: #555555;
+  color: rgba(255,255,255,0.85);
 }
 
 .mode-progress-bar {
   width: 100%;
   height: 3px;
-  background: rgba(214, 180, 109, 0.2);
+  background: rgba(255,255,255,0.15);
   border-radius: 2px;
   margin-top: 30px;
   overflow: hidden;
@@ -2364,7 +2379,7 @@ responsive
   height: 100%;
   border-radius: 2px;
   transition: width 0.7s ease;
-  background: linear-gradient(90deg, #F5A425, #E58A00);
+  background: linear-gradient(90deg, #F5A425, #A12C2F);
 }
 
 /* Mode-specific icon backgrounds */
@@ -2400,8 +2415,8 @@ responsive
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, #F5A425, #E58A00);
-  box-shadow: 0 0 40px rgba(245, 164, 37, 0.3), 0 0 60px rgba(229, 138, 0, 0.18);
+  background: radial-gradient(circle at 40% 35%, #F5A425, #A12C2F);
+  box-shadow: 0 0 40px rgba(245, 164, 37, 0.3), 0 0 60px rgba(161, 44, 47, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2410,7 +2425,7 @@ responsive
 
 .wheel-orb-inner {
   text-align: center;
-  color: #2C2C2C;
+  color: #FFFFFF;
 }
 
 .orb-label {
@@ -2418,7 +2433,7 @@ responsive
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #6B7280;
+  color: rgba(255,255,255,0.55);
   opacity: 0.85;
   display: block;
   margin-bottom: 2px;
@@ -2427,7 +2442,7 @@ responsive
 .orb-name {
   font-size: 13px;
   font-weight: 700;
-  color: #2C2C2C;
+  color: #FFFFFF;
   display: block;
   line-height: 1.2;
   transition: all 0.4s ease;
@@ -2454,7 +2469,7 @@ responsive
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 2px dashed #D6B46D;
+  border: 2px dashed rgba(245,164,37,0.40);
 }
 
 /* Decorative solid inner circle */
@@ -2467,7 +2482,7 @@ responsive
   width: 78%;
   height: 78%;
   border-radius: 50%;
-  border: 1px solid rgba(214, 180, 109, 0.3);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 /* Spoke nodes */
@@ -2481,9 +2496,8 @@ responsive
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
-  border: 2px solid rgba(214, 180, 109, 0.3);
-  background: #FFFFFF;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 2px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.08);
 }
 
 /* Node positions — top / right / bottom / left */
@@ -2508,7 +2522,7 @@ responsive
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #2C2C2C;
+  color: rgba(255,255,255,0.65);
   display: block;
   transition: color 0.4s;
 }
@@ -2516,7 +2530,7 @@ responsive
 .wheel-node.active-node {
   border-color: #F5A425;
   background: rgba(245, 164, 37, 0.08);
-  box-shadow: 0 0 20px rgba(245, 164, 37, 0.2);
+  box-shadow: 0 0 20px rgba(245, 164, 37, 0.35);
 }
 
 .wheel-node.active-node .node-label {
@@ -2608,7 +2622,7 @@ responsive
   left: 50%;
   transform: translateX(-50%);
   font-size: 11px;
-  color: #6B7280;
+  color: rgba(255,255,255,0.45);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -2629,8 +2643,8 @@ responsive
 .scroll-hint-arrow {
   width: 20px;
   height: 20px;
-  border-right: 2px solid #D6B46D;
-  border-bottom: 2px solid #D6B46D;
+  border-right: 2px solid rgba(255,255,255,0.25);
+  border-bottom: 2px solid rgba(255,255,255,0.25);
   transform: rotate(45deg);
   animation: appScrollBounce 1.4s infinite;
 }
@@ -2658,7 +2672,7 @@ responsive
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(214, 180, 109, 0.35);
+  background: rgba(255,255,255,0.25);
   transition: all 0.4s;
 }
 
@@ -2756,17 +2770,17 @@ responsive
    Testimonials Section
 --------------------------------------------------------------- */
 .testimonials-section {
-  background: #1f272b;
-  padding: 80px 0 60px;
+  background: #FDFBF7;
+  padding: 100px 0;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
 
 .testimonials-section .section-heading h2 {
-  color: #fff;
+  color: #2C2C2C;
   text-align: center;
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 50px;
 }
 
@@ -2775,7 +2789,7 @@ responsive
   display: block;
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #f5a425, #a12c2f);
+  background: linear-gradient(90deg, #D6B46D, #F5A425);
   border-radius: 2px;
   margin: 14px auto 0;
 }
@@ -2783,10 +2797,10 @@ responsive
 /* Slider wrapper */
 .testimonial-slider-wrapper {
   position: relative;
-  min-height: 340px;
+  min-height: 380px;
 }
 
-/* Each slide */
+/* Each slide — premium card */
 .testimonial-slide {
   position: absolute;
   top: 0;
@@ -2798,6 +2812,11 @@ responsive
   opacity: 0;
   transition: opacity 0.7s ease, transform 0.7s ease;
   pointer-events: none;
+  background: #FFFFFF;
+  border: 2px solid #D6B46D;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  padding: 45px 40px 40px;
 }
 
 .testimonial-slide.t-active {
@@ -2823,12 +2842,12 @@ responsive
   border-radius: 50%;
   margin: 0 auto 18px;
   overflow: hidden;
-  border: 3px solid #f5a425;
-  box-shadow: 0 0 20px rgba(245, 164, 37, 0.3);
+  border: 2px solid #D6B46D;
+  box-shadow: 0 0 20px rgba(245, 164, 37, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #a12c2f, #f5a425);
+  background: linear-gradient(135deg, #F5A425, #E58A00);
 }
 
 .testimonial-avatar img {
@@ -2853,24 +2872,25 @@ responsive
 .testimonial-name {
   font-size: 18px;
   font-weight: 700;
-  color: #fff;
+  color: #2C2C2C;
   margin-bottom: 4px;
 }
 
 .testimonial-role {
   font-size: 13px;
-  color: #f5a425;
-  letter-spacing: 1px;
+  color: #E58A00;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   display: block;
   margin-bottom: 20px;
+  font-weight: 600;
 }
 
 /* Quote text */
 .testimonial-quote {
   font-size: 15px;
-  line-height: 1.9;
-  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.8;
+  color: #555555;
   font-style: italic;
   max-width: 620px;
   margin: 0 auto 20px;
@@ -2878,7 +2898,7 @@ responsive
 
 /* Stars */
 .testimonial-stars {
-  color: #f5a425;
+  color: #F5A425;
   font-size: 14px;
   letter-spacing: 3px;
 }
@@ -2895,14 +2915,14 @@ responsive
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: #D6D6D6;
   display: inline-block;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .t-dot.t-dot-active {
-  background: #f5a425;
+  background: #F5A425;
   transform: scale(1.3);
   box-shadow: 0 0 8px rgba(245, 164, 37, 0.6);
 }
@@ -2911,12 +2931,14 @@ responsive
   .testimonial-slide,
   .testimonial-slide.t-active {
     max-width: 100%;
-    padding: 0 20px;
+  }
+
+  .testimonial-slide {
+    padding: 30px 20px;
   }
 
   .testimonial-quote {
     font-size: 14px;
-    text-align: justify;
   }
 }
 
@@ -3138,7 +3160,7 @@ responsive
   font-size: 40px;
   text-transform: uppercase;
   font-weight: 700;
-  color: #E58A00;
+  color: #F5A425;
   letter-spacing: 1px;
   margin-bottom: 15px;
 }
@@ -3634,14 +3656,14 @@ section.app-heading-page h6.app-sub-quote {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #2C2C2C;
+  color: #FFFFFF;
   margin-bottom: clamp(6px, 1.5vh, 12px);
 }
 
 .core-modes-subtitle {
   font-size: clamp(13px, 3.6vw, 17px);
   font-weight: 500;
-  color: #6B7280;
+  color: rgba(255,255,255,0.75);
   margin-bottom: clamp(8px, 2vh, 16px);
 }
 
@@ -3653,7 +3675,7 @@ section.app-heading-page h6.app-sub-quote {
 .core-modes-underline {
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #F5A425, #E58A00);
+  background: linear-gradient(90deg, #F5A425, #A12C2F);
   border-radius: 2px;
   margin: 0 auto;
 }
