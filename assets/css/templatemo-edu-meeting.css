@@ -1368,14 +1368,14 @@ section.contact-us {
 .contact-info-heading {
   font-size: 28px;
   font-weight: 900;
-  color: #fff;
+  color: #2C2C2C;
   text-transform: uppercase;
   margin-bottom: 14px;
 }
 
 .contact-info-subtext {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.65);
+  color: #6B7280;
   line-height: 1.7;
   margin-bottom: 30px;
 }
@@ -1391,7 +1391,8 @@ section.contact-us {
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E5DDD1;
   border-radius: 14px;
   padding: 18px 20px;
 }
@@ -1418,14 +1419,14 @@ section.contact-us {
 }
 
 .contact-info-text strong {
-  color: #fff;
+  color: #2C2C2C;
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 2px;
 }
 
 .contact-info-text span {
-  color: rgba(255, 255, 255, 0.65);
+  color: #6B7280;
   font-size: 13px;
   line-height: 1.5;
 }
@@ -2090,14 +2091,13 @@ responsive
   position: relative;
   width: 100%;
   min-height: 400px;
-  height: 400px;
+  height: auto;
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   align-items: center;
-  /* CHANGED: Centers the inner content container horizontally */
-  justify-content: center; 
-  padding: 50px 0; /* Reduced side padding since the 10% margin will handle it */
+  justify-content: center;
+  padding: 60px 40px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   margin-top: 20px;
 }
@@ -2162,15 +2162,16 @@ responsive
 /* Responsive adjustments for mobile phone screens */
 @media (max-width: 767px) {
   .about-video-card {
-    padding: 30px 20px;
+    padding: 40px 20px;
     min-height: auto;
-    height: 500px;
+    height: auto;
   }
   .about-card-content {
-    /* RESET: Expands to full available width on mobile so text doesn't get squeezed */
     width: 100%;
     margin: 0;
     text-align: justify;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   .about-card-content h3 {
     font-size: 22px;
