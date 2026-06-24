@@ -567,7 +567,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="about-card-overlay"></div>
             
             <div class="about-card-content">
-              <h3>About Center 12</h3>
+              <h3>About Center 22</h3>
               <p>
                 Founded in 2009, Aashirwad Institute of Teachers is a premier institution in Kerala, specializing in competitive exam coaching, with a particular focus on PSC and KTET training. Headquartered in Vaikom, the institute has grown to include multiple branches across Kerala, offering personalized coaching and innovative learning tools to help students achieve success in their academic and professional aspirations. At Aashirwad, we offer a wide array of courses including PSC, KTET, Navodaya Entrance, Civil Service Nurturing Programs, and more. Our curriculum is designed to foster critical thinking and practical skills, with a commitment to excellence that has earned us 23 first ranks in PSC exams and a consistent record of Navodaya admissions from Kottayam since 2010. We are proud innovators, introducing Indiaâ€™s first digital rank file with interactive features, enhancing the learning experience for our students. With a strong emphasis on results, our â€œSuccess Guaranteeâ€ ensures that if KTET candidates do not pass, they can avail of the next training session free of charge. Our publications, including subject-specific rank files and current affairs updates, further support students in their preparation. Aashirwad remains dedicated to shaping future leaders by providing world-class education and unmatched guidance.
               </p>
@@ -2015,7 +2015,8 @@ https://templatemo.com/tm-569-edu-meeting
             var inZone = inScrollZone();
             if (!inZone) return;
             if (stepInProgress) return;
-            if (scrollLocked) return;
+            /*if (scrollLocked) return;*/
+            if (scrollLocked && currentStep > 0 && currentStep < TOTAL_STEPS - 1) return;
             var s = stepFromScroll();
             if (s !== currentStep) {
               var diff = Math.abs(s - currentStep);
@@ -2069,6 +2070,10 @@ https://templatemo.com/tm-569-edu-meeting
 
             var goingDown = e.deltaY > 0;
             var goingUp   = !goingDown && e.deltaY < 0;
+
+            var atTopBoundary    = (currentStep === 0 && goingUp);
+            var atBottomBoundary = (currentStep === TOTAL_STEPS - 1 && goingDown);
+            if (atTopBoundary || atBottomBoundary) return;
 
             var intercept = (goingDown && currentStep < TOTAL_STEPS - 1) ||
                             (goingUp   && currentStep > 0);
@@ -2128,8 +2133,14 @@ https://templatemo.com/tm-569-edu-meeting
           scene.addEventListener('touchmove', function (e) {
             if (!inScrollZone()) return;
 
-            if (touchHandled) {
+            /*if (touchHandled) {
               e.preventDefault();
+              return;
+            }*/
+            if (touchHandled) {
+              if (currentStep > 0 && currentStep < TOTAL_STEPS - 1) {
+                e.preventDefault();
+              }
               return;
             }
 
