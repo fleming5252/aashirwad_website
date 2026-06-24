@@ -2064,7 +2064,8 @@ https://templatemo.com/tm-569-edu-meeting
           scene.addEventListener('wheel', function onWheel(e) {
             var inZone = inScrollZone();
             if (!inZone) return;
-            if (scrollLocked) { e.preventDefault(); return; }
+            /*if (scrollLocked) { e.preventDefault(); return; }*/
+            if (scrollLocked) { return; }
 
             var goingDown = e.deltaY > 0;
             var goingUp   = !goingDown && e.deltaY < 0;
@@ -2100,9 +2101,9 @@ https://templatemo.com/tm-569-edu-meeting
               clearTimeout(boundaryLockTimeout);
             }
 
-            if (currentStep === 0 || currentStep === TOTAL_STEPS - 1) {
+            /*if (currentStep === 0 || currentStep === TOTAL_STEPS - 1) {
               boundaryLockActive = true;
-            }
+            }*/
 
             setTimeout(function () {
               scrollLocked = false;
