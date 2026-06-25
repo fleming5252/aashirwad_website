@@ -1225,18 +1225,8 @@ https://templatemo.com/tm-569-edu-meeting
           /* Initial render */
           applyStep(0, 0);
 
-          if (isMobile()) {
-            startMobileAuto();
-          }
-
-          nodes.forEach(function (node) { node.style.cursor = 'pointer'; });
-          ring.addEventListener('click', function (e) {
-            var node = e.target.closest('.wheel-node');
-            if (!node) return;
+          function spinTo(node, nodeIndex, target) {
             if (stepInProgress) return;
-            var target = parseInt(node.getAttribute('data-node'), 10);
-            var nodeIndex = nodes.indexOf(node);
-            if (nodeIndex === -1) return;
             var modTarget = ((360 - nodeIndex * 90) % 360 + 360) % 360;
             var k = Math.ceil((cumulativeDeg - modTarget) / 360);
             if (k < 0) k = 0;
@@ -1263,6 +1253,35 @@ https://templatemo.com/tm-569-edu-meeting
             else hint.classList.remove('hidden');
             currentStep = target;
             if (isMobile()) resetMobileAuto();
+          }
+
+          if (isMobile()) {
+            startMobileAuto();
+
+            nodes.forEach(function (node) {
+              var nodeIndex = nodes.indexOf(node);
+              var target = parseInt(node.getAttribute('data-node'), 10);
+              var els = node.querySelectorAll('.node-icon, .node-label');
+              Array.from(els).forEach(function (el) {
+                function tap(e) {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  spinTo(node, nodeIndex, target);
+                }
+                el.addEventListener('click', tap);
+                el.addEventListener('touchend', tap, { passive: false });
+              });
+            });
+          }
+
+          nodes.forEach(function (node) { node.style.cursor = 'pointer'; });
+          ring.addEventListener('click', function (e) {
+            var node = e.target.closest('.wheel-node');
+            if (!node) return;
+            var target = parseInt(node.getAttribute('data-node'), 10);
+            var nodeIndex = nodes.indexOf(node);
+            if (nodeIndex === -1) return;
+            spinTo(node, nodeIndex, target);
           });
 
           if (isMobile()) {
