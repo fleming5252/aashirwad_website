@@ -296,14 +296,14 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
  
-            <!-- Node 1 – Write (right) -->
-            <div class="wheel-node" data-node="1">
+            <!-- Node 1 – Watch (right) -->
+            <div class="wheel-node" data-node="3">
               <div class="node-inner">
-                <span class="node-icon">✍️</span>
-                <span class="node-label">Write</span>
+                <span class="node-icon">🎬</span>
+                <span class="node-label">Watch</span>
               </div>
             </div>
- 
+  
             <!-- Node 2 – Listen (bottom) -->
             <div class="wheel-node" data-node="2">
               <div class="node-inner">
@@ -311,12 +311,12 @@ https://templatemo.com/tm-569-edu-meeting
                 <span class="node-label">Listen</span>
               </div>
             </div>
- 
-            <!-- Node 3 – Watch (left) -->
-            <div class="wheel-node" data-node="3">
+  
+            <!-- Node 3 – Write (left) -->
+            <div class="wheel-node" data-node="1">
               <div class="node-inner">
-                <span class="node-icon">🎬</span>
-                <span class="node-label">Watch</span>
+                <span class="node-icon">✍️</span>
+                <span class="node-label">Write</span>
               </div>
             </div>
  
@@ -1227,19 +1227,45 @@ https://templatemo.com/tm-569-edu-meeting
 
           if (isMobile()) {
             startMobileAuto();
+          }
 
-            nodes.forEach(function (node, i) {
-              node.style.cursor = 'pointer';
-              node.addEventListener('click', function () {
-                var target = parseInt(node.getAttribute('data-node'), 10);
-                var stepsForward = (target - currentStep + TOTAL_STEPS) % TOTAL_STEPS;
-                if (stepsForward === 0) return;
-                cumulativeDeg += (stepsForward - 1) * 90;
-                applyStep(target, 1);
-                resetMobileAuto();
+          nodes.forEach(function (node, i) {
+            node.style.cursor = 'pointer';
+            node.addEventListener('click', function () {
+              if (stepInProgress) return;
+              var target = parseInt(node.getAttribute('data-node'), 10);
+              var nodeIndex = nodes.indexOf(node);
+              if (nodeIndex === -1) return;
+              var modTarget = ((360 - nodeIndex * 90) % 360 + 360) % 360;
+              var k = Math.ceil((cumulativeDeg - modTarget) / 360);
+              if (k < 0) k = 0;
+              var targetCumulativeDeg = modTarget + k * 360;
+              if (targetCumulativeDeg === cumulativeDeg) return;
+              cumulativeDeg = targetCumulativeDeg;
+              ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
+              innerEls.forEach(function (el) {
+                el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
               });
+              sparkleWrappers.forEach(function (w) {
+                w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
+              });
+              nodes.forEach(function (n, j) {
+                n.classList.toggle('active-node', j === nodeIndex);
+              });
+              orbName.textContent = MODES[target];
+              cards.forEach(function (card, j) {
+                card.classList.remove('active', 'exit-up', 'exit-down');
+                if (j === target) card.classList.add('active');
+              });
+              dots.forEach(function (d, j) { d.classList.toggle('active', j === target); });
+              if (target > 0) hint.classList.add('hidden');
+              else hint.classList.remove('hidden');
+              currentStep = target;
+              if (isMobile()) resetMobileAuto();
             });
+          });
 
+          if (isMobile()) {
             if (hint) hint.style.display = 'none';
 
             var rightPane = document.querySelector('.app-right-pane');

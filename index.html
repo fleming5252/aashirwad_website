@@ -434,27 +434,27 @@ https://templatemo.com/tm-569-edu-meeting
                   <div class="quote-slider">
                     <div class="quote-slide active">
                       <p class="quote-text">"Opportunities don't happen, you create them."</p>
-                      <span class="quote-author">â€” Chris Grosser</span>
+                      <span class="quote-author">- Chris Grosser</span>
                     </div>
                     <div class="quote-slide">
                       <p class="quote-text">"An investment in knowledge pays the best interest."</p>
-                      <span class="quote-author">â€” Benjamin Franklin</span>
+                      <span class="quote-author">- Benjamin Franklin</span>
                     </div>
                     <div class="quote-slide">
                       <p class="quote-text">"I find that the harder I work, the more luck I seem to have."</p>
-                      <span class="quote-author">â€” Thomas Jefferson</span>
+                      <span class="quote-author">- Thomas Jefferson</span>
                     </div>
                     <div class="quote-slide">
                       <p class="quote-text">"If people throw stones at you, turn them into milestones."</p>
-                      <span class="quote-author">â€” Sachin Tendulkar</span>
+                      <span class="quote-author">- Sachin Tendulkar</span>
                     </div>
                     <div class="quote-slide">
                       <p class="quote-text">"If you want to shine like the sun, first burn like the sun."</p>
-                      <span class="quote-author">â€” A. P. J. Abdul Kalam</span>
+                      <span class="quote-author">- A. P. J. Abdul Kalam</span>
                     </div>
                     <div class="quote-slide">
                       <p class="quote-text">"Wake up with determination. Go to bed with satisfaction."</p>
-                      <span class="quote-author">â€” George Horace Lorimer</span>
+                      <span class="quote-author">- George Horace Lorimer</span>
                     </div>
                   </div>
                   <div class="main-button-red">
@@ -1256,11 +1256,11 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
   
-            <!-- Node 1 â€“ Write (right) -->
-            <div class="wheel-node" data-node="1">
+            <!-- Node 1 â€“ Watch (right) -->
+            <div class="wheel-node" data-node="3">
               <div class="node-inner">
-                <span class="node-icon">✍️</span>
-                <span class="node-label">Write</span>
+                <span class="node-icon">🎬</span>
+                <span class="node-label">Watch</span>
               </div>
             </div>
   
@@ -1272,11 +1272,11 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
   
-            <!-- Node 3 â€“ Watch (left) -->
-            <div class="wheel-node" data-node="3">
+            <!-- Node 3 â€“ Write (left) -->
+            <div class="wheel-node" data-node="1">
               <div class="node-inner">
-                <span class="node-icon">🎬</span>
-                <span class="node-label">Watch</span>
+                <span class="node-icon">✍️</span>
+                <span class="node-label">Write</span>
               </div>
             </div>
   
@@ -1973,10 +1973,6 @@ https://templatemo.com/tm-569-edu-meeting
               w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
             });
 
-            sparkleWrappers.forEach(function (w) {
-              w.style.transform = 'rotate(' + (-deg) + 'deg)';
-            });
-
             nodes.forEach(function (n, i) {
               var nodeStep = (TOTAL_STEPS - i) % TOTAL_STEPS;
               n.classList.toggle('active-node', nodeStep === step % TOTAL_STEPS);
@@ -2292,19 +2288,45 @@ https://templatemo.com/tm-569-edu-meeting
 
           if (isMobile()) {
             startMobileAuto();
+          }
 
-            nodes.forEach(function (node, i) {
-              node.style.cursor = 'pointer';
-              node.addEventListener('click', function () {
-                var target = parseInt(node.getAttribute('data-node'), 10);
-                var stepsForward = (target - currentStep + TOTAL_STEPS) % TOTAL_STEPS;
-                if (stepsForward === 0) return;
-                cumulativeDeg += (stepsForward - 1) * 90;
-                applyStep(target, 1);
-                resetMobileAuto();
+          nodes.forEach(function (node, i) {
+            node.style.cursor = 'pointer';
+            node.addEventListener('click', function () {
+              if (stepInProgress) return;
+              var target = parseInt(node.getAttribute('data-node'), 10);
+              var nodeIndex = nodes.indexOf(node);
+              if (nodeIndex === -1) return;
+              var modTarget = ((360 - nodeIndex * 90) % 360 + 360) % 360;
+              var k = Math.ceil((cumulativeDeg - modTarget) / 360);
+              if (k < 0) k = 0;
+              var targetCumulativeDeg = modTarget + k * 360;
+              if (targetCumulativeDeg === cumulativeDeg) return;
+              cumulativeDeg = targetCumulativeDeg;
+              ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
+              innerEls.forEach(function (el) {
+                el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
               });
+              sparkleWrappers.forEach(function (w) {
+                w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
+              });
+              nodes.forEach(function (n, j) {
+                n.classList.toggle('active-node', j === nodeIndex);
+              });
+              orbName.textContent = MODES[target];
+              cards.forEach(function (card, j) {
+                card.classList.remove('active', 'exit-up', 'exit-down');
+                if (j === target) card.classList.add('active');
+              });
+              dots.forEach(function (d, j) { d.classList.toggle('active', j === target); });
+              if (target > 0) hint.classList.add('hidden');
+              else hint.classList.remove('hidden');
+              currentStep = target;
+              if (isMobile()) resetMobileAuto();
             });
+          });
 
+          if (isMobile()) {
             if (hint) hint.style.display = 'none';
 
             var rightPane = document.querySelector('.app-right-pane');
