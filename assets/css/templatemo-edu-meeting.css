@@ -3348,7 +3348,7 @@ section.app-heading-page h6.app-sub-quote {
 .app-about-title {
   font-size: 32px;
   font-weight: 700;
-  color: #fff;
+  color: #1e1e1e;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 12px;
@@ -3365,7 +3365,7 @@ section.app-heading-page h6.app-sub-quote {
 .app-about-content p {
   font-size: 14px;
   line-height: 1.9;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(0, 0, 0, 0.85);
   text-align: justify;
   margin-bottom: 18px;
 }
@@ -3715,6 +3715,13 @@ section.app-heading-page h6.app-sub-quote {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.pf-slide[data-bg="dark"] .pf-title { color: #1e1e1e; }
+.pf-slide[data-bg="dark"] .pf-desc { color: rgba(0,0,0,0.75); }
+.pf-slide[data-bg="dark"] .pf-bullets li { color: rgba(0,0,0,0.88); }
+.pf-slide[data-bg="dark"] .pf-scroll-text { color: rgba(0,0,0,0.5); }
+.pf-slide[data-bg="dark"] .pf-scroll-arrow { border-right-color: rgba(0,0,0,0.4); border-bottom-color: rgba(0,0,0,0.4); }
+.pf-slide[data-bg="dark"] .pf-bg-number { color: rgba(0,0,0,0.07); }
 
 .pf-slide[data-bg="red"] {
   background-image: url(../images/meetings-page-bg-red.jpg);
@@ -5598,7 +5605,7 @@ section.learning-process .container {
 .app-promo-title {
   font-size: 30px;
   font-weight: 800;
-  color: #fff;
+  color: #1e1e1e;
   line-height: 1.2;
   margin: 0;
 }
@@ -5616,7 +5623,7 @@ section.learning-process .container {
 
 .app-promo-desc {
   font-size: 14px;
-  color: rgba(255,255,255,0.65);
+  color: rgba(0,0,0,0.65);
   line-height: 1.8;
   margin-bottom: 20px;
 }
@@ -5629,7 +5636,7 @@ section.learning-process .container {
 
 .app-promo-features li {
   font-size: 13.5px;
-  color: rgba(255,255,255,0.85);
+  color: rgba(0,0,0,0.85);
   padding: 5px 0;
   display: flex;
   align-items: center;
