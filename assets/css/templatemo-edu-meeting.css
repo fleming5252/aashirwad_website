@@ -2222,7 +2222,7 @@ responsive
 /* Responsive adjustment for small mobile screens */
 @media (max-width: 767px) {
   .logo .logo-image {
-    height: 35px;        /* Slightly downscales on mobile devices so it doesn't push the menu toggle */
+    height: 64px;
   }
 }
 
@@ -6467,7 +6467,7 @@ section.learning-process .container {
 
 .milestone[data-milestone="0"] { gap: 20px; text-align: justify; flex-direction: row; align-items: flex-start; margin-top: -3cm; padding-left: 30px; }
 .milestone[data-milestone="0"] .milestone-media { margin-left: 0cm; flex: 0 0 192px; height: 144px; }
-.milestone[data-milestone="0"] .milestone-content { text-align: justify; margin-right: -4cm; }
+.milestone[data-milestone="0"] .milestone-content { text-align: justify; margin-right: -2.5cm; }
 .milestone[data-milestone="0"] .milestone-node { top: 2cm; left: calc(50% - 6cm); }
 .milestone[data-milestone="1"] { flex-direction: row; align-items: flex-start; text-align: justify; margin-top: -2cm; }
 .milestone[data-milestone="1"] .milestone-media { margin-left: -3cm; flex: 0 0 192px; height: 144px; }
@@ -6480,7 +6480,7 @@ section.learning-process .container {
 .milestone[data-milestone="3"] { margin-top: 3cm; }
 .milestone[data-milestone="3"] .milestone-node { top: -3.5cm; left: calc(50% + 7cm); }
 .milestone[data-milestone="3"] .milestone-media { margin-top: -5cm; margin-left: calc(-3cm - 20px); }
-.milestone[data-milestone="3"] .milestone-content { margin-top: -5cm; margin-left: 2cm; }
+.milestone[data-milestone="3"] .milestone-content { margin-top: -5cm; margin-left: 2cm; text-align: justify; }
 .milestone[data-milestone="4"] { margin-top: 2cm; }
 .milestone[data-milestone="4"] .milestone-node { top: -2cm; left: calc(50% - 6cm); }
 .milestone[data-milestone="4"] .milestone-media { margin-top: -2cm; transform: translateX(-6cm); }
@@ -6809,9 +6809,9 @@ section.learning-process .container {
     display: block !important;
     left: auto !important;
     right: auto !important;
-    width: calc(100% - 60px) !important;
-    max-width: 420px !important;
-    height: 200px !important;
+    width: calc(90% - 54px) !important;
+    max-width: 378px !important;
+    height: 180px !important;
     margin: 0 0 18px 80px !important;
     border-radius: 14px !important;
     overflow: hidden !important;
@@ -6820,8 +6820,8 @@ section.learning-process .container {
     -webkit-mask-image: none !important;
     mask-image: none !important;
   }
-  .memory-bg[data-memory="5"] { margin: -30px 0 18px 30px !important; }
-  .memory-bg[data-memory="6"] { margin: -120px 0 18px 30px !important; }
+  .memory-bg[data-memory="5"] { margin: -30px 0 18px 80px !important; }
+  .memory-bg[data-memory="6"] { margin: 0 0 18px 80px !important; }
 
   .journey-trust-bar { padding: 20px; }
   .journey-destination { margin-top: 20px !important; }
