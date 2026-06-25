@@ -2290,40 +2290,40 @@ https://templatemo.com/tm-569-edu-meeting
             startMobileAuto();
           }
 
-          nodes.forEach(function (node, i) {
-            node.style.cursor = 'pointer';
-            node.addEventListener('click', function () {
-              if (stepInProgress) return;
-              var target = parseInt(node.getAttribute('data-node'), 10);
-              var nodeIndex = nodes.indexOf(node);
-              if (nodeIndex === -1) return;
-              var modTarget = ((360 - nodeIndex * 90) % 360 + 360) % 360;
-              var k = Math.ceil((cumulativeDeg - modTarget) / 360);
-              if (k < 0) k = 0;
-              var targetCumulativeDeg = modTarget + k * 360;
-              if (targetCumulativeDeg === cumulativeDeg) return;
-              cumulativeDeg = targetCumulativeDeg;
-              ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
-              innerEls.forEach(function (el) {
-                el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
-              });
-              sparkleWrappers.forEach(function (w) {
-                w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
-              });
-              nodes.forEach(function (n, j) {
-                n.classList.toggle('active-node', j === nodeIndex);
-              });
-              orbName.textContent = MODES[target];
-              cards.forEach(function (card, j) {
-                card.classList.remove('active', 'exit-up', 'exit-down');
-                if (j === target) card.classList.add('active');
-              });
-              dots.forEach(function (d, j) { d.classList.toggle('active', j === target); });
-              if (target > 0) hint.classList.add('hidden');
-              else hint.classList.remove('hidden');
-              currentStep = target;
-              if (isMobile()) resetMobileAuto();
+          nodes.forEach(function (node) { node.style.cursor = 'pointer'; });
+          ring.addEventListener('click', function (e) {
+            var node = e.target.closest('.wheel-node');
+            if (!node) return;
+            if (stepInProgress) return;
+            var target = parseInt(node.getAttribute('data-node'), 10);
+            var nodeIndex = nodes.indexOf(node);
+            if (nodeIndex === -1) return;
+            var modTarget = ((360 - nodeIndex * 90) % 360 + 360) % 360;
+            var k = Math.ceil((cumulativeDeg - modTarget) / 360);
+            if (k < 0) k = 0;
+            var targetCumulativeDeg = modTarget + k * 360;
+            if (targetCumulativeDeg === cumulativeDeg) return;
+            cumulativeDeg = targetCumulativeDeg;
+            ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
+            innerEls.forEach(function (el) {
+              el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
             });
+            sparkleWrappers.forEach(function (w) {
+              w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
+            });
+            nodes.forEach(function (n, j) {
+              n.classList.toggle('active-node', j === nodeIndex);
+            });
+            orbName.textContent = MODES[target];
+            cards.forEach(function (card, j) {
+              card.classList.remove('active', 'exit-up', 'exit-down');
+              if (j === target) card.classList.add('active');
+            });
+            dots.forEach(function (d, j) { d.classList.toggle('active', j === target); });
+            if (target > 0) hint.classList.add('hidden');
+            else hint.classList.remove('hidden');
+            currentStep = target;
+            if (isMobile()) resetMobileAuto();
           });
 
           if (isMobile()) {
