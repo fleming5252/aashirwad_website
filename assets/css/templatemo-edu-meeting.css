@@ -5287,6 +5287,24 @@ section.learning-process .container {
   animation-play-state: paused;
 }
 
+/* ── Disable native touch gestures (text selection, image save menu,
+   drag) so a touch-hold is never hijacked by the OS before our JS
+   pause/resume logic can react to it ── */
+.toppers-track,
+.toppers-track * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.toppers-track img {
+  pointer-events: none;
+}
+
 @keyframes topperScroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -6248,7 +6266,7 @@ section.learning-process .container {
 
   .mobile-carousel-arrow {
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
     width: 44px;
     height: 44px;
