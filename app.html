@@ -876,11 +876,60 @@ https://templatemo.com/tm-569-edu-meeting
 
           function isMobile() { return window.innerWidth < 992; }
 
+          if (isMobile()) {
+            scene.style.height = 'auto';
+          }
+
+          if (isMobile()) {
+            var stickyFrame = document.getElementById('appStickyFrame');
+            if (stickyFrame) {
+              stickyFrame.style.position = 'relative';
+              stickyFrame.style.height = 'auto';
+              stickyFrame.style.minHeight = '100vh';
+            }
+          }
+
+          var mobileAutoTimer = null;
+
+          function startMobileAuto() {
+            if (!isMobile()) return;
+            stopMobileAuto();
+            mobileAutoTimer = setInterval(function () {
+              var next = (currentStep + 1) % TOTAL_STEPS;
+              applyStep(next, 1);
+            }, 3000);
+          }
+
+          function stopMobileAuto() {
+            if (mobileAutoTimer) {
+              clearInterval(mobileAutoTimer);
+              mobileAutoTimer = null;
+            }
+          }
+
+          function resetMobileAuto() {
+            stopMobileAuto();
+            startMobileAuto();
+          }
+
+          var resizeMobileTimer;
+          window.addEventListener('resize', function () {
+            clearTimeout(resizeMobileTimer);
+            resizeMobileTimer = setTimeout(function () {
+              if (isMobile()) {
+                startMobileAuto();
+              } else {
+                stopMobileAuto();
+              }
+            }, 200);
+          });
+
           /* ── State ── */
           var currentStep    = 0;
           var stepInProgress = false;
           var scrollLocked   = false;
           var scrollLockTimer   = null;
+          var cumulativeDeg     = 0;
 
           /* ── Apply a step (0-3) ── */
           function applyStep(step, direction) {
@@ -891,15 +940,15 @@ https://templatemo.com/tm-569-edu-meeting
             }
             stepInProgress = true;
 
-            var deg = step * 90;
-            ring.style.transform = 'translate(-50%,-50%) rotate(' + deg + 'deg)';
+            cumulativeDeg += direction * 90;
+            ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
 
             innerEls.forEach(function (el) {
-              el.style.transform = 'rotate(' + (-deg) + 'deg)';
+              el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
             });
 
             sparkleWrappers.forEach(function (w) {
-              w.style.transform = 'rotate(' + (-deg) + 'deg)';
+              w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)';
             });
 
             nodes.forEach(function (n, i) {
@@ -971,6 +1020,7 @@ https://templatemo.com/tm-569-edu-meeting
           }
 
           function onWheel(e) {
+            if (isMobile()) return;
             var inZone = inScrollZone();
             if (!inZone) return;
             if (scrollLocked || stepInProgress) { e.preventDefault(); return; }
@@ -1032,12 +1082,14 @@ https://templatemo.com/tm-569-edu-meeting
           }
 
           window.addEventListener('touchstart', function (e) {
+            if (isMobile()) return;
             if (!isWheelVisible()) return;
             touchStartY = e.touches[0].clientY;
             touchHandled = false;
           }, { passive: true });
 
           window.addEventListener('touchmove', function (e) {
+            if (isMobile()) return;
             if (!isWheelVisible()) return;
 
             // If an animation translation sequence is running, force kill layout creep
@@ -1093,6 +1145,7 @@ https://templatemo.com/tm-569-edu-meeting
           }, { passive: false });
 
           window.addEventListener('touchend', function (e) {
+            if (isMobile()) return;
             touchHandled = false;
           }, { passive: true });
 
@@ -1110,13 +1163,13 @@ https://templatemo.com/tm-569-edu-meeting
                 lockScroll();
               } else if (diff > 1) {
                 /* Entering from outside — snap directly without animation */
-                var deg = s * 90;
+                cumulativeDeg = s * 90;
                 ring.style.transition = 'none';
                 innerEls.forEach(function (el) { el.style.transition = 'none'; });
                 sparkleWrappers.forEach(function (w) { w.style.transition = 'none'; });
-                ring.style.transform = 'translate(-50%,-50%) rotate(' + deg + 'deg)';
-                innerEls.forEach(function (el) { el.style.transform = 'rotate(' + (-deg) + 'deg)'; });
-                sparkleWrappers.forEach(function (w) { w.style.transform = 'rotate(' + (-deg) + 'deg)'; });
+                ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
+                innerEls.forEach(function (el) { el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)'; });
+                sparkleWrappers.forEach(function (w) { w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)'; });
                 void ring.offsetHeight;
                 ring.style.transition = '';
                 innerEls.forEach(function (el) { el.style.transition = ''; });
@@ -1171,6 +1224,100 @@ https://templatemo.com/tm-569-edu-meeting
 
           /* Initial render */
           applyStep(0, 0);
+
+          if (isMobile()) {
+            startMobileAuto();
+
+            nodes.forEach(function (node, i) {
+              node.style.cursor = 'pointer';
+              node.addEventListener('click', function () {
+                var target = parseInt(node.getAttribute('data-node'), 10);
+                var stepsForward = (target - currentStep + TOTAL_STEPS) % TOTAL_STEPS;
+                if (stepsForward === 0) return;
+                cumulativeDeg += (stepsForward - 1) * 90;
+                applyStep(target, 1);
+                resetMobileAuto();
+              });
+            });
+
+            if (hint) hint.style.display = 'none';
+
+            var rightPane = document.querySelector('.app-right-pane');
+            if (rightPane) rightPane.style.position = 'relative';
+
+            var leftBtn = document.createElement('button');
+            leftBtn.innerHTML = '&#8249;';
+            leftBtn.setAttribute('aria-label', 'Previous mode');
+            leftBtn.style.cssText = [
+              'position:absolute',
+              'left:6px',
+              'top:50%',
+              'transform:translateY(-50%)',
+              'z-index:50',
+              'width:36px',
+              'height:36px',
+              'border-radius:50%',
+              'border:2px solid rgba(245,164,37,0.5)',
+              'background:rgba(23,35,43,0.85)',
+              'color:#f5a425',
+              'font-size:22px',
+              'line-height:1',
+              'display:flex',
+              'align-items:center',
+              'justify-content:center',
+              'cursor:pointer',
+              'backdrop-filter:blur(4px)',
+              '-webkit-backdrop-filter:blur(4px)',
+              'padding:0',
+              'font-family:Poppins,sans-serif',
+              '-webkit-tap-highlight-color:transparent'
+            ].join(';');
+
+            var rightBtn = document.createElement('button');
+            rightBtn.innerHTML = '&#8250;';
+            rightBtn.setAttribute('aria-label', 'Next mode');
+            rightBtn.style.cssText = [
+              'position:absolute',
+              'right:6px',
+              'top:50%',
+              'transform:translateY(-50%)',
+              'z-index:50',
+              'width:36px',
+              'height:36px',
+              'border-radius:50%',
+              'border:2px solid rgba(245,164,37,0.5)',
+              'background:rgba(23,35,43,0.85)',
+              'color:#f5a425',
+              'font-size:22px',
+              'line-height:1',
+              'display:flex',
+              'align-items:center',
+              'justify-content:center',
+              'cursor:pointer',
+              'backdrop-filter:blur(4px)',
+              '-webkit-backdrop-filter:blur(4px)',
+              'padding:0',
+              'font-family:Poppins,sans-serif',
+              '-webkit-tap-highlight-color:transparent'
+            ].join(';');
+
+            leftBtn.addEventListener('click', function () {
+              var prev = (currentStep - 1 + TOTAL_STEPS) % TOTAL_STEPS;
+              applyStep(prev, -1);
+              resetMobileAuto();
+            });
+
+            rightBtn.addEventListener('click', function () {
+              var next = (currentStep + 1) % TOTAL_STEPS;
+              applyStep(next, 1);
+              resetMobileAuto();
+            });
+
+            if (rightPane) {
+              rightPane.appendChild(leftBtn);
+              rightPane.appendChild(rightBtn);
+            }
+          }
         })();
 
         
