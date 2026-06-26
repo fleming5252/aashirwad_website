@@ -3443,6 +3443,28 @@ section.app-heading-page h6.app-sub-quote {
   margin-right: auto;
 }
 
+.app-feature-pills {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+.app-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #D6B46D, #C68A2D);
+  color: #1f272b;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 50px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(198, 138, 45, 0.3);
+}
+
 .app-download-buttons {
   display: flex;
   justify-content: center;
@@ -3451,6 +3473,13 @@ section.app-heading-page h6.app-sub-quote {
   flex-wrap: wrap;
 }
 
+.app-store-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 .app-store-btn {
   display: inline-block;
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -3477,6 +3506,14 @@ section.app-heading-page h6.app-sub-quote {
     height: 44px;
   }
 
+  .app-feature-pills {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .app-feature-pill {
+    font-size: 12px;
+    padding: 7px 16px;
+  }
   .app-download-buttons {
     flex-direction: column;
     gap: 14px;
@@ -6890,6 +6927,850 @@ section.learning-process .container {
   .footer-col p,
   .footer-col-brand p {
     text-align: justify;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Guided Learning Journey (gj-*)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.gj-section {
+  position: relative;
+  background: #F8F7F4;
+  padding: 120px 0;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+.gj-section::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%;
+  height: 100%;
+  background: radial-gradient(ellipse at 75% 50%, rgba(214,164,68,0.12) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Particles ── */
+.gj-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.gj-particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.12;
+  animation: gjParticleDrift linear infinite;
+}
+@keyframes gjParticleDrift {
+  0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0;    }
+  10%  {                                               opacity: 0.12; }
+  90%  {                                               opacity: 0.12; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0;    }
+}
+
+/* ── Inner container (replaces .container for full-width columns) ── */
+.gj-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 45px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Left column ── */
+.gj-left-col {
+  flex: 1.4;
+  min-width: 0;
+}
+
+/* ── Right column (phone) — order: render second on desktop via flex row,
+     but DOM has it first so on mobile stack it naturally shows first ── */
+.gj-right-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Label / Eyebrow ── */
+.gj-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.gj-label-line {
+  width: 30px;
+  height: 2px;
+  background: #C68A2D;
+  flex-shrink: 0;
+}
+.gj-label-text {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #C68A2D;
+}
+
+/* ── Heading ── */
+.gj-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1E1E1E;
+  margin: 0 0 16px;
+}
+.gj-heading-accent {
+  background: linear-gradient(135deg, #DFA437, #A12C2F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Subtitle ── */
+.gj-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
+  margin: 0 0 18px;
+  line-height: 1.4;
+}
+
+/* ── Intro row (paragraph + journey heading side by side) ── */
+.gj-intro-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 36px;
+}
+.gj-paragraph {
+  flex-shrink: 0;
+  max-width: 100%;
+  width: 100%;
+  font-size: 15px;
+  color: #666666;
+  line-height: 1.8;
+  margin: 0 0 28px;
+}
+.gj-journey-heading {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 6px;
+}
+.gj-journey-line {
+  flex: 1;
+  height: 1px;
+  background: #D6A23C;
+}
+.gj-journey-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #7A2F31;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── Slider wrap ── */
+.gj-slider-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+/* ── Arrow buttons ── */
+.gj-arrow {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #7A2F31;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.gj-arrow:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.gj-arrow:disabled {
+  opacity: 1;
+  cursor: pointer;
+}
+.gj-arrow-left {
+  left: -22px;
+}
+.gj-arrow-right {
+  right: -22px;
+}
+
+/* ── Slider card ── */
+.gj-slider-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  padding: 30px 36px;
+  min-height: 320px;
+  height: 420px;
+  overflow: hidden;
+  position: relative;
+}
+.gj-card-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  height: 100%;
+  overflow: hidden;
+}
+.gj-card-text {
+  flex: 0 0 58%;
+  max-width: 58%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.gj-card-phone {
+  flex: 0 0 38%;
+  max-width: 38%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  padding: 8px 0;
+}
+.gj-card-phone-img {
+  max-height: 360px;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ── Card top (icon + badge) ── */
+.gj-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.gj-step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #7A2F31;
+  color: #D6B46D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.gj-step-badge {
+  display: inline-block;
+  background: #A12C2F;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 999px;
+  letter-spacing: 1px;
+}
+
+.gj-step-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1F1F1F;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+.gj-step-desc {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0 0 12px;
+  text-align: justify;
+}
+
+/* ── Feature list ── */
+.gj-step-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gj-step-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: justify;
+  font-size: 13px;
+  color: #444;
+}
+.gj-feature-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  background: rgba(214,180,109,0.15);
+  color: #C68A2D;
+}
+.gj-step-features li:nth-child(2) .gj-feature-icon {
+  background: rgba(161,44,47,0.10);
+  color: #A12C2F;
+}
+.gj-step-features li:nth-child(3) .gj-feature-icon {
+  background: rgba(214,180,109,0.15);
+  color: #C68A2D;
+}
+
+/* ── Step indicator ── */
+.gj-step-indicator {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 30px;
+  padding: 16px 0 0;
+}
+.gj-step-indicator::before {
+  content: '';
+  position: absolute;
+  top: 31px;
+  left: 20px;
+  right: 20px;
+  border-top: 2px dotted #ddd;
+  z-index: 0;
+}
+.gj-step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  cursor: pointer;
+}
+.gj-step-node:hover .gj-step-circle {
+  background: rgba(161, 44, 47, 0.15);
+  color: #A12C2F;
+}
+.gj-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #E5E5E5;
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+}
+.gj-step-node.active .gj-step-circle {
+  background: #A12C2F;
+  color: #fff;
+}
+.gj-step-label {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+/* ── Caption pill ── */
+.gj-caption-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.gj-caption-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(214,180,109,0.15);
+  color: #C68A2D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.gj-caption-text {
+  font-size: 15px;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+.gj-caption-highlight {
+  color: #A12C2F;
+  font-weight: 700;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Right Column — Phone Stage
+   ════════════════════════════════════════════════════════════════ */
+
+.gj-phone-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 990px;
+}
+.gj-phone-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214,164,68,0.20) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.gj-pedestal {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 540px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(200,200,200,0.1) 100%);
+  box-shadow: 0 0 60px rgba(214,164,68,0.35);
+  z-index: 2;
+  pointer-events: none;
+}
+@keyframes gjPhoneFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-18px); }
+}
+
+.gj-hero-phone {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-height: 1980px;
+  z-index: 3;
+  animation: gjPhoneFloat 4s ease-in-out infinite;
+}
+.gj-hero-phone-mobile {
+  display: none;
+}
+
+/* ── Callout cards ── */
+.gj-callout {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  z-index: 4;
+  white-space: nowrap;
+  animation: gjPhoneFloat 4s ease-in-out infinite;
+}
+.gj-callout-connector {
+  display: none;
+}
+.gj-callout-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.gj-callout-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.gj-callout-text {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.2;
+}
+
+/* Callout 1 — Exam Selection (coral) */
+.gj-callout-1 {
+  top: calc(10% + 100px);
+  right: 0%;
+  animation-delay: 0.2s;
+}
+.gj-callout-1 .gj-callout-dot { background: #E2574C; }
+.gj-callout-1 .gj-callout-icon {
+  background: rgba(226,87,76,0.12);
+  color: #E2574C;
+}
+
+/* Callout 2 — Subjects & Topics (amber) */
+.gj-callout-2 {
+  top: calc(32% + 50px);
+  right: -4%;
+  animation-delay: 0.6s;
+}
+.gj-callout-2 .gj-callout-dot { background: #C68A2D; }
+.gj-callout-2 .gj-callout-icon {
+  background: rgba(198,138,45,0.12);
+  color: #C68A2D;
+}
+
+/* Callout 3 — Chapters & Contents (green) */
+.gj-callout-3 {
+  top: calc(56% - 50px);
+  right: -2%;
+  animation-delay: 1s;
+}
+.gj-callout-3 .gj-callout-dot { background: #4CAF6D; }
+.gj-callout-3 .gj-callout-icon {
+  background: rgba(76,175,109,0.12);
+  color: #4CAF6D;
+}
+
+/* Callout 4 — 4 Powerful Learning Modes (blue) */
+.gj-callout-4 {
+  top: calc(80% - 100px);
+  right: 4%;
+  animation-delay: 1.4s;
+}
+.gj-callout-4 .gj-callout-dot { background: #4A90D9; }
+.gj-callout-4 .gj-callout-icon {
+  background: rgba(74,144,217,0.12);
+  color: #4A90D9;
+}
+.gj-callout-4 .gj-callout-text {
+  white-space: normal;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Trust Strip
+   ════════════════════════════════════════════════════════════════ */
+
+.gj-trust-strip {
+  background: #1C1C21;
+  padding: 45px 0;
+  border-top: 3px solid #D6B46D;
+  font-family: 'Poppins', sans-serif;
+}
+.gj-trust-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.gj-trust-item {
+  flex: 1;
+  text-align: center;
+  padding: 10px 12px;
+  position: relative;
+}
+.gj-trust-item + .gj-trust-item::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(transparent 0%, rgba(255,215,0,0.18) 30%, rgba(255,215,0,0.18) 70%, transparent 100%);
+}
+.gj-trust-icon {
+  width: 54px;
+  height: 54px;
+  border: 2px solid #D6B46D;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #D6B46D;
+  margin: 0 auto 14px;
+}
+.gj-trust-heading {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+  letter-spacing: 0.3px;
+}
+.gj-trust-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 160px;
+  margin: 0 auto;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Responsive — 1199px (intermediate)
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1199px) {
+  .gj-heading {
+    font-size: 40px;
+  }
+  .gj-subtitle {
+    font-size: 20px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Responsive — 991px
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 991px) {
+  .gj-container {
+    flex-direction: column;
+    gap: 50px;
+    padding: 0 24px;
+  }
+  .gj-right-col {
+    display: none;
+  }
+  .gj-hero-phone {
+    display: none;
+  }
+  .gj-hero-phone-mobile {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    margin: 0 auto 24px;
+  }
+  .gj-subtitle {
+    font-size: 20px;
+  }
+  .gj-intro-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .gj-journey-heading {
+    width: 100%;
+    padding-top: 0;
+  }
+  .gj-slider-card {
+    padding: 24px;
+    height: 520px;
+    overflow: hidden;
+  }
+  .gj-card-inner {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .gj-card-text {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+  .gj-card-phone {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+  .gj-card-phone-img {
+    max-height: 240px;
+  }
+  .gj-arrow-left {
+    left: -16px;
+  }
+  .gj-arrow-right {
+    right: -16px;
+  }
+  .gj-step-indicator {
+    overflow-x: auto;
+    gap: 0;
+    justify-content: flex-start;
+  }
+  .gj-step-node {
+    flex: 0 0 auto;
+    min-width: 60px;
+  }
+  .gj-phone-stage {
+    min-height: 860px;
+  }
+  .gj-hero-phone {
+    max-height: 460px;
+  }
+  .gj-callout {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .gj-callout-text {
+    font-size: 12px;
+  }
+  .gj-callout-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+  .gj-callout-1 { right: 0%; }
+  .gj-callout-2 { right: -2%; }
+  .gj-callout-3 { right: 0%; }
+  .gj-callout-4 { right: 3%; }
+  .gj-pedestal {
+    width: 250px;
+    height: 28px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Responsive — 767px
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  .gj-section {
+    padding: 80px 0;
+  }
+  .gj-heading {
+    font-size: 32px;
+  }
+  .gj-subtitle {
+    font-size: 20px;
+  }
+  .gj-paragraph {
+    font-size: 16px;
+  }
+  .gj-step-title {
+    font-size: 28px;
+  }
+  .gj-slider-card {
+    padding: 20px;
+    border-radius: 20px;
+    height: auto;
+    min-height: 460px;
+    overflow: hidden;
+  }
+  .gj-card-phone-img {
+    max-height: 200px;
+  }
+  .gj-step-indicator {
+    overflow-x: auto;
+    justify-content: flex-start;
+    gap: 4px;
+  }
+  .gj-step-node {
+    flex: 0 0 auto;
+    min-width: 54px;
+  }
+  .gj-step-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+  }
+  .gj-step-label {
+    font-size: 10px;
+  }
+  .gj-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+  .gj-arrow-left {
+    left: -12px;
+  }
+  .gj-arrow-right {
+    right: -12px;
+  }
+  .gj-phone-stage {
+    min-height: 360px;
+  }
+  .gj-hero-phone {
+    max-height: 360px;
+  }
+  .gj-pedestal {
+    width: 150px;
+    height: 22px;
+    display: none;
+  }
+  .gj-callout {
+    display: none;
+  }
+
+  /* Trust strip — wrap to 2-3 per row */
+  .gj-trust-strip {
+    padding: 30px 0;
+  }
+  .gj-trust-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .gj-trust-item {
+    flex: 0 0 calc(50% - 16px);
+    max-width: calc(50% - 16px);
+    padding: 8px;
+  }
+  .gj-trust-item + .gj-trust-item::before {
+    display: none;
+  }
+  .gj-trust-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .gj-trust-heading {
+    font-size: 13px;
+  }
+  .gj-trust-desc {
+    font-size: 11px;
   }
 }
 
