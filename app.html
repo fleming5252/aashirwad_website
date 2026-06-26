@@ -705,6 +705,7 @@ https://templatemo.com/tm-569-edu-meeting
 
 
 <section class="pf-section" id="features">
+  <div class="pf-track">
 
   <!-- SLIDE 1 — Syllabus Tree | text left, image right | dark bg -->
   <div class="pf-slide" id="pfSlide0" data-bg="dark">
@@ -844,7 +845,8 @@ https://templatemo.com/tm-569-edu-meeting
       <span class="pf-scroll-text">scroll</span>
       <div class="pf-scroll-arrow"></div>
     </div>
-  </div>
+    </div><!-- /pf-slide 5 -->
+  </div><!-- /pf-track -->
 
 </section>
 
@@ -1220,6 +1222,7 @@ https://templatemo.com/tm-569-edu-meeting
           var scrollLocked   = false;
           var scrollLockTimer   = null;
           var cumulativeDeg     = 0;
+          var STEP_COOLDOWN     = isMobile() ? 1000 : 650;
 
           /* ── Apply a step (0-3) ── */
           function applyStep(step, direction) {
@@ -1265,6 +1268,8 @@ https://templatemo.com/tm-569-edu-meeting
             else          { hint.classList.remove('hidden'); }
 
             currentStep = step;
+
+            setTimeout(function () { stepInProgress = false; }, STEP_COOLDOWN);
           }
 
           /*
@@ -1656,11 +1661,12 @@ https://templatemo.com/tm-569-edu-meeting
         })();
 
         
-        /* ── Premium Features — Sticky Stacking Slides (Fixed) ── */
+        /* ── Premium Features — Sticky Stacking Slides (Fixed) / Mobile Carousel ── */
         (function () {
           var section = document.querySelector('.pf-section');
           var slides  = Array.from(document.querySelectorAll('.pf-slide'));
-          if (!slides.length || !section) return;
+          var track   = document.querySelector('.pf-track');
+          if (!slides.length || !section || !track) return;
 
           var TOTAL              = slides.length;
           var currentStep        = 0;
@@ -1675,8 +1681,13 @@ https://templatemo.com/tm-569-edu-meeting
 
           function isMobile() { return window.innerWidth < 992; }
 
+          /* =============================
+             DESKTOP: sticky stacking
+             ============================= */
+          if (!isMobile()) {
+
           function setSectionHeight() {
-            section.style.height = isMobile() ? '' : (TOTAL * 100) + 'vh';
+            section.style.height = (TOTAL * 100) + 'vh';
           }
           setSectionHeight();
           window.addEventListener('resize', setSectionHeight);
@@ -1692,7 +1703,7 @@ https://templatemo.com/tm-569-edu-meeting
             var vh         = window.innerHeight;
             var sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
             var targetY    = sectionTop + targetStep * vh;
-            window.scrollTo({ top: targetY, behavior: isMobile() ? 'instant' : 'smooth' });
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
           }
 
           function activateSlide(step) {
@@ -1718,27 +1729,6 @@ https://templatemo.com/tm-569-edu-meeting
             stepInProgress = true;
             currentStep = step;
 
-            if (isMobile()) {
-              isTransitionLocked = true;
-              isSnapAnimating = true;
-              snapTargetStep = step;
-              if (lockTimer) clearTimeout(lockTimer);
-              lockTimer = setTimeout(function () {
-                isTransitionLocked = false;
-                /* ── Final alignment correction ── */
-                if (snapTargetStep >= 0) {
-                  var alignVh = window.innerHeight;
-                  var alignSectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-                  var alignTargetY = alignSectionTop + snapTargetStep * alignVh;
-                  if (Math.abs(window.pageYOffset - alignTargetY) > 2) {
-                    window.scrollTo({ top: alignTargetY, behavior: 'instant' });
-                  }
-                }
-                isSnapAnimating = false;
-                snapTargetStep = -1;
-              }, LOCK_DURATION);
-            }
-
             activateSlide(step);
 
             if (animTimer) clearTimeout(animTimer);
@@ -1755,13 +1745,8 @@ https://templatemo.com/tm-569-edu-meeting
             return Math.max(0, Math.min(TOTAL - 1, step));
           }
 
-          /* ── Wheel: intercept and snap one step at a time ── */
           function onWheel(e) {
             if (!inScrollZone()) return;
-            if (isMobile() && isTransitionLocked) {
-              e.preventDefault();
-              return;
-            }
 
             var goingDown = e.deltaY > 0;
             var goingUp   = !goingDown && e.deltaY < 0;
@@ -1780,7 +1765,6 @@ https://templatemo.com/tm-569-edu-meeting
           }
           window.addEventListener('wheel', onWheel, { passive: false });
 
-          /* ── Touch: one swipe = one step ── */
           var touchStartY  = 0;
           var touchHandled = false;
           var SWIPE_THRESHOLD = 60;
@@ -1792,21 +1776,13 @@ https://templatemo.com/tm-569-edu-meeting
 
           window.addEventListener('touchmove', function (e) {
             if (!inScrollZone()) return;
-            /* Safety: if the Spinning Wheel is still active on screen, don't touch the slides */
             var wheelScene = document.getElementById('app-scroll-scene');
             if (wheelScene) {
               var wheelRect = wheelScene.getBoundingClientRect();
               if (wheelRect.top <= 100 && wheelRect.bottom >= window.innerHeight - 100) return;
             }
-            // CRITICAL: during animation lock, prevent ALL scroll and clamp position
             if (isTransitionLocked || stepInProgress) {
               e.preventDefault();
-              if (isMobile() && snapTargetStep >= 0) {
-                var lockVh = window.innerHeight;
-                var lockSectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-                var lockTargetY = lockSectionTop + snapTargetStep * lockVh;
-                window.scrollTo({ top: lockTargetY, behavior: 'instant' });
-              }
               return;
             }
             var deltaY    = touchStartY - e.touches[0].clientY;
@@ -1828,7 +1804,6 @@ https://templatemo.com/tm-569-edu-meeting
             }
           }, { passive: false });
 
-          /* ── Keyboard ── */
           window.addEventListener('keydown', function (e) {
             if (!inScrollZone() || stepInProgress || isTransitionLocked) return;
             if (e.key === 'ArrowDown' && currentStep < TOTAL - 1) {
@@ -1844,23 +1819,9 @@ https://templatemo.com/tm-569-edu-meeting
             }
           });
 
-          /* ── Mobile scroll correction: re-snaps if momentum drifts during lock ── */
-          window.addEventListener('scroll', function () {
-            if (!isMobile() || !inScrollZone()) return;
-            if (!isSnapAnimating || snapTargetStep < 0) return;
-            var driftVh = window.innerHeight;
-            var driftSectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-            var driftTargetY = driftSectionTop + snapTargetStep * driftVh;
-            var drift = Math.abs(window.pageYOffset - driftTargetY);
-            if (drift > 5) {
-              window.scrollTo({ top: driftTargetY, behavior: 'instant' });
-            }
-          }, { passive: true });
-
-          /* ── Natural scroll sync (ONLY fires when stepInProgress is false) ── */
           var scrollSyncTimer = null;
           window.addEventListener('scroll', function () {
-            if (isMobile() || !inScrollZone()) return;
+            if (!inScrollZone()) return;
             if (stepInProgress) return;
             if (scrollSyncTimer) clearTimeout(scrollSyncTimer);
             scrollSyncTimer = setTimeout(function () {
@@ -1873,8 +1834,167 @@ https://templatemo.com/tm-569-edu-meeting
             }, 80);
           }, { passive: true });
 
-          /* ── Initial render ── */
           activateSlide(0);
+          return;
+          } /* ── end desktop ── */
+
+          /* =============================
+             MOBILE: horizontal carousel
+             ============================= */
+          var autoTimer     = null;
+          var isPaused      = false;
+          var touchStartX   = 0;
+          var touchMoved    = false;
+          var autoInterval  = 4000;
+          var realTotal     = TOTAL;
+
+          /* Clone the first slide and append to track for continuous
+             one‑direction sliding (wrapping right edge → left). */
+          var firstClone = slides[0].cloneNode(true);
+          firstClone.id  = (firstClone.id || 'pfSlide0') + '-clone';
+          track.appendChild(firstClone);
+          var totalSlides = realTotal + 1; // indices 0‑5, 5 is the clone
+
+          function updateSlide() {
+            track.style.transform = 'translateX(-' + (currentStep * 100) + 'vw)';
+            /* Highlight the active slide (clone shares visual with slide 0) */
+            var allSlides = track.querySelectorAll('.pf-slide');
+            allSlides.forEach(function (s, i) {
+              s.classList.toggle('pf-slide-active', i === currentStep);
+            });
+            /* Map clone position → real slide 0 for dots */
+            var dotIndex = currentStep === totalSlides - 1 ? 0 : currentStep;
+            var dots = section.querySelectorAll('.pf-dot-indicator');
+            dots.forEach(function (d, i) {
+              d.classList.toggle('pf-dot-active', i === dotIndex);
+            });
+            /* Arrows: right always enabled (wrap via clone), left disabled at 0 */
+            var leftBtn  = section.querySelector('.pf-arrow-left');
+            var rightBtn = section.querySelector('.pf-arrow-right');
+            if (leftBtn)  leftBtn.classList.toggle('pf-arrow-disabled', currentStep === 0);
+            if (rightBtn) rightBtn.classList.remove('pf-arrow-disabled');
+          }
+
+          function goTo(step) {
+            if (stepInProgress) return;
+            if (step < 0 || step >= totalSlides) return;
+            if (step === currentStep) return;
+            stepInProgress = true;
+            currentStep = step;
+            updateSlide();
+            if (animTimer) clearTimeout(animTimer);
+            if (currentStep === totalSlides - 1) {
+              /* Reached the clone → after animation, instantly jump back to
+                 real slide 0 without transition (user sees seamless loop). */
+              animTimer = setTimeout(function () {
+                track.style.transition = 'none';
+                currentStep = 0;
+                updateSlide();
+                void track.offsetHeight; // force reflow
+                track.style.transition = '';
+                stepInProgress = false;
+              }, 650);
+            } else {
+              animTimer = setTimeout(function () { stepInProgress = false; }, 650);
+            }
+          }
+
+          function goNext() {
+            var next = currentStep + 1;
+            if (next >= totalSlides) return;
+            goTo(next);
+          }
+
+          function goPrev() {
+            var prev = currentStep - 1;
+            if (prev < 0) return;
+            goTo(prev);
+          }
+
+          function startAuto() {
+            stopAuto();
+            if (isPaused) return;
+            autoTimer = setInterval(function () {
+              if (isPaused || stepInProgress) return;
+              if (currentStep >= totalSlides - 1) {
+                goTo(0);
+              } else {
+                goNext();
+              }
+            }, autoInterval);
+          }
+
+          function stopAuto() {
+            if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+          }
+
+          /* ── create arrows ── */
+          var leftArrow  = document.createElement('button');
+          leftArrow.className  = 'pf-arrow pf-arrow-left';
+          leftArrow.setAttribute('aria-label', 'Previous slide');
+          leftArrow.innerHTML = '&#8249;';
+          section.appendChild(leftArrow);
+
+          var rightArrow  = document.createElement('button');
+          rightArrow.className  = 'pf-arrow pf-arrow-right';
+          rightArrow.setAttribute('aria-label', 'Next slide');
+          rightArrow.innerHTML = '&#8250;';
+          section.appendChild(rightArrow);
+
+          leftArrow.addEventListener('click', goPrev);
+          rightArrow.addEventListener('click', goNext);
+
+          /* ── create dots ── */
+          var dotsEl = document.createElement('div');
+          dotsEl.className = 'pf-dots';
+          for (var di = 0; di < realTotal; di++) {
+            var dot = document.createElement('span');
+            dot.className = 'pf-dot-indicator';
+            if (di === 0) dot.classList.add('pf-dot-active');
+            dotsEl.appendChild(dot);
+          }
+          section.appendChild(dotsEl);
+
+          /* ── touch: hold pauses, release resumes, swipe advances ── */
+          section.addEventListener('touchstart', function (e) {
+            touchStartX = e.touches[0].clientX;
+            touchMoved  = false;
+            isPaused    = true;
+            stopAuto();
+          }, { passive: true });
+
+          section.addEventListener('touchmove', function (e) {
+            if (touchMoved) return;
+            var dx = e.touches[0].clientX - touchStartX;
+            if (Math.abs(dx) > 50) {
+              touchMoved = true;
+              if (dx > 0) {
+                goPrev();
+              } else {
+                goNext();
+              }
+            }
+          }, { passive: true });
+
+          section.addEventListener('touchend', function () {
+            isPaused = false;
+            if (!touchMoved) {
+              /* tap — let default browser behavior happen, but don't restart auto immediately */
+            }
+            startAuto();
+          }, { passive: true });
+
+          section.addEventListener('touchcancel', function () {
+            isPaused = false;
+            startAuto();
+          }, { passive: true });
+
+          /* ── disable context menu on section to kill long-press ── */
+          section.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+          /* ── initial render & start ── */
+          updateSlide();
+          startAuto();
         })();
 
         /* ── FAQ Accordion with IntersectionObserver ── */
