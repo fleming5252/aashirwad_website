@@ -1798,10 +1798,15 @@ https://templatemo.com/tm-569-edu-meeting
               var wheelRect = wheelScene.getBoundingClientRect();
               if (wheelRect.top <= 100 && wheelRect.bottom >= window.innerHeight - 100) return;
             }
-            // CRITICAL LEAK FIX: Block the page from sliding down on the final card
-            // while the transition cooldown is active
+            // CRITICAL: during animation lock, prevent ALL scroll and clamp position
             if (isTransitionLocked || stepInProgress) {
               e.preventDefault();
+              if (isMobile() && snapTargetStep >= 0) {
+                var lockVh = window.innerHeight;
+                var lockSectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+                var lockTargetY = lockSectionTop + snapTargetStep * lockVh;
+                window.scrollTo({ top: lockTargetY, behavior: 'instant' });
+              }
               return;
             }
             var deltaY    = touchStartY - e.touches[0].clientY;
@@ -1846,7 +1851,8 @@ https://templatemo.com/tm-569-edu-meeting
             var driftVh = window.innerHeight;
             var driftSectionTop = section.getBoundingClientRect().top + window.pageYOffset;
             var driftTargetY = driftSectionTop + snapTargetStep * driftVh;
-            if (Math.abs(window.pageYOffset - driftTargetY) > 2) {
+            var drift = Math.abs(window.pageYOffset - driftTargetY);
+            if (drift > 5) {
               window.scrollTo({ top: driftTargetY, behavior: 'instant' });
             }
           }, { passive: true });
