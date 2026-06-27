@@ -4789,6 +4789,8 @@ section.app-heading-page h6.app-sub-quote {
   }
 
   .pf-mockup-img { max-height: 280px; }
+  #pfSlide0 .pf-mockup-img,
+  #pfSlide3 .pf-mockup-img { max-height: 280px; }
   .pf-title      { font-size: 22px; }
   .pf-bg-number  { font-size: 40vw; }
 
