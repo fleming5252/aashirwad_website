@@ -3341,7 +3341,8 @@ section.app-heading-page h6.app-sub-quote {
 }
 
 .app-about-phone-img {
-  max-height: 500px;
+  max-height: 700px;
+  max-width: 100%;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0px 12px 30px rgba(0, 0, 0, 0.15));
@@ -3380,6 +3381,39 @@ section.app-heading-page h6.app-sub-quote {
   margin-bottom: 0;
 }
 
+@media (min-width: 992px) {
+  .app-about-section .container {
+    max-width: 1600px;
+    width: 94%;
+  }
+
+  .app-about-section .app-about-image-col {
+    text-align: left;
+  }
+
+  .app-about-img-wrapper {
+    margin-left: -60px;
+    transform: translateX(20px);
+  }
+
+  .app-about-glow {
+    width: 420px;
+    height: 420px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .app-about-section .app-about-image-col {
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+
+  .app-about-section .app-about-text-col {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
 @media (max-width: 991px) {
   .app-about-image-col {
     margin-bottom: 35px;
@@ -3391,6 +3425,310 @@ section.app-heading-page h6.app-sub-quote {
 
   .app-about-phone-img {
     max-height: 380px;
+  }
+}
+
+/* Tablet 50/50 layout */
+@media (min-width: 768px) and (max-width: 991px) {
+  .app-about-section .app-about-image-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 0;
+  }
+
+  .app-about-section .app-about-text-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .app-about-phone-img {
+    max-height: 500px;
+  }
+
+  .app-about-glow {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* ── Enhanced App About Section Styles ── */
+
+.app-about-img-wrapper {
+  position: relative;
+}
+
+/* Orange glow behind phone */
+.app-about-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5a425 0%, #D6B46D 40%, transparent 70%);
+  filter: blur(100px);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+  animation: appAboutGlowPulse 5s ease-in-out infinite;
+}
+
+@keyframes appAboutGlowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.96); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+}
+
+/* Decorative floating circles behind phone */
+.app-about-deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: #D6B46D;
+  opacity: 0.1;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-about-deco-circle.deco-1 {
+  width: 180px;
+  height: 180px;
+  top: 5%;
+  left: -10%;
+  animation: appAboutDecoFloat1 12s ease-in-out infinite;
+}
+
+.app-about-deco-circle.deco-2 {
+  width: 120px;
+  height: 120px;
+  bottom: 10%;
+  right: -5%;
+  animation: appAboutDecoFloat2 15s ease-in-out infinite;
+}
+
+@keyframes appAboutDecoFloat1 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes appAboutDecoFloat2 {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(15px); }
+}
+
+/* Phone entrance animation */
+.app-about-image-col {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: none;
+}
+
+.app-about-revealed .app-about-image-col {
+  animation: appAboutSlideIn 0.9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+@keyframes appAboutSlideIn {
+  0% { opacity: 0; transform: translateX(-60px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Phone floating animation after entrance */
+.app-about-revealed .app-about-phone-img {
+  animation: appAboutFloat 6s ease-in-out infinite;
+  animation-delay: 0.9s;
+}
+
+@keyframes appAboutFloat {
+  0%, 100% { transform: translateY(-8px); }
+  50% { transform: translateY(0); }
+}
+
+/* Phone hover interaction */
+.app-about-phone-img {
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.app-about-phone-img:hover {
+  animation-play-state: paused;
+  transform: scale(1.02) rotate(-1deg) !important;
+}
+
+/* Ensure text column is visible on reveal */
+.app-about-revealed .app-about-text-col {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease 0.15s, transform 0.8s ease 0.15s;
+}
+
+/* White glass content card */
+.app-about-card {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 45px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.08);
+  border: 1px solid rgba(255,255,255,.45);
+  opacity: 0;
+  transform: translateX(40px);
+}
+
+.app-about-revealed .app-about-card {
+  animation: appAboutCardIn 0.8s ease 0.15s forwards;
+}
+
+@keyframes appAboutCardIn {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Reset content padding inside card */
+.app-about-content {
+  padding-left: 0;
+}
+
+/* Heading gradient */
+.app-about-title {
+  font-weight: 800 !important;
+  letter-spacing: 1px;
+  color: transparent;
+  background: linear-gradient(135deg, #1E293B, #111827);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated underline */
+.app-about-underline {
+  width: 0;
+  transition: none;
+}
+
+.app-about-revealed .app-about-underline {
+  animation: appAboutUnderlineGrow 0.7s ease 0.3s forwards;
+}
+
+@keyframes appAboutUnderlineGrow {
+  0% { width: 0; }
+  100% { width: 70px; }
+}
+
+/* Paragraph animation sequence */
+.app-about-content p {
+  line-height: 1.9;
+  font-size: 16px;
+  color: #4b5563;
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.app-about-revealed .app-about-content p:nth-of-type(1) {
+  animation: appAboutParaIn 0.7s ease 0.3s forwards;
+}
+
+.app-about-revealed .app-about-content p:nth-of-type(2) {
+  animation: appAboutParaIn 0.7s ease 0.5s forwards;
+}
+
+@keyframes appAboutParaIn {
+  0% { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Highlight "Aashirwad Eduverse" */
+.app-about-content p strong {
+  font-weight: 700 !important;
+  color: #D6B46D;
+  position: relative;
+  display: inline-block;
+}
+
+.app-about-content p strong::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #D6B46D;
+  border-radius: 1px;
+  transition: none;
+}
+
+.app-about-revealed .app-about-content p strong::after {
+  animation: appAboutHighlightUnderline 0.6s ease 0.6s forwards;
+}
+
+@keyframes appAboutHighlightUnderline {
+  0% { width: 0; left: 0; }
+  100% { width: 100%; left: 0; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 991px) {
+  .app-about-image-col {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .app-about-revealed .app-about-image-col {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .app-about-text-col {
+    opacity: 1;
+    transform: none;
+  }
+
+  .app-about-card {
+    padding: 25px;
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .app-about-revealed .app-about-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .app-about-content p {
+    opacity: 1;
+    transform: none;
+  }
+
+  .app-about-revealed .app-about-content p {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .app-about-revealed .app-about-underline {
+    animation: none;
+    width: 60px;
+  }
+
+  .app-about-revealed .app-about-content p strong::after {
+    animation: none;
+    width: 100%;
+  }
+
+  .app-about-phone-img {
+    animation: none !important;
+  }
+
+  .app-about-glow {
+    width: 180px;
+    height: 180px;
+    filter: blur(60px);
+  }
+
+  .app-about-deco-circle {
+    display: none;
   }
 }
 
@@ -3523,6 +3861,421 @@ section.app-heading-page h6.app-sub-quote {
   .app-download-buttons {
     flex-direction: column;
     gap: 14px;
+  }
+}
+
+/* ── Enhanced Download / CTA Section Styles ── */
+
+/* Background radial overlay */
+.app-download-bg-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(214, 180, 109, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating particles */
+.app-download-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ad-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #D6B46D;
+  opacity: 0.14;
+  animation: adParticleFloat ease-in-out infinite;
+}
+
+@keyframes adParticleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+/* Scroll reveal animations */
+.app-download-section .app-download-tagline,
+.app-download-section .app-download-heading,
+.app-download-section .app-download-subtext,
+.app-download-section .ad-divider,
+.app-download-section .app-feature-pill,
+.app-download-section .app-download-buttons {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(.22,.61,.36,1), transform 0.7s cubic-bezier(.22,.61,.36,1);
+}
+
+.app-download-section.ad-revealed .app-download-tagline {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.app-download-section.ad-revealed .app-download-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.12s;
+}
+
+.app-download-section.ad-revealed .app-download-subtext {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.24s;
+}
+
+.app-download-section.ad-revealed .ad-divider {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.36s;
+}
+
+.app-download-section.ad-revealed .app-feature-pill {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.app-download-section.ad-revealed .app-feature-pill:nth-child(1) { transition-delay: 0.48s; }
+.app-download-section.ad-revealed .app-feature-pill:nth-child(2) { transition-delay: 0.55s; }
+.app-download-section.ad-revealed .app-feature-pill:nth-child(3) { transition-delay: 0.62s; }
+.app-download-section.ad-revealed .app-feature-pill:nth-child(4) { transition-delay: 0.69s; }
+.app-download-section.ad-revealed .app-feature-pill:nth-child(5) { transition-delay: 0.76s; }
+
+.app-download-section.ad-revealed .app-download-buttons {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.88s;
+}
+
+/* Subtitle improvement */
+.app-download-tagline {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, #f5a425, #D6B46D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+/* Heading improvement */
+.app-download-heading {
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.app-download-heading span {
+  background: linear-gradient(135deg, #f5a425, #D6B46D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px rgba(245, 164, 37, 0.2);
+}
+
+/* Paragraph improvement */
+.app-download-subtext {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.9;
+  margin-bottom: 32px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Animated divider */
+.ad-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.ad-divider-line {
+  display: block;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #D6B46D);
+  border-radius: 1px;
+  transition: width 0.6s cubic-bezier(.22,.61,.36,1) 0.4s;
+}
+
+.app-download-section.ad-revealed .ad-divider-line {
+  width: 60px;
+}
+
+.ad-divider-line:last-child {
+  background: linear-gradient(90deg, #D6B46D, transparent);
+}
+
+.ad-divider-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D6B46D;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
+}
+
+.app-download-section.ad-revealed .ad-divider-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pills glow behind */
+.app-download-section .app-feature-pills {
+  position: relative;
+}
+
+.app-download-section .app-feature-pills::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 120%;
+  background: radial-gradient(ellipse, rgba(245, 164, 37, 0.1) 0%, transparent 70%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Feature pills redesign */
+.app-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(214, 180, 109, 0.18), rgba(198, 138, 45, 0.12));
+  color: #f5e6c8;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 50px;
+  white-space: nowrap;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(214, 180, 109, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform 0.35s cubic-bezier(.22,.61,.36,1), box-shadow 0.35s ease;
+  cursor: default;
+  position: relative;
+  z-index: 1;
+}
+
+.app-feature-pill:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Icon animation inside pills */
+.app-feature-pill i,
+.app-feature-pill .pill-icon {
+  display: inline-block;
+  transition: transform 0.35s ease;
+}
+
+.app-feature-pill:hover i,
+.app-feature-pill:hover .pill-icon {
+  transform: rotate(12deg);
+}
+
+/* Download buttons container */
+.app-download-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  position: relative;
+}
+
+/* Button glow */
+.ad-btn-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 420px;
+  height: 100px;
+  background: radial-gradient(ellipse, rgba(245, 164, 37, 0.1) 0%, transparent 70%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-store-btn {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(.22,.61,.36,1), filter 0.35s ease;
+  filter: brightness(1);
+  position: relative;
+  z-index: 1;
+}
+
+.app-store-btn img {
+  height: 54px;
+  width: auto;
+  display: block;
+}
+
+.app-store-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  filter: brightness(1.15);
+}
+
+/* Cursor glow */
+.ad-cursor-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 164, 37, 0.05) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: left 0.1s ease, top 0.1s ease;
+}
+
+/* Ensure content sits above glow layers */
+.app-download-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive — tablet */
+@media (min-width: 768px) and (max-width: 991px) {
+  .app-download-heading {
+    font-size: 30px;
+  }
+
+  .app-download-subtext {
+    font-size: 15px;
+    max-width: 600px;
+  }
+
+  .app-feature-pill {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+
+  .app-download-buttons {
+    gap: 18px;
+  }
+
+  .app-store-btn img {
+    height: 48px;
+  }
+}
+
+/* Responsive — phone */
+@media (max-width: 767px) {
+  .app-download-bg-glow {
+    width: 400px;
+    height: 300px;
+    top: -40px;
+  }
+
+  .app-download-particles .ad-particle {
+    display: none;
+  }
+
+  .app-download-particles .ad-particle:nth-child(-n+4) {
+    display: block;
+  }
+
+  .app-download-heading {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+
+  .app-download-subtext {
+    font-size: 14px;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .ad-divider {
+    margin-bottom: 28px;
+  }
+
+  .app-download-section.ad-revealed .ad-divider-line {
+    width: 40px;
+  }
+
+  .app-feature-pill {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
+
+  .app-download-buttons {
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .app-store-btn img {
+    height: 44px;
+  }
+
+  .ad-btn-glow {
+    width: 280px;
+    height: 120px;
+  }
+
+  .ad-cursor-glow {
+    display: none;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .app-download-section .app-download-tagline,
+  .app-download-section .app-download-heading,
+  .app-download-section .app-download-subtext,
+  .app-download-section .ad-divider,
+  .app-download-section .app-feature-pill,
+  .app-download-section .app-download-buttons {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .app-download-section.ad-revealed .ad-divider-line {
+    width: 60px;
+    transition: none;
+  }
+
+  .app-download-section.ad-revealed .ad-divider-dot {
+    opacity: 1;
+    transform: scale(1);
+    transition: none;
+  }
+
+  .ad-particle {
+    animation: none !important;
+    display: none;
+  }
+
+  .ad-cursor-glow {
+    display: none;
   }
 }
 
@@ -3928,6 +4681,11 @@ section.app-heading-page h6.app-sub-quote {
   margin-top: 80px;
   filter: drop-shadow(0 24px 48px rgba(0,0,0,0.55));
   transition: transform 0.8s cubic-bezier(.22,.68,0,1.2);
+}
+
+#pfSlide0 .pf-mockup-img,
+#pfSlide3 .pf-mockup-img {
+  max-height: 600px;
 }
 
 .pf-slide.pf-slide-active .pf-mockup-img {
@@ -7467,17 +8225,7 @@ section.learning-process .container {
   z-index: 0;
 }
 .gj-pedestal {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 540px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(200,200,200,0.1) 100%);
-  box-shadow: 0 0 60px rgba(214,164,68,0.35);
-  z-index: 2;
-  pointer-events: none;
+  display: none;
 }
 @keyframes gjPhoneFloat {
   0%, 100% { transform: translateY(0); }
