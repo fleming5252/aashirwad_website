@@ -275,11 +275,15 @@ header
 
 .header-area {
   background-color: rgba(255,255,255,0.7);
-  position: absolute;
-  top: 40px;
+  position: sticky;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 1100;
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.12);
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
@@ -586,14 +590,25 @@ header
     width: 100%;
   }
   .header-area {
-    position: fixed;
+    position: sticky;
     top: 0;
-    z-index: 1112;
+    z-index: 1100;
     background-color: transparent;
     padding: 0px 15px;
-    height: 100px;
+    height: 60px;
     box-shadow: none;
     text-align: center;
+  }
+
+  .header-area {
+    position: sticky;
+    top: 0;
+    z-index: 1200;
+  }
+
+  .sub-header {
+    position: relative;
+    z-index: 1100;
   }
   .header-area .container {
     padding: 0px;
@@ -601,27 +616,37 @@ header
   .header-area .logo {
     margin-left: 30px;
   }
-  .header-area .menu-trigger {
+  .header-area .main-nav .menu-trigger {
     display: block !important;
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    z-index: 1003;
   }
   .header-area .main-nav {
-    overflow: hidden;
+    overflow: visible;
   }
   .header-area .main-nav .nav {
+    position: fixed;
+    top: 60px;
+    left: 0;
     float: none;
     width: 100%;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
     display: none;
     -webkit-transition: all 0s ease 0s;
     -moz-transition: all 0s ease 0s;
     -o-transition: all 0s ease 0s;
     transition: all 0s ease 0s;
-    margin-left: 0px;
+    margin: 0;
+    z-index: 1000;
   }
   .header-area .main-nav .nav li:first-child {
     border-top: 1px solid #eee;
   }
   .header-area.header-sticky .nav {
-    margin-top: 100px !important;
+    margin-top: 0 !important;
   }
   .header-area .main-nav .nav li {
     width: 100%;
@@ -672,6 +697,30 @@ header
   }
   .header-area .main-nav .nav li.submenu:hover ul, .header-area .main-nav .nav li.submenu:focus ul {
     height: 0px;
+  }
+
+  .header-area {
+    min-height: 60px;
+  }
+
+  .header-area .main-nav {
+    min-height: 60px;
+    height: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-area .main-nav .logo {
+    position: relative;
+    z-index: 1002;
+    line-height: 60px;
+    height: 60px;
+    float: left;
+  }
+
+  .header-area.header-sticky {
+    min-height: 60px !important;
+    height: 60px !important;
   }
 }
 
@@ -1553,6 +1602,7 @@ section.contact-us {
   font-size: 14px;
   line-height: 1.8;
   margin: 0 0 8px;
+  text-align: justify;
 }
 
 .footer-col p i {
@@ -1573,6 +1623,7 @@ section.contact-us {
   font-size: 14px;
   line-height: 1.8;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .footer-social {
@@ -2222,7 +2273,9 @@ responsive
 /* Responsive adjustment for small mobile screens */
 @media (max-width: 767px) {
   .logo .logo-image {
-    height: 64px;
+    height: 54px;
+    vertical-align: middle;
+    display: inline-block;
   }
 }
 
@@ -2366,6 +2419,7 @@ responsive
   font-size: 15px;
   line-height: 1.85;
   color: rgba(255,255,255,0.85);
+  text-align: justify;
 }
 
 .mode-progress-bar {
@@ -3783,6 +3837,7 @@ section.app-heading-page h6.app-sub-quote {
   line-height: 1.8;
   margin-bottom: 40px;
   max-width: 580px;
+  text-align: justify;
   margin-left: auto;
   margin-right: auto;
 }
@@ -3995,6 +4050,7 @@ section.app-heading-page h6.app-sub-quote {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  text-align: justify;
 }
 
 /* Animated divider */
@@ -4646,6 +4702,7 @@ section.app-heading-page h6.app-sub-quote {
   font-size: 13.5px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.88);
+  text-align: justify;
 }
 
 .pf-dot {
@@ -4690,6 +4747,10 @@ section.app-heading-page h6.app-sub-quote {
 
 .pf-slide.pf-slide-active .pf-mockup-img {
   transform: translateY(0px);
+}
+
+#pfSlide0 .pf-mockup-img[src*="mobile9"] {
+  transform: scale(0.8);
 }
 
 .pf-mockup-glow {
@@ -5010,6 +5071,7 @@ section.app-heading-page h6.app-sub-quote {
   color: #ffffff;
   line-height: 1.5;
   flex: 1;
+  text-align: justify;
 }
 
 /* ── + / × icon (CSS bars, no emoji) ── */
@@ -5071,6 +5133,7 @@ section.app-heading-page h6.app-sub-quote {
   line-height: 1.85;
   color: rgba(255, 255, 255, 0.65);
   margin: 0;
+  text-align: justify;
 }
 
 /* ── Right column — phone image ── */
@@ -7913,6 +7976,7 @@ section.learning-process .container {
   color: #666666;
   line-height: 1.8;
   margin: 0 0 28px;
+  text-align: justify;
 }
 .gj-journey-heading {
   flex: 0 1 auto;
@@ -8013,18 +8077,39 @@ section.learning-process .container {
 .gj-card-phone {
   flex: 0 0 38%;
   max-width: 38%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   height: 100%;
   overflow: hidden;
   padding: 8px 0;
 }
 .gj-card-phone-img {
-  max-height: 360px;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  object-fit: contain;
+  height: 135%;
+  object-fit: cover;
+  object-position: top;
   display: block;
+}
+
+.gj-card-phone-img[src*="appstep2"] {
+  height: 194%;
+  top: -50px;
+}
+
+.gj-card-phone-img[src*="appstep1"] {
+  height: 122%;
+  top: -30px;
+}
+
+.gj-card-phone-img[src*="appstep4"] {
+  height: 162%;
+  top: -40px;
+}
+
+.gj-card-phone-img[src*="appstep7"] {
+  height: 122%;
 }
 
 /* ── Card top (icon + badge) ── */
@@ -8416,10 +8501,27 @@ section.learning-process .container {
    ════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 991px) {
+  .gj-section {
+    overflow-x: hidden;
+  }
+  .gj-slider-wrap {
+    padding: 0 32px;
+  }
   .gj-container {
     flex-direction: column;
     gap: 50px;
     padding: 0 24px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .gj-left-col,
+  .gj-right-col {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .gj-right-col {
     display: none;
@@ -8430,7 +8532,7 @@ section.learning-process .container {
   .gj-hero-phone-mobile {
     display: block;
     width: 100%;
-    max-width: 280px;
+    max-width: min(280px, 70vw);
     height: auto;
     margin: 0 auto 24px;
   }
@@ -8445,33 +8547,86 @@ section.learning-process .container {
     width: 100%;
     padding-top: 0;
   }
+  .gj-heading,
+  .gj-subtitle,
+  .gj-paragraph,
+  .gj-journey-heading,
+  .gj-caption-pill,
+  .gj-step-indicator {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
   .gj-slider-card {
-    padding: 24px;
-    height: 520px;
+    padding: 18px 16px;
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .gj-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    height: 100%;
     overflow: hidden;
   }
-  .gj-card-inner {
-    flex-direction: column;
-    gap: 20px;
-  }
+
   .gj-card-text {
-    flex: none;
-    max-width: 100%;
+    flex: 0 0 auto;
     width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
+
   .gj-card-phone {
-    flex: none;
-    max-width: 100%;
+    flex: 1;
     width: 100%;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
   }
+
   .gj-card-phone-img {
-    max-height: 240px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 133%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
   }
+
+  .gj-card-phone-img[src*="appstep1"],
+  .gj-card-phone-img[src*="appstep2"],
+  .gj-card-phone-img[src*="appstep4"],
+  .gj-card-phone-img[src*="appstep7"] {
+    top: 0;
+    height: 133%;
+  }
+  .gj-card-phone-img[src*="appstep1"] {
+    transform: scale(0.64);
+    transform-origin: top center;
+  }
+  .gj-card-phone-img[src*="appstep7"] {
+    transform: scale(0.6);
+    transform-origin: top center;
+  }
+
   .gj-arrow-left {
-    left: -16px;
+    left: -28px;
   }
+
   .gj-arrow-right {
-    right: -16px;
+    right: -28px;
   }
   .gj-step-indicator {
     overflow-x: auto;
@@ -8516,7 +8671,27 @@ section.learning-process .container {
 
 @media (max-width: 767px) {
   .gj-section {
+    overflow-x: hidden;
     padding: 80px 0;
+  }
+  .gj-slider-wrap {
+    padding: 0 28px;
+  }
+  .gj-container,
+  .gj-left-col {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .gj-heading,
+  .gj-subtitle,
+  .gj-paragraph {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   .gj-heading {
     font-size: 32px;
@@ -8528,34 +8703,94 @@ section.learning-process .container {
     font-size: 16px;
   }
   .gj-step-title {
-    font-size: 28px;
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+
+  .gj-step-desc {
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+
+  .gj-step-features li {
+    font-size: 11px;
+  }
+
+  .gj-step-badge {
+    font-size: 10px;
+    padding: 4px 10px;
   }
   .gj-slider-card {
-    padding: 20px;
-    border-radius: 20px;
+    padding: 16px 14px;
     height: auto;
-    min-height: 460px;
-    overflow: hidden;
+    min-height: unset;
+    overflow: visible;
+    position: relative;
+    box-sizing: border-box;
   }
+
+  .gj-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .gj-card-text {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .gj-card-phone {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    flex: 0 0 220px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .gj-card-phone-img {
-    max-height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+  .gj-card-phone-img[src*="appstep1"] {
+    transform: scale(0.64);
+    transform-origin: top center;
+  }
+  .gj-card-phone-img[src*="appstep7"] {
+    transform: scale(0.6);
+    transform-origin: top center;
   }
   .gj-step-indicator {
-    overflow-x: auto;
-    justify-content: flex-start;
-    gap: 4px;
+    overflow-x: visible;
+    justify-content: space-between;
+    gap: 2px;
   }
   .gj-step-node {
-    flex: 0 0 auto;
-    min-width: 54px;
+    flex: 1 1 0;
+    min-width: 0;
   }
   .gj-step-circle {
-    width: 28px;
-    height: 28px;
-    font-size: 10px;
+    width: 24px;
+    height: 24px;
+    font-size: 9px;
   }
   .gj-step-label {
-    font-size: 10px;
+    font-size: 8px;
   }
   .gj-arrow {
     width: 42px;
@@ -8563,10 +8798,10 @@ section.learning-process .container {
     font-size: 16px;
   }
   .gj-arrow-left {
-    left: -12px;
+    left: -24px;
   }
   .gj-arrow-right {
-    right: -12px;
+    right: -24px;
   }
   .gj-phone-stage {
     min-height: 360px;
@@ -8611,6 +8846,4 @@ section.learning-process .container {
   }
   .gj-trust-desc {
     font-size: 11px;
-  }
-}
-
+  }}
