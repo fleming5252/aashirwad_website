@@ -3837,7 +3837,7 @@ section.app-heading-page h6.app-sub-quote {
   line-height: 1.8;
   margin-bottom: 40px;
   max-width: 580px;
-  text-align: justify;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
@@ -4050,7 +4050,7 @@ section.app-heading-page h6.app-sub-quote {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  text-align: justify;
+  text-align: center;
 }
 
 /* Animated divider */
@@ -4226,6 +4226,7 @@ section.app-heading-page h6.app-sub-quote {
   .app-download-subtext {
     font-size: 15px;
     max-width: 600px;
+    text-align: justify;
   }
 
   .app-feature-pill {
@@ -4267,6 +4268,7 @@ section.app-heading-page h6.app-sub-quote {
     font-size: 14px;
     max-width: 100%;
     margin-bottom: 24px;
+    text-align: justify;
   }
 
   .ad-divider {
@@ -8595,30 +8597,44 @@ section.learning-process .container {
   }
 
   .gj-card-phone-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 133%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: top center !important;
+    display: block !important;
+    margin: 0 auto !important;
+    top: auto !important;
+    transform: none !important;
+    transform-origin: top center !important;
   }
 
-  .gj-card-phone-img[src*="appstep1"],
-  .gj-card-phone-img[src*="appstep2"],
-  .gj-card-phone-img[src*="appstep4"],
-  .gj-card-phone-img[src*="appstep7"] {
-    top: 0;
-    height: 133%;
-  }
   .gj-card-phone-img[src*="appstep1"] {
-    transform: scale(0.64);
-    transform-origin: top center;
+    transform: scale(1) !important;
   }
+
+  .gj-card-phone-img[src*="appstep2"] {
+    transform: scale(1.55) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep3"] {
+    transform: scale(1.5) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep4"] {
+    transform: scale(1.5) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep5"] {
+    transform: scale(1.3) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep6"] {
+    transform: scale(1.1) !important;
+  }
+
   .gj-card-phone-img[src*="appstep7"] {
-    transform: scale(0.6);
-    transform-origin: top center;
+    transform: scale(0.90) !important;
   }
 
   .gj-arrow-left {
@@ -8758,22 +8774,44 @@ section.learning-process .container {
   }
 
   .gj-card-phone-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: top center !important;
+    display: block !important;
+    margin: 0 auto !important;
+    top: auto !important;
+    transform: none !important;
+    transform-origin: top center !important;
   }
+
   .gj-card-phone-img[src*="appstep1"] {
-    transform: scale(0.64);
-    transform-origin: top center;
+    transform: scale(1) !important;
   }
+
+  .gj-card-phone-img[src*="appstep2"] {
+    transform: scale(1.55) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep3"] {
+    transform: scale(1.5) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep4"] {
+    transform: scale(1.5) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep5"] {
+    transform: scale(1.3) !important;
+  }
+
+  .gj-card-phone-img[src*="appstep6"] {
+    transform: scale(1.1) !important;
+  }
+
   .gj-card-phone-img[src*="appstep7"] {
-    transform: scale(0.6);
-    transform-origin: top center;
+    transform: scale(0.90) !important;
   }
   .gj-step-indicator {
     overflow-x: visible;
