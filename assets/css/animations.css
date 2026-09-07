@@ -8,10 +8,12 @@ html { scroll-behavior: smooth; }
 
 /* ── Reveal base ── */
 .reveal {
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .reveal-visible {
+  opacity: 1;
   transform: none !important;
 }
 
@@ -415,4 +417,29 @@ html { scroll-behavior: smooth; }
   .reveal { transform: none !important; }
   #particle-field { display: none !important; }
   #scroll-progress { display: none !important; }
+}
+
+/* ── Gel letter-drop headings (shared across pages) ── */
+@keyframes gelDrop {
+  0%   { opacity: 0; transform: translateY(40px); }
+  55%  { opacity: 1; transform: translateY(-10px); }
+  72%  { transform: translateY(5px); }
+  84%  { transform: translateY(-4px); }
+  93%  { transform: translateY(2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.gel-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: gelDrop 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.gel-letter.space {
+  display: inline-block;
+  width: 0.3em;
+}
+
+.gel-animated {
+  opacity: 0 !important;
 }

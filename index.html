@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <title>Aashirwad EduVerse</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -69,7 +70,7 @@
         background: #fff;
         transform: translateY(-1px);
       }
-      /* â”€â”€ App-intro enhancements â”€â”€ */
+      /* ── App-intro enhancements ── */
       .app-intro-image-wrapper {
         display: flex;
         flex-direction: column;
@@ -211,8 +212,8 @@
         display: inline-flex;
         align-items: center;
         gap: 10px;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
         border-radius: 50px;
         padding: 10px 18px 10px 10px;
         font-family: 'Poppins', sans-serif;
@@ -329,6 +330,57 @@
           height: 220px;
         }
       }
+
+      .contact-form-privacy {
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .privacy-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        line-height: 1.5;
+      }
+
+      .privacy-link i {
+        font-size: 12px;
+        color: #D6B46D;
+        flex-shrink: 0;
+      }
+
+      .privacy-link span {
+        color: #a12c2f;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .privacy-link:hover {
+        color: #6b7280;
+      }
+
+      .privacy-link:hover span {
+        color: #661a1d;
+      }
+
+      @keyframes slideUp {
+        0%   { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .form-field-animate {
+        opacity: 0;
+      }
+
+      .form-field-animate.field-visible {
+        animation: slideUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      }
     </style>
 <!--
 
@@ -366,58 +418,8 @@ https://templatemo.com/tm-569-edu-meeting
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
-  <!-- Sub Header -->
-  <div class="sub-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-sm-8">
-          <div class="left-content">
-            <p>Aashirwad Institute of Teachers</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="right-icons">
-            <ul>
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-behance"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-      <div class="container">
-          <div class="row">
-              <div class="col-12">
-                  <nav class="main-nav">
-                      <!-- ***** Logo Start ***** -->
-                      <a href="index.html" class="logo">
-                        <img src="assets/images/logo3.png" alt="Aashirwad EduVerse Logo" class="logo-image">
-                      </a>
-                      <!-- ***** Logo End ***** -->
-                      <!-- ***** Menu Start ***** -->
-                      <ul class="nav">
-                          <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                          <li class="scroll-to-section"><a href="#about">About</a></li> 
-                          <li><a href="courses.html">Courses</a></li>
-                          <li><a href="app.html">Mobile App</a></li>
-                          <li><a href="contact.html">Contact Us</a></li> 
-                      </ul>        
-                      <a class='menu-trigger'>
-                          <span>Menu</span>
-                      </a>
-                      <!-- ***** Menu End ***** -->
-                  </nav>
-              </div>
-          </div>
-      </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
+  <!-- Shared Navbar (injected from components/navbar.html) -->
+  <div id="site-nav"></div>
 
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
@@ -570,7 +572,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="about-card-content">
               <h3>About</h3>
               <p>
-                Founded in 2009, Aashirwad Institute of Teachers is a premier institution in Kerala, specializing in competitive exam coaching, with a particular focus on PSC and KTET training. Headquartered in Vaikom, the institute has grown to include multiple branches across Kerala, offering personalized coaching and innovative learning tools to help students achieve success in their academic and professional aspirations. At Aashirwad, we offer a wide array of courses including PSC, KTET, Navodaya Entrance, Civil Service Nurturing Programs, and more. Our curriculum is designed to foster critical thinking and practical skills, with a commitment to excellence that has earned us 23 first ranks in PSC exams and a consistent record of Navodaya admissions from Kottayam since 2010. We are proud innovators, introducing Indiaâ€™s first digital rank file with interactive features, enhancing the learning experience for our students. With a strong emphasis on results, our â€œSuccess Guaranteeâ€ ensures that if KTET candidates do not pass, they can avail of the next training session free of charge. Our publications, including subject-specific rank files and current affairs updates, further support students in their preparation. Aashirwad remains dedicated to shaping future leaders by providing world-class education and unmatched guidance.
+                Founded in 2009, Aashirwad Institute of Teachers is a premier institution in Kerala, specializing in competitive exam coaching, with a particular focus on PSC and KTET training. Headquartered in Vaikom, the institute has grown to include multiple branches across Kerala, offering personalized coaching and innovative learning tools to help students achieve success in their academic and professional aspirations. At Aashirwad, we offer a wide array of courses including PSC, KTET, Navodaya Entrance, Civil Service Nurturing Programs, and more. Our curriculum is designed to foster critical thinking and practical skills, with a commitment to excellence that has earned us 23 first ranks in PSC exams and a consistent record of Navodaya admissions from Kottayam since 2010. We are proud innovators, introducing India’s first digital rank file with interactive features, enhancing the learning experience for our students. With a strong emphasis on results, our “Success Guarantee” ensures that if KTET candidates do not pass, they can avail of the next training session free of charge. Our publications, including subject-specific rank files and current affairs updates, further support students in their preparation. Aashirwad remains dedicated to shaping future leaders by providing world-class education and unmatched guidance.
               </p>
               <p>
                 Contact Information: Aashirwad Institute of Teachers Kacherikavala, Vaikom, Kottayam, Kerala 686141 Helpline: 8547 577 007 | WhatsApp: 8547 935 616
@@ -583,7 +585,7 @@ https://templatemo.com/tm-569-edu-meeting
     </div>
   </section>
 
-    <!-- ── Golden divider ── -->
+    <!-- -- Golden divider -- -->
     <div class="section-divider-gold"></div>
 
   <section class="journey-section" id="journey">
@@ -761,10 +763,10 @@ https://templatemo.com/tm-569-edu-meeting
 
   </section>
 
-    <!-- ── Golden divider ── -->
+    <!-- -- Golden divider -- -->
     <div class="section-divider-gold"></div>
 
-    <!-- â”€â”€ SECTION: Rank Holders / Toppers Wall â”€â”€ -->
+    <!-- ── SECTION: Rank Holders / Toppers Wall ── -->
     <section class="toppers-section">
       <div class="container">
         <div class="cp-heading">
@@ -774,7 +776,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="cp-underline"></div>
         </div>
 
-        <!-- â”€â”€ Achievement Statistics Bar â”€â”€ -->
+        <!-- ── Achievement Statistics Bar ── -->
         <div class="hof-stats">
           <div class="hof-stat-card reveal-stat" data-delay="0">
             <div class="hof-stat-icon"><i class="fa fa-award"></i></div>
@@ -856,7 +858,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course-02.jpg" alt="KTET">
+                <img src="assets/images/course/KTET.webp" alt="KTET">
                 <div class="card-img-overlay"><span>KTET</span></div>
               </div>
               <div class="down-content">
@@ -883,7 +885,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course-03.jpg" alt="Degree Level">
+                <img src="assets/images/course/DegreeLevel.webp" alt="Degree Level">
                 <div class="card-img-overlay"><span>Degree Level</span></div>
               </div>
               <div class="down-content">
@@ -910,7 +912,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course-04.jpg" alt="Police Constable">
+                <img src="assets/images/course/PoliceConstable.webp" alt="Police Constable">
                 <div class="card-img-overlay"><span>Police Constable</span></div>
               </div>
               <div class="down-content">
@@ -936,9 +938,8 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="deck-card-position popular-active">
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card popular">
-              <div class="popular-badge">Most Popular</div>
               <div class="card-img-wrap">
-                <img src="assets/images/course-01.jpg" alt="LDC Clerk">
+                <img src="assets/images/course/LDClerk.webp" alt="LDC Clerk">
                 <div class="card-img-overlay"><span>LDC Clerk</span></div>
               </div>
               <div class="down-content">
@@ -965,7 +966,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course-01.jpg" alt="CTET">
+                <img src="assets/images/course/CTET.webp" alt="CTET">
                 <div class="card-img-overlay"><span>CTET</span></div>
               </div>
               <div class="down-content">
@@ -992,7 +993,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course-02.jpg" alt="Civil Service Foundation">
+                <img src="assets/images/course/Civil Service Foundation.webp" alt="Civil Service Foundation">
                 <div class="card-img-overlay"><span>Civil Service Foundation</span></div>
               </div>
               <div class="down-content">
@@ -1007,33 +1008,6 @@ https://templatemo.com/tm-569-edu-meeting
                 <div class="course-price-row">
                   <span class="current-price">₹ 12,999</span>
                   <span class="original-price">₹ 19,999</span>
-                  <span class="discount-badge">-35% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="deck-card-position">
-          <div class="deck-card-tilt" tabindex="0">
-            <div class="course-item-card">
-              <div class="card-img-wrap">
-                <img src="assets/images/course-03.jpg" alt="Bank Exams">
-                <div class="card-img-overlay"><span>Bank Exams</span></div>
-              </div>
-              <div class="down-content">
-                <h4>Bank Exams</h4>
-                <div class="course-rating-row">
-                  <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
-                  <span class="rating-num">(4.7)</span>
-                  <span class="student-count">1.8k+ Students</span>
-                </div>
-                <p class="course-desc">Comprehensive coaching for IBPS, SBI, and other bank exams with expert faculty and mock tests.</p>
-                <div class="card-divider"></div>
-                <div class="course-price-row">
-                  <span class="current-price">₹ 5,499</span>
-                  <span class="original-price">₹ 8,499</span>
                   <span class="discount-badge">-35% OFF</span>
                   <a href="#" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
@@ -1057,7 +1031,7 @@ https://templatemo.com/tm-569-edu-meeting
   <!-- Floating decorative particles (filled by JS) -->
   <div class="app-particles" id="appParticles"></div>
 
-  <!-- â”€â”€ Section heading â€” always visible above sticky frame â”€â”€ -->
+  <!-- ── Section heading — always visible above sticky frame ── -->
   <div class="app-intro-panel">
     <div class="container" id="mobileapp">
       <div class="row align-items-center">
@@ -1108,11 +1082,11 @@ https://templatemo.com/tm-569-edu-meeting
 
         <div class="col-lg-8 col-md-7">
           <div class="app-intro-content-wrapper">
-            <h4 class="app-intro-subheading">Our Mobile App</h4>
-            <h2>Meet the New Era of <span class="highlight">Competitive Exam Prep</span></h2>
-            <div class="app-intro-divider"></div>
+            <h4 class="app-intro-subheading slide-in-up" style="transition-delay: 0s;">Our Mobile App</h4>
+            <h2 class="slide-in-up" style="transition-delay: 0.1s;">Meet the New Era of </br><span class="highlight">Competitive Exam Prep</span></h2>
+            <div class="app-intro-divider slide-in-up" style="transition-delay: 0.2s;"></div>
 
-            <p class="intro-text">
+            <p class="intro-text slide-in-up" style="transition-delay: 0.3s;">
               Empower your study routine with <strong>Aashirwad Eduverse</strong>, our intelligent,
               adaptive mobile application designed to bring comprehensive Kerala PSC and competitive
               exam preparation straight to your smartphone. Built with a sleek, modern user interface,
@@ -1122,7 +1096,7 @@ https://templatemo.com/tm-569-edu-meeting
               tailored for Kerala PSC aspirants.
             </p>
 
-            <div class="app-feature-badges">
+            <div class="app-feature-badges slide-in-up" style="transition-delay: 0.4s;">
               <span class="app-feature-badge">
                 <span class="badge-icon"><i class="fa fa-refresh"></i></span>
                 Smart Revision
@@ -1159,11 +1133,11 @@ https://templatemo.com/tm-569-edu-meeting
     </div>
   </div>
  
-  <!-- â”€â”€ Sticky scroll scene â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  <!-- ── Sticky scroll scene ──────────────────────────────── -->
   <div id="app-scroll-scene">
     <div class="app-sticky-frame" id="appStickyFrame">
  
-      <!-- â”€â”€ Static heading inside sticky frame â”€â”€ -->
+      <!-- ── Static heading inside sticky frame ── -->
       <div class="core-modes-heading-wrapper">
         <h2 class="core-modes-title">Our Core  Learning Modes</h2>
         <p class="core-modes-subtitle">Read, Write, Listen, Watch: <span>Study Your Way</span></p>
@@ -1181,10 +1155,10 @@ https://templatemo.com/tm-569-edu-meeting
       <!-- Left: mode content cards -->
       <div class="app-left-pane">
   
-        <!-- Card 0 â€“ Read -->
+        <!-- Card 0 – Read -->
         <div class="mode-card active" data-index="0">
           <div class="mode-icon icon-read">📖</div>
-          <h3><span class="highlight">Reading</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Reading</span> Mode</h3>
           <p>
             Dive into distraction-free digital reading environments curated by subject experts.
             Focus entirely on the core material with a clean, optimised layout built for deep
@@ -1195,10 +1169,10 @@ https://templatemo.com/tm-569-edu-meeting
           </div>
         </div>
   
-        <!-- Card 1 â€“ Write -->
+        <!-- Card 1 – Write -->
         <div class="mode-card" data-index="1">
           <div class="mode-icon icon-write">✍️</div>
-          <h3><span class="highlight">Writing</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Writing</span> Mode</h3>
           <p>
             Turn passive reading into active muscle memory. Engage with dedicated writing and
             practice exercises designed to force memory retrieval, anchor key facts, and ensure
@@ -1209,10 +1183,10 @@ https://templatemo.com/tm-569-edu-meeting
           </div>
         </div>
   
-        <!-- Card 2 â€“ Listen -->
+        <!-- Card 2 – Listen -->
         <div class="mode-card" data-index="2">
           <div class="mode-icon icon-listen">🎧</div>
-          <h3><span class="highlight">Audio</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Audio</span> Mode</h3>
           <p>
             Turn your commute, workout, or downtime into productive study time. Listen to
             professionally explained audio lessons and master core concepts on the go with
@@ -1223,10 +1197,10 @@ https://templatemo.com/tm-569-edu-meeting
           </div>
         </div>
   
-        <!-- Card 3 â€“ Watch -->
+        <!-- Card 3 – Watch -->
         <div class="mode-card" data-index="3">
           <div class="mode-icon icon-watch">🎬</div>
-          <h3><span class="highlight">Video</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Video</span> Mode</h3>
           <p>
             Visual learners rejoice. Complex theories, tough problem-solving steps, and core
             syllabus topics are broken down into high-quality, engaging video sessions that make
@@ -1254,7 +1228,7 @@ https://templatemo.com/tm-569-edu-meeting
           <!-- Rotating ring with four nodes -->
           <div class="wheel-ring" id="wheelRing">
   
-            <!-- Node 0 â€“ Read (top) -->
+            <!-- Node 0 – Read (top) -->
             <div class="wheel-node active-node" data-node="0">
               <div class="node-inner">
                 <span class="node-icon">📖</span>
@@ -1262,7 +1236,7 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
   
-            <!-- Node 1 â€“ Watch (right) -->
+            <!-- Node 1 – Watch (right) -->
             <div class="wheel-node" data-node="3">
               <div class="node-inner">
                 <span class="node-icon">🎬</span>
@@ -1270,7 +1244,7 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
   
-            <!-- Node 2 â€“ Listen (bottom) -->
+            <!-- Node 2 – Listen (bottom) -->
             <div class="wheel-node" data-node="2">
               <div class="node-inner">
                 <span class="node-icon">🎧</span>
@@ -1278,7 +1252,7 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
   
-            <!-- Node 3 â€“ Write (left) -->
+            <!-- Node 3 – Write (left) -->
             <div class="wheel-node" data-node="1">
               <div class="node-inner">
                 <span class="node-icon">✍️</span>
@@ -1286,7 +1260,7 @@ https://templatemo.com/tm-569-edu-meeting
               </div>
             </div>
   
-            <!-- â”€â”€ Sparkles â”€â”€ -->
+            <!-- ── Sparkles ── -->
             <div class="sparkle" style="top:calc(50% + -30px);left:calc(50% + 80px);height:15px;--hw:7.5px;animation:twinkle2 3.2s ease-in-out 0.5s infinite"></div>
             <div class="sparkle" style="top:calc(50% + -70px);left:calc(50% + 40px);height:8px;--hw:4px;animation:twinkle1 1.8s ease-in-out 1.2s infinite"></div>
             <div class="sparkle" style="top:calc(50% + -85px);left:calc(50% + -50px);height:12px;--hw:6px;animation:twinkle3 2.6s ease-in-out 0.1s infinite"></div>
@@ -1309,7 +1283,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="sparkle" style="top:calc(50% + 20px);left:calc(50% + -100px);height:14px;--hw:7px;animation:twinkle5 3.9s ease-in-out 0.7s infinite"></div>
             <div class="sparkle" style="top:calc(50% + -25px);left:calc(50% + 25px);height:12px;--hw:6px;animation:twinkle1 2.3s ease-in-out 1.1s infinite"></div>
             <div class="sparkle" style="top:calc(50% + 30px);left:calc(50% + -30px);height:13px;--hw:6.5px;animation:twinkle3 2.9s ease-in-out 2.1s infinite"></div>
-            <!-- â”€â”€ Outside sparkles â”€â”€ -->
+            <!-- ── Outside sparkles ── -->
             <div class="sparkle" style="top:calc(50% + -60px);left:calc(50% + 170px);height:18px;--hw:9px;animation:twinkle2 2.7s ease-in-out 0.1s infinite"></div>
             <div class="sparkle" style="top:calc(50% + -90px);left:calc(50% + -160px);height:13px;--hw:6.5px;animation:twinkle4 3.4s ease-in-out 0.7s infinite"></div>
             <div class="sparkle" style="top:calc(50% + 165px);left:calc(50% + 90px);height:20px;--hw:10px;animation:twinkle1 2.2s ease-in-out 1.5s infinite"></div>
@@ -1362,7 +1336,7 @@ https://templatemo.com/tm-569-edu-meeting
         </div><!-- /wheel-wrapper -->
       </div><!-- /app-right-pane -->
   
-      <!-- Scroll hint â€” centred at the bottom of the sticky frame -->
+      <!-- Scroll hint — centred at the bottom of the sticky frame -->
       <div class="scroll-hint" id="scrollHint">
         <span>scroll</span>
         <div class="scroll-hint-arrow"></div>
@@ -1373,7 +1347,7 @@ https://templatemo.com/tm-569-edu-meeting
  
 </section>
 
-<!-- â”€â”€ Learning Process Timeline â”€â”€ -->
+<!-- ── Learning Process Timeline ── -->
 <section class="learning-process" id="learning-process">
   <div class="container">
     <div class="text-center" style="margin-bottom: 48px;">
@@ -1490,23 +1464,29 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="contact-form-accent"></div>
             <h3 class="contact-form-heading">Send Us a Message</h3>
             <form action="" method="post">
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-name">Name</label>
                 <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
               </div>
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-email">Email</label>
                 <input type="email" id="contact-email" name="email" placeholder="Your email address" required>
               </div>
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-subject">Subject</label>
                 <input type="text" id="contact-subject" name="subject" placeholder="Subject" required>
               </div>
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-message">Message</label>
-                <textarea id="contact-message" name="message" placeholder="Write your message here..." rows="5"></textarea>
+                <textarea id="contact-message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
               </div>
-              <button type="submit" class="contact-send-btn">Send Message</button>
+              <button type="submit" class="contact-send-btn form-field-animate">Send Message</button>
+              <div class="contact-form-privacy form-field-animate">
+                <a href="privacypolicy.html" class="privacy-link">
+                  <i class="fa fa-shield"></i>
+                  Your information is safe &amp; secure &mdash; <span>read our data policy</span>
+                </a>
+              </div>
             </form>
           </div>
         </div>
@@ -1514,17 +1494,17 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Right: Info Panel -->
         <div class="contact-info-col">
           <h3 class="contact-info-heading">Let's Get in Touch</h3>
-          <p class="contact-info-subtext">Have questions about our courses or admissions? We're here to help you every step of the way.</p>
+          <p class="contact-info-subtext form-field-animate">Have questions about our courses or admissions? We're here to help you every step of the way.</p>
 
           <div class="contact-info-cards">
-            <div class="contact-info-card">
+            <div class="contact-info-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-map-marker"></i></div>
               <div class="contact-info-text">
                 <strong>Address</strong>
                 <span>Kacherikavala, Vaikom, Kottayam, Kerala 686141</span>
               </div>
             </div>
-            <div class="contact-info-card">
+            <div class="contact-info-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-phone"></i></div>
               <div class="contact-info-text">
                 <strong>Phone &amp; WhatsApp</strong>
@@ -1532,7 +1512,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <span>WhatsApp: 8547 935 616</span>
               </div>
             </div>
-            <div class="contact-info-card">
+            <div class="contact-info-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-envelope"></i></div>
               <div class="contact-info-text">
                 <strong>Email</strong>
@@ -1541,7 +1521,7 @@ https://templatemo.com/tm-569-edu-meeting
             </div>
           </div>
 
-          <div class="contact-map-wrapper">
+          <div class="contact-map-wrapper form-field-animate">
             <div id="locationMap"></div>
             <a href="https://www.google.com/maps/place/Aashirwad+Institute+Of+Teachers./@9.7986126,76.4377363,12.76z/data=!4m6!3m5!1s0x3b08791202bf0249:0xef3dd46b957523ea!8m2!3d9.7554921!4d76.3953634!16s%2Fg%2F11c5s47wt6?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D"
                target="_blank"
@@ -1650,79 +1630,12 @@ https://templatemo.com/tm-569-edu-meeting
 
 
 
-    <footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-
-      <!-- Column 1: Brand -->
-      <div class="footer-col footer-col-brand">
-        <img src="assets/images/logo3.png" alt="Aashirwad Institute of Teachers" class="footer-logo">
-        <p>Shaping futures since 2009. Kerala's most trusted institute for competitive exam coaching with branches across the state and a legacy of academic excellence.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
-          <a href="#" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a>
-        </div>
-      </div>
-
-      <!-- Column 2: Quick Links -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Quick Links</h4>
-        <nav>
-          <a href="#top">Home</a>
-          <a href="#about">About</a>
-          <a href="courses.html">Courses</a>
-          <a href="app.html">Mobile App</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-      </div>
-
-      <!-- Column 3: Courses -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Courses</h4>
-        <nav>
-          <a href="courses.html">PSC Coaching</a>
-          <a href="courses.html">KTET Program</a>
-          <a href="courses.html">Navodaya</a>
-          <a href="courses.html">Civil Service</a>
-          <a href="courses.html">LDC Training</a>
-          <a href="courses.html">Police Coaching</a>
-        </nav>
-      </div>
-
-      <!-- Column 4: Contact -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Contact Us</h4>
-        <p><i class="fa fa-map-marker"></i> Kacherikavala, Vaikom, Kottayam, Kerala 686141</p>
-        <p><i class="fa fa-phone"></i> Helpline: 8547 577 007</p>
-        <p><i class="fa fa-whatsapp"></i> WhatsApp: 8547 935 616</p>
-        <p><i class="fa fa-envelope"></i> info@aitacademyindia.com</p>
-      </div>
-
-      <!-- Column 5: Newsletter -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Newsletter</h4>
-        <p>Stay updated with the latest exam notifications and preparation tips.</p>
-        <div class="footer-newsletter">
-          <input type="email" placeholder="Your email address">
-          <button type="button">Subscribe</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2026 Aashirwad Institute of Teachers. All Rights Reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms</a>
-      </div>
-    </div>
-  </div>
-</footer>
+    <!-- Shared Footer (injected from components/footer.html) -->
+  <div id="site-footer"></div>
 
   <!-- Scripts -->
+  <!-- Shared components loader (must run before custom.js binds nav) -->
+  <script src="components/includes.js"></script>
   <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1735,7 +1648,7 @@ https://templatemo.com/tm-569-edu-meeting
     <script src="assets/js/slick-slider.js"></script>
     <script src="assets/js/custom.js"></script>
     <script>
-      /* â”€â”€ Equalize service card heights â”€â”€ */
+      /* ── Equalize service card heights ── */
       (function () {
         var MAX_HEIGHT = 350;
         function equalize() {
@@ -1950,7 +1863,7 @@ https://templatemo.com/tm-569-edu-meeting
             }, 200);
           });
 
-          /* â”€â”€ State â”€â”€ */
+          /* ── State ── */
           var currentStep    = 0;
           var stepInProgress = false;
           var STEP_COOLDOWN  = isMobile() ? 1000 : 650; /* longer cooldown on mobile to prevent momentum-scroll step skipping */
@@ -1959,7 +1872,7 @@ https://templatemo.com/tm-569-edu-meeting
           var scrollAnchor   = 0;
           var cumulativeDeg  = 0;
 
-          /* ── Apply a step (0-3) ── */
+          /* -- Apply a step (0-3) -- */
           function applyStep(step, direction) {
             if (step < 0 || step >= TOTAL_STEPS) return;
             if (step === currentStep) {
@@ -2008,7 +1921,7 @@ https://templatemo.com/tm-569-edu-meeting
           }
 
           /*
-           * â”€â”€ Scroll-zone detection â”€â”€
+           * ── Scroll-zone detection ──
            * The scene is 500vh tall with a sticky frame inside.
            * We are "in the zone" when:
            *   rect.top <= 0  (scene has started pinning)
@@ -2021,7 +1934,7 @@ https://templatemo.com/tm-569-edu-meeting
           }
 
           /*
-           * â”€â”€ Derive current step from actual scroll position â”€â”€
+           * ── Derive current step from actual scroll position ──
            * The scene is 500vh. The first vh is just entering; the next 400vh
            * is the 4-step travel (100vh each).
            */
@@ -2034,7 +1947,7 @@ https://templatemo.com/tm-569-edu-meeting
             return Math.max(0, Math.min(TOTAL_STEPS - 1, step));
           }
 
-          /* â”€â”€ Sync wheel hijacking: intercept scroll, do a programmatic scroll â”€â”€ */
+          /* ── Sync wheel hijacking: intercept scroll, do a programmatic scroll ── */
           var scrolling  = false; /* rAF guard */
           var pendingDir = 0;
 
@@ -2065,7 +1978,7 @@ https://templatemo.com/tm-569-edu-meeting
             }
           }
 
-          /* â”€â”€ Sync on real scroll (handles keyboard, scrollbar drag, etc.) â”€â”€ */
+          /* ── Sync on real scroll (handles keyboard, scrollbar drag, etc.) ── */
           window.addEventListener('scroll', function () {
             if (isMobile()) return;
             var inZone = inScrollZone();
@@ -2080,7 +1993,7 @@ https://templatemo.com/tm-569-edu-meeting
                 applyStep(s, s > currentStep ? 1 : -1);
                 lockScroll();
               } else if (diff > 1) {
-                /* Entering from outside â€” snap directly without animation */
+                /* Entering from outside — snap directly without animation */
                 cumulativeDeg = s * 90;
                 ring.style.transition = 'none';
                 innerEls.forEach(function (el) { el.style.transition = 'none'; });
@@ -2110,7 +2023,7 @@ https://templatemo.com/tm-569-edu-meeting
             }
           }, { passive: true });
 
-          /* â”€â”€ Wheel & touch interception scoped to scene only â”€â”€ */
+          /* ── Wheel & touch interception scoped to scene only ── */
           var touchStartY       = 0;
           var touchHandled      = false;
           var SWIPE_THRESHOLD   = 60;
@@ -2224,12 +2137,12 @@ https://templatemo.com/tm-569-edu-meeting
 
             /* Not a direction we intend to handle (true boundary,
                e.g. already on step 0 swiping further up, or step 3
-               swiping further down) â€” let native scroll continue
+               swiping further down) — let native scroll continue
                normally so the user can leave the section. */
             if (!intercept) return;
 
             /* THE ACTUAL FIX: block native scroll immediately once we
-               know this swipe is one we're going to handle â€” even
+               know this swipe is one we're going to handle — even
                before the 50px activation threshold below is reached.
                Previously, returning early here without preventDefault
                let the browser perform a small native scroll during
@@ -2259,7 +2172,7 @@ https://templatemo.com/tm-569-edu-meeting
             zoneEnteredThisGesture = false;
           }, { passive: true });
 
-          /* â”€â”€ Spawn decorative particles â”€â”€ */
+          /* ── Spawn decorative particles ── */
           var container = document.getElementById('appParticles');
           var COLORS    = ['#D6B46D', '#F5A425', '#E58A00', '#C4953A'];
           for (var i = 0; i < 18; i++) {
@@ -2275,7 +2188,7 @@ https://templatemo.com/tm-569-edu-meeting
             container.appendChild(p);
           }
 
-          /* â”€â”€ Wrap each sparkle so it counter-rotates independently â”€â”€ */
+          /* ── Wrap each sparkle so it counter-rotates independently ── */
           var rawSparkles = Array.from(ring.querySelectorAll('.sparkle'));
           rawSparkles.forEach(function (s) {
             var w = document.createElement('span');
@@ -2432,7 +2345,26 @@ https://templatemo.com/tm-569-edu-meeting
           }
         })();
 
-        /* â”€â”€ Quote Slider â”€â”€ */
+        /* ── Restart mode-heading slide-up when scroll scene enters viewport ── */
+        (function () {
+          var scene = document.getElementById('app-scroll-scene');
+          if (!scene) return;
+          var restartObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var h3 = document.querySelector('.mode-card.active h3');
+                if (h3) {
+                  h3.style.animation = 'none';
+                  void h3.offsetHeight;
+                  h3.style.animation = '';
+                }
+              }
+            });
+          }, { threshold: 0.15 });
+          restartObserver.observe(scene);
+        })();
+
+        /* ── Quote Slider ── */
         (function () {
           var slides  = Array.from(document.querySelectorAll('.quote-slide'));
           var current = 0;
@@ -2454,7 +2386,7 @@ https://templatemo.com/tm-569-edu-meeting
           setInterval(showNext, 5000);
         })();
 
-        /* â”€â”€ Testimonial Slider â”€â”€ */
+        /* ── Testimonial Slider ── */
         (function () {
           var slides  = Array.from(document.querySelectorAll('.testimonial-slide'));
           var dots    = Array.from(document.querySelectorAll('.t-dot'));
@@ -2489,7 +2421,7 @@ https://templatemo.com/tm-569-edu-meeting
           });
         })();
 
-        /* â”€â”€ Leaflet Map â”€â”€ */
+        /* ── Leaflet Map ── */
         (function () {
           var container = document.getElementById('locationMap');
           if (!container) return;
@@ -2566,7 +2498,7 @@ https://templatemo.com/tm-569-edu-meeting
         window.addEventListener('scroll', check, { passive: true });
         check();
       })();
-        /* â”€â”€ Toppers track auto-scroll (pause on hover) â”€â”€ */
+        /* ── Toppers track auto-scroll (pause on hover) ── */
         (function () {
           var track = document.getElementById('toppersTrack');
           if (track) {
@@ -2604,11 +2536,19 @@ https://templatemo.com/tm-569-edu-meeting
             });
           }
 
-          /* â”€â”€ IntersectionObserver for topper cards, stats & slide animations â”€â”€ */
+          /* ── IntersectionObserver for topper cards, stats & slide animations ── */
           if ('IntersectionObserver' in window) {
+            var lastIOScrollY = window.scrollY;
+            var ioScrollingDown = true;
+            window.addEventListener('scroll', function () {
+              var current = window.scrollY;
+              ioScrollingDown = current > lastIOScrollY;
+              lastIOScrollY = current;
+            }, { passive: true });
+
             var io = new IntersectionObserver(function (entries) {
               entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
+                if (!entry.isIntersecting || !ioScrollingDown) return;
                 var el = entry.target;
                 if (el.classList.contains('topper-card')) {
                   el.classList.add('tp-visible');
@@ -2622,6 +2562,8 @@ https://templatemo.com/tm-569-edu-meeting
                   el.classList.add('anim-active');
                 } else if (el.classList.contains('slide-in-right')) {
                   el.classList.add('anim-active');
+                } else if (el.classList.contains('slide-in-up')) {
+                  el.classList.add('anim-active');
                 }
                 io.unobserve(el);
               });
@@ -2631,11 +2573,11 @@ https://templatemo.com/tm-569-edu-meeting
               if (t.offsetParent !== null) io.observe(t);
             });
             document.querySelectorAll('.reveal-stat').forEach(function (s) { io.observe(s); });
-            document.querySelectorAll('.slide-in-left, .slide-in-right').forEach(function (el) { io.observe(el); });
+            document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up').forEach(function (el) { io.observe(el); });
           } else {
             document.querySelectorAll('.topper-card').forEach(function (t) { t.classList.add('tp-visible'); });
             document.querySelectorAll('.reveal-stat').forEach(function (s) { s.classList.add('stat-visible'); });
-            document.querySelectorAll('.slide-in-left, .slide-in-right').forEach(function (el) { el.classList.add('anim-active'); });
+            document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up').forEach(function (el) { el.classList.add('anim-active'); });
           }
 
           /* Counter animation (ease-out, supports decimal) */
@@ -2649,6 +2591,7 @@ https://templatemo.com/tm-569-edu-meeting
             var startTime = null;
 
             function step(timestamp) {
+              if (!el.dataset.animated) return;
               if (!startTime) startTime = timestamp;
               var elapsed = timestamp - startTime;
               var progress = Math.min(elapsed / duration, 1);
@@ -2659,9 +2602,67 @@ https://templatemo.com/tm-569-edu-meeting
             }
             requestAnimationFrame(step);
           }
+
+          /* Stats: re-animate + re-count on every downward scroll pass */
+          var hofEls = document.querySelectorAll('.reveal-stat');
+          var hofItems = [];
+          hofEls.forEach(function (el) {
+            hofItems.push({ el: el, animated: false });
+          });
+
+          var lastHofScrollY = window.scrollY;
+
+          function triggerHof(item) {
+            item.animated = true;
+            var el = item.el;
+            var delay = parseInt(el.getAttribute('data-delay')) || 0;
+            setTimeout(function () {
+              el.classList.add('stat-visible');
+              animateCounter(el.querySelector('.stat-number'));
+            }, delay);
+          }
+
+          function resetHof(item) {
+            item.animated = false;
+            var el = item.el;
+            el.classList.remove('stat-visible');
+            var num = el.querySelector('.stat-number');
+            num.dataset.animated = '';
+            num.textContent = num.dataset.decimal === 'true' ? '0.0' : '0';
+          }
+
+          window.addEventListener('scroll', function () {
+            var currentScrollY = window.scrollY;
+            var scrollingDown = currentScrollY > lastHofScrollY;
+
+            hofItems.forEach(function (item) {
+              var el = item.el;
+              var rect = el.getBoundingClientRect();
+              var triggerPoint = window.innerHeight * 0.85;
+
+              if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+                triggerHof(item);
+              } else if (!scrollingDown && item.animated) {
+                if (rect.top > window.innerHeight) {
+                  resetHof(item);
+                }
+              }
+            });
+
+            lastHofScrollY = currentScrollY;
+          }, { passive: true });
+
+          /* Initial in-view trigger on load */
+          hofItems.forEach(function (item) {
+            var el = item.el;
+            var rect = el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+              triggerHof(item);
+            }
+          });
         })();
 
-        /* â”€â”€ Featured center card detection â”€â”€ */
+        /* ── Featured center card detection ── */
         (function () {
           var track = document.getElementById('toppersTrack');
           var marker = document.getElementById('hofCenterMarker');
@@ -2711,7 +2712,7 @@ https://templatemo.com/tm-569-edu-meeting
     </script>
 
     <script>
-    /* â”€â”€ Arc Carousel: manual arrow navigation with enter/exit animations â”€â”€ */
+    /* ── Arc Carousel: manual arrow navigation with enter/exit animations ── */
     (function () {
       var stage = document.getElementById('deckStage');
       if (!stage) return;
@@ -2726,7 +2727,7 @@ https://templatemo.com/tm-569-edu-meeting
       var isTablet = function () { return window.innerWidth >= 768 && window.innerWidth < 992; };
       if (isMobile()) return;
 
-      /* â”€â”€ Arc geometry (7 slots) â”€â”€ */
+      /* ── Arc geometry (7 slots) ── */
       var ARC_HEIGHT   = 70;
       var X_MARGIN     = 10;
       var MAX_ROTATION = 10;
@@ -2743,7 +2744,7 @@ https://templatemo.com/tm-569-edu-meeting
       var offset = 0;
       var isAnimating = false;
 
-      /* â”€â”€ Compute slot position values â”€â”€ */
+      /* ── Compute slot position values ── */
       function getSlotPos(slotIdx, stageW) {
         var s = slots[slotIdx];
         return {
@@ -2753,14 +2754,14 @@ https://templatemo.com/tm-569-edu-meeting
         };
       }
 
-      /* â”€â”€ Position a single card â”€â”€ */
+      /* ── Position a single card ── */
       function posCard(card, dx, dy, rot) {
         card.style.setProperty('--dx', dx + 'px');
         card.style.setProperty('--dy', dy + 'px');
         card.style.setProperty('--card-rot', rot + 'deg');
       }
 
-      /* â”€â”€ Update z-index for all cards based on current offset â”€â”€ */
+      /* ── Update z-index for all cards based on current offset ── */
       function updateZIndices() {
         cards.forEach(function (card, i) {
           var slotIdx = ((i + offset) % total + total) % total;
@@ -2769,7 +2770,7 @@ https://templatemo.com/tm-569-edu-meeting
         });
       }
 
-      /* â”€â”€ Layout without animation (initial or immediate) â”€â”€ */
+      /* ── Layout without animation (initial or immediate) ── */
       function layoutImmediate() {
         var stageW = stage.offsetWidth;
         cards.forEach(function (card, i) {
@@ -2780,7 +2781,7 @@ https://templatemo.com/tm-569-edu-meeting
         updateZIndices();
       }
 
-      /* â”€â”€ Animated step (direction: 1 = forward/right, -1 = backward/left) â”€â”€ */
+      /* ── Animated step (direction: 1 = forward/right, -1 = backward/left) ── */
       function animateStep(direction) {
         if (reduced) { offset = ((offset + direction) % total + total) % total; layoutImmediate(); return; }
         if (isAnimating) return;
@@ -2796,7 +2797,7 @@ https://templatemo.com/tm-569-edu-meeting
 
           // Check for wrap-around
           if (Math.abs(newSlotIdx - prevSlotIdx) > 1) {
-            // â”€â”€ Wrap animation â”€â”€
+            // ── Wrap animation ──
             var oldP = getSlotPos(prevSlotIdx, stageW);
             var newP = getSlotPos(newSlotIdx, stageW);
 
@@ -2840,7 +2841,7 @@ https://templatemo.com/tm-569-edu-meeting
             return;
           }
 
-          // â”€â”€ Normal step: animate via CSS transition â”€â”€
+          // ── Normal step: animate via CSS transition ──
           var p = getSlotPos(newSlotIdx, stageW);
           posCard(card, p.dx, p.dy, p.rot);
         });
@@ -2850,7 +2851,7 @@ https://templatemo.com/tm-569-edu-meeting
         setTimeout(function () { isAnimating = false; }, 1000);
       }
 
-      /* â”€â”€ Auto-rotation â”€â”€ */
+      /* ── Auto-rotation ── */
       var autoTimer = null;
       var hoverPaused = false;
 
@@ -2868,17 +2869,17 @@ https://templatemo.com/tm-569-edu-meeting
 
       function resetAutoRotate() { stopAutoRotate(); startAutoRotate(); }
 
-      /* â”€â”€ Hover pause / resume â”€â”€ */
+      /* ── Hover pause / resume ── */
       stage.addEventListener('mouseenter', function () { hoverPaused = true; });
       stage.addEventListener('mouseleave', function () { hoverPaused = false; });
 
-      /* â”€â”€ Arrow handlers (reset timer on click) â”€â”€ */
+      /* ── Arrow handlers (reset timer on click) ── */
       var arrowLeft = stage.querySelector('.deck-arrow-left');
       var arrowRight = stage.querySelector('.deck-arrow-right');
       if (arrowLeft) arrowLeft.addEventListener('click', function () { animateStep(-1); resetAutoRotate(); });
       if (arrowRight) arrowRight.addEventListener('click', function () { animateStep(1); resetAutoRotate(); });
 
-      /* â”€â”€ Card hover: bring forward at same angle â”€â”€ */
+      /* ── Card hover: bring forward at same angle ── */
       cards.forEach(function (card) {
         card.addEventListener('mouseenter', function () {
           cards.forEach(function (c) { c.classList.remove('active-card'); });
@@ -2889,21 +2890,21 @@ https://templatemo.com/tm-569-edu-meeting
         });
       });
 
-      /* â”€â”€ Initial layout â”€â”€ */
+      /* ── Initial layout ── */
       if (reduced) {
         cards.forEach(function (c) { c.style.transition = 'none'; });
       }
       layoutImmediate();
       startAutoRotate();
 
-      /* â”€â”€ Mobile stacked layout after brief delay â”€â”€ */
+      /* ── Mobile stacked layout after brief delay ── */
       if (isMobile()) {
         setTimeout(function () {
           cards.forEach(function (c) { c.classList.add('visible-mobile'); });
         }, 150);
       }
 
-      /* â”€â”€ Debounced resize â”€â”€ */
+      /* ── Debounced resize ── */
       var resizeTimer;
       window.addEventListener('resize', function () {
         clearTimeout(resizeTimer);
@@ -2917,7 +2918,7 @@ https://templatemo.com/tm-569-edu-meeting
         }, 150);
       });
 
-      /* â”€â”€ Desktop mouse-tilt 3D â”€â”€ */
+      /* ── Desktop mouse-tilt 3D ── */
       if (!reduced && !('ontouchstart' in window)) {
         var tiltRAF = null;
         tilts.forEach(function (tilt) {
@@ -2945,7 +2946,7 @@ https://templatemo.com/tm-569-edu-meeting
     </script>
 
     <script>
-    /* â”€â”€ Mobile single-card carousel for courses section â”€â”€ */
+    /* ── Mobile single-card carousel for courses section ── */
     (function () {
       if (window.innerWidth >= 768) return;
 
@@ -2955,7 +2956,7 @@ https://templatemo.com/tm-569-edu-meeting
       var cards = Array.from(stage.querySelectorAll('.deck-card-position'));
       if (cards.length < 2) return;
 
-      /* â”€â”€ Clear arc inline styles â”€â”€ */
+      /* ── Clear arc inline styles ── */
       cards.forEach(function (card) {
         card.style.position = '';
         card.style.left = '';
@@ -2966,12 +2967,12 @@ https://templatemo.com/tm-569-edu-meeting
         card.style.transition = '';
       });
 
-      /* â”€â”€ Hide old deck arrows â”€â”€ */
+      /* ── Hide old deck arrows ── */
       stage.querySelectorAll('.deck-arrow').forEach(function (a) {
         a.style.display = 'none';
       });
 
-      /* â”€â”€ Create wrapper, viewport, track â”€â”€ */
+      /* ── Create wrapper, viewport, track ── */
       var wrapper = document.createElement('div');
       wrapper.className = 'mobile-carousel-wrapper';
 
@@ -2988,7 +2989,7 @@ https://templatemo.com/tm-569-edu-meeting
       viewport.appendChild(track);
       wrapper.appendChild(viewport);
 
-      /* â”€â”€ Arrow buttons â”€â”€ */
+      /* ── Arrow buttons ── */
       var leftArrow = document.createElement('button');
       leftArrow.className = 'mobile-carousel-arrow mobile-carousel-arrow-left';
       leftArrow.innerHTML = '&#8249;';
@@ -3004,7 +3005,7 @@ https://templatemo.com/tm-569-edu-meeting
 
       stage.insertBefore(wrapper, stage.firstChild);
 
-      /* â”€â”€ Dots â”€â”€ */
+      /* ── Dots ── */
       var dotsContainer = document.createElement('div');
       dotsContainer.className = 'mobile-carousel-dots';
 
@@ -3016,7 +3017,7 @@ https://templatemo.com/tm-569-edu-meeting
       });
       stage.appendChild(dotsContainer);
 
-      /* â”€â”€ State â”€â”€ */
+      /* ── State ── */
       var current = 0;
       var total = cards.length;
       var autoTimer = null;
@@ -3066,7 +3067,7 @@ https://templatemo.com/tm-569-edu-meeting
         goTo(parseInt(dot.getAttribute('data-slide'), 10));
       });
 
-      /* â”€â”€ Swipe support â”€â”€ */
+      /* ── Swipe support ── */
       var swipeStartX = 0, swipeStartY = 0, swiping = false;
 
       viewport.addEventListener('touchstart', function (e) {
@@ -3111,8 +3112,8 @@ https://templatemo.com/tm-569-edu-meeting
       var milestoneNodes = Array.from(document.querySelectorAll('.milestone-node'));
       var memoryBgs = Array.from(document.querySelectorAll('.memory-bg'));
 
-      /* â”€â”€ Remember each memory photo's original spot in the DOM so we
-           can put it back exactly when the screen returns to desktop width â”€â”€ */
+      /* ── Remember each memory photo's original spot in the DOM so we
+           can put it back exactly when the screen returns to desktop width ── */
       var memoryOriginalParent = [];
       var memoryOriginalNext = [];
       memoryBgs.forEach(function (m) {
@@ -3126,10 +3127,10 @@ https://templatemo.com/tm-569-edu-meeting
         return window.innerWidth <= 991;
       }
 
-      /* â”€â”€ On mobile/tablet: move each memory photo to sit directly
+      /* ── On mobile/tablet: move each memory photo to sit directly
            before its matching milestone, so the page reads
            [photo] [milestone content] [photo] [milestone content] ...
-           On desktop: move every photo back to its original position. â”€â”€ */
+           On desktop: move every photo back to its original position. ── */
       function relayoutMemories() {
         var shouldBeMobile = isMobileWidth();
         if (shouldBeMobile === mobileLayoutActive) return;
@@ -3227,5 +3228,163 @@ https://templatemo.com/tm-569-edu-meeting
     })();
     </script>
 
+  <script>
+    (function () {
+      var form = document.querySelector('.contact-form-card form');
+      if (!form) return;
+
+      form.addEventListener('invalid', function (e) {
+        var el = e.target;
+        if (el && el.focus && el.getBoundingClientRect) {
+          el.focus({ preventScroll: true });
+          var rect = el.getBoundingClientRect();
+          var viewportH = window.innerHeight;
+          var scrollY = rect.top + window.scrollY - (viewportH / 2) + (rect.height / 2);
+          window.scrollTo({ top: scrollY, behavior: 'smooth' });
+        }
+      }, true);
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var btn = form.querySelector('.contact-send-btn');
+        var originalHTML = btn.innerHTML;
+        btn.innerHTML = 'SENDING...';
+        btn.disabled = true;
+
+        var waText =
+          'Hello Aashirwad Institute of Teachers,%0A%0A' +
+          'Name: ' + encodeURIComponent(document.getElementById('contact-name').value.trim()) + '%0A' +
+          'Email: ' + encodeURIComponent(document.getElementById('contact-email').value.trim()) + '%0A' +
+          'Subject: ' + encodeURIComponent(document.getElementById('contact-subject').value.trim()) + '%0A%0A' +
+          'Message:%0A' + encodeURIComponent(document.getElementById('contact-message').value.trim());
+
+        form.reset();
+        window.location.href = 'https://wa.me/918547935616?text=' + waText;
+
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+      });
+    })();
+  </script>
+  <script src="assets/js/gel-animation.js"></script>
+  <script>
+    (function () {
+      function isInTriggerZone(el) {
+        const rect = el.getBoundingClientRect();
+        const triggerPoint = window.innerHeight * 0.8;
+        return rect.top <= triggerPoint && rect.bottom >= 0;
+      }
+
+      const fields = document.querySelectorAll('.form-field-animate');
+
+      fields.forEach(el => {
+        el.dataset.fieldAnimated = 'false';
+      });
+
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+
+        fields.forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const triggerPoint = window.innerHeight * 0.8;
+
+          if (scrollingDown && rect.top <= triggerPoint && el.dataset.fieldAnimated === 'false') {
+            el.dataset.fieldAnimated = 'true';
+            el.style.animationDelay = (i * 0.1) + 's';
+            el.classList.add('field-visible');
+          } else if (!scrollingDown && el.dataset.fieldAnimated === 'true') {
+            if (rect.top > window.innerHeight) {
+              el.dataset.fieldAnimated = 'false';
+              el.classList.remove('field-visible');
+              el.style.opacity = '0';
+              el.style.animationDelay = '';
+            }
+          }
+        });
+
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
+      fields.forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8) {
+          el.dataset.fieldAnimated = 'true';
+          el.style.animationDelay = (i * 0.1) + 's';
+          el.classList.add('field-visible');
+        }
+      });
+    })();
+  </script>
+  <!-- Floating Contact Buttons -->
+  <div class="fcb-wrapper" id="fcbWrapper">
+    <div class="fcb-child fcb-call" id="fcbCall" title="Call Us">
+      <i class="fa fa-phone"></i>
+    </div>
+    <div class="fcb-child fcb-whatsapp" id="fcbWhatsapp" title="WhatsApp">
+      <i class="fa fa-whatsapp"></i>
+    </div>
+    <div class="fcb-main" id="fcbMain" title="Contact Us">
+      <i class="fa fa-comment fcb-icon-open"></i>
+      <i class="fa fa-times fcb-icon-close"></i>
+    </div>
+  </div>
+  <!-- Scroll to Top Button -->
+  <div class="stt-btn" id="sttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="stt-arrow">&#8593;</div>
+    <div class="stt-letters">
+      <span>T</span><span>O</span><span>P</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var sttBtn = document.getElementById('sttBtn');
+      if (!sttBtn) return;
+
+      var hero = document.querySelector('.heading-page') ||
+                 document.querySelector('#top') ||
+                 document.querySelector('section');
+
+      window.addEventListener('scroll', function () {
+        var heroBottom = hero ? hero.getBoundingClientRect().bottom : 300;
+        if (heroBottom < 0) {
+          sttBtn.classList.add('stt-visible');
+        } else {
+          sttBtn.classList.remove('stt-visible');
+        }
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      var wrapper = document.getElementById('fcbWrapper');
+      var main    = document.getElementById('fcbMain');
+      var call    = document.getElementById('fcbCall');
+      var wa      = document.getElementById('fcbWhatsapp');
+
+      if (!main) return;
+
+      main.addEventListener('click', function () {
+        wrapper.classList.toggle('fcb-open');
+      });
+
+      call.addEventListener('click', function () {
+        window.location.href = 'tel:+918547577007';
+      });
+
+      wa.addEventListener('click', function () {
+        window.open('https://wa.me/918547935616', '_blank');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('fcb-open');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <title>Education - List of Meetings</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
 <!--
 
 TemplateMo 569 Edu Meeting
@@ -31,62 +33,15 @@ https://templatemo.com/tm-569-edu-meeting
 
 <body>
 
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
+
    
 
-  <!-- Sub Header -->
-  <div class="sub-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-sm-8">
-          <div class="left-content">
-            <p>Aashirwad Institute of Teachers</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="right-icons">
-            <ul>
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-behance"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Shared Navbar (injected from components/navbar.html) -->
+  <div id="site-nav"></div>
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-      <div class="container">
-          <div class="row">
-              <div class="col-12">
-                  <nav class="main-nav">
-                      <!-- ***** Logo Start ***** -->
-                      <a href="index.html" class="logo">
-                        <img src="assets/images/logo3.png" alt="Aashirwad EduVerse Logo" class="logo-image">
-                      </a>
-                      <!-- ***** Logo End ***** -->
-                      <!-- ***** Menu Start ***** -->
-                      <ul class="nav">
-                          <li ><a href="index.html">Home</a></li>
-                          <li class="scroll-to-section"><a href="index.html#about">About</a></li> 
-                          <li><a href="courses.html">Courses</a></li>
-                          <li><a href="app.html" class="active">Mobile App</a></li>
-                          <li><a href="contact.html">Contact Us</a></li> 
-                      </ul>        
-                      <a class='menu-trigger'>
-                          <span>Menu</span>
-                      </a>
-                      <!-- ***** Menu End ***** -->
-                  </nav>
-              </div>
-          </div>
-      </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
-
-  <section class="heading-page header-text app-heading-page" id="top">
+  <section class="heading-page header-text app-heading-page app-hero" id="top">
     <div class="container">
         <div class="row">
         <div class="col-lg-12">
@@ -161,7 +116,7 @@ https://templatemo.com/tm-569-edu-meeting
 
 
 
-<section class="app-download-section" id="app-download">
+<section class="app-download-section app-download-bg-img" id="app-download">
   <div class="app-download-bg-glow"></div>
   <div class="app-download-particles">
     <div class="ad-particle" style="top:12%;left:8%;width:5px;height:5px;animation-duration:14s;animation-delay:0s"></div>
@@ -176,29 +131,39 @@ https://templatemo.com/tm-569-edu-meeting
     <div class="ad-particle" style="top:10%;left:75%;width:5px;height:5px;animation-duration:15s;animation-delay:3.5s"></div>
   </div>
   <div class="container">
-    <div class="row justify-content-center text-center">
-      <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-6 col-md-8 ad-left-content">
         <p class="app-download-tagline">Your Success Journey Starts Here</p>
-        <h2 class="app-download-heading">Get the App & Become Part of the <span>Aashirwad Family</span></h2>
+        <h2 class="app-download-heading" data-gel-nested="1">Get the App & Become Part of the <span>Aashirwad Family</span></h2>
         <p class="app-download-subtext">Join thousands of Kerala PSC aspirants who are already learning smarter, faster, and better — right from their phones.</p>
-        <div class="ad-divider">
-          <span class="ad-divider-line"></span>
-          <span class="ad-divider-dot"></span>
-          <span class="ad-divider-line"></span>
-        </div>
-        <div class="app-feature-pills">
-          <span class="app-feature-pill">💰 Affordable Pricing</span>
-          <span class="app-feature-pill">🧠 Smart Revision</span>
-          <span class="app-feature-pill">📰 Daily Current Affairs</span>
-          <span class="app-feature-pill">📝 Unlimited Practice</span>
-          <span class="app-feature-pill">🏆 Live Competitions</span>
+        <div class="ad-icon-row">
+          <div class="ad-icon-item">
+            <div class="ad-icon-circle">💰</div>
+            <span>Affordable Pricing</span>
+          </div>
+          <div class="ad-icon-item">
+            <div class="ad-icon-circle">🧠</div>
+            <span>Smart Revision</span>
+          </div>
+          <div class="ad-icon-item">
+            <div class="ad-icon-circle">📰</div>
+            <span>Daily Current Affairs</span>
+          </div>
+          <div class="ad-icon-item">
+            <div class="ad-icon-circle">📝</div>
+            <span>Unlimited Practice</span>
+          </div>
+          <div class="ad-icon-item">
+            <div class="ad-icon-circle">🏆</div>
+            <span>Live Competitions</span>
+          </div>
         </div>
         <div class="app-download-buttons">
           <div class="ad-btn-glow"></div>
-          <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn" target="_blank">
+          <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn app-store-btn-dark" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
           </a>
-          <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn" target="_blank">
+          <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn app-store-btn-dark" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
           </a>
         </div>
@@ -206,6 +171,21 @@ https://templatemo.com/tm-569-edu-meeting
     </div>
   </div>
 </section>
+
+<script>
+(function() {
+  var sec = document.querySelector('.app-download-bg-img');
+  if (!sec) return;
+  var img = new Image();
+  img.onload = function() {
+    var ratio = img.naturalHeight / img.naturalWidth;
+    var w = sec.offsetWidth || window.innerWidth;
+    var h = Math.round(w * ratio);
+    sec.style.minHeight = h + 'px';
+  };
+  img.src = 'assets/images/app-get.webp';
+})();
+</script>
 
 <section class="gj-section" id="guided-journey">
   <!-- Particles container -->
@@ -235,9 +215,9 @@ https://templatemo.com/tm-569-edu-meeting
         Perfectly <span class="gj-heading-accent">Organized.</span>
       </h2>
 
-      <p class="gj-subtitle">A Structured Learning Journey that Guarantees Success</p>
+      <p class="gj-subtitle slide-in-up">A Structured Learning Journey that Guarantees Success</p>
 
-      <p class="gj-paragraph">
+      <p class="gj-paragraph slide-in-up delay-2">
         From exam selection to mastering every concept through 4 powerful learning modes, our app ensures you never lose track of what to study next—all within an affordable learning experience designed to make quality education accessible to every aspirant.
       </p>
 
@@ -256,12 +236,12 @@ https://templatemo.com/tm-569-edu-meeting
 
         <div class="gj-slider-card">
           <div class="gj-card-inner">
-            <div class="gj-card-text">
+            <div class="gj-card-text anim-active">
               <div class="gj-card-top">
                 <span class="gj-step-badge">STEP 1 OF 7</span>
               </div>
 
-              <h3 class="gj-step-title">Choose Your Exam</h3>
+              <h3 class="gj-step-title no-gel">Choose Your Exam</h3>
 
               <p class="gj-step-desc">
                 Begin your journey by selecting the competitive exam you are preparing for.
@@ -453,7 +433,7 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="col-lg-8 col-md-7">
           <div class="app-intro-content-wrapper">
             <h4 class="app-intro-subheading">Our Mobile App</h4>
-            <h2>Meet the New Era of <span class="highlight">Competitive Exam Prep</span></h2>
+            <h2 class="no-gel">Meet the New Era of </br> <span class="highlight">Competitive Exam Prep</span></h2>
             <div class="app-intro-divider"></div>
 
             <p class="intro-text">
@@ -528,7 +508,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 0 – Read -->
         <div class="mode-card active" data-index="0">
           <div class="mode-icon icon-read">📖</div>
-          <h3><span class="highlight">Reading</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Reading</span> Mode</h3>
           <p>
             Dive into distraction-free digital reading environments curated by subject experts.
             Focus entirely on the core material with a clean, optimised layout built for deep
@@ -542,7 +522,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 1 – Write -->
         <div class="mode-card" data-index="1">
           <div class="mode-icon icon-write">✍️</div>
-          <h3><span class="highlight">Writing</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Writing</span> Mode</h3>
           <p>
             Turn passive reading into active muscle memory. Engage with dedicated writing and
             practice exercises designed to force memory retrieval, anchor key facts, and ensure
@@ -556,7 +536,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 2 – Listen -->
         <div class="mode-card" data-index="2">
           <div class="mode-icon icon-listen">🎧</div>
-          <h3><span class="highlight">Audio</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Audio</span> Mode</h3>
           <p>
             Turn your commute, workout, or downtime into productive study time. Listen to
             professionally explained audio lessons and master core concepts on the go with
@@ -570,7 +550,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 3 – Watch -->
         <div class="mode-card" data-index="3">
           <div class="mode-icon icon-watch">🎬</div>
-          <h3><span class="highlight">Video</span> Mode</h3>
+          <h3 class="no-gel"><span class="highlight">Video</span> Mode</h3>
           <p>
             Visual learners rejoice. Complex theories, tough problem-solving steps, and core
             syllabus topics are broken down into high-quality, engaging video sessions that make
@@ -736,7 +716,7 @@ https://templatemo.com/tm-569-edu-meeting
     <div class="pf-bg-number">01</div>
     <div class="pf-slide-inner">
       <div class="pf-content-side">
-        <h2 class="pf-content-heading">OUR FEATURES</h2>
+        <h2 class="pf-content-heading no-gel">OUR FEATURES</h2>
         <div class="pf-tag">Knowledge Architecture</div>
         <h3 class="pf-title">Syllabus Tree</h3>
         <p class="pf-desc">Navigate your preparation with absolute structure. All digital materials are meticulously organized module-wise into subjects, topics, subtopics, and chapters. Enhanced with clear images and contextual examples, the Syllabus Tree makes complex data highly memorable. Create your own digital short notes directly within chapters and access built-in revision tests instantly.</p>
@@ -770,7 +750,7 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
       </div>
       <div class="pf-content-side">
-        <h2 class="pf-content-heading">OUR FEATURES</h2>
+        <h2 class="pf-content-heading no-gel">OUR FEATURES</h2>
         <div class="pf-tag pf-tag-light">Instant Discovery</div>
         <h3 class="pf-title">Keyword Search</h3>
         <p class="pf-desc">Locate any topic instantly across our vast knowledge base. Our advanced search engine allows you to look up both full text and specific keywords — scanning all content categorised by subject and topic with razor-sharp precision.</p>
@@ -792,7 +772,7 @@ https://templatemo.com/tm-569-edu-meeting
     <div class="pf-bg-number">03</div>
     <div class="pf-slide-inner">
       <div class="pf-content-side">
-        <h2 class="pf-content-heading">OUR FEATURES</h2>
+        <h2 class="pf-content-heading no-gel">OUR FEATURES</h2>
         <div class="pf-tag">Performance & Testing</div>
         <h3 class="pf-title">Smart Exam Modes & Live Contests</h3>
         <p class="pf-desc">Master your time management with our comprehensive testing suite. Sharpen your skills with Unlimited Practice Exams, structured Test Series, Previous Year Papers, and Mock Exams — then compete live against thousands of aspirants in real-time contests.</p>
@@ -826,7 +806,7 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
       </div>
       <div class="pf-content-side">
-        <h2 class="pf-content-heading">OUR FEATURES</h2>
+        <h2 class="pf-content-heading no-gel">OUR FEATURES</h2>
         <div class="pf-tag pf-tag-light">Gamified Learning</div>
         <h3 class="pf-title">The Educational Game Zone</h3>
         <p class="pf-desc">Break up study fatigue and stay motivated. This zone features engaging, high-energy educational activities and quick quizzes designed to visualize your daily consistency, build momentum, and make learning genuinely addictive — one streak at a time.</p>
@@ -848,7 +828,7 @@ https://templatemo.com/tm-569-edu-meeting
     <div class="pf-bg-number">05</div>
     <div class="pf-slide-inner">
       <div class="pf-content-side">
-        <h2 class="pf-content-heading">OUR FEATURES</h2>
+        <h2 class="pf-content-heading no-gel">OUR FEATURES</h2>
         <div class="pf-tag">Stay Ahead</div>
         <h3 class="pf-title">Daily Current Affairs & Editorial Insights</h3>
         <p class="pf-desc">Stay ahead with fresh daily updates. Get curated current affairs paired with visual aids, complemented by deep-dive editorials on major global and national events — building a mature, well-rounded perspective for your exams.</p>
@@ -1002,82 +982,13 @@ https://templatemo.com/tm-569-edu-meeting
     </div>
   </div>
 </section>
-<section class="meetings-page" id="meetings">
-    <footer class="footer" id="contact">
-  <div class="container">
-    <div class="footer-grid">
-
-      <!-- Column 1: Brand -->
-      <div class="footer-col footer-col-brand">
-        <img src="assets/images/logo3.png" alt="Aashirwad Institute of Teachers" class="footer-logo">
-        <p>Shaping futures since 2009. Kerala's most trusted institute for competitive exam coaching with branches across the state and a legacy of academic excellence.</p>
-        <div class="footer-social">
-          <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
-          <a href="#" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a>
-        </div>
-      </div>
-
-      <!-- Column 2: Quick Links -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Quick Links</h4>
-        <nav>
-          <a href="#top">Home</a>
-          <a href="#about">About</a>
-          <a href="courses.html">Courses</a>
-          <a href="app.html">Mobile App</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-      </div>
-
-      <!-- Column 3: Courses -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Courses</h4>
-        <nav>
-          <a href="courses.html">PSC Coaching</a>
-          <a href="courses.html">KTET Program</a>
-          <a href="courses.html">Navodaya</a>
-          <a href="courses.html">Civil Service</a>
-          <a href="courses.html">LDC Training</a>
-          <a href="courses.html">Police Coaching</a>
-        </nav>
-      </div>
-
-      <!-- Column 4: Contact -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Contact Us</h4>
-        <p><i class="fa fa-map-marker"></i> Kacherikavala, Vaikom, Kottayam, Kerala 686141</p>
-        <p><i class="fa fa-phone"></i> Helpline: 8547 577 007</p>
-        <p><i class="fa fa-whatsapp"></i> WhatsApp: 8547 935 616</p>
-        <p><i class="fa fa-envelope"></i> info@aitacademyindia.com</p>
-      </div>
-
-      <!-- Column 5: Newsletter -->
-      <div class="footer-col">
-        <h4 class="footer-col-title">Newsletter</h4>
-        <p>Stay updated with the latest exam notifications and preparation tips.</p>
-        <div class="footer-newsletter">
-          <input type="email" placeholder="Your email address">
-          <button type="button">Subscribe</button>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2026 Aashirwad Institute of Teachers. All Rights Reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms</a>
-      </div>
-    </div>
-  </div>
-</footer>
-</section>
+<!-- Shared Footer (injected from components/footer.html) -->
+  <div id="site-footer"></div>
 
 
   <!-- Scripts -->
+  <!-- Shared components loader (must run before custom.js binds nav) -->
+  <script src="components/includes.js"></script>
   <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1179,16 +1090,113 @@ https://templatemo.com/tm-569-edu-meeting
         (function () {
           var aboutSection = document.getElementById('app-about');
           if (aboutSection) {
+            var lastAboutScrollY = window.scrollY;
+            var aboutScrollingDown = true;
+            window.addEventListener('scroll', function () {
+              var current = window.scrollY;
+              aboutScrollingDown = current > lastAboutScrollY;
+              lastAboutScrollY = current;
+            }, { passive: true });
+
             var aboutReveal = new IntersectionObserver(function(entries) {
               entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && aboutScrollingDown) {
                   aboutSection.classList.add('app-about-revealed');
-                  aboutReveal.unobserve(aboutSection);
+                } else if (!aboutScrollingDown && !entry.isIntersecting) {
+                  aboutSection.classList.remove('app-about-revealed');
                 }
               });
             }, { threshold: 0.3, rootMargin: '0px 0px -80px 0px' });
             aboutReveal.observe(aboutSection);
           }
+        })();
+
+        (function () {
+          var slideItems = [];
+          document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .slide-in-down, .scale-in').forEach(function (el) {
+            slideItems.push({ el: el, animated: false });
+          });
+
+          var lastSlideScrollY = window.scrollY;
+          window.addEventListener('scroll', function () {
+            var currentScrollY = window.scrollY;
+            var scrollingDown = currentScrollY > lastSlideScrollY;
+
+            slideItems.forEach(function (item) {
+              var el = item.el;
+              if (!el || !el.isConnected) return;
+              var rect = el.getBoundingClientRect();
+              var triggerPoint = window.innerHeight * 0.8;
+
+              if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+                item.animated = true;
+                el.classList.add('anim-active');
+              } else if (!scrollingDown && item.animated) {
+                if (rect.bottom < 0) {
+                  item.animated = false;
+                  el.classList.remove('anim-active');
+                }
+              }
+            });
+
+            lastSlideScrollY = currentScrollY;
+          }, { passive: true });
+
+          slideItems.forEach(function (item) {
+            var rect = item.el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0) {
+              item.animated = true;
+              item.el.classList.add('anim-active');
+            }
+          });
+        })();
+
+        (function () {
+          /* Re-trigger the app intro column slide reveals every time the
+             section is scrolled back into view */
+          var revealItems = [];
+          document.querySelectorAll('.app-intro-panel .col-lg-4').forEach(function (el) {
+            revealItems.push({ el: el, animated: false });
+          });
+          document.querySelectorAll('.app-intro-content-wrapper > *').forEach(function (el, i) {
+            el.classList.add('reveal', 'reveal-right', 'delay-' + (i + 1));
+            revealItems.push({ el: el, animated: false });
+          });
+
+          var lastRevealScrollY = window.scrollY;
+          window.addEventListener('scroll', function () {
+            var currentScrollY = window.scrollY;
+            var scrollingDown = currentScrollY > lastRevealScrollY;
+
+            revealItems.forEach(function (item) {
+              var el = item.el;
+              if (!el || !el.isConnected) return;
+              var rect = el.getBoundingClientRect();
+              var triggerPoint = window.innerHeight * 0.8;
+
+              if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+                item.animated = true;
+                el.classList.add('reveal-visible');
+                el.classList.remove('gel-animated');
+              } else if (!scrollingDown && item.animated) {
+                if (rect.bottom < 0) {
+                  item.animated = false;
+                  el.classList.remove('reveal-visible');
+                  el.classList.add('gel-animated');
+                }
+              }
+            });
+
+            lastRevealScrollY = currentScrollY;
+          }, { passive: true });
+
+          revealItems.forEach(function (item) {
+            var rect = item.el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0) {
+              item.animated = true;
+              item.el.classList.add('reveal-visible');
+            }
+          });
         })();
 
         (function () {
@@ -1559,6 +1567,23 @@ https://templatemo.com/tm-569-edu-meeting
 
           /* Initial render */
           applyStep(0, 0);
+
+          /* Restart the active mode heading slide-up when the scene enters the
+             viewport so the first (already-active) card animates like the rest */
+          if ('IntersectionObserver' in window) {
+            var sceneEnter = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  document.querySelectorAll('.mode-card.active h3').forEach(function (h3) {
+                    h3.style.animation = 'none';
+                    void h3.offsetHeight;
+                    h3.style.animation = '';
+                  });
+                }
+              });
+            }, { threshold: 0 });
+            sceneEnter.observe(scene);
+          }
 
           function spinTo(node, nodeIndex, target) {
             if (stepInProgress) return;
@@ -2068,7 +2093,8 @@ https://templatemo.com/tm-569-edu-meeting
               entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
                   entry.target.classList.add('faq-item-visible');
-                  observer.unobserve(entry.target);
+                } else {
+                  entry.target.classList.remove('faq-item-visible');
                 }
               });
             }, { threshold: 0.15 });
@@ -2187,6 +2213,10 @@ https://templatemo.com/tm-569-edu-meeting
           isAnimating = true;
 
           var step = steps[index];
+          var cardText = card.querySelector('.gj-card-text');
+
+          /* Remove anim-active to reset animations */
+          if (cardText) cardText.classList.remove('anim-active');
 
           /* Fade out */
           card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
@@ -2227,6 +2257,12 @@ https://templatemo.com/tm-569-edu-meeting
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
             card.style.opacity = '1';
             card.style.transform = 'translateX(0)';
+
+            /* Trigger slide animations */
+            if (cardText) {
+              card.offsetHeight; /* force reflow */
+              cardText.classList.add('anim-active');
+            }
 
             setTimeout(function () { isAnimating = false; }, 420);
           }, 320);
@@ -2289,13 +2325,22 @@ https://templatemo.com/tm-569-edu-meeting
         /* ── CTA Section Scroll Reveal ── */
         var section = document.getElementById('app-download');
         if (section) {
-          var els = section.querySelectorAll('.app-download-tagline, .app-download-heading, .app-download-subtext, .ad-divider, .app-feature-pill, .app-download-buttons');
+          var els = section.querySelectorAll('.app-download-tagline, .app-download-heading, .app-download-subtext, .ad-divider, .ad-icon-item, .app-download-buttons');
           if (els.length) {
+            var lastCTAScrollY = window.scrollY;
+            var ctaScrollingDown = true;
+            window.addEventListener('scroll', function () {
+              var current = window.scrollY;
+              ctaScrollingDown = current > lastCTAScrollY;
+              lastCTAScrollY = current;
+            }, { passive: true });
+
             var ctaObs = new IntersectionObserver(function(entries) {
               entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && ctaScrollingDown) {
                   section.classList.add('ad-revealed');
-                  ctaObs.unobserve(section);
+                } else if (!ctaScrollingDown && !entry.isIntersecting) {
+                  section.classList.remove('ad-revealed');
                 }
               });
             }, { threshold: 0.25, rootMargin: '0px 0px -60px 0px' });
@@ -2321,9 +2366,97 @@ https://templatemo.com/tm-569-edu-meeting
             cursorGlow.style.top = y + 'px';
           });
         }
-      })();
+})();
     </script>
-</body>
+
+
+
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/gel-animation.js"></script>
+  <!-- Floating Contact Buttons -->
+  <div class="fcb-wrapper" id="fcbWrapper">
+    <div class="fcb-child fcb-call" id="fcbCall" title="Call Us">
+      <i class="fa fa-phone"></i>
+    </div>
+    <div class="fcb-child fcb-whatsapp" id="fcbWhatsapp" title="WhatsApp">
+      <i class="fa fa-whatsapp"></i>
+    </div>
+    <div class="fcb-main" id="fcbMain" title="Contact Us">
+      <i class="fa fa-comment fcb-icon-open"></i>
+      <i class="fa fa-times fcb-icon-close"></i>
+    </div>
+  </div>
+  <!-- Scroll to Top Button -->
+  <div class="stt-btn" id="sttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="stt-arrow">&#8593;</div>
+    <div class="stt-letters">
+      <span>T</span><span>O</span><span>P</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var sttBtn = document.getElementById('sttBtn');
+      if (!sttBtn) return;
+
+      var hero = document.querySelector('.heading-page') ||
+                 document.querySelector('#top') ||
+                 document.querySelector('section');
+
+      window.addEventListener('scroll', function () {
+        var heroBottom = hero ? hero.getBoundingClientRect().bottom : 300;
+        if (heroBottom < 0) {
+          sttBtn.classList.add('stt-visible');
+        } else {
+          sttBtn.classList.remove('stt-visible');
+        }
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      var trustStrip = document.querySelector('.gj-trust-strip');
+      if (!trustStrip || !('IntersectionObserver' in window)) return;
+
+      var trustObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            trustStrip.classList.add('anim-active');
+          }
+        });
+      }, { threshold: 0.3 });
+
+      trustObs.observe(trustStrip);
+    })();
+  </script>
+  <script>
+    (function () {
+      var wrapper = document.getElementById('fcbWrapper');
+      var main    = document.getElementById('fcbMain');
+      var call    = document.getElementById('fcbCall');
+      var wa      = document.getElementById('fcbWhatsapp');
+
+      if (!main) return;
+
+      main.addEventListener('click', function () {
+        wrapper.classList.toggle('fcb-open');
+      });
+
+      call.addEventListener('click', function () {
+        window.location.href = 'tel:+918547577007';
+      });
+
+      wa.addEventListener('click', function () {
+        window.open('https://wa.me/918547935616', '_blank');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('fcb-open');
+        }
+      });
+    })();
+  </script>
+  </body>
 
 
 

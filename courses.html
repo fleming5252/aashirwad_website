@@ -8,6 +8,7 @@
     <meta name="author" content="Template Mo">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <title>Aashirwad EduVerse - Our Courses</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
@@ -18,51 +19,13 @@
 
 <body>
 
-  <div class="sub-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-sm-8">
-          <div class="left-content">
-            <p>Aashirwad Institute of Teachers</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="right-icons">
-            <ul>
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-behance"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
 
-  <header class="header-area header-sticky">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <a href="index.html" class="logo">
-              <img src="assets/images/logo3.png" alt="Aashirwad EduVerse Logo" class="logo-image">
-            </a>
-            <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="index.html#about">About</a></li>
-              <li><a href="courses.html" class="active">Courses</a></li>
-              <li><a href="app.html">Mobile App</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-            <a class='menu-trigger'><span>Menu</span></a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Shared Navbar (injected from components/navbar.html) -->
+  <div id="site-nav"></div>
 
-  <section class="heading-page header-text app-heading-page" id="top" style="background-image: url(assets/images/courses-hero.png);">
+  <section class="heading-page header-text app-heading-page courses-hero" id="top" style="background-image: url(assets/images/courses-hero.webp);">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -75,25 +38,47 @@
     </div>
   </section>
 
-  <!-- ═══════ Intro Bridge (dark) ═══════ -->
-  <section class="courses-intro">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="ci-content fade-slide-up">
-            <span class="ci-badge"><i class="fa fa-star"></i> Trusted by 15,000+ Students Across Kerala</span>
-            <h2 class="ci-title">Find the Right Course for Your Goal</h2>
-            <p class="ci-desc">From LDC and LGS to Police, Teaching, and Degree-level exams &mdash; Aashirwad has the right program to take you from preparation to rank.</p>
-            <div class="ci-chips">
-              <span class="ci-chip"><i class="fa fa-book"></i> Updated Syllabus</span>
-              <span class="ci-chip"><i class="fa fa-user"></i> Expert Faculty</span>
-              <span class="ci-chip"><i class="fa fa-trophy"></i> Proven Results</span>
-            </div>
-          </div>
+<!-- ═══════ Intro Bridge (redesigned) ═══════ -->
+<section class="courses-intro-new">
+  <div class="ci-new-bg" style="background-image: url('assets/images/courseright.webp'); position:absolute; top:0; left:0; width:100%; height:100%; background-size:100% 100%; background-repeat:no-repeat; z-index:0;"></div>
+  <div class="ci-new-inner">
+    <div class="ci-new-right">
+      <span class="ci-new-badge slide-in-down"><i class="fa fa-star"></i> Trusted by 15,000+ Students Across Kerala</span>
+      <h2 class="ci-new-title">Find the Right Course<br>for <span class="ci-new-title-red">Your Goal</span></h2>
+      <p class="ci-new-desc slide-in-up">From LDC and LGS to Police, Teaching, and Degree-level exams &mdash; Aashirwad has the right program to take you from preparation to rank.</p>
+      <div class="ci-new-chips">
+        <div class="ci-new-chip slide-in-up" style="transition-delay:0s;">
+          <span class="ci-new-chip-icon" style="background:#fff3e8;"><i class="fa fa-book" style="color:#f5a425;"></i></span>
+          <span class="ci-new-chip-text">Updated Syllabus</span>
+        </div>
+        <div class="ci-new-chip slide-in-up" style="transition-delay:0.15s;">
+          <span class="ci-new-chip-icon" style="background:#fff3e8;"><i class="fa fa-user" style="color:#f5a425;"></i></span>
+          <span class="ci-new-chip-text">Expert Faculty</span>
+        </div>
+        <div class="ci-new-chip slide-in-up" style="transition-delay:0.3s;">
+          <span class="ci-new-chip-icon" style="background:#fff3e8;"><i class="fa fa-trophy" style="color:#f5a425;"></i></span>
+          <span class="ci-new-chip-text">Proven Results</span>
         </div>
       </div>
     </div>
-  </section>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  if (window.innerWidth > 767) return;
+  var sec = document.querySelector('.courses-intro-new');
+  if (!sec) return;
+  var img = new Image();
+  img.onload = function() {
+    var ratio = img.naturalHeight / img.naturalWidth;
+    var h = Math.round(window.innerWidth * ratio);
+    sec.style.minHeight = h + 'px';
+  };
+  img.src = 'assets/images/courserightmobile.webp';
+})();
+</script>
 
   <section class="meetings-page courses-page" id="meetings">
     <div class="container">
@@ -112,7 +97,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-02.jpg" alt="Women Police">
+                    <img src="assets/images/course/WomenPolice.webp" alt="Women Police">
                     <div class="card-img-overlay"><span>Women Police</span></div>
                   </div>
                   <div class="down-content">
@@ -122,7 +107,7 @@
                       <span class="rating-num">(4.8)</span>
                       <span class="student-count">1.2k+ Students</span>
                     </div>
-                    <p class="course-desc">Specialized coaching for Women Police constable exams with physical training and mock interviews.</p>
+                    <p class="course-desc slide-in-up">Specialized coaching for Women Police constable exams with physical training and mock interviews.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 2,999</span>
@@ -140,7 +125,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-03.jpg" alt="Police Constable">
+                    <img src="assets/images/course/PoliceConstable.webp" alt="Police Constable">
                     <div class="card-img-overlay"><span>Police Constable</span></div>
                   </div>
                   <div class="down-content">
@@ -150,7 +135,7 @@
                       <span class="rating-num">(4.7)</span>
                       <span class="student-count">2.1k+ Students</span>
                     </div>
-                    <p class="course-desc">Complete preparation for Kerala Police Constable exams including written, physical, and viva.</p>
+                    <p class="course-desc slide-in-up">Complete preparation for Kerala Police Constable exams including written, physical, and viva.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 3,499</span>
@@ -168,7 +153,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-04.jpg" alt="LGS (Lower Grade)">
+                    <img src="assets/images/course/LSG.webp" alt="LGS (Lower Grade)">
                     <div class="card-img-overlay"><span>LGS (Lower Grade)</span></div>
                   </div>
                   <div class="down-content">
@@ -178,7 +163,7 @@
                       <span class="rating-num">(4.6)</span>
                       <span class="student-count">3.4k+ Students</span>
                     </div>
-                    <p class="course-desc">Thorough coaching for Lower Grade Servants exams with focus on Kerala PSC syllabus.</p>
+                    <p class="course-desc slide-in-up">Thorough coaching for Lower Grade Servants exams with focus on Kerala PSC syllabus.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 2,499</span>
@@ -195,9 +180,8 @@
             <div class="col-lg-4 col-md-6 col-sm-12 course-col">
               <div class="item">
                 <div class="course-item-card popular">
-                  <div class="popular-badge">Most Popular</div>
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-01.jpg" alt="LDC Clerk">
+                    <img src="assets/images/course/LDClerk.webp" alt="LDC Clerk">
                     <div class="card-img-overlay"><span>LDC Clerk</span></div>
                   </div>
                   <div class="down-content">
@@ -207,7 +191,7 @@
                       <span class="rating-num">(4.9)</span>
                       <span class="student-count">5.6k+ Students</span>
                     </div>
-                    <p class="course-desc">Expert-led coaching for Lower Division Clerk exams with comprehensive study materials.</p>
+                    <p class="course-desc slide-in-up">Expert-led coaching for Lower Division Clerk exams with comprehensive study materials.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 3,999</span>
@@ -225,7 +209,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-02.jpg" alt="Degree Level">
+                    <img src="assets/images/course/DegreeLevel.webp" alt="Degree Level">
                     <div class="card-img-overlay"><span>Degree Level</span></div>
                   </div>
                   <div class="down-content">
@@ -235,7 +219,7 @@
                       <span class="rating-num">(4.8)</span>
                       <span class="student-count">4.2k+ Students</span>
                     </div>
-                    <p class="course-desc">Degree-level PSC exam preparation covering all subjects with expert faculty guidance.</p>
+                    <p class="course-desc slide-in-up">Degree-level PSC exam preparation covering all subjects with expert faculty guidance.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 4,499</span>
@@ -253,7 +237,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-03.jpg" alt="Secretariat Assistant">
+                    <img src="assets/images/course/SecretariatAssistant.webp" alt="Secretariat Assistant">
                     <div class="card-img-overlay"><span>Secretariat Assistant</span></div>
                   </div>
                   <div class="down-content">
@@ -263,7 +247,7 @@
                       <span class="rating-num">(4.5)</span>
                       <span class="student-count">1.8k+ Students</span>
                     </div>
-                    <p class="course-desc">Specialized coaching for Secretariat Assistant exams with focus on Kerala PSC standards.</p>
+                    <p class="course-desc slide-in-up">Specialized coaching for Secretariat Assistant exams with focus on Kerala PSC standards.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 5,999</span>
@@ -281,7 +265,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-04.jpg" alt="KTET">
+                    <img src="assets/images/course/KTET.webp" alt="KTET">
                     <div class="card-img-overlay"><span>KTET</span></div>
                   </div>
                   <div class="down-content">
@@ -291,7 +275,7 @@
                       <span class="rating-num">(4.9)</span>
                       <span class="student-count">6.3k+ Students</span>
                     </div>
-                    <p class="course-desc">Success-guaranteed KTET coaching with mock tests, expert faculty, and comprehensive study materials.</p>
+                    <p class="course-desc slide-in-up">Success-guaranteed KTET coaching with mock tests, expert faculty, and comprehensive study materials.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 3,999</span>
@@ -309,7 +293,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-01.jpg" alt="CTET">
+                    <img src="assets/images/course/CTET.webp" alt="CTET">
                     <div class="card-img-overlay"><span>CTET</span></div>
                   </div>
                   <div class="down-content">
@@ -319,7 +303,7 @@
                       <span class="rating-num">(4.7)</span>
                       <span class="student-count">2.9k+ Students</span>
                     </div>
-                    <p class="course-desc">Central Teacher Eligibility Test preparation with all subjects covered by expert educators.</p>
+                    <p class="course-desc slide-in-up">Central Teacher Eligibility Test preparation with all subjects covered by expert educators.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 4,499</span>
@@ -337,7 +321,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course-02.jpg" alt="Civil Service Foundation">
+                    <img src="assets/images/course/Civil Service Foundation.webp" alt="Civil Service Foundation">
                     <div class="card-img-overlay"><span>Civil Service Foundation</span></div>
                   </div>
                   <div class="down-content">
@@ -347,7 +331,7 @@
                       <span class="rating-num">(4.6)</span>
                       <span class="student-count">1.5k+ Students</span>
                     </div>
-                    <p class="course-desc">Foundation course for Civil Services with comprehensive coverage of prelims and mains syllabus.</p>
+                    <p class="course-desc slide-in-up">Foundation course for Civil Services with comprehensive coverage of prelims and mains syllabus.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
                       <span class="current-price">₹ 12,999</span>
@@ -365,38 +349,68 @@
       </div>
     </div>
 
-    <!-- ── SECTION 2: Achievement Stats Strip ── -->
+<!-- ── SECTION 2: Achievement Stats Strip ── -->
     <section class="stats-strip">
-      <div class="stats-glow-bg"></div>
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat-item reveal-stat" data-delay="0">
-            <div class="stat-icon"><i class="fa fa-graduation-cap"></i></div>
-            <div class="stat-number" data-target="15000">0</div>
-            <div class="stat-suffix">+</div>
-            <div class="stat-label">Students Enrolled</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item reveal-stat" data-delay="150">
-            <div class="stat-icon"><i class="fa fa-trophy"></i></div>
-            <div class="stat-number" data-target="500">0</div>
-            <div class="stat-suffix">+</div>
-            <div class="stat-label">Rank Holders</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item reveal-stat" data-delay="300">
-            <div class="stat-icon"><i class="fa fa-book"></i></div>
-            <div class="stat-number" data-target="10">0</div>
-            <div class="stat-suffix">+</div>
-            <div class="stat-label">Courses Available</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item reveal-stat" data-delay="450">
-            <div class="stat-icon"><i class="fa fa-star"></i></div>
-            <div class="stat-number" data-target="4.8" data-decimal="true">0.0</div>
-            <div class="stat-label">Average Rating</div>
-          </div>
+      <div class="stats-strip-bg" style="background-image: url('assets/images/coursenumbers.webp');"></div>
+      <div class="container" style="position:relative;z-index:2;">
+
+        <!-- Heading block -->
+        <div class="stats-heading-block text-center">
+          <h2 class="stats-main-title">Numbers That Tell <span class="stats-title-gold">Our Story</span></h2>
+          <p class="stats-subtitle slide-in-up">Aashirwad has been guiding aspirants towards their government job dreams with<br>quality education, expert mentorship and consistent results.</p>
         </div>
+
+        <!-- Cards row -->
+        <div class="stats-cards-row">
+
+          <div class="stat-card reveal-stat" data-delay="0">
+            <div class="stat-card-icon"><i class="fa fa-graduation-cap"></i></div>
+            <div class="stat-card-number">
+              <span class="stat-number" data-target="15000">0</span>
+              <span class="stat-suffix">+</span>
+            </div>
+            <div class="stat-card-label">STUDENTS ENROLLED</div>
+            <div class="stat-card-divider"></div>
+          </div>
+
+          <div class="stat-card reveal-stat" data-delay="150">
+            <div class="stat-card-icon"><i class="fa fa-trophy"></i></div>
+            <div class="stat-card-number">
+              <span class="stat-number" data-target="500">0</span>
+              <span class="stat-suffix">+</span>
+            </div>
+            <div class="stat-card-label">RANK HOLDERS</div>
+            <div class="stat-card-divider"></div>
+          </div>
+
+          <div class="stat-card reveal-stat" data-delay="300">
+            <div class="stat-card-icon"><i class="fa fa-book"></i></div>
+            <div class="stat-card-number">
+              <span class="stat-number" data-target="10">0</span>
+              <span class="stat-suffix">+</span>
+            </div>
+            <div class="stat-card-label">COURSES AVAILABLE</div>
+            <div class="stat-card-divider"></div>
+          </div>
+
+          <div class="stat-card reveal-stat" data-delay="450">
+            <div class="stat-card-icon"><i class="fa fa-star"></i></div>
+            <div class="stat-card-number">
+              <span class="stat-number" data-target="4.8" data-decimal="true">0.0</span>
+            </div>
+            <div class="stat-card-label">AVERAGE RATING</div>
+            <div class="stat-card-divider"></div>
+          </div>
+
+        </div>
+
+        <!-- Bottom tagline -->
+        <div class="stats-bottom-row slide-in-down">
+          <span class="stats-eyebrow-line"></span>
+          <span class="stats-eyebrow-text">MORE THAN A COACHING INSTITUTE</span>
+          <span class="stats-eyebrow-line"></span>
+        </div>
+
       </div>
     </section>
 
@@ -406,7 +420,7 @@
         <div class="cp-heading">
           <span class="cp-label section-visible slide-in-left">Our Achievers</span>
           <h2 class="cp-title">Our Proud Rank Holders</h2>
-          <p class="cp-subtitle">Real students, real results &mdash; our toppers speak for themselves.</p>
+          <p class="cp-subtitle slide-in-up">Real students, real results &mdash; our toppers speak for themselves.</p>
           <div class="cp-underline"></div>
         </div>
       </div>
@@ -435,25 +449,67 @@
 
     <!-- ── SECTION 4: CTA Banner ── -->
     <section class="cta-banner">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-8">
-            <div class="cta-content slide-in-left">
-              <h2 class="cta-heading">Your Rank is Waiting. Start Today.</h2>
-              <p class="cta-text">Join thousands of successful students who chose Aashirwad. Enroll now and take the first step toward your dream job.</p>
-              <div class="cta-buttons">
-                <a href="#" class="cta-btn cta-btn-primary">Enroll Now</a>
-                <a href="#" class="cta-btn cta-btn-outline">Talk to an Advisor</a>
+      <div class="cta-bg-img"></div>
+      <div class="cta-bg-overlay"></div>
+      <div class="cta-inner">
+
+        <!-- Left col -->
+        <div class="cta-left slide-in-left">
+          <div class="cta-eyebrow">
+            DREAM &bull; PREPARE &bull; ACHIEVE
+          </div>
+          <h2 class="cta-heading">Your Rank is Waiting.<br><span class="cta-heading-gold">Start Today.</span></h2>
+          <p class="cta-text slide-in-up">Join thousands of successful students who chose Aashirwad. Turn your dedication into a government job.</p>
+          <div class="cta-buttons">
+            <a href="#" class="cta-btn cta-btn-primary">Enroll Now &rarr;</a>
+            <a href="https://wa.me/918547935616?text=Hi%2C%20I%27d%20like%20to%20talk%20to%20an%20advisor%20about%20your%20courses." target="_blank" rel="noopener" class="cta-btn cta-btn-outline">&#128172; Talk to an Advisor</a>
+          </div>
+          <div class="cta-mini-stats">
+            <div class="cta-mini-stat reveal reveal-bottom delay-1">
+              <i class="fa fa-graduation-cap"></i>
+              <div>
+                <strong>15,000+</strong>
+                <span>Students Guided</span>
+              </div>
+            </div>
+            <div class="cta-mini-stat reveal reveal-bottom delay-2">
+              <i class="fa fa-trophy"></i>
+              <div>
+                <strong>500+</strong>
+                <span>Ranks Achieved</span>
+              </div>
+            </div>
+            <div class="cta-mini-stat reveal reveal-bottom delay-3">
+              <i class="fa fa-users"></i>
+              <div>
+                <strong>200+</strong>
+                <span>Expert Classes</span>
+              </div>
+            </div>
+            <div class="cta-mini-stat reveal reveal-bottom delay-4">
+              <i class="fa fa-shield"></i>
+              <div>
+                <strong>95%</strong>
+                <span>Student Satisfaction</span>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 text-center">
-            <div class="cta-badge scale-in">
-              <div class="cta-badge-icon">🏆</div>
-              <div class="cta-badge-text">500+ Ranks Achieved</div>
-            </div>
-          </div>
         </div>
+
+        <!-- Right col -->
+        <div class="cta-right slide-in-right">
+          <div class="cta-big-stat">
+            <div class="cta-more-than">
+              <span class="cta-more-line"></span>
+              MORE THAN
+              <span class="cta-more-line"></span>
+            </div>
+            <div class="cta-big-number">500+</div>
+            <div class="cta-big-label">RANKS ACHIEVED<br><span>AND COUNTING...</span></div>
+          </div>
+          <div class="cta-script-text">Higher<br>Stronger<br>Brighter Together.</div>
+        </div>
+
       </div>
     </section>
 
@@ -466,17 +522,17 @@
               <span class="app-promo-tag"><i class="fa fa-mobile"></i> Also Available On</span>
               <h2 class="app-promo-title">Learn Anywhere, Anytime</h2>
               <h2 class="app-promo-title-accent">with Our App</h2>
-              <p class="app-promo-desc">Take your PSC preparation on the go. Our mobile app gives you access to all courses, live tests, rank files, a game zone to challenge yourself, and much more &mdash; right in your pocket.</p>
+              <p class="app-promo-desc slide-in-up">Take your PSC preparation on the go. Our mobile app gives you access to all courses, live tests, rank files, a game zone to challenge yourself, and much more &mdash; right in your pocket.</p>
               <ul class="app-promo-features">
-                <li><i class="fa fa-check-circle"></i> Live Mock Tests &amp; Quizzes</li>
-                <li><i class="fa fa-gamepad"></i> Game Zone &mdash; Climb the Ranks</li>
-                <li><i class="fa fa-download"></i> Offline Study Materials</li>
-                <li><i class="fa fa-bell"></i> Real-time Notifications</li>
+                <li class="slide-in-right" style="transition-delay: 0s;"><i class="fa fa-check-circle"></i> Live Mock Tests &amp; Quizzes</li>
+                <li class="slide-in-right" style="transition-delay: 0.15s;"><i class="fa fa-gamepad"></i> Game Zone &mdash; Climb the Ranks</li>
+                <li class="slide-in-right" style="transition-delay: 0.3s;"><i class="fa fa-download"></i> Offline Study Materials</li>
+                <li class="slide-in-right" style="transition-delay: 0.45s;"><i class="fa fa-bell"></i> Real-time Notifications</li>
               </ul>
               <div class="app-promo-buttons">
-                <a href="app.html" class="app-promo-btn-primary">More Info <i class="fa fa-arrow-right"></i></a>
-                <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play"></a>
-                <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store"></a>
+                <a href="app.html" class="app-promo-btn-primary slide-in-up" style="transition-delay: 0.15s;">More Info <i class="fa fa-arrow-right"></i></a>
+                <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn slide-in-up" style="transition-delay: 0.3s;" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play"></a>
+                <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn slide-in-up" style="transition-delay: 0.45s;" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store"></a>
               </div>
             </div>
           </div>
@@ -490,68 +546,13 @@
       </div>
     </section>
 
-    <footer class="footer" id="contact">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-col footer-col-brand">
-            <img src="assets/images/logo3.png" alt="Aashirwad Institute of Teachers" class="footer-logo">
-            <p>Shaping futures since 2009. Kerala's most trusted institute for competitive exam coaching with branches across the state and a legacy of academic excellence.</p>
-            <div class="footer-social">
-              <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
-              <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-              <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
-              <a href="#" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a>
-            </div>
-          </div>
-          <div class="footer-col">
-            <h4 class="footer-col-title">Quick Links</h4>
-            <nav>
-              <a href="index.html">Home</a>
-              <a href="index.html#about">About</a>
-              <a href="courses.html">Courses</a>
-              <a href="app.html">Mobile App</a>
-              <a href="contact.html">Contact</a>
-            </nav>
-          </div>
-          <div class="footer-col">
-            <h4 class="footer-col-title">Courses</h4>
-            <nav>
-              <a href="courses.html">PSC Coaching</a>
-              <a href="courses.html">KTET Program</a>
-              <a href="courses.html">Navodaya</a>
-              <a href="courses.html">Civil Service</a>
-              <a href="courses.html">LDC Training</a>
-              <a href="courses.html">Police Coaching</a>
-            </nav>
-          </div>
-          <div class="footer-col">
-            <h4 class="footer-col-title">Contact Us</h4>
-            <p><i class="fa fa-map-marker"></i> Kacherikavala, Vaikom, Kottayam, Kerala 686141</p>
-            <p><i class="fa fa-phone"></i> Helpline: 8547 577 007</p>
-            <p><i class="fa fa-whatsapp"></i> WhatsApp: 8547 935 616</p>
-            <p><i class="fa fa-envelope"></i> info@aitacademyindia.com</p>
-          </div>
-          <div class="footer-col">
-            <h4 class="footer-col-title">Newsletter</h4>
-            <p>Stay updated with the latest exam notifications and preparation tips.</p>
-            <div class="footer-newsletter">
-              <input type="email" placeholder="Your email address">
-              <button type="button">Subscribe</button>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2026 Aashirwad Institute of Teachers. All Rights Reserved.</p>
-          <div class="footer-bottom-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <!-- Shared Footer (injected from components/footer.html) -->
+    <div id="site-footer"></div>
   </section>
 
-  <!-- Scripts -->
+    <!-- Scripts -->
+  <!-- Shared components loader (must run before custom.js binds nav) -->
+  <script src="components/includes.js"></script>
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/isotope.min.js"></script>
@@ -561,12 +562,21 @@
   <script src="assets/js/video.js"></script>
   <script src="assets/js/slick-slider.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script>
     (function () {
+      var lastScrollY = window.scrollY;
+      var scrollingDown = true;
+      window.addEventListener('scroll', function () {
+        var current = window.scrollY;
+        scrollingDown = current > lastScrollY;
+        lastScrollY = current;
+      }, { passive: true });
+
       /* ── IntersectionObserver for all scroll animations ── */
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
+          if (!entry.isIntersecting || !scrollingDown) return;
           var el = entry.target;
           if (el.classList.contains('course-item-card')) {
             var idx = Array.prototype.indexOf.call(el.parentElement.parentElement.parentElement.children, el.parentElement.parentElement);
@@ -581,12 +591,6 @@
             el.classList.add('tp-visible');
           } else if (el.classList.contains('reveal-section')) {
             el.classList.add('section-visible');
-          } else if (el.classList.contains('slide-in-left')) {
-            el.classList.add('anim-active');
-          } else if (el.classList.contains('slide-in-right')) {
-            el.classList.add('anim-active');
-          } else if (el.classList.contains('scale-in')) {
-            el.classList.add('anim-active');
           }
           io.unobserve(el);
         });
@@ -611,8 +615,144 @@
       var promo = document.querySelector('.app-promo-section');
       if (promo) { promo.classList.add('reveal-section'); io.observe(promo); }
 
-      /* Slide / scale anims on visible elements */
-      document.querySelectorAll('.slide-in-left, .slide-in-right, .scale-in').forEach(function (el) { io.observe(el); });
+      /* Slide / scale anims: re-animate on every downward scroll pass */
+      var slideEls = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .slide-in-down, .scale-in');
+      var slideItems = [];
+      slideEls.forEach(function (el) {
+        slideItems.push({ el: el, animated: false });
+      });
+
+      var lastSlideScrollY = window.scrollY;
+      window.addEventListener('scroll', function () {
+        var currentScrollY = window.scrollY;
+        var scrollingDown = currentScrollY > lastSlideScrollY;
+
+        slideItems.forEach(function (item) {
+          var el = item.el;
+          var rect = el.getBoundingClientRect();
+          var triggerPoint = window.innerHeight * 0.8;
+
+          if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+            item.animated = true;
+            el.classList.add('anim-active');
+          } else if (!scrollingDown && item.animated) {
+            if (rect.top > window.innerHeight) {
+              item.animated = false;
+              el.classList.remove('anim-active');
+            }
+          }
+        });
+
+        lastSlideScrollY = currentScrollY;
+      }, { passive: true });
+
+      /* Initial in-view trigger on load */
+      slideItems.forEach(function (item) {
+        var rect = item.el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0) {
+          item.animated = true;
+          item.el.classList.add('anim-active');
+        }
+      });
+
+      /* Mini-stats: re-animate one-by-one on every downward scroll pass */
+      var statEls = document.querySelectorAll('.cta-mini-stat');
+      var statItems = [];
+      statEls.forEach(function (el) {
+        statItems.push({ el: el, animated: false });
+      });
+
+      var lastStatScrollY = window.scrollY;
+      window.addEventListener('scroll', function () {
+        var currentScrollY = window.scrollY;
+        var scrollingDown = currentScrollY > lastStatScrollY;
+
+        statItems.forEach(function (item) {
+          var el = item.el;
+          var rect = el.getBoundingClientRect();
+          var triggerPoint = window.innerHeight * 0.85;
+
+          if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+            item.animated = true;
+            el.classList.add('reveal-visible');
+          } else if (!scrollingDown && item.animated) {
+            if (rect.top > window.innerHeight) {
+              item.animated = false;
+              el.classList.remove('reveal-visible');
+            }
+          }
+        });
+
+        lastStatScrollY = currentScrollY;
+      }, { passive: true });
+
+      /* Initial in-view trigger on load */
+      statItems.forEach(function (item) {
+        var el = item.el;
+        var rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+          item.animated = true;
+          el.classList.add('reveal-visible');
+        }
+      });
+
+      /* Stat cards: re-animate + re-count on every downward scroll pass */
+      var statCardEls = document.querySelectorAll('.reveal-stat');
+      var statCardItems = [];
+      statCardEls.forEach(function (el) {
+        statCardItems.push({ el: el, animated: false });
+      });
+
+      var lastStatCardScrollY = window.scrollY;
+
+      function triggerStatCard(item) {
+        item.animated = true;
+        var el = item.el;
+        var delay = parseInt(el.getAttribute('data-delay')) || 0;
+        setTimeout(function () {
+          el.classList.add('stat-visible');
+          animateCounter(el.querySelector('.stat-number'));
+        }, delay);
+      }
+
+      function resetStatCard(item) {
+        item.animated = false;
+        var el = item.el;
+        el.classList.remove('stat-visible');
+        var num = el.querySelector('.stat-number');
+        num.dataset.animated = '';
+        num.textContent = num.dataset.decimal === 'true' ? '0.0' : '0';
+      }
+
+      window.addEventListener('scroll', function () {
+        var currentScrollY = window.scrollY;
+        var scrollingDown = currentScrollY > lastStatCardScrollY;
+
+        statCardItems.forEach(function (item) {
+          var el = item.el;
+          var rect = el.getBoundingClientRect();
+          var triggerPoint = window.innerHeight * 0.85;
+
+          if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+            triggerStatCard(item);
+          } else if (!scrollingDown && item.animated) {
+            if (rect.top > window.innerHeight) {
+              resetStatCard(item);
+            }
+          }
+        });
+
+        lastStatCardScrollY = currentScrollY;
+      }, { passive: true });
+
+      /* Initial in-view trigger on load */
+      statCardItems.forEach(function (item) {
+        var el = item.el;
+        var rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+          triggerStatCard(item);
+        }
+      });
 
       /* Counter animation (ease-out, supports decimal) */
       function animateCounter(el) {
@@ -624,7 +764,8 @@
         var duration = 1200;
         var startTime = null;
 
-        function step(timestamp) {
+function step(timestamp) {
+          if (!el.dataset.animated) return;
           if (!startTime) startTime = timestamp;
           var elapsed = timestamp - startTime;
           var progress = Math.min(elapsed / duration, 1);
@@ -664,6 +805,74 @@
           lastTouchEnd = Date.now();
         }, { passive: true });
       }
+    })();
+  </script>
+  <script src="assets/js/gel-animation.js"></script>
+  <!-- Floating Contact Buttons -->
+  <div class="fcb-wrapper" id="fcbWrapper">
+    <div class="fcb-child fcb-call" id="fcbCall" title="Call Us">
+      <i class="fa fa-phone"></i>
+    </div>
+    <div class="fcb-child fcb-whatsapp" id="fcbWhatsapp" title="WhatsApp">
+      <i class="fa fa-whatsapp"></i>
+    </div>
+    <div class="fcb-main" id="fcbMain" title="Contact Us">
+      <i class="fa fa-comment fcb-icon-open"></i>
+      <i class="fa fa-times fcb-icon-close"></i>
+    </div>
+  </div>
+  <!-- Scroll to Top Button -->
+  <div class="stt-btn" id="sttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="stt-arrow">&#8593;</div>
+    <div class="stt-letters">
+      <span>T</span><span>O</span><span>P</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var sttBtn = document.getElementById('sttBtn');
+      if (!sttBtn) return;
+
+      var hero = document.querySelector('.heading-page') ||
+                 document.querySelector('#top') ||
+                 document.querySelector('section');
+
+      window.addEventListener('scroll', function () {
+        var heroBottom = hero ? hero.getBoundingClientRect().bottom : 300;
+        if (heroBottom < 0) {
+          sttBtn.classList.add('stt-visible');
+        } else {
+          sttBtn.classList.remove('stt-visible');
+        }
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      var wrapper = document.getElementById('fcbWrapper');
+      var main    = document.getElementById('fcbMain');
+      var call    = document.getElementById('fcbCall');
+      var wa      = document.getElementById('fcbWhatsapp');
+
+      if (!main) return;
+
+      main.addEventListener('click', function () {
+        wrapper.classList.toggle('fcb-open');
+      });
+
+      call.addEventListener('click', function () {
+        window.location.href = 'tel:+918547577007';
+      });
+
+      wa.addEventListener('click', function () {
+        window.open('https://wa.me/918547935616', '_blank');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('fcb-open');
+        }
+      });
     })();
   </script>
 </body>

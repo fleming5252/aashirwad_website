@@ -8,6 +8,7 @@
     <meta name="author" content="Template Mo">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <title>Aashirwad EduVerse - Contact Us</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
@@ -98,56 +99,116 @@
         position: relative;
         z-index: 2;
       }
+      @keyframes gelDrop {
+        0%   { opacity: 0; transform: translateY(40px); }
+        55%  { opacity: 1; transform: translateY(-10px); }
+        72%  { transform: translateY(5px); }
+        84%  { transform: translateY(-4px); }
+        93%  { transform: translateY(2px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .gel-letter {
+        display: inline-block;
+        opacity: 0;
+        animation: gelDrop 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      }
+
+      .gel-letter.space {
+        display: inline-block;
+        width: 0.3em;
+      }
+
+      .gel-heading {
+        opacity: 0 !important;
+      }
+
+      @keyframes slideUp {
+        0%   { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .form-field-animate {
+        opacity: 0;
+      }
+
+      .form-field-animate.field-visible {
+        animation: slideUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+      }
+
+      .contact-info-card.address-card,
+      .contact-info-card.email-card {
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      }
+
+      .contact-info-card.address-card:hover,
+      .contact-info-card.email-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        border-color: #f5a425;
+      }
+
+      .contact-info-card .contact-number-link {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .contact-info-card .contact-number-link:hover {
+        color: #a12c2f;
+        text-decoration: underline;
+      }
+
+      .contact-form-privacy {
+        text-align: center;
+        margin-top: 12px;
+      }
+
+      .privacy-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        line-height: 1.5;
+      }
+
+      .privacy-link i {
+        font-size: 12px;
+        color: #D6B46D;
+        flex-shrink: 0;
+      }
+
+      .privacy-link span {
+        color: #a12c2f;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .privacy-link:hover {
+        color: #6b7280;
+      }
+
+      .privacy-link:hover span {
+        color: #661a1d;
+      }
     </style>
   </head>
 
 <body>
 
-  <div class="sub-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-sm-8">
-          <div class="left-content">
-            <p>Aashirwad Institute of Teachers</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-4">
-          <div class="right-icons">
-            <ul>
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-behance"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress"></div>
 
-  <header class="header-area header-sticky">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <a href="index.html" class="logo">
-              <img src="assets/images/logo3.png" alt="Aashirwad EduVerse Logo" class="logo-image">
-            </a>
-            <ul class="nav">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="index.html#about">About</a></li>
-              <li><a href="courses.html">Courses</a></li>
-              <li><a href="app.html">Mobile App</a></li>
-              <li><a href="contact.html" class="active">Contact Us</a></li>
-            </ul>
-            <a class='menu-trigger'><span>Menu</span></a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Shared Navbar (injected from components/navbar.html) -->
+  <div id="site-nav"></div>
 
-  <section class="heading-page header-text app-heading-page" id="top" style="background-image: url(assets/images/contact.png);">
+  <section class="heading-page header-text app-heading-page contact-hero" id="top" style="background-image: url(assets/images/contact.png);">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
@@ -167,62 +228,67 @@
         <div class="contact-form-col">
           <div class="contact-form-card">
             <div class="contact-form-accent"></div>
-            <h3 class="contact-form-heading">Send Us a Message</h3>
+            <h3 class="contact-form-heading gel-heading">Send Us a Message</h3>
             <form action="" method="post">
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-name">Name</label>
                 <input type="text" id="contact-name" name="name" placeholder="Your full name" required>
               </div>
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-email">Email</label>
                 <input type="email" id="contact-email" name="email" placeholder="Your email address" required>
               </div>
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-subject">Subject</label>
                 <input type="text" id="contact-subject" name="subject" placeholder="Subject" required>
               </div>
-              <div class="form-group">
+              <div class="form-group form-field-animate">
                 <label for="contact-message">Message</label>
-                <textarea id="contact-message" name="message" placeholder="Write your message here..." rows="5"></textarea>
+                <textarea id="contact-message" name="message" placeholder="Write your message here..." rows="5" required></textarea>
               </div>
-              <button type="submit" class="contact-send-btn">Send Message</button>
+              <button type="submit" class="contact-send-btn form-field-animate">Send Message</button>
+              <div class="contact-form-privacy form-field-animate">
+                <a href="privacypolicy.html" class="privacy-link">
+                  <i class="fa fa-shield"></i>
+                  Your information is safe &amp; secure &mdash; <span>read our data policy</span>
+                </a>
+              </div>
             </form>
           </div>
         </div>
 
         <div class="contact-info-col">
-          <h3 class="contact-info-heading">Let's Get in Touch</h3>
-          <p class="contact-info-subtext">Have questions about our courses or admissions? We're here to help you every step of the way.</p>
+          <h3 class="contact-info-heading gel-heading">Let's Get in Touch</h3>
+          <p class="contact-info-subtext form-field-animate">Have questions about our courses or admissions? We're here to help you every step of the way.</p>
 
           <div class="contact-info-cards">
-            <div class="contact-info-card">
+            <div class="contact-info-card address-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-map-marker"></i></div>
               <div class="contact-info-text">
                 <strong>Address</strong>
                 <span>Kacherikavala, Vaikom, Kottayam, Kerala 686141</span>
               </div>
             </div>
-            <div class="contact-info-card">
+            <div class="contact-info-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-phone"></i></div>
               <div class="contact-info-text">
                 <strong>Phone &amp; WhatsApp</strong>
-                <span>Helpline: 8547 577 007</span>
-                <span>WhatsApp: 8547 935 616</span>
+                <span>Helpline: <a href="tel:+91854757707" class="contact-number-link">8547 577 007</a></span>
+                <span>WhatsApp: <a href="https://wa.me/918547935616" class="contact-number-link">8547 935 616</a></span>
               </div>
             </div>
-            <div class="contact-info-card">
+            <div class="contact-info-card email-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-envelope"></i></div>
               <div class="contact-info-text">
                 <strong>Email</strong>
-                <span>info@aitacademyindia.com</span>
+                <span class="contact-number-link">info@aitacademyindia.com</span>
               </div>
             </div>
           </div>
 
-          <div class="contact-map-wrapper">
+          <div class="contact-map-wrapper form-field-animate">
             <div id="locationMap"></div>
             <a href="https://www.google.com/maps/place/Aashirwad+Institute+Of+Teachers./@9.7986126,76.4377363,12.76z/data=!4m6!3m5!1s0x3b08791202bf0249:0xef3dd46b957523ea!8m2!3d9.7554921!4d76.3953634!16s%2Fg%2F11c5s47wt6?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D"
-               target="_blank"
                rel="noopener noreferrer"
                class="map-open-btn">
               <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg" alt="" style="width:16px;height:16px;flex-shrink:0;"> See on Map
@@ -234,74 +300,12 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-
-        <div class="footer-col footer-col-brand">
-          <img src="assets/images/logo3.png" alt="Aashirwad Institute of Teachers" class="footer-logo">
-          <p>Shaping futures since 2009. Kerala's most trusted institute for competitive exam coaching with branches across the state and a legacy of academic excellence.</p>
-          <div class="footer-social">
-            <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fa fa-youtube"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a>
-          </div>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Quick Links</h4>
-          <nav>
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="courses.html">Courses</a>
-            <a href="app.html">Mobile App</a>
-            <a href="contact.html">Contact</a>
-          </nav>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Courses</h4>
-          <nav>
-            <a href="courses.html">PSC Coaching</a>
-            <a href="courses.html">KTET Program</a>
-            <a href="courses.html">Navodaya</a>
-            <a href="courses.html">Civil Service</a>
-            <a href="courses.html">LDC Training</a>
-            <a href="courses.html">Police Coaching</a>
-          </nav>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Contact Us</h4>
-          <p><i class="fa fa-map-marker"></i> Kacherikavala, Vaikom, Kottayam, Kerala 686141</p>
-          <p><i class="fa fa-phone"></i> Helpline: 8547 577 007</p>
-          <p><i class="fa fa-whatsapp"></i> WhatsApp: 8547 935 616</p>
-          <p><i class="fa fa-envelope"></i> info@aitacademyindia.com</p>
-        </div>
-
-        <div class="footer-col">
-          <h4 class="footer-col-title">Newsletter</h4>
-          <p>Stay updated with the latest exam notifications and preparation tips.</p>
-          <div class="footer-newsletter">
-            <input type="email" placeholder="Your email address">
-            <button type="button">Subscribe</button>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 Aashirwad Institute of Teachers. All Rights Reserved.</p>
-        <div class="footer-bottom-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- Shared Footer (injected from components/footer.html) -->
+  <div id="site-footer"></div>
 
   <!-- Scripts -->
+  <!-- Shared components loader (must run before custom.js binds nav) -->
+  <script src="components/includes.js"></script>
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/isotope.min.js"></script>
@@ -311,6 +315,7 @@
   <script src="assets/js/video.js"></script>
   <script src="assets/js/slick-slider.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script src="assets/js/animations.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
@@ -393,6 +398,233 @@
           lastTouchEnd = Date.now();
         }, { passive: true });
       }
+    })();
+  </script>
+  <script>
+    (function () {
+      var form = document.querySelector('.contact-form-card form');
+      if (!form) return;
+
+      form.addEventListener('invalid', function (e) {
+        var el = e.target;
+        if (el && el.focus && el.getBoundingClientRect) {
+          el.focus({ preventScroll: true });
+          var rect = el.getBoundingClientRect();
+          var viewportH = window.innerHeight;
+          var scrollY = rect.top + window.scrollY - (viewportH / 2) + (rect.height / 2);
+          window.scrollTo({ top: scrollY, behavior: 'smooth' });
+        }
+      }, true);
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var btn = form.querySelector('.contact-send-btn');
+        var originalHTML = btn.innerHTML;
+        btn.innerHTML = 'SENDING...';
+        btn.disabled = true;
+
+        var waText =
+          'Hello Aashirwad Institute of Teachers,%0A%0A' +
+          'Name: ' + encodeURIComponent(document.getElementById('contact-name').value.trim()) + '%0A' +
+          'Email: ' + encodeURIComponent(document.getElementById('contact-email').value.trim()) + '%0A' +
+          'Subject: ' + encodeURIComponent(document.getElementById('contact-subject').value.trim()) + '%0A%0A' +
+          'Message:%0A' + encodeURIComponent(document.getElementById('contact-message').value.trim());
+
+        form.reset();
+        window.location.href = 'https://wa.me/918547935616?text=' + waText;
+
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      function wrapLetters(el) {
+        const text = el.dataset.originalText || el.textContent;
+        el.dataset.originalText = text;
+        el.innerHTML = '';
+        [...text].forEach((char, i) => {
+          const span = document.createElement('span');
+          span.className = char === ' ' ? 'gel-letter space' : 'gel-letter';
+          span.style.animationDelay = (i * 0.045) + 's';
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          el.appendChild(span);
+        });
+        el.style.setProperty('opacity', '1', 'important');
+      }
+
+      function resetHeading(el) {
+        el.innerHTML = el.dataset.originalText;
+        el.style.setProperty('opacity', '0', 'important');
+      }
+
+      function isInTriggerZone(el) {
+        const rect = el.getBoundingClientRect();
+        const triggerPoint = window.innerHeight * 0.8;
+        return rect.top <= triggerPoint && rect.bottom >= 0;
+      }
+
+      const headings = document.querySelectorAll('.gel-heading');
+
+      // Store original text immediately
+      headings.forEach(el => {
+        el.dataset.originalText = el.textContent;
+        el.dataset.animated = 'false';
+      });
+
+      const fields = document.querySelectorAll('.form-field-animate');
+
+      fields.forEach(el => {
+        el.dataset.fieldAnimated = 'false';
+      });
+
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+
+        headings.forEach(el => {
+          const inZone = isInTriggerZone(el);
+
+          if (scrollingDown && inZone && el.dataset.animated === 'false') {
+            // Scrolling down and heading just entered zone — animate
+            el.dataset.animated = 'true';
+            wrapLetters(el);
+          } else if (!scrollingDown && el.dataset.animated === 'true') {
+            const rect = el.getBoundingClientRect();
+            // Only reset when heading is fully below the viewport (scrolled back up past it)
+            if (rect.top > window.innerHeight) {
+              el.dataset.animated = 'false';
+              resetHeading(el);
+            }
+          }
+        });
+
+        // Form fields animation
+        fields.forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const triggerPoint = window.innerHeight * 0.8;
+
+          if (scrollingDown && rect.top <= triggerPoint && el.dataset.fieldAnimated === 'false') {
+            el.dataset.fieldAnimated = 'true';
+            el.style.animationDelay = (i * 0.1) + 's';
+            el.classList.add('field-visible');
+          } else if (!scrollingDown && el.dataset.fieldAnimated === 'true') {
+            if (rect.top > window.innerHeight) {
+              el.dataset.fieldAnimated = 'false';
+              el.classList.remove('field-visible');
+              el.style.opacity = '0';
+              el.style.animationDelay = '';
+            }
+          }
+        });
+
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
+      // Check on page load in case already in view
+      fields.forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8) {
+          el.dataset.fieldAnimated = 'true';
+          el.style.animationDelay = (i * 0.1) + 's';
+          el.classList.add('field-visible');
+        }
+      });
+
+      headings.forEach(el => {
+        if (isInTriggerZone(el)) {
+          el.dataset.animated = 'true';
+          wrapLetters(el);
+        }
+      });
+
+      // Address card click -> open Google Maps
+      var mapLink = document.querySelector('.map-open-btn');
+      var addressCard = document.querySelector('.address-card');
+      if (mapLink && addressCard) {
+        addressCard.addEventListener('click', function () {
+          window.location.href = mapLink.href;
+        });
+      }
+
+      // Email card click -> open mail client
+      var emailCard = document.querySelector('.email-card');
+      if (emailCard) {
+        emailCard.addEventListener('click', function () {
+          window.location.href = 'mailto:info@aitacademyindia.com';
+        });
+      }
+    })();
+  </script>
+  <!-- Floating Contact Buttons -->
+  <div class="fcb-wrapper" id="fcbWrapper">
+    <div class="fcb-child fcb-call" id="fcbCall" title="Call Us">
+      <i class="fa fa-phone"></i>
+    </div>
+    <div class="fcb-child fcb-whatsapp" id="fcbWhatsapp" title="WhatsApp">
+      <i class="fa fa-whatsapp"></i>
+    </div>
+    <div class="fcb-main" id="fcbMain" title="Contact Us">
+      <i class="fa fa-comment fcb-icon-open"></i>
+      <i class="fa fa-times fcb-icon-close"></i>
+    </div>
+  </div>
+  <!-- Scroll to Top Button -->
+  <div class="stt-btn" id="sttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="stt-arrow">&#8593;</div>
+    <div class="stt-letters">
+      <span>T</span><span>O</span><span>P</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var sttBtn = document.getElementById('sttBtn');
+      if (!sttBtn) return;
+
+      var hero = document.querySelector('.heading-page') ||
+                 document.querySelector('#top') ||
+                 document.querySelector('section');
+
+      window.addEventListener('scroll', function () {
+        var heroBottom = hero ? hero.getBoundingClientRect().bottom : 300;
+        if (heroBottom < 0) {
+          sttBtn.classList.add('stt-visible');
+        } else {
+          sttBtn.classList.remove('stt-visible');
+        }
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    (function () {
+      var wrapper = document.getElementById('fcbWrapper');
+      var main    = document.getElementById('fcbMain');
+      var call    = document.getElementById('fcbCall');
+      var wa      = document.getElementById('fcbWhatsapp');
+
+      if (!main) return;
+
+      main.addEventListener('click', function () {
+        wrapper.classList.toggle('fcb-open');
+      });
+
+      call.addEventListener('click', function () {
+        window.location.href = 'tel:+918547577007';
+      });
+
+      wa.addEventListener('click', function () {
+        window.open('https://wa.me/918547935616', '_blank');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('fcb-open');
+        }
+      });
     })();
   </script>
 </body>

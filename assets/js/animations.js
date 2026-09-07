@@ -11,9 +11,18 @@
     var els = document.querySelectorAll('.reveal');
     if (!els.length) return;
 
+    var lastScrollY = window.scrollY;
+    var scrollingDown = true;
+
+    window.addEventListener('scroll', function () {
+      var current = window.scrollY;
+      scrollingDown = current > lastScrollY;
+      lastScrollY = current;
+    }, { passive: true });
+
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && scrollingDown) {
           entry.target.classList.add('reveal-visible');
           obs.unobserve(entry.target);
         }
@@ -166,9 +175,9 @@
       if (i < 2) el.classList.add('delay-' + (i + 1));
     });
 
-    /* App showcase section */
-    document.querySelectorAll('.app-intro-panel .col-lg-4, .app-intro-panel .col-lg-8').forEach(function (el, i) {
-      el.classList.add('reveal', i === 0 ? 'reveal-left' : 'reveal-right');
+    /* App showcase image column (text column children are staggered in app.html) */
+    document.querySelectorAll('.app-intro-panel .col-lg-4').forEach(function (el) {
+      el.classList.add('reveal', 'reveal-left');
     });
 
     /* Contact section */
