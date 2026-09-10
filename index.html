@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="TemplateMo">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <title>Aashirwad EduVerse</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
@@ -394,26 +395,24 @@ https://templatemo.com/tm-569-edu-meeting
 <body>
 
   <!-- Page Loader -->
-  <div id="page-loader">
-    <div class="solar-stage">
-        <div class="solar-ambient"></div>
-        <div class="solar-tilt">
-        <div class="solar-sun"></div>
-        <div class="solar-orbit orbit-1">
-          <div class="solar-ring"></div>
-          <div class="solar-track"><div class="solar-planet p1"></div></div>
-        </div>
-        <div class="solar-orbit orbit-2">
-          <div class="solar-ring"></div>
-          <div class="solar-track"><div class="solar-planet p2"></div></div>
-        </div>
-        <div class="solar-orbit orbit-3">
-          <div class="solar-ring"></div>
-          <div class="solar-track"><div class="solar-planet p3"></div></div>
+  <div id="page-loader" role="status" aria-live="polite" aria-label="Loading Aashirwad EduVerse">
+    <div id="constellation-wrap">
+      <canvas id="sphere-canvas"></canvas>
+    </div>
+    <div class="loader-content">
+      <div class="word-stage">
+        <div class="word-wrapper">
+          <span class="word" id="w0">Learn</span>
+          <span class="word" id="w1">Practice</span>
+          <span class="word" id="w2">Improve</span>
+          <span class="word" id="w3">Achieve</span>
         </div>
       </div>
+      <div id="progress-text">FORMING NETWORK: 0%</div>
     </div>
   </div>
+
+  <script src="assets/js/loader.js"></script>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -1158,7 +1157,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 0 – Read -->
         <div class="mode-card active" data-index="0">
           <div class="mode-icon icon-read">📖</div>
-          <h3 class="no-gel"><span class="highlight">Reading</span> Mode</h3>
+          <h3><span class="highlight">Reading</span> Mode</h3>
           <p>
             Dive into distraction-free digital reading environments curated by subject experts.
             Focus entirely on the core material with a clean, optimised layout built for deep
@@ -1172,7 +1171,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 1 – Write -->
         <div class="mode-card" data-index="1">
           <div class="mode-icon icon-write">✍️</div>
-          <h3 class="no-gel"><span class="highlight">Writing</span> Mode</h3>
+          <h3><span class="highlight">Writing</span> Mode</h3>
           <p>
             Turn passive reading into active muscle memory. Engage with dedicated writing and
             practice exercises designed to force memory retrieval, anchor key facts, and ensure
@@ -1186,7 +1185,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 2 – Listen -->
         <div class="mode-card" data-index="2">
           <div class="mode-icon icon-listen">🎧</div>
-          <h3 class="no-gel"><span class="highlight">Audio</span> Mode</h3>
+          <h3><span class="highlight">Audio</span> Mode</h3>
           <p>
             Turn your commute, workout, or downtime into productive study time. Listen to
             professionally explained audio lessons and master core concepts on the go with
@@ -1200,7 +1199,7 @@ https://templatemo.com/tm-569-edu-meeting
         <!-- Card 3 – Watch -->
         <div class="mode-card" data-index="3">
           <div class="mode-icon icon-watch">🎬</div>
-          <h3 class="no-gel"><span class="highlight">Video</span> Mode</h3>
+          <h3><span class="highlight">Video</span> Mode</h3>
           <p>
             Visual learners rejoice. Complex theories, tough problem-solving steps, and core
             syllabus topics are broken down into high-quality, engaging video sessions that make
@@ -2546,34 +2545,46 @@ https://templatemo.com/tm-569-edu-meeting
               lastIOScrollY = current;
             }, { passive: true });
 
+            function revealIoEl(el) {
+              if (el.classList.contains('topper-card')) {
+                el.classList.add('tp-visible');
+              } else if (el.classList.contains('reveal-stat')) {
+                var delay = parseInt(el.getAttribute('data-delay')) || 0;
+                setTimeout(function () {
+                  el.classList.add('stat-visible');
+                  animateCounter(el.querySelector('.stat-number'));
+                }, delay);
+              } else if (el.classList.contains('slide-in-left')) {
+                el.classList.add('anim-active');
+              } else if (el.classList.contains('slide-in-right')) {
+                el.classList.add('anim-active');
+              } else if (el.classList.contains('slide-in-up')) {
+                el.classList.add('anim-active');
+              }
+            }
+
             var io = new IntersectionObserver(function (entries) {
               entries.forEach(function (entry) {
                 if (!entry.isIntersecting || !ioScrollingDown) return;
-                var el = entry.target;
-                if (el.classList.contains('topper-card')) {
-                  el.classList.add('tp-visible');
-                } else if (el.classList.contains('reveal-stat')) {
-                  var delay = parseInt(el.getAttribute('data-delay')) || 0;
-                  setTimeout(function () {
-                    el.classList.add('stat-visible');
-                    animateCounter(el.querySelector('.stat-number'));
-                  }, delay);
-                } else if (el.classList.contains('slide-in-left')) {
-                  el.classList.add('anim-active');
-                } else if (el.classList.contains('slide-in-right')) {
-                  el.classList.add('anim-active');
-                } else if (el.classList.contains('slide-in-up')) {
-                  el.classList.add('anim-active');
-                }
-                io.unobserve(el);
+                revealIoEl(entry.target);
+                io.unobserve(entry.target);
               });
             }, { threshold: 0.2 });
 
+            function observeIoWithInitialReveal(el) {
+              var rect = el.getBoundingClientRect();
+              if (rect.top <= window.innerHeight * 0.8) {
+                revealIoEl(el);
+              } else {
+                io.observe(el);
+              }
+            }
+
             document.querySelectorAll('.topper-card').forEach(function (t) {
-              if (t.offsetParent !== null) io.observe(t);
+              if (t.offsetParent !== null) observeIoWithInitialReveal(t);
             });
-            document.querySelectorAll('.reveal-stat').forEach(function (s) { io.observe(s); });
-            document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up').forEach(function (el) { io.observe(el); });
+            document.querySelectorAll('.reveal-stat').forEach(observeIoWithInitialReveal);
+            document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up').forEach(observeIoWithInitialReveal);
           } else {
             document.querySelectorAll('.topper-card').forEach(function (t) { t.classList.add('tp-visible'); });
             document.querySelectorAll('.reveal-stat').forEach(function (s) { s.classList.add('stat-visible'); });
@@ -2656,7 +2667,7 @@ https://templatemo.com/tm-569-edu-meeting
           hofItems.forEach(function (item) {
             var el = item.el;
             var rect = el.getBoundingClientRect();
-            if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+            if (rect.top <= window.innerHeight * 0.85) {
               triggerHof(item);
             }
           });
@@ -3267,7 +3278,6 @@ https://templatemo.com/tm-569-edu-meeting
       });
     })();
   </script>
-  <script src="assets/js/gel-animation.js"></script>
   <script>
     (function () {
       function isInTriggerZone(el) {

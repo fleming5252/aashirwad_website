@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Aashirwad Institute of Teachers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- custom cursor (gemini) -->
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<!-- noise texture overlay (gemini) -->
+<div class="noise"></div>
+
+<!-- preloader intro (gemini) -->
+<div class="preloader">
+  <div class="preloader-text">Building Futures Together</div>
+</div>
+
+<!-- progress rail (cloude) -->
+<div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+
+<nav class="site-nav">
+  <span class="site-nav__mark">Aashirwad</span>
+  <span class="site-nav__tag">Est. 2009 · Vaikom, Kottayam</span>
+</nav>
+
+<!-- ============ 1. HERO — book-cover opening (cloude) ============ -->
+<section class="section hero" id="hero">
+  <div class="hero__book" id="heroBook">
+    <div class="hero__book-cover hero__book-cover--left">
+      <span class="hero__book-spine-text">Aashirwad</span>
+    </div>
+    <div class="hero__book-cover hero__book-cover--right">
+      <span class="hero__book-spine-text">Institute of Teachers</span>
+    </div>
+  </div>
+
+  <div class="hero__stage">
+    <div class="hero__bg" aria-hidden="true">
+      <img class="hero__bg-img" data-seed="hero1"
+           src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=80"
+           alt="">
+      <div class="hero__bg-veil"></div>
+    </div>
+
+    <div class="hero__floaters" aria-hidden="true">
+      <img class="hero__float hero__float--1" data-seed="floatbook"
+           src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="">
+      <img class="hero__float hero__float--2" data-seed="floatgrad"
+           src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80" alt="">
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow">Academy for Competitive Examinations, Research &amp; Training</p>
+      <h1 class="hero__title">Aashirwad Institute<br>of Teachers</h1>
+      <p class="hero__tagline">Building Futures Together</p>
+      <p class="hero__lede">Established in 2009, dedicated to empowering learners through quality education, structured training, expert guidance and innovative learning solutions.</p>
+      <div class="hero__scroll-cue"><span></span>Scroll to begin the story</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. JOURNEY — pinned scrubbed timeline (cloude) ============ -->
+<section class="section journey" id="journey">
+  <div class="journey__pin">
+    <div class="journey__intro">
+      <h2 class="journey__heading">Our journey is driven by a simple yet powerful vision</h2>
+      <p class="journey__sub">to identify potential, nurture talent and create pathways to academic and professional success.</p>
+    </div>
+
+    <svg class="journey__line" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true">
+      <path id="journeyPath" d="M0,150 C150,150 200,40 350,40 C500,40 500,160 650,160 C800,160 820,60 1000,60"
+            fill="none" stroke="url(#journeyGrad)" stroke-width="3"/>
+      <defs>
+        <linearGradient id="journeyGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#C99A3E"/>
+          <stop offset="100%" stop-color="#1B4B44"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="journey__stops">
+      <article class="journey__stop" data-stop="1">
+        <span class="journey__stop-year">2009</span>
+        <h3>An institute is founded</h3>
+        <p>Aashirwad Institute of Teachers begins its work in Vaikom, Kottayam — a leading educational institution built on quality education, structured training and expert guidance.</p>
+      </article>
+      <article class="journey__stop" data-stop="2">
+        <span class="journey__stop-year">2010</span>
+        <h3>An ecosystem takes shape</h3>
+        <p>Aashirwad evolves into a comprehensive educational ecosystem spanning competitive examinations, teacher eligibility training, school education, civil service preparation, digital learning and skill development.</p>
+      </article>
+      <article class="journey__stop" data-stop="3">
+        <span class="journey__stop-year">Today</span>
+        <h3>Guided by one vision</h3>
+        <p>Every programme we run traces back to the same purpose — identify potential, nurture talent, and create pathways to academic and professional success.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. EXCELLENCE — interactive 3D card scatter (gemini) ============ -->
+<section class="excellence section" id="excellence">
+  <div class="container excellence-layout">
+    <div class="excellence-text">
+      <h2 class="section-title">Excellence in Competitive Examinations</h2>
+      <p>Aashirwad has built a strong reputation for result-oriented preparation for a wide range of competitive examinations, including Kerala PSC, KTET, CTET, Navodaya Entrance, Civil Services, SSC and other national and state-level examinations.</p>
+
+      <div class="stats-box">
+        <h3 class="highlight-text">27 First Ranks</h3>
+        <p>in Kerala PSC examinations.</p>
+      </div>
+
+      <p>We have also maintained a strong and consistent record in Jawahar Navodaya Vidyalaya admissions from Kottayam since 2010, demonstrating our long-standing expertise in entrance examination preparation.</p>
+      <p>Our academic approach combines conceptual clarity, systematic preparation, regular assessment, quality learning resources, personalised mentoring and continuous academic support.</p>
+    </div>
+
+    <div class="excellence-visuals">
+      <div class="scatter-center">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop" class="scatter-card card-1" alt="Students cheering">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop" class="scatter-card card-2" alt="Study materials">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=1000&auto=format&fit=crop" class="scatter-card card-3" alt="Student success">
+        <div class="scatter-card card-text">Result-Oriented</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. ECOSYSTEM — auto-scrolling marquee (cloude) ============ -->
+<section class="section ecosystem" id="ecosystem">
+  <div class="ecosystem__heading">
+    <h2>A Comprehensive Educational Ecosystem</h2>
+    <p>Aashirwad provides learning opportunities for students and aspirants at different stages of their academic and professional journey. Through this diverse range of programmes, we strive to provide learners with the right knowledge, guidance, resources and opportunities within a single educational ecosystem.</p>
+  </div>
+  <div class="ecosystem__marquee">
+    <div class="ecosystem__track" id="ecosystemTrack">
+      <article class="programme-card">
+        <img src="assets/images/course/LDClerk.webp" alt="Kerala PSC exam coaching class">
+        <h3>Kerala PSC Coaching</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/KTET.webp" alt="Teacher eligibility test training materials">
+        <h3>KTET &amp; CTET Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/Civil Service Foundation.webp" alt="Students at a Navodaya entrance coaching session">
+        <h3>Navodaya Entrance Coaching</h3>
+      </article>
+      <article class="programme-card programme-card--feature">
+        <img src="assets/images/course/PoliceConstable.webp" alt="Civil service aspirant studying">
+        <h3>Civil Service Nurture Programme (CSNP)</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/CTET.webp" alt="Competitive exam preparation books">
+        <h3>SSC &amp; Other Competitive Exam Prep</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/SecretariatAssistant.webp" alt="School tuition classroom">
+        <h3>School Tuition Programmes</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/LSG.webp" alt="Typewriting and skill development">
+        <h3>Typewriting &amp; Skill Development</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/WomenPolice.webp" alt="Spoken English and communication training">
+        <h3>Spoken English &amp; Communication Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/DegreeLevel.webp" alt="German language learning">
+        <h3>German Language Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/LDClerk.webp" alt="IELTS and OET training">
+        <h3>IELTS &amp; OET Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/KTET.webp" alt="Students collaborating in digital learning">
+        <h3>Academic Support &amp; Digital Learning</h3>
+      </article>
+    </div>
+    <div class="ecosystem__track ecosystem__track--clone" aria-hidden="true">
+      <article class="programme-card">
+        <img src="assets/images/course/LDClerk.webp" alt="">
+        <h3>Kerala PSC Coaching</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/KTET.webp" alt="">
+        <h3>KTET &amp; CTET Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/Civil Service Foundation.webp" alt="">
+        <h3>Navodaya Entrance Coaching</h3>
+      </article>
+      <article class="programme-card programme-card--feature">
+        <img src="assets/images/course/PoliceConstable.webp" alt="">
+        <h3>Civil Service Nurture Programme (CSNP)</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/CTET.webp" alt="">
+        <h3>SSC &amp; Other Competitive Exam Prep</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/SecretariatAssistant.webp" alt="">
+        <h3>School Tuition Programmes</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/LSG.webp" alt="">
+        <h3>Typewriting &amp; Skill Development</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/WomenPolice.webp" alt="">
+        <h3>Spoken English &amp; Communication Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/DegreeLevel.webp" alt="">
+        <h3>German Language Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/LDClerk.webp" alt="">
+        <h3>IELTS &amp; OET Training</h3>
+      </article>
+      <article class="programme-card">
+        <img src="assets/images/course/KTET.webp" alt="">
+        <h3>Academic Support &amp; Digital Learning</h3>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. CSNP — image reveal / masking (gemini) ============ -->
+<section class="csnp section" id="csnp">
+  <div class="csnp-mask-container">
+    <div class="csnp-bg-dark">
+      <h2 class="csnp-huge-text">FUTURE LEADERS</h2>
+    </div>
+
+    <div class="csnp-mask-layer">
+      <img src="assets/images/aboutcivil.webp" alt="Nurturing Future Civil Servants">
+      <div class="csnp-content">
+        <h2 class="csnp-heading">Nurturing <span>Future Civil Servants</span></h2>
+        <div class="csnp-underline"></div>
+
+        <p class="csnp-intro">The Civil Service Nurture Programme (CSNP) is one of Aashirwad&rsquo;s flagship initiatives, designed to nurture young aspirants from the school level and guide them progressively towards the Civil Services.</p>
+
+        <div class="csnp-main-row">
+          <div class="csnp-skills">
+            <div class="csnp-skill-item">
+              <div class="csnp-skill-icon"><i class="fa fa-book"></i></div>
+              <div class="csnp-skill-label">Knowledge</div>
+            </div>
+            <div class="csnp-skill-item">
+              <div class="csnp-skill-icon"><i class="far fa-lightbulb"></i></div>
+              <div class="csnp-skill-label">Analytical<br>Thinking</div>
+            </div>
+            <div class="csnp-skill-item">
+              <div class="csnp-skill-icon"><i class="fa fa-comments"></i></div>
+              <div class="csnp-skill-label">Communication<br>Skills</div>
+            </div>
+          </div>
+
+          <div class="csnp-skills csnp-skills--right">
+            <div class="csnp-skill-item">
+              <div class="csnp-skill-icon"><i class="far fa-newspaper"></i></div>
+              <div class="csnp-skill-label">Current Affairs<br>Awareness</div>
+            </div>
+            <div class="csnp-skill-item">
+              <div class="csnp-skill-icon"><i class="fa fa-users"></i></div>
+              <div class="csnp-skill-label">Confidence</div>
+            </div>
+            <div class="csnp-skill-item">
+              <div class="csnp-skill-icon"><i class="fas fa-chart-line"></i></div>
+              <div class="csnp-skill-label">Leadership<br>Qualities</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="csnp-footer">The programme focuses on developing knowledge, analytical thinking, communication skills, current affairs awareness, confidence and leadership qualities, laying a strong foundation for future competitive examination success.</p>
+        <div class="csnp-footer-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. INNOVATION — 3D book page-turning (gemini) ============ -->
+<section class="innovation section" id="innovation">
+  <div class="container">
+    <div class="innovation-header">
+      <h2 class="section-title">Innovation in Education</h2>
+      <p>Innovation has been an integral part of Aashirwad&rsquo;s educational journey. Through initiatives such as Aashirwad Rank File and Aashirwad EduVerse, we integrate technology with conventional learning.</p>
+    </div>
+
+    <div class="book-wrapper">
+      <div class="book-stage">
+        <div class="book">
+          <div class="book-cover book-cover-back"></div>
+          <div class="book-spine-shadow"></div>
+
+          <div class="book-page book-page-static">
+            <div class="page-face page-face-front">
+              <h3 class="page-title">Digital Ecosystem</h3>
+              <p class="page-caption">Our digital learning ecosystem brings together rank files, study materials, current affairs, multimedia resources and interactive learning tools, enabling learners to continue their preparation beyond the traditional classroom.</p>
+              <div class="page-tech">
+                <span>EduVerse</span>
+                <span>Rank File</span>
+                <span>Multimedia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="book-page book-page-turn" id="pageTurn1">
+            <div class="page-face page-face-front">
+              <span class="page-number">3</span>
+            </div>
+            <div class="page-face page-face-back">
+              <span class="page-number">4</span>
+            </div>
+          </div>
+
+          <div class="book-cover book-cover-front" id="bookCoverFront">
+            <div class="page-face page-face-front">
+              <img src="assets/images/logo.webp" alt="Aashirwad logo" class="page-logo">
+            </div>
+            <div class="page-face page-face-back">
+              <h3 class="page-title">Open the Future</h3>
+            </div>
+          </div>
+        </div>
+        <div class="book-shadow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. BEYOND — 3D tunnel / perspective (gemini) ============ -->
+<section class="beyond section" id="beyond">
+  <div class="tunnel-container">
+    <div class="tunnel-content">
+      <h2>Learning Beyond<br>the Classroom</h2>
+      <p>At Aashirwad, education goes beyond completing a syllabus or preparing for an examination. We believe in developing critical thinking, confidence, communication, discipline, problem-solving skills and a lifelong commitment to learning.</p>
+      <p>Our programmes are supported by experienced educators, structured curricula, regular assessments, personalised mentoring and continuous learner support.</p>
+    </div>
+
+    <div class="tunnel-images">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" class="t-img t-img-1" alt="Group Discussion">
+      <img src="https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?q=80&w=800&auto=format&fit=crop" class="t-img t-img-2" alt="Mentoring">
+      <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop" class="t-img t-img-3" alt="Critical Thinking">
+      <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=800&auto=format&fit=crop" class="t-img t-img-4" alt="Confidence">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. COMMITMENT — card stack that separates (cloude) ============ -->
+<section class="section commitment" id="commitment">
+  <div class="commitment__pin">
+    <div class="commitment__copy">
+      <h2>Our Commitment to Results</h2>
+      <p>We believe that meaningful education should lead to measurable progress and lasting success. Our commitment to learner success is reflected not only in our examination results and ranks but also in the confidence we place in the quality of our training.</p>
+    </div>
+    <div class="commitment__stack" id="commitmentStack">
+      <div class="commitment__card" data-i="1">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=80" alt="">
+        <h3>Structured training</h3>
+        <p>Systematic preparation built on years of examination expertise.</p>
+      </div>
+      <div class="commitment__card" data-i="2">
+        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=700&q=80" alt="">
+        <h3>KTET Success Guarantee</h3>
+        <p>Eligible candidates who do not qualify after completing the prescribed training may attend the next training session free of charge, subject to the applicable programme terms and conditions.</p>
+      </div>
+      <div class="commitment__card" data-i="3">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80" alt="">
+        <h3>Confidence in our training</h3>
+        <p>A promise backed by our own trust in the quality of what we teach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. VISION / MISSION — split morph (cloude) ============ -->
+<section class="section vm" id="vm">
+  <div class="vm__pin">
+    <div class="vm__panel vm__panel--vision" id="vmVision">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="">
+      <div class="vm__panel-copy">
+        <span class="vm__label">Our Vision</span>
+        <p>To build a trusted, progressive and future-ready educational ecosystem that makes quality education, expert guidance and effective learning resources accessible to every learner.</p>
+      </div>
+    </div>
+    <div class="vm__panel vm__panel--mission" id="vmMission">
+      <img src="https://images.unsplash.com/photo-1522661067900-ab829854a57f?auto=format&fit=crop&w=1200&q=80" alt="">
+      <div class="vm__panel-copy">
+        <span class="vm__label">Our Mission</span>
+        <p>To empower learners, nurture potential and build successful futures through quality education, innovative learning, personalised guidance and an unwavering commitment to excellence.</p>
+      </div>
+    </div>
+    <div class="vm__divider" id="vmDivider"></div>
+  </div>
+</section>
+
+<!-- ============ 10. CLOSING (cloude) ============ -->
+<footer class="section closing" id="closing">
+  <div class="closing__particles" id="closingParticles" aria-hidden="true"></div>
+  <div class="closing__content">
+    <p class="closing__eyebrow">Academy for Competitive Examinations, Research &amp; Training</p>
+    <h2 class="closing__title">Aashirwad Institute<br>of Teachers</h2>
+    <p class="closing__tagline">Building Futures Together</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.0.29/dist/lenis.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -19,6 +19,26 @@
 
 <body>
 
+  <!-- Page Loader -->
+  <div id="page-loader" role="status" aria-live="polite" aria-label="Loading Aashirwad EduVerse">
+    <div id="constellation-wrap">
+      <canvas id="sphere-canvas"></canvas>
+    </div>
+    <div class="loader-content">
+      <div class="word-stage">
+        <div class="word-wrapper">
+          <span class="word" id="w0">Learn</span>
+          <span class="word" id="w1">Practice</span>
+          <span class="word" id="w2">Improve</span>
+          <span class="word" id="w3">Achieve</span>
+        </div>
+      </div>
+      <div id="progress-text">FORMING NETWORK: 0%</div>
+    </div>
+  </div>
+
+  <script src="assets/js/loader.js"></script>
+
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
 
@@ -40,7 +60,7 @@
 
 <!-- ═══════ Intro Bridge (redesigned) ═══════ -->
 <section class="courses-intro-new">
-  <div class="ci-new-bg" style="background-image: url('assets/images/courseright.webp'); position:absolute; top:0; left:0; width:100%; height:100%; background-size:100% 100%; background-repeat:no-repeat; z-index:0;"></div>
+  <canvas id="ci-frame-canvas" class="ci-new-bg" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;"></canvas>
   <div class="ci-new-inner">
     <div class="ci-new-right">
       <span class="ci-new-badge slide-in-down"><i class="fa fa-star"></i> Trusted by 15,000+ Students Across Kerala</span>
@@ -97,7 +117,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/WomenPolice.webp" alt="Women Police">
+                    <video src="assets/images/course/WomenPolice.mp4" autoplay muted loop playsinline preload="auto" aria-label="Women Police"></video>
                     <div class="card-img-overlay"><span>Women Police</span></div>
                   </div>
                   <div class="down-content">
@@ -125,7 +145,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/PoliceConstable.webp" alt="Police Constable">
+                    <video src="assets/images/course/PoliceConstable.mp4" autoplay muted loop playsinline preload="auto" aria-label="Police Constable"></video>
                     <div class="card-img-overlay"><span>Police Constable</span></div>
                   </div>
                   <div class="down-content">
@@ -153,7 +173,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/LSG.webp" alt="LGS (Lower Grade)">
+                    <video src="assets/images/course/LSG.mp4" autoplay muted loop playsinline preload="auto" aria-label="LGS (Lower Grade)"></video>
                     <div class="card-img-overlay"><span>LGS (Lower Grade)</span></div>
                   </div>
                   <div class="down-content">
@@ -181,7 +201,7 @@
               <div class="item">
                 <div class="course-item-card popular">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/LDClerk.webp" alt="LDC Clerk">
+                    <video src="assets/images/course/LDClerk.mp4" autoplay muted loop playsinline preload="auto" aria-label="LDC Clerk"></video>
                     <div class="card-img-overlay"><span>LDC Clerk</span></div>
                   </div>
                   <div class="down-content">
@@ -209,7 +229,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/DegreeLevel.webp" alt="Degree Level">
+                    <video src="assets/images/course/DegreeLevel.mp4" autoplay muted loop playsinline preload="auto" aria-label="Degree Level"></video>
                     <div class="card-img-overlay"><span>Degree Level</span></div>
                   </div>
                   <div class="down-content">
@@ -237,7 +257,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/SecretariatAssistant.webp" alt="Secretariat Assistant">
+                    <video src="assets/images/course/SecretariatAssistant.mp4" autoplay muted loop playsinline preload="auto" aria-label="Secretariat Assistant"></video>
                     <div class="card-img-overlay"><span>Secretariat Assistant</span></div>
                   </div>
                   <div class="down-content">
@@ -265,7 +285,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/KTET.webp" alt="KTET">
+                    <video src="assets/images/course/KTET.mp4" autoplay muted loop playsinline preload="auto" aria-label="KTET"></video>
                     <div class="card-img-overlay"><span>KTET</span></div>
                   </div>
                   <div class="down-content">
@@ -293,7 +313,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/CTET.webp" alt="CTET">
+                    <video src="assets/images/course/CTET.mp4" autoplay muted loop playsinline preload="auto" aria-label="CTET"></video>
                     <div class="card-img-overlay"><span>CTET</span></div>
                   </div>
                   <div class="down-content">
@@ -321,7 +341,7 @@
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <img src="assets/images/course/Civil Service Foundation.webp" alt="Civil Service Foundation">
+                    <video src="assets/images/course/CivilServiceFoundation.mp4" autoplay muted loop playsinline preload="auto" aria-label="Civil Service Foundation"></video>
                     <div class="card-img-overlay"><span>Civil Service Foundation</span></div>
                   </div>
                   <div class="down-content">
@@ -449,7 +469,7 @@
 
     <!-- ── SECTION 4: CTA Banner ── -->
     <section class="cta-banner">
-      <div class="cta-bg-img"></div>
+      <div class="cta-bg-img" id="cta-hero-webgl"></div>
       <div class="cta-bg-overlay"></div>
       <div class="cta-inner">
 
@@ -563,6 +583,8 @@
   <script src="assets/js/slick-slider.js"></script>
   <script src="assets/js/custom.js"></script>
   <script src="assets/js/animations.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="assets/js/cta-hero-depth.js"></script>
   <script>
     (function () {
       var lastScrollY = window.scrollY;
@@ -574,46 +596,62 @@
       }, { passive: true });
 
       /* ── IntersectionObserver for all scroll animations ── */
+      function revealCardEl(el) {
+        if (el.classList.contains('course-item-card')) {
+          var idx = Array.prototype.indexOf.call(el.parentElement.parentElement.parentElement.children, el.parentElement.parentElement);
+          setTimeout(function () { el.classList.add('card-visible'); }, idx * 100);
+        } else if (el.classList.contains('reveal-stat')) {
+          var delay = parseInt(el.getAttribute('data-delay')) || 0;
+          setTimeout(function () {
+            el.classList.add('stat-visible');
+            animateCounter(el.querySelector('.stat-number'));
+          }, delay);
+        } else if (el.classList.contains('topper-card')) {
+          el.classList.add('tp-visible');
+        } else if (el.classList.contains('reveal-section')) {
+          el.classList.add('section-visible');
+        }
+      }
+
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           if (!entry.isIntersecting || !scrollingDown) return;
-          var el = entry.target;
-          if (el.classList.contains('course-item-card')) {
-            var idx = Array.prototype.indexOf.call(el.parentElement.parentElement.parentElement.children, el.parentElement.parentElement);
-            setTimeout(function () { el.classList.add('card-visible'); }, idx * 100);
-          } else if (el.classList.contains('reveal-stat')) {
-            var delay = parseInt(el.getAttribute('data-delay')) || 0;
-            setTimeout(function () {
-              el.classList.add('stat-visible');
-              animateCounter(el.querySelector('.stat-number'));
-            }, delay);
-          } else if (el.classList.contains('topper-card')) {
-            el.classList.add('tp-visible');
-          } else if (el.classList.contains('reveal-section')) {
-            el.classList.add('section-visible');
-          }
-          io.unobserve(el);
+          revealCardEl(entry.target);
+          io.unobserve(entry.target);
         });
       }, { threshold: 0.2 });
 
+      /* On load, instantly reveal anything already above the trigger
+         line (including scrolled past above the viewport on a mid-page
+         reload) instead of handing it to the observer, which would
+         never fire for it. */
+      function observeWithInitialReveal(el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.8) {
+          revealCardEl(el);
+        } else {
+          io.observe(el);
+        }
+      }
+
       /* Course cards */
-      document.querySelectorAll('.courses-grid .course-item-card').forEach(function (c) { io.observe(c); });
+      document.querySelectorAll('.courses-grid .course-item-card').forEach(observeWithInitialReveal);
 
       /* Stats */
-      document.querySelectorAll('.reveal-stat').forEach(function (s) { io.observe(s); });
+      document.querySelectorAll('.reveal-stat').forEach(observeWithInitialReveal);
 
       /* Topper cards */
       document.querySelectorAll('.topper-card').forEach(function (t) {
-        if (t.offsetParent !== null) io.observe(t);
+        if (t.offsetParent !== null) observeWithInitialReveal(t);
       });
 
       /* CTA section */
       var cta = document.querySelector('.cta-banner');
-      if (cta) { cta.classList.add('reveal-section'); io.observe(cta); }
+      if (cta) { cta.classList.add('reveal-section'); observeWithInitialReveal(cta); }
 
       /* App promo section */
       var promo = document.querySelector('.app-promo-section');
-      if (promo) { promo.classList.add('reveal-section'); io.observe(promo); }
+      if (promo) { promo.classList.add('reveal-section'); observeWithInitialReveal(promo); }
 
       /* Slide / scale anims: re-animate on every downward scroll pass */
       var slideEls = document.querySelectorAll('.slide-in-left, .slide-in-right, .slide-in-up, .slide-in-down, .scale-in');
@@ -646,13 +684,27 @@
         lastSlideScrollY = currentScrollY;
       }, { passive: true });
 
-      /* Initial in-view trigger on load */
+      /* Initial state on load/reload: reveal every section at or above the
+        trigger line — including ones scrolled past above the viewport — so
+        nothing above is left blank. No transition for this instant reveal. */
+      var triggerPointInit = window.innerHeight * 0.8;
       slideItems.forEach(function (item) {
         var rect = item.el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0) {
+        if (rect.top <= triggerPointInit) {
           item.animated = true;
+          item.el.classList.add('no-anim-transition');
           item.el.classList.add('anim-active');
         }
+      });
+
+      /* Let the browser paint that instant state, then remove the
+         transition-blocker so future reveals animate normally again. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.querySelectorAll('.no-anim-transition').forEach(function (el) {
+            el.classList.remove('no-anim-transition');
+          });
+        });
       });
 
       /* Mini-stats: re-animate one-by-one on every downward scroll pass */
@@ -690,7 +742,7 @@
       statItems.forEach(function (item) {
         var el = item.el;
         var rect = el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+        if (rect.top <= window.innerHeight * 0.85) {
           item.animated = true;
           el.classList.add('reveal-visible');
         }
@@ -749,7 +801,7 @@
       statCardItems.forEach(function (item) {
         var el = item.el;
         var rect = el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.85 && rect.bottom >= 0) {
+        if (rect.top <= window.innerHeight * 0.85) {
           triggerStatCard(item);
         }
       });
@@ -807,7 +859,6 @@ function step(timestamp) {
       }
     })();
   </script>
-  <script src="assets/js/gel-animation.js"></script>
   <!-- Floating Contact Buttons -->
   <div class="fcb-wrapper" id="fcbWrapper">
     <div class="fcb-child fcb-call" id="fcbCall" title="Call Us">
@@ -873,6 +924,101 @@ function step(timestamp) {
           wrapper.classList.remove('fcb-open');
         }
       });
+    })();
+  </script>
+  <script>
+    (function () {
+      var canvas = document.getElementById('ci-frame-canvas');
+      var section = document.querySelector('.courses-intro-new');
+      if (!canvas || !section) return;
+
+      var ctx = canvas.getContext('2d');
+      var FRAME_COUNT = 34;
+      var FRAME_PATH = 'assets/images/video/frames/frame_';
+      var FPS = 40; // playback speed of the frame sequence
+      var frames = [];
+      var hasPlayed = false;
+
+      function pad(n) { return String(n).padStart(4, '0'); }
+
+      for (var i = 1; i <= FRAME_COUNT; i++) {
+        var img = new Image();
+        img.src = FRAME_PATH + pad(i) + '.png';
+        frames.push(img);
+      }
+
+      function resizeCanvas() {
+        canvas.width = canvas.clientWidth * (window.devicePixelRatio || 1);
+        canvas.height = canvas.clientHeight * (window.devicePixelRatio || 1);
+      }
+
+      function drawFrame(idx) {
+        var img = frames[idx];
+        if (!img.complete || !img.naturalWidth) return;
+        var cw = canvas.width, ch = canvas.height;
+        var scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight); // cover
+        var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+        lastDrawnFrame = idx;
+      }
+
+      function allFramesLoaded(cb) {
+        var loaded = 0;
+        frames.forEach(function (img) {
+          if (img.complete) { loaded++; if (loaded === FRAME_COUNT) cb(); }
+          else {
+            img.onload = function () { loaded++; if (loaded === FRAME_COUNT) cb(); };
+          }
+        });
+      }
+
+      var DURATION = 1800; // total playback time in milliseconds — adjust this to taste
+
+      function playSequence() {
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var progress = Math.min(elapsed / DURATION, 1);
+          var idx = Math.floor(progress * (FRAME_COUNT - 1));
+          drawFrame(idx);
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      resizeCanvas();
+      var lastDrawnFrame = 0;
+
+      window.addEventListener('resize', function () {
+        resizeCanvas();
+        drawFrame(lastDrawnFrame);
+      });
+
+      if (frames[0].complete && frames[0].naturalWidth) {
+        drawFrame(0);
+      } else {
+        frames[0].onload = function () {
+          drawFrame(0);
+        };
+      }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.99 && !hasPlayed) {
+            hasPlayed = true;
+            allFramesLoaded(playSequence);
+            io.unobserve(section);
+          }
+        });
+      }, { threshold: 0.99 });
+
+      io.observe(section);
     })();
   </script>
 </body>

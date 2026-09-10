@@ -225,166 +225,139 @@ html { scroll-behavior: smooth; }
   background-clip: text;
 }
 
-/* ── Page loader: solar system ── */
+/* ── Page loader: constellation sphere ── */
 #page-loader {
   position: fixed;
   inset: 0;
-  z-index: 99999;
-  background: radial-gradient(ellipse at center, #2a3540 0%, #1f272b 100%);
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+  background:
+    radial-gradient(circle at 50% 45%, #8B0000 0%, #7A0000 45%, #5c0000 78%, #300000 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
 }
 
-#page-loader.loaded {
+#page-loader.loaded,
+#page-loader.is-exiting {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
 }
 
-/* ── Stage & perspective tilt ── */
-.solar-stage {
-  position: relative;
-  perspective: 800px;
+#constellation-wrap {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Ambient glow bloom behind the system */
-.solar-ambient {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 760px;
-  height: 760px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(245,164,37,0.12) 0%, rgba(161,44,47,0.06) 45%, transparent 75%);
-  filter: blur(60px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.solar-tilt {
-  position: relative;
-  width: 460px;
-  height: 460px;
-  transform: rotateX(58deg);
-  z-index: 1;
-}
-
-/* ── Sun ── */
-.solar-sun {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotateX(-58deg);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #ffe9b0 0%, #f5a425 30%, #c9701f 58%, #7a2418 80%, #3d1310 100%);
-  box-shadow: 0 0 40px rgba(245,164,37,0.45), 0 0 80px rgba(161,44,47,0.25);
-  z-index: 10;
-}
-
-/* ── Orbit containers ── */
-.solar-orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-}
-
-.orbit-1 { width: 220px; height: 220px; }
-.orbit-2 { width: 340px; height: 340px; }
-.orbit-3 { width: 460px; height: 460px; }
-
-/* ── Static orbit rings ── */
-.solar-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.orbit-1 .solar-ring { border: 1px dashed rgba(245,164,37,0.16); }
-.orbit-2 .solar-ring { border: 1px dashed rgba(161,44,47,0.16); }
-.orbit-3 .solar-ring { border: 1px dashed rgba(253,243,226,0.12); }
-
-/* ── Rotating tracks ── */
-.solar-track {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
   will-change: transform;
 }
 
-.orbit-1 .solar-track { animation: solar-spin 3s linear infinite; }
-.orbit-2 .solar-track { animation: solar-spin 5s linear infinite; }
-.orbit-3 .solar-track { animation: solar-spin 8s linear infinite; }
-
-@keyframes solar-spin {
-  to { transform: rotate(360deg); }
+#page-loader.is-exiting #constellation-wrap {
+  transform: scale(1.18);
 }
 
-/* ── Planets ── */
-.solar-planet {
+#sphere-canvas {
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.solar-planet::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  transform: translateY(-50%);
-  border-radius: 2px;
-  filter: blur(2px);
+.loader-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+  user-select: none;
 }
 
-.p1 {
-  width: 14px;
-  height: 14px;
-  background: radial-gradient(circle at 30% 35%, #ffd875 0%, #f5a425 35%, #b87a1a 70%, #6b460e 100%);
-  box-shadow: 0 0 8px 2px rgba(245,164,37,0.3);
-}
-.p1::before {
-  width: 48px;
-  height: 5px;
-  background: linear-gradient(to left, rgba(245,164,37,0.55), transparent);
-}
-
-.p2 {
-  width: 16px;
-  height: 16px;
-  background: radial-gradient(circle at 30% 35%, #d94a4d 0%, #a12c2f 35%, #661a1d 65%, #330b0d 100%);
-  box-shadow: 0 0 8px 2px rgba(161,44,47,0.3);
-}
-.p2::before {
-  width: 52px;
-  height: 5px;
-  background: linear-gradient(to left, rgba(161,44,47,0.5), transparent);
+#progress-text {
+  margin-top: 120px;
+  font-family: 'Poppins', -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.68rem, 1.6vw, 0.85rem);
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.82);
+  min-width: 260px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
 }
 
-.p3 {
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle at 30% 35%, #fff9e8 0%, #fdf3e2 35%, #cfc4b1 65%, #8a8273 100%);
-  box-shadow: 0 0 8px 2px rgba(253,243,226,0.25);
+@media (max-width: 480px) {
+  #progress-text { min-width: 220px; }
 }
-.p3::before {
-  width: 44px;
-  height: 4px;
-  background: linear-gradient(to left, rgba(253,243,226,0.4), transparent);
+
+/* ── Flip word stage ── */
+.word-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  perspective: 800px;
+  position: relative;
+  margin-top: 150px;
+}
+
+.word-wrapper {
+  position: relative;
+  height: 90px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.word {
+  position: absolute;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  backface-visibility: hidden;
+  opacity: 0;
+  transform: rotateX(90deg);
+  text-shadow:
+    0 2px 0px rgba(0,0,0,0.25),
+    0 4px 8px rgba(0,0,0,0.20),
+    0 8px 24px rgba(0,0,0,0.15);
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+.word.active {
+  animation: flipIn 0.65s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+.word.exit {
+  animation: flipOut 0.55s cubic-bezier(0.55, 0, 0.45, 1) forwards;
+}
+
+@keyframes flipIn {
+  0%   { opacity: 0; transform: rotateX(-80deg) translateY(12px); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: rotateX(0deg) translateY(0px); }
+}
+
+@keyframes flipOut {
+  0%   { opacity: 1; transform: rotateX(0deg) translateY(0px); }
+  40%  { opacity: 0.5; }
+  100% { opacity: 0; transform: rotateX(70deg) translateY(-10px); }
 }
 
 /* ── Scroll progress bar ── */
@@ -408,8 +381,8 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { transform: none !important; }
   .particle { display: none !important; }
-  .solar-track { animation: none !important; }
-  .solar-planet::before { display: none !important; }
+  #constellation-wrap { transition: none; }
+  #page-loader { transition: opacity 0.4s linear; }
   html { scroll-behavior: auto; }
 }
 
@@ -442,4 +415,10 @@ html { scroll-behavior: smooth; }
 
 .gel-animated {
   opacity: 0 !important;
+}
+
+/* Instantly reveal (no transition) — used for the on-load bulk reveal so
+   scroll-triggered animations don't all replay at once on load/reload. */
+.no-anim-transition {
+  transition: none !important;
 }

@@ -1,0 +1,234 @@
+/* ═══════════════════════════════════════════════════════
+   page-transition.css
+   "Dive-through-tunnel" page transition overlay
+   Self-contained — does not touch any existing styles.
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Utility: hide body content while entry overlay is being set up ── */
+html.pt-loading {
+  background: #1f272b;
+}
+html.pt-loading body {
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── Overlay container ── */
+.pt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, #1f272b 0%, #000 100%);
+
+  /* allow children to sit at center naturally */
+  overflow: hidden;
+}
+
+.pt-overlay.pt-active {
+  pointer-events: all;
+  animation: pt-overlay-fadein 0.15s ease both;
+}
+
+/* ── Central glow ── */
+.pt-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  margin: -60px 0 0 -60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,164,37,0.35) 0%, rgba(161,44,47,0.12) 50%, transparent 70%);
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.pt-active .pt-glow {
+  animation: pt-glow-pulse 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+/* ── Full-screen flash ── */
+.pt-flash {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 164, 37, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  will-change: opacity;
+}
+
+.pt-active .pt-flash {
+  animation: pt-flash-burst 0.25s ease 0.52s both;
+}
+
+/* ── Concentric rings ── */
+.pt-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -30px 0 0 -30px;
+  border-radius: 50%;
+  border: 2.5px solid #f5a425;
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 3;
+  transform: translate(0, 0) scale(0);
+  opacity: 0;
+}
+
+.pt-active .pt-ring {
+  animation: pt-ring-expand 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ── Light streak particles ── */
+.pt-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 3px;
+  margin: -1.5px 0 0 -2px;
+  border-radius: 50%;
+  background: #f5a425;
+  will-change: transform, opacity;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+}
+
+.pt-active .pt-particle {
+  animation: pt-particle-fly 0.75s cubic-bezier(0.15, 0.7, 0.3, 1) both;
+}
+
+/* ── Preferred reduced motion: simple crossfade only ── */
+@media (prefers-reduced-motion: reduce) {
+  .pt-overlay .pt-ring,
+  .pt-overlay .pt-particle,
+  .pt-overlay .pt-glow,
+  .pt-overlay .pt-flash {
+    animation: none !important;
+    display: none !important;
+  }
+
+  .pt-overlay.pt-active.pt-reduced {
+    animation: pt-overlay-fadein 0.15s ease both;
+    background: #1f272b;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   EXIT KEYFRAMES (source page → destination page)
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes pt-overlay-fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pt-ring-expand {
+  0% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(0, 0) scale(16);
+    opacity: 0;
+  }
+}
+
+@keyframes pt-particle-fly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.3);
+  }
+  12% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(1.2);
+  }
+}
+
+@keyframes pt-glow-pulse {
+  0%   { opacity: 0; transform: scale(0.3); }
+  55%  { opacity: 0.9; transform: scale(1.8); }
+  100% { opacity: 0.6; transform: scale(1.4); }
+}
+
+@keyframes pt-flash-burst {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 0.75; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   ENTRY KEYFRAMES  (destination page, reverse tunnel)
+   ═══════════════════════════════════════════════════════ */
+
+.pt-entry {
+  opacity: 1;
+  pointer-events: all;
+  transition: none;
+  animation: pt-overlay-fadeout 0.4s ease 0.6s both;
+}
+
+.pt-entry .pt-ring {
+  animation: pt-ring-contract 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.pt-entry .pt-particle {
+  animation: pt-particle-return 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.pt-entry .pt-glow {
+  animation: pt-glow-fade 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.05s both;
+}
+
+.pt-entry .pt-flash {
+  display: none !important;
+}
+
+@keyframes pt-overlay-fadeout {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes pt-ring-contract {
+  0% {
+    transform: translate(0, 0) scale(16);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) scale(0);
+    opacity: 0.5;
+  }
+}
+
+@keyframes pt-particle-return {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(1.2);
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.3);
+  }
+}
+
+@keyframes pt-glow-fade {
+  0%   { opacity: 0.6; transform: scale(1.4); }
+  100% { opacity: 0; transform: scale(0.3); }
+}

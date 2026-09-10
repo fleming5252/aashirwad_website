@@ -15,9 +15,1646 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+      /* ── About Intro Section (new design) ── */
+      .about-intro-section {
+        padding: 0;
+        background: #fff;
+      }
+
+      /* --- Hero Banner --- */
+      .abt-hero-banner {
+        position: relative;
+        background: url('assets/images/about01.webp') center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 48px 40px 0;
+        overflow: hidden;
+      }
+      .abt-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,18,28,0.45) 0%, rgba(10,18,28,0.15) 60%, rgba(10,18,28,0.55) 100%);
+        pointer-events: none;
+      }
+      .abt-hero-corner {
+        position: absolute;
+        top: 40px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.85);
+        line-height: 1.7;
+        z-index: 2;
+      }
+      .abt-hero-corner-left  { left: 48px; text-align: left; }
+      .abt-hero-corner-right { right: 48px; text-align: right; }
+      .abt-hero-corner-line {
+        display: block;
+        width: 36px;
+        height: 2px;
+        background: #F5A425;
+        margin-top: 6px;
+      }
+      .abt-hero-corner-left .abt-hero-corner-line  { margin-left: 0; }
+      .abt-hero-corner-right .abt-hero-corner-line { margin-left: auto; }
+
+      .abt-hero-titles {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .abt-hero-titles .line1 {
+        display: block;
+        font-size: clamp(24px, 4vw, 48px);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 2px;
+        line-height: 1.1;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-hero-titles .line2 {
+        display: block;
+        font-size: clamp(28px, 5vw, 56px);
+        font-weight: 900;
+        color: #F5A425;
+        letter-spacing: 3px;
+        line-height: 1.05;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-hero-subtitle {
+        position: relative;
+        z-index: 2;
+        margin-top: 14px;
+        font-size: 15px;
+        color: rgba(255,255,255,0.88);
+        letter-spacing: 1px;
+      }
+
+      /* --- Journey Steps --- */
+      .abt-journey-row {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 40px;
+        margin-bottom: 50px;
+        width: 100%;
+        max-width: 900px;
+      }
+      .abt-journey-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        position: relative;
+      }
+
+      .abt-journey-circle {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid rgba(245,164,37,0.6);
+        box-shadow: 0 0 20px rgba(245,164,37,0.3), 0 0 40px rgba(0,0,0,0.4);
+        position: relative;
+        z-index: 2;
+        flex-shrink: 0;
+      }
+      .abt-journey-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .abt-journey-label {
+        margin-top: 14px;
+        text-align: center;
+      }
+      .abt-journey-label strong {
+        display: block;
+        font-size: 15px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .abt-journey-label span {
+        display: block;
+        font-size: 12px;
+        color: rgba(255,255,255,0.75);
+        margin-top: 3px;
+      }
+
+      /* --- Info Card at bottom --- */
+      .abt-info-card {
+        background: #fff;
+        border-radius: 20px 20px 0 0;
+        padding: 50px 60px;
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+        gap: 0 40px;
+        width: 100%;
+      }
+      .abt-info-divider {
+        background: #C8A96E;
+        width: 1px;
+        align-self: stretch;
+      }
+      .abt-info-left h2 {
+        font-size: clamp(24px, 3vw, 36px);
+        font-weight: 800;
+        color: #1F272B;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+      .abt-info-left h3 {
+        font-size: 15px;
+        font-weight: 500;
+        color: #444;
+        margin-bottom: 14px;
+      }
+      .abt-info-left .abt-gold-line {
+        width: 50px;
+        height: 3px;
+        background: #C8A96E;
+        border-radius: 2px;
+        margin-bottom: 20px;
+      }
+      .abt-info-left p,
+      .abt-info-right p {
+        font-size: 14px;
+        color: #444;
+        line-height: 1.85;
+        margin-bottom: 14px;
+      }
+      .abt-info-right {
+        padding-left: 40px;
+      }
+
+      /* Responsive */
+      @media (max-width: 991px) {
+        .abt-hero-banner { padding: 40px 20px 0; }
+        .abt-hero-corner { top: 20px; font-size: 10px; }
+        .abt-hero-corner-left  { left: 20px; }
+        .abt-hero-corner-right { right: 20px; }
+        .abt-journey-circle { width: 100px; height: 100px; }
+        .abt-journey-row { gap: 20px; margin-bottom: 36px; }
+        .abt-journey-label strong { font-size: 12px; }
+        .abt-info-card { grid-template-columns: 1fr; gap: 30px 0; border-radius: 16px 16px 0 0; padding: 36px 24px; }
+        .abt-info-divider { width: 100%; height: 1px; }
+        .abt-info-right { padding-left: 0; }
+      }
+      @media (max-width: 575px) {
+        .abt-journey-row { gap: 10px; max-width: 100%; margin-bottom: 28px; }
+        .abt-journey-circle { width: 72px; height: 72px; }
+        .abt-journey-label strong { font-size: 10px; letter-spacing: 1px; }
+        .abt-journey-label span { font-size: 10px; }
+        .abt-hero-banner { padding: 30px 16px 0; }
+        .abt-info-card { padding: 28px 16px; }
+      }
+
+      /* ── Excellence Section (new design) ── */
+      .about-excellence-section {
+        padding: 50px 0 40px;
+        background-image: url('assets/images/meetings-bg.webp');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Top label line */
+      .abt-exc-top-label {
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #C49A00;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-exc-top-label::before,
+      .abt-exc-top-label::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 1px;
+        background: #C49A00;
+      }
+
+      /* Main heading */
+      .abt-exc-heading {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .abt-exc-heading .line1 {
+        display: block;
+        font-size: clamp(22px, 2.8vw, 36px);
+        font-weight: 700;
+        color: #1F272B;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+      }
+      .abt-exc-heading .line2 {
+        display: block;
+        font-size: clamp(24px, 3vw, 40px);
+        font-weight: 800;
+        color: #A12C2F;
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+      }
+      .abt-exc-underline {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #C49A00, #A12C2F);
+        border-radius: 2px;
+        margin: 8px auto 18px;
+      }
+
+      /* Intro paragraph */
+      .abt-exc-intro {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        color: #444;
+        line-height: 1.75;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Stats row — 27 and 2010 */
+      .abt-exc-stats-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 28px;
+      }
+      .abt-exc-stat-block {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 30px;
+      }
+      .abt-exc-stat-divider {
+        width: 1px;
+        height: 90px;
+        background: #C49A00;
+        flex-shrink: 0;
+      }
+      .abt-exc-wreath-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 6px;
+      }
+      .abt-exc-wreath {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+      }
+      .abt-exc-wreath.mirrored {
+        transform: scaleX(-1);
+      }
+      .abt-exc-stat-number {
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 900;
+        color: #C49A00;
+        line-height: 1;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-exc-stat-since {
+        font-size: 13px;
+        font-weight: 700;
+        color: #A12C2F;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-exc-stat-label {
+        font-size: 12px;
+        font-weight: 800;
+        color: #A12C2F;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-exc-stat-sublabel {
+        font-size: 12px;
+        font-weight: 500;
+        color: #555;
+        line-height: 1.6;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Bottom para */
+      .abt-exc-bottom-para {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        color: #444;
+        line-height: 1.75;
+        max-width: 700px;
+        margin: 0 auto 36px;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Academic Approach */
+      .abt-exc-approach-label {
+        text-align: center;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #C49A00;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-exc-approach-label::before,
+      .abt-exc-approach-label::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 1px;
+        background: #C49A00;
+      }
+      .abt-exc-approach-grid {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0;
+        flex-wrap: wrap;
+      }
+      .abt-exc-approach-item {
+        flex: 1;
+        min-width: 120px;
+        max-width: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 10px;
+        position: relative;
+      }
+      /* vertical divider between items */
+      .abt-exc-approach-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10px;
+        height: 60px;
+        width: 1px;
+        background: rgba(196,154,0,0.4);
+      }
+      .abt-exc-approach-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid rgba(196,154,0,0.4);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #C49A00;
+        margin-bottom: 10px;
+      }
+      .abt-exc-approach-item h4 {
+        font-size: 11px;
+        font-weight: 700;
+        color: #1F272B;
+        line-height: 1.4;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Responsive */
+      @media (max-width: 991px) {
+        .abt-exc-stat-block { padding: 0 20px; }
+        .abt-exc-stat-divider { height: 80px; }
+        .abt-exc-approach-grid { gap: 20px 0; }
+        .abt-exc-approach-item { min-width: 100px; }
+      }
+      @media (max-width: 575px) {
+        .abt-exc-stats-row { flex-direction: column; gap: 30px; }
+        .abt-exc-stat-divider { width: 80px; height: 1px; }
+        .abt-exc-approach-grid { gap: 24px 0; }
+        .abt-exc-approach-item:not(:last-child)::after { display: none; }
+        .abt-exc-approach-item { min-width: 45%; max-width: 50%; }
+      }
+
+      /* ── Stats Strip ── */
+      .about-stats-strip {
+        padding: 60px 0;
+        background: #17232B;
+        position: relative;
+        overflow: hidden;
+      }
+      .about-stats-bg {
+        position: absolute;
+        inset: 0;
+        background: url('assets/images/about-stats-bg.webp') center/cover no-repeat;
+        opacity: 0.15;
+      }
+      .about-stats-strip .container {
+        position: relative;
+        z-index: 2;
+      }
+      .about-stat-card {
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .about-stat-number {
+        font-size: 42px;
+        font-weight: 800;
+        color: #F5A425;
+        margin-bottom: 8px;
+      }
+      .about-stat-number .stat-suffix {
+        font-size: 28px;
+      }
+      .about-stat-label {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255,255,255,0.7);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* ── Ecosystem Section ── */
+      .about-ecosystem-section {
+        padding: 60px 0 70px;
+        background: #7a1020;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .abt-eco-heading {
+        text-align: center;
+        margin-bottom: 8px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-eco-heading .line1 {
+        font-size: clamp(20px, 2.5vw, 32px);
+        font-weight: 700;
+        color: #fff;
+      }
+      .abt-eco-heading .line2 {
+        font-size: clamp(20px, 2.5vw, 32px);
+        font-weight: 800;
+        color: #C49A00;
+      }
+      .abt-eco-subtitle {
+        text-align: center;
+        font-size: 13px;
+        color: rgba(255,255,255,0.85);
+        line-height: 1.75;
+        max-width: 560px;
+        margin: 0 auto 0px;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* ── Orbit stage ── */
+      .abt-eco-stage {
+        position: relative;
+        width: 100%;
+        max-width: 820px;
+        margin: 0 auto 36px;
+        /* tall enough to hold the ellipse */
+        height: 480px;
+      }
+
+      /* SVG orbit rings behind everything */
+      .abt-eco-svg-rings {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      /* Center logo circle */
+      .abt-eco-center {
+        position: absolute;
+        top: 44%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 0 6px rgba(196,154,0,0.35), 0 0 50px rgba(196,154,0,0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 20;
+        overflow: hidden;
+      }
+      .abt-eco-center img {
+        width: 148px;
+        object-fit: contain;
+      }
+
+      /* Each programme item — positioned by JS */
+      .abt-eco-item {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 10;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s;
+      }
+      .abt-eco-item-circle {
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 35%, #c0394a, #7a1020);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        /* size set by JS via CSS var */
+      }
+      .abt-eco-item-icon {
+        color: #fff;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .abt-eco-item-label {
+        color: #fff;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        line-height: 1.25;
+        text-align: center;
+        padding: 0 4px;
+      }
+
+      .abt-eco-footer {
+        text-align: center;
+        font-size: 13px;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.8;
+        max-width: 700px;
+        margin: 0 auto;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      @media (max-width: 767px) {
+        .abt-eco-stage { height: 340px; max-width: 100%; }
+        .abt-eco-center { width: 110px; height: 110px; }
+        .abt-eco-center img { width: 82px; }
+      }
+      @media (max-width: 480px) {
+        .abt-eco-stage { height: 260px; }
+        .abt-eco-center { width: 80px; height: 80px; }
+        .abt-eco-center img { width: 60px; }
+      }
+
+      /* ── CSNP Section ── */
+      .about-csnp-section {
+        padding: 0;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .abt-csnp-bg {
+        display: none;
+      }
+
+      /* Full-width image container */
+      .abt-csnp-img-col {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      .abt-csnp-img-col canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      /* Everything sits on top of the image */
+      .abt-csnp-inner {
+        position: relative;
+        z-index: 2;
+        min-height: 580px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 0 30px;
+      }
+
+      /* Heading */
+      .abt-csnp-heading {
+        text-align: center;
+        margin-bottom: 6px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-csnp-heading .line1,
+      .abt-csnp-heading .line2 {
+        display: inline;
+      }
+      .abt-csnp-heading .line1 {
+        font-size: clamp(24px, 3vw, 42px);
+        font-weight: 700;
+        color: #1F272B;
+      }
+      .abt-csnp-heading .line2 {
+        font-size: clamp(24px, 3vw, 42px);
+        font-weight: 800;
+        color: #A12C2F;
+      }
+      .abt-csnp-underline {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #C49A00, #A12C2F);
+        border-radius: 2px;
+        margin: 8px auto 8px;
+      }
+      .abt-csnp-intro {
+        text-align: center;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.8;
+        max-width: 680px;
+        margin: 0 auto 10px;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Service tags row — IAS IPS IFS IAF */
+      .abt-csnp-tags {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 0;
+      }
+      .abt-csnp-tag {
+        text-align: center;
+        padding: 0 50px;
+        position: relative;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-csnp-tag:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 4px;
+        height: 36px;
+        width: 1px;
+        background: rgba(0,0,0,0.15);
+      }
+      .abt-csnp-tag-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: #A12C2F;
+        display: block;
+      }
+      .abt-csnp-tag-sub {
+        font-size: 11px;
+        color: #666;
+        display: block;
+        margin-top: 2px;
+      }
+
+      /* Main row stretches full width */
+      .abt-csnp-main-row {
+        width: 100%;
+        flex: 1;
+        align-items: center;
+        padding: 10px 40px;
+        justify-content: space-between;
+        display: flex;
+      }
+
+      /* Side skill columns */
+      .abt-csnp-skills {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        flex-shrink: 0;
+      }
+      .abt-csnp-skill-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        /* float animation applied via JS */
+      }
+      .abt-csnp-skill-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #A12C2F, #7a1f21);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(161,44,47,0.3);
+        flex-shrink: 0;
+      }
+      .abt-csnp-skill-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: #1F272B;
+        line-height: 1.3;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Footer sits at bottom over image */
+      .abt-csnp-footer {
+        text-align: center;
+        font-size: 13px;
+        color: #1F272B;
+        font-weight: 500;
+        line-height: 1.8;
+        max-width: 760px;
+        margin: 10px auto 0;
+        font-family: 'Poppins', sans-serif;
+        background: rgba(255,255,255,0.75);
+        border-radius: 12px;
+        padding: 14px 30px;
+        backdrop-filter: blur(4px);
+      }
+      .abt-csnp-footer-line {
+        width: 50px;
+        height: 2px;
+        background: #C49A00;
+        border-radius: 2px;
+        margin: 12px auto 0;
+      }
+
+      /* Float keyframes — 6 variants for randomness */
+      @keyframes csnpFloat1 { 0%,100%{transform:translateY(0)}   50%{transform:translateY(-8px)} }
+      @keyframes csnpFloat2 { 0%,100%{transform:translateY(-5px)} 50%{transform:translateY(5px)} }
+      @keyframes csnpFloat3 { 0%,100%{transform:translateY(0)}   50%{transform:translateY(-6px)} }
+      @keyframes csnpFloat4 { 0%,100%{transform:translateY(-4px)} 50%{transform:translateY(6px)} }
+      @keyframes csnpFloat5 { 0%,100%{transform:translateY(0)}   50%{transform:translateY(-9px)} }
+      @keyframes csnpFloat6 { 0%,100%{transform:translateY(-3px)} 50%{transform:translateY(4px)} }
+
+      .abt-csnp-skill-item:nth-child(1) { animation: csnpFloat1 3.2s ease-in-out infinite; }
+      .abt-csnp-skill-item:nth-child(2) { animation: csnpFloat2 2.8s ease-in-out infinite; }
+      .abt-csnp-skill-item:nth-child(3) { animation: csnpFloat3 3.6s ease-in-out infinite; }
+      .abt-csnp-skill-item:nth-child(4) { animation: csnpFloat4 2.5s ease-in-out infinite; }
+      .abt-csnp-skill-item:nth-child(5) { animation: csnpFloat5 3.0s ease-in-out infinite; }
+      .abt-csnp-skill-item:nth-child(6) { animation: csnpFloat6 3.4s ease-in-out infinite; }
+
+      /* Responsive */
+      @media (max-width: 767px) {
+        .about-csnp-section {
+          overflow: hidden;
+        }
+
+        /* Inner becomes a normal vertical column */
+        .abt-csnp-inner {
+          position: relative !important;
+          min-height: unset !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          padding: 28px 16px 20px !important;
+        }
+
+        /* 1 — Heading */
+        .abt-csnp-heading { order: 1; }
+
+        /* 2 — Gold underline */
+        .abt-csnp-underline { order: 2; }
+
+        /* 3 — Intro paragraph */
+        .abt-csnp-intro {
+          order: 3;
+          margin-bottom: 12px !important;
+        }
+
+        /* 4 — IAS IPS tags */
+        .abt-csnp-tags {
+          order: 4;
+          flex-wrap: wrap;
+          margin-bottom: 12px;
+        }
+        .abt-csnp-tag { padding: 0 10px !important; }
+        .abt-csnp-tag-title { font-size: 12px !important; }
+        .abt-csnp-tag-sub   { font-size: 10px !important; }
+
+        /* 5 — Full-width image */
+        .abt-csnp-img-col {
+          order: 5;
+          position: relative !important;
+          inset: unset !important;
+          width: calc(100% + 32px) !important; /* bleed past container padding */
+          margin-left: -16px !important;
+          height: 240px !important;
+          z-index: 0;
+        }
+
+        .abt-csnp-img-col canvas {
+          width: 100% !important;
+          height: 100% !important;
+        }
+
+        /* 6 — Skills row (both columns flattened into one row) */
+        .abt-csnp-main-row {
+          order: 6;
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          padding: 16px 0 !important;
+          gap: 12px !important;
+        }
+
+        /* Hide empty spacer */
+        .abt-csnp-main-row > div:not(.abt-csnp-skills) {
+          display: none !important;
+        }
+
+        .abt-csnp-skills {
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+          justify-content: center !important;
+          gap: 12px 16px !important;
+        }
+
+        .abt-csnp-skill-icon {
+          width: 46px !important;
+          height: 46px !important;
+          font-size: 16px !important;
+        }
+
+        .abt-csnp-skill-label { font-size: 10px !important; }
+
+        /* Slow the float drift to half speed on mobile */
+        .abt-csnp-skill-item:nth-child(1) { animation: csnpFloat1 6.4s ease-in-out infinite; }
+        .abt-csnp-skill-item:nth-child(2) { animation: csnpFloat2 5.6s ease-in-out infinite; }
+        .abt-csnp-skill-item:nth-child(3) { animation: csnpFloat3 7.2s ease-in-out infinite; }
+        .abt-csnp-skill-item:nth-child(4) { animation: csnpFloat4 5.0s ease-in-out infinite; }
+        .abt-csnp-skill-item:nth-child(5) { animation: csnpFloat5 6.0s ease-in-out infinite; }
+        .abt-csnp-skill-item:nth-child(6) { animation: csnpFloat6 6.8s ease-in-out infinite; }
+
+        /* 7 — Footer text */
+        .abt-csnp-footer {
+          order: 7;
+          font-size: 12px !important;
+          padding: 12px 14px !important;
+          margin-top: 8px !important;
+        }
+
+        /* 8 — Footer line */
+        .abt-csnp-footer-line {
+          order: 8;
+          margin-bottom: 16px;
+        }
+      }
+
+      /* ── Innovation Section ── */
+      .about-innovation-section {
+        padding: 60px 0 40px;
+        background: #faf7f2;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Faint bg pattern */
+      .abt-inn-bg {
+        position: absolute;
+        inset: 0;
+        background: url('assets/images/about-excellence-bg.webp') center/cover no-repeat;
+        opacity: 0.05;
+        pointer-events: none;
+      }
+
+      /* Heading */
+      .abt-inn-heading {
+        text-align: center;
+        margin-bottom: 6px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-inn-heading .line1 {
+        font-size: clamp(26px, 3.5vw, 48px);
+        font-weight: 800;
+        color: #1F272B;
+      }
+      .abt-inn-heading .line2 {
+        font-size: clamp(26px, 3.5vw, 48px);
+        font-weight: 800;
+        color: #A12C2F;
+      }
+      .abt-inn-underline {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #C49A00, #A12C2F);
+        border-radius: 2px;
+        margin: 8px auto 16px;
+      }
+      .abt-inn-intro {
+        text-align: center;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.85;
+        max-width: 720px;
+        margin: 0 auto 50px;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Timeline row */
+      .abt-inn-timeline {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 50px;
+        padding: 0 20px;
+      }
+
+      /* SVG connector line behind items */
+      .abt-inn-svg {
+        position: absolute;
+        top: 80px; /* vertically centred on the dots */
+        left: 0;
+        width: 100%;
+        height: 60px;
+        pointer-events: none;
+        z-index: 0;
+        overflow: visible;
+      }
+
+      /* Each timeline item */
+      .abt-inn-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        padding: 0 8px;
+      }
+
+      /* Dot on the line */
+      .abt-inn-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #C49A00;
+        border: 3px solid #fff;
+        box-shadow: 0 0 0 2px #C49A00;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+      }
+
+      /* Image platform */
+      .abt-inn-img-wrap {
+        width: 140px;
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+        flex-shrink: 0;
+      }
+      .abt-inn-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      /* Item text */
+      .abt-inn-item-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: #1F272B;
+        line-height: 1.3;
+        margin-bottom: 6px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-inn-item-title.gold { color: #A12C2F; }
+      .abt-inn-item-desc {
+        font-size: 11px;
+        color: #666;
+        line-height: 1.6;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Footer text */
+      .abt-inn-footer-wrap {
+        border-top: 1px solid rgba(196,154,0,0.3);
+        border-bottom: 1px solid rgba(196,154,0,0.3);
+        padding: 20px 0;
+        position: relative;
+      }
+      .abt-inn-footer-wrap::before,
+      .abt-inn-footer-wrap::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #C49A00;
+        transform: translateY(-50%);
+      }
+      .abt-inn-footer-wrap::before { left: 0; }
+      .abt-inn-footer-wrap::after  { right: 0; }
+      .abt-inn-footer {
+        text-align: center;
+        font-size: 13px;
+        color: #333;
+        line-height: 1.85;
+        max-width: 820px;
+        margin: 0 auto;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Responsive */
+      @media (max-width: 767px) {
+        .abt-inn-timeline { flex-wrap: wrap; gap: 30px; }
+        .abt-inn-item { flex: 0 0 45%; }
+        .abt-inn-svg { display: none; }
+        .abt-inn-img-wrap { width: 100px; height: 100px; }
+      }
+      @media (max-width: 480px) {
+        .abt-inn-item { flex: 0 0 100%; }
+      }
+
+      /* ── Learning Section ── */
+      .about-learning-section {
+        padding: 0 0 50px;
+        background: #faf7f2;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Top image area */
+      .abt-learn-hero {
+        width: 100%;
+        position: relative;
+        margin-bottom: 40px;
+      }
+      .abt-learn-hero img {
+        width: 100%;
+        max-height: 340px;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Heading over image — no, heading is above image in white area */
+      .abt-learn-heading-wrap {
+        text-align: center;
+        padding: 50px 20px 0;
+        position: relative;
+        z-index: 2;
+      }
+      .abt-learn-heading {
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 6px;
+      }
+      .abt-learn-heading .line1 {
+        display: block;
+        font-size: clamp(26px, 3.5vw, 50px);
+        font-weight: 800;
+        color: #1F272B;
+      }
+      .abt-learn-heading .line2 {
+        display: block;
+        font-size: clamp(26px, 3.5vw, 50px);
+        font-weight: 800;
+        color: #A12C2F;
+      }
+      .abt-learn-underline {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #C49A00, #A12C2F);
+        border-radius: 2px;
+        margin: 10px auto 20px;
+      }
+      .abt-learn-intro {
+        text-align: center;
+        font-size: 15px;
+        color: #1F272B;
+        line-height: 1.85;
+        max-width: 680px;
+        margin: 0 auto 10px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+      }
+      .abt-learn-intro2 {
+        text-align: center;
+        font-size: 15px;
+        color: #1F272B;
+        line-height: 1.85;
+        max-width: 780px;
+        margin: 0 auto 0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+      }
+
+      /* Book open image strip */
+      .abt-learn-book-strip {
+        width: 100%;
+        margin: 20px 0 40px;
+        overflow: hidden;
+        line-height: 0;
+      }
+      .abt-learn-book-strip img {
+        width: 100%;
+        max-height: 220px;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+
+      /* Skills grid — 6 items */
+      .abt-learn-skills-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 36px;
+        flex-wrap: nowrap;
+      }
+      .abt-learn-skill-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 12px;
+        position: relative;
+      }
+      .abt-learn-skill-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 10px;
+        height: 50px;
+        width: 1px;
+        background: rgba(196,154,0,0.5);
+      }
+      .abt-learn-skill-icon {
+        font-size: 36px;
+        color: #A12C2F;
+        margin-bottom: 12px;
+        line-height: 1;
+      }
+      .abt-learn-skill-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1F272B;
+        line-height: 1.3;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      /* Foundation strip */
+      .abt-learn-foundation-label {
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #A12C2F;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-learn-foundation-label::before,
+      .abt-learn-foundation-label::after {
+        content: '';
+        display: block;
+        height: 1px;
+        width: 120px;
+        background: #C49A00;
+      }
+
+      /* Foundation items — 5 items, text only with dividers */
+      .abt-learn-foundation-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        flex-wrap: nowrap;
+      }
+      .abt-learn-foundation-item {
+        flex: 1;
+        text-align: center;
+        padding: 0 20px;
+        position: relative;
+        font-size: 13px;
+        font-weight: 600;
+        color: #444;
+        line-height: 1.4;
+        font-family: 'Poppins', sans-serif;
+      }
+      .abt-learn-foundation-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background: rgba(196,154,0,0.5);
+      }
+
+      /* Responsive */
+      @media (max-width: 767px) {
+        .abt-learn-skills-row { flex-wrap: wrap; gap: 24px 0; }
+        .abt-learn-skill-item { flex: 0 0 33%; }
+        .abt-learn-skill-item:not(:last-child)::after { display: none; }
+        .abt-learn-foundation-row { flex-wrap: wrap; gap: 16px 0; }
+        .abt-learn-foundation-item { flex: 0 0 50%; }
+        .abt-learn-foundation-item:not(:last-child)::after { display: none; }
+      }
+      @media (max-width: 480px) {
+        .abt-learn-skill-item { flex: 0 0 50%; }
+        .abt-learn-heading .line1,
+        .abt-learn-heading .line2 { font-size: 28px; }
+      }
+
+      /* ── Commitment Section (card stack) ── */
+      .about-commitment-section {
+        z-index: 3;
+        background-image: url('assets/images/meetings-page-bg-red.webp');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+      }
+      .about-commitment-pin {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 clamp(1.25rem, 4vw, 4rem);
+      }
+      .about-commitment-copy {
+        max-width: 620px;
+        margin: 0 auto 3rem;
+        text-align: center;
+      }
+      .about-commitment-copy h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 1.2rem;
+      }
+      .about-commitment-copy p {
+        font-family: 'Poppins', sans-serif;
+        color: #fff;
+        margin-top: 0.8rem;
+        font-size: 1.02rem;
+        line-height: 1.8;
+      }
+      .about-commitment-stack {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        height: 340px;
+      }
+      .about-commitment-card {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 300px;
+        background: #fff;
+        border: 1px solid rgba(16,25,43,0.12);
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -20px rgba(16,25,43,0.25);
+        transform: translate(-50%, 0) rotate(0deg);
+        will-change: transform;
+      }
+      .about-commitment-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+      }
+      .about-commitment-card h3 {
+        padding: 1.1rem 1.2rem 0.4rem;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1F272B;
+      }
+      .about-commitment-card p {
+        padding: 0 1.2rem 1.2rem;
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.88rem;
+        color: #444;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 767px) {
+        .about-commitment-stack {
+          height: 380px;
+        }
+        .about-commitment-card {
+          width: 260px;
+        }
+      }
+      @media (max-width: 480px) {
+        .about-commitment-stack {
+          height: 420px;
+        }
+        .about-commitment-card {
+          width: 240px;
+        }
+        .about-commitment-card img {
+          height: 120px;
+        }
+      }
+
+      @media (max-width: 767px) {
+
+        /* Allow the commitment section to grow with content on mobile */
+        .about-commitment-section {
+          min-height: unset !important;
+        }
+
+        .about-commitment-pin {
+          height: auto !important;
+          padding: 50px 20px 40px !important;
+        }
+
+        .about-commitment-copy {
+          margin-bottom: 30px !important;
+        }
+
+        .about-commitment-copy h2 {
+          font-size: 1.6rem !important;
+        }
+
+        /* Stack container becomes flex column */
+        .about-commitment-stack {
+          height: auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          gap: 20px !important;
+          padding-bottom: 10px !important;
+        }
+
+        /* Cards become relative and full-width */
+        .about-commitment-card {
+          position: relative !important;
+          left: unset !important;
+          top: unset !important;
+          width: 85% !important;
+          max-width: 320px !important;
+          transform: none !important;
+          margin: 0 auto !important;
+        }
+
+        .about-commitment-card img {
+          height: 130px !important;
+        }
+      }
+
+      /* ── Vision & Mission ── */
+      .about-vision-section {
+        padding: 0;
+        background: #f5f0e8;
+      }
+      .abt-vm-card {
+        flex: 1;
+        max-width: 420px;
+        background: #fff;
+        border: 1.5px solid rgba(196,154,0,0.35);
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 0 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .abt-vm-icon-wrap {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #f5f0e8;
+        border: 1.5px solid rgba(196,154,0,0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 2;
+        margin-top: 24px;
+      }
+      .abt-vm-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(26px, 3vw, 38px);
+        font-weight: 800;
+        color: #1F272B;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+      .abt-vm-title span {
+        color: #A12C2F;
+      }
+      .abt-vm-underline {
+        width: 50px;
+        height: 2px;
+        background: #C49A00;
+        border-radius: 2px;
+        margin: 0 auto 20px;
+      }
+      .abt-vm-body {
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        color: #1F272B;
+        line-height: 1.85;
+        text-align: center;
+        padding: 0 30px;
+        margin-bottom: 24px;
+        font-weight: 500;
+      }
+      .abt-vm-img-wrap {
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .abt-vm-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .abt-vm-tags {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 16px 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #1F272B;
+        width: 100%;
+      }
+      .abt-vm-tag-divider {
+        color: #C49A00;
+      }
+
+      /* Responsive */
+      @media (max-width: 991px) {
+        .about-vision-section .container-fluid > div:first-child {
+          flex-direction: column;
+          align-items: center;
+          padding: 40px 20px 0;
+          gap: 30px;
+        }
+        .abt-vm-card { max-width: 100%; width: 100%; }
+        .about-vision-section [style*="flex-direction:column"][style*="LEARN"],
+        .about-vision-section [style*="flex-direction:column"][style*="BETTER"] { display: none !important; }
+        .about-vision-section [style*="padding:0 36px"] { flex-direction: row; padding: 20px 0; }
+      }
+
+      @media (max-width: 767px) {
+        /* Center the vision-section side column texts on mobile */
+        .abt-vm-learn-col,
+        .abt-vm-grow-col {
+          align-items: center !important;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+        }
+        .abt-vm-learn-col > div,
+        .abt-vm-grow-col > div {
+          margin: 4px auto 0 !important;
+        }
+      }
+
+      /* ── Closing Banner ── */
+      .about-closing-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #A12C2F, #7a1f21);
+        text-align: center;
+      }
+      .about-closing-content h2 {
+        font-size: 36px;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .about-closing-subtitle {
+        font-size: 16px;
+        color: rgba(255,255,255,0.8);
+        margin-bottom: 20px;
+      }
+      .about-closing-divider {
+        width: 60px;
+        height: 3px;
+        background: #F5A425;
+        border-radius: 2px;
+        margin: 0 auto 20px;
+      }
+      .about-closing-tagline {
+        font-size: 20px;
+        font-weight: 600;
+        color: #F5A425;
+        margin: 0;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 991px) {
+        .about-csnp-section,
+        .about-innovation-section,
+        .about-learning-section {
+          padding: 60px 0;
+        }
+        .about-csnp-content .cp-title,
+        .about-innovation-content .cp-title,
+        .about-learning-content .cp-title {
+          font-size: 26px;
+        }
+        .about-stat-number {
+          font-size: 32px;
+        }
+        .about-closing-content h2 {
+          font-size: 28px;
+        }
+      }
+      @media (max-width: 575px) {
+        .about-stat-card {
+          padding: 20px 10px;
+        }
+        .about-stat-number {
+          font-size: 28px;
+        }
+        .about-stat-label {
+          font-size: 12px;
+        }
+      }
+    </style>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="assets/js/csnp-hero-depth.js"></script>
   </head>
 
 <body>
+
+  <!-- Page Loader -->
+  <div id="page-loader" role="status" aria-live="polite" aria-label="Loading Aashirwad EduVerse">
+    <div id="constellation-wrap">
+      <canvas id="sphere-canvas"></canvas>
+    </div>
+    <div class="loader-content">
+      <div class="word-stage">
+        <div class="word-wrapper">
+          <span class="word" id="w0">Learn</span>
+          <span class="word" id="w1">Practice</span>
+          <span class="word" id="w2">Improve</span>
+          <span class="word" id="w3">Achieve</span>
+        </div>
+      </div>
+      <div id="progress-text">FORMING NETWORK: 0%</div>
+    </div>
+  </div>
+
+  <script src="assets/js/loader.js"></script>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -39,8 +1676,882 @@
     </div>
   </section>
 
+  <!-- Intro Section -->
+  <section class="about-intro-section" id="about-intro">
+    <!-- Hero Banner -->
+    <div class="abt-hero-banner">
+      <div class="abt-hero-overlay"></div>
+
+      <!-- Main titles -->
+      <div class="abt-hero-titles slide-in-up">
+        <span class="line1">BUILDING</span>
+        <span class="line2">FUTURES TOGETHER</span>
+      </div>
+
+      <!-- Journey steps -->
+      <div class="abt-journey-row">
+        <div class="abt-journey-step slide-in-up">
+          <div class="abt-journey-circle">
+            <img src="assets/images/about011.webp" alt="Learn">
+          </div>
+          <div class="abt-journey-label">
+            <strong>Learn</strong>
+            <span>Discover Potential</span>
+          </div>
+        </div>
+        <div class="abt-journey-step slide-in-up">
+          <div class="abt-journey-circle">
+            <img src="assets/images/about012.webp" alt="Prepare">
+          </div>
+          <div class="abt-journey-label">
+            <strong>Prepare</strong>
+            <span>Build Knowledge</span>
+          </div>
+        </div>
+        <div class="abt-journey-step slide-in-up">
+          <div class="abt-journey-circle">
+            <img src="assets/images/about013.webp" alt="Grow">
+          </div>
+          <div class="abt-journey-label">
+            <strong>Grow</strong>
+            <span>Achieve Goals</span>
+          </div>
+        </div>
+        <div class="abt-journey-step slide-in-up">
+          <div class="abt-journey-circle">
+            <img src="assets/images/about014.webp" alt="Succeed">
+          </div>
+          <div class="abt-journey-label">
+            <strong>Succeed</strong>
+            <span>Create a Brighter Tomorrow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Card — now inside the banner -->
+      <div class="abt-info-card">
+        <div class="abt-info-left slide-in-left">
+          <h2>Aashirwad Institute of Teachers</h2>
+          <h3>Academy for Competitive Examinations, Research &amp; Training</h3>
+          <div class="abt-gold-line"></div>
+          <p>Established in 2009, Aashirwad Institute of Teachers is a leading educational institution dedicated to empowering learners through quality education, structured training, expert guidance and innovative learning solutions.</p>
+        </div>
+        <div class="abt-info-divider"></div>
+        <div class="abt-info-right slide-in-right">
+          <p>Headquartered in Vaikom, Kottayam, Kerala, Aashirwad has evolved into a comprehensive educational ecosystem with a strong focus on competitive examinations, teacher eligibility training, school education, civil service preparation, digital learning and skill development.</p>
+          <p>Our journey is driven by a simple yet powerful vision — to identify potential, nurture talent and create pathways to academic and professional success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Golden divider -->
+  <div class="section-divider-gold"></div>
+
+  <!-- Excellence in Competitive Examinations -->
+  <section class="about-excellence-section" id="about-excellence">
+    <div class="container">
+
+      <div class="abt-exc-heading slide-in-up">
+        <span class="line1">Excellence in</span>
+        <span class="line2">Competitive Examinations</span>
+      </div>
+      <div class="abt-exc-underline"></div>
+
+      <p class="abt-exc-intro slide-in-up">
+        Aashirwad has built a strong reputation for result-oriented preparation for a wide range of competitive examinations, including Kerala PSC, KTET, CTET, Navodaya Entrance, Civil Services, SSC and other national and state-level examinations.
+      </p>
+
+      <!-- Stats: 27 and 2010 -->
+      <div class="abt-exc-stats-row slide-in-up">
+        <div class="abt-exc-stat-block">
+          <div class="abt-exc-wreath-row">
+            <img src="assets/images/laurelwreath.webp" alt="" class="abt-exc-wreath" aria-hidden="true">
+            <div class="abt-exc-stat-number">27</div>
+            <img src="assets/images/laurelwreath.webp" alt="" class="abt-exc-wreath mirrored" aria-hidden="true">
+          </div>
+          <div class="abt-exc-stat-label">First Ranks</div>
+          <div class="abt-exc-stat-sublabel">in Kerala PSC examinations</div>
+        </div>
+
+        <div class="abt-exc-stat-divider"></div>
+
+        <div class="abt-exc-stat-block">
+          <div class="abt-exc-wreath-row">
+            <img src="assets/images/laurelwreath.webp" alt="" class="abt-exc-wreath" aria-hidden="true">
+            <div>
+              <div class="abt-exc-stat-since">Since</div>
+              <div class="abt-exc-stat-number">2010</div>
+            </div>
+            <img src="assets/images/laurelwreath.webp" alt="" class="abt-exc-wreath mirrored" aria-hidden="true">
+          </div>
+          <div class="abt-exc-stat-sublabel">Strong and consistent record in<br>Jawahar Navodaya Vidyalaya admissions<br>from Kottayam.</div>
+        </div>
+      </div>
+
+      <p class="abt-exc-bottom-para slide-in-up">
+        Our academic approach combines conceptual clarity, systematic preparation, regular assessment, quality learning resources, personalised mentoring and continuous academic support.
+      </p>
+
+      <!-- Academic Approach -->
+      <div class="abt-exc-approach-label slide-in-up">Our Academic Approach</div>
+
+      <div class="abt-exc-approach-grid slide-in-up">
+        <div class="abt-exc-approach-item">
+          <div class="abt-exc-approach-icon"><i class="fa fa-lightbulb-o"></i></div>
+          <h4>Conceptual Clarity</h4>
+        </div>
+        <div class="abt-exc-approach-item">
+          <div class="abt-exc-approach-icon"><i class="fa fa-clipboard"></i></div>
+          <h4>Systematic Preparation</h4>
+        </div>
+        <div class="abt-exc-approach-item">
+          <div class="abt-exc-approach-icon"><i class="fa fa-bar-chart"></i></div>
+          <h4>Regular Assessment</h4>
+        </div>
+        <div class="abt-exc-approach-item">
+          <div class="abt-exc-approach-icon"><i class="fa fa-book"></i></div>
+          <h4>Quality Learning Resources</h4>
+        </div>
+        <div class="abt-exc-approach-item">
+          <div class="abt-exc-approach-icon"><i class="fa fa-users"></i></div>
+          <h4>Personalised Mentoring</h4>
+        </div>
+        <div class="abt-exc-approach-item">
+          <div class="abt-exc-approach-icon"><i class="fa fa-cogs"></i></div>
+          <h4>Continuous Academic Support</h4>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Golden divider -->
+  <div class="section-divider-gold"></div>
+
+  <!-- Comprehensive Educational Ecosystem -->
+  <section class="about-ecosystem-section" id="about-ecosystem">
+    <div class="container">
+
+      <div class="abt-eco-heading slide-in-up">
+        <span class="line1">A Comprehensive </span><span class="line2">Educational Ecosystem</span>
+      </div>
+      <p class="abt-eco-subtitle slide-in-up">
+        Aashirwad provides learning opportunities for students and aspirants at different stages of their academic and professional journey.
+      </p>
+
+      <div class="abt-eco-stage" id="ecoStage">
+        <!-- SVG rings drawn by JS -->
+        <svg class="abt-eco-svg-rings" id="ecoSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+
+        <!-- Center -->
+        <div class="abt-eco-center">
+          <img src="assets/images/logo.webp" alt="Aashirwad">
+        </div>
+      </div>
+
+      <p class="abt-eco-footer slide-in-up">
+        Through this diverse range of programmes, we strive to provide learners with the right knowledge, guidance, resources and opportunities within a single educational ecosystem.
+      </p>
+
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var programmes = [
+        { icon: 'fa-university',      label: 'Kerala PSC\nCoaching' },
+        { icon: 'fa-book',            label: 'KTET & CTET\nTraining' },
+        { icon: 'fa-users',           label: 'Navodaya\nEntrance Coaching' },
+        { icon: 'fa-briefcase',       label: 'Civil Service\nNurture Programme\n(CSNP)' },
+        { icon: 'fa-pencil-square-o', label: 'SSC & Other\nCompetitive\nExaminations' },
+        { icon: 'fa-graduation-cap',  label: 'School Tuition\nProgrammes' },
+        { icon: 'fa-keyboard-o',      label: 'Typewriting &\nSkill Development' },
+        { icon: 'fa-comments',        label: 'Spoken English &\nCommunication\nTraining' },
+        { icon: 'fa-globe',           label: 'German Language\nTraining' },
+        { icon: 'fa-bar-chart',       label: 'IELTS & OET\nTraining' },
+        { icon: 'fa-laptop',          label: 'Academic Support\n& Digital Learning' },
+      ];
+
+      function build() {
+        var stage = document.getElementById('ecoStage');
+        var svg   = document.getElementById('ecoSvg');
+        if (!stage) return;
+
+        var W  = stage.offsetWidth;
+        var H  = stage.offsetHeight;
+        var cx = W / 2;
+        var cy = H / 2;
+        var rx = W * 0.44;
+        var ry = H * 0.28;
+
+        /* ── Draw back-half-only perspective rings ── */
+        svg.innerHTML = '';
+        var ringScales = [1, 0.89, 0.78];
+
+        ringScales.forEach(function (scale, ri) {
+          var outerRy  = ry;
+          var gapFront = (1 - scale) * ry;
+          var gapBack  = gapFront / 3;
+          var ryTop    = outerRy - gapBack;
+          var rxCur    = rx * scale;
+
+          /* Draw ONLY the top half arc: right point → left point going UP */
+          var x1 = cx + rxCur;  /* right */
+          var x2 = cx - rxCur;  /* left  */
+
+          var d =
+            'M ' + x1 + ' ' + cy +
+            ' A ' + rxCur + ' ' + ryTop + ' 0 0 0 ' + x2 + ' ' + cy;
+
+          var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          path.setAttribute('d', d);
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', 'rgba(196,154,0,0.28)');
+          path.setAttribute('stroke-width', '1.2');
+          svg.appendChild(path);
+
+          /* Dots only on the top half */
+          var dotCount = 6;
+          for (var d2 = 0; d2 < dotCount; d2++) {
+            var a    = (Math.PI / (dotCount - 1)) * d2;
+            var dx   = cx + rxCur * Math.cos(a);
+            var dy   = cy - ryTop * Math.sin(a);
+            var dot  = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dot.setAttribute('cx', dx);
+            dot.setAttribute('cy', dy);
+            dot.setAttribute('r',  ri === 0 ? 3.5 : 2.5);
+            dot.setAttribute('fill', '#C49A00');
+            dot.setAttribute('opacity', '0.5');
+            svg.appendChild(dot);
+          }
+
+          /* Draw ONLY the bottom half arc: left point → right point going DOWN */
+          var ryBottom = scale * ry;
+
+          var dBottom =
+            'M ' + x1 + ' ' + cy +
+            ' A ' + rxCur + ' ' + ryBottom + ' 0 0 1 ' + x2 + ' ' + cy;
+
+          var pathBottom = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          pathBottom.setAttribute('d', dBottom);
+          pathBottom.setAttribute('fill', 'none');
+          pathBottom.setAttribute('stroke', 'rgba(196,154,0,0.5)');
+          pathBottom.setAttribute('stroke-width', '1.2');
+          svg.appendChild(pathBottom);
+
+          /* Dots on bottom half */
+          var dotCountB = 6;
+          for (var d3 = 0; d3 < dotCountB; d3++) {
+            var aB  = (Math.PI / (dotCountB - 1)) * d3;
+            var dxB = cx + rxCur    * Math.cos(aB);
+            var dyB = cy + ryBottom * Math.sin(aB);
+            var dotB = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            dotB.setAttribute('cx', dxB);
+            dotB.setAttribute('cy', dyB);
+            dotB.setAttribute('r',  ri === 0 ? 3.5 : 2.5);
+            dotB.setAttribute('fill', '#C49A00');
+            dotB.setAttribute('opacity', '0.8');
+            svg.appendChild(dotB);
+          }
+        });
+
+        /* ── Remove old items ── */
+        stage.querySelectorAll('.abt-eco-item').forEach(function (el) { el.remove(); });
+
+        /* ── Create 11 items ── */
+        programmes.forEach(function (prog, i) {
+          var item = document.createElement('div');
+          item.className = 'abt-eco-item';
+
+          var circle = document.createElement('div');
+          circle.className = 'abt-eco-item-circle';
+
+          var iconEl = document.createElement('i');
+          iconEl.className = 'fa ' + prog.icon + ' abt-eco-item-icon';
+
+          var labelEl = document.createElement('div');
+          labelEl.className = 'abt-eco-item-label';
+          labelEl.innerHTML = prog.label.replace(/\n/g, '<br>');
+
+          circle.appendChild(iconEl);
+          circle.appendChild(labelEl);
+          item.appendChild(circle);
+          stage.appendChild(item);
+        });
+      }
+
+      /* ── Shared sizing fn ── */
+      function getSize(W, perspScale) {
+        /* increased base sizes */
+        var baseSize = W < 500 ? 68 : 96;
+        return Math.round(baseSize * perspScale);
+      }
+
+      /* ── Animation ── */
+      var angleOffset = 0;
+      var speed  = 0.003;
+      var paused = false;
+
+      var stage = document.getElementById('ecoStage');
+      if (stage) {
+        stage.addEventListener('mouseenter', function () { paused = true; });
+        stage.addEventListener('mouseleave', function () { paused = false; });
+      }
+
+      /* z-index layers for 3D feel:
+         - items in BACK  half (sin < 0, top arc)  → behind center logo
+         - items in FRONT half (sin > 0, bottom arc)→ in front of center logo
+         Center logo sits at z-index 20.
+         Back items:  z 5–14   (below center)
+         Front items: z 25–34  (above center)         */
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (paused) return;
+
+        var stage = document.getElementById('ecoStage');
+        if (!stage) return;
+
+        var W  = stage.offsetWidth;
+        var H  = stage.offsetHeight;
+        var cx = W / 2;
+        var cy = H / 2;
+        var rx = W * 0.44;
+        var ry = H * 0.28;
+
+        angleOffset += speed;
+
+        var items     = stage.querySelectorAll('.abt-eco-item');
+        var total     = items.length;
+        var startAngle = -Math.PI / 2;
+        var angleStep  = (2 * Math.PI) / total;
+
+        items.forEach(function (item, i) {
+          var angle  = startAngle + angleStep * i + angleOffset;
+          var sinVal = Math.sin(angle);   /* -1 = top (far), +1 = bottom (near) */
+          var cosVal = Math.cos(angle);
+
+          /* perspective: far(top) = small, near(bottom) = large */
+          var perspScale = 0.65 + 0.55 * ((sinVal + 1) / 2);
+
+          var size     = getSize(W, perspScale);
+          var iconSize = Math.round(size * 0.30);
+          var fontSize = Math.max(7, Math.round(size * 0.115));
+
+          var itemX = cx + rx * cosVal;
+          var itemY = cy + ry * sinVal;
+
+          item.style.left = itemX + 'px';
+          item.style.top  = itemY + 'px';
+
+          /* 3D layering:
+             sinVal < 0  → back arc  → behind logo (z 5–14)
+             sinVal >= 0 → front arc → in front of logo (z 25–34) */
+          var zBase = sinVal < 0 ? 5 : 25;
+          item.style.zIndex = Math.round(zBase + Math.abs(sinVal) * 9);
+
+          /* opacity: slightly fade back items for depth */
+          item.style.opacity = (0.55 + 0.45 * ((sinVal + 1) / 2)).toFixed(2);
+
+          var circle = item.querySelector('.abt-eco-item-circle');
+          if (circle) {
+            circle.style.width  = size + 'px';
+            circle.style.height = size + 'px';
+            circle.style.boxShadow =
+              '0 0 0 ' + Math.round(size * 0.065) + 'px rgba(196,154,0,0.6),' +
+              'inset 0 0 '  + Math.round(size * 0.22) + 'px rgba(0,0,0,0.3)';
+          }
+          var icon = item.querySelector('.abt-eco-item-icon');
+          if (icon) icon.style.fontSize = iconSize + 'px';
+
+          var label = item.querySelector('.abt-eco-item-label');
+          if (label) label.style.fontSize = fontSize + 'px';
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () { build(); animate(); });
+      } else {
+        build();
+        animate();
+      }
+
+      window.addEventListener('resize', build);
+    })();
+  </script>
+
+  <!-- Nurturing Future Civil Servants -->
+  <section class="about-csnp-section" id="about-csnp">
+
+    <div class="container">
+      <div class="abt-csnp-inner">
+
+        <!-- Heading -->
+<div class="abt-csnp-heading slide-in-up">
+        <span class="line1">Nurturing <span class="line2">Future Civil Servants</span></span>
+      </div>
+        <div class="abt-csnp-underline"></div>
+
+        <p class="abt-csnp-intro slide-in-up">
+          The Civil Service Nurture Programme (CSNP) is one of Aashirwad's flagship initiatives, designed to nurture young aspirants from the school level and guide them progressively towards the Civil Services.
+        </p>
+
+        <!-- IAS / IPS / IFS / IAF tags -->
+        <div class="abt-csnp-tags slide-in-up">
+          <div class="abt-csnp-tag">
+            <span class="abt-csnp-tag-title">IAS</span>
+            <span class="abt-csnp-tag-sub">Administration</span>
+          </div>
+          <div class="abt-csnp-tag">
+            <span class="abt-csnp-tag-title">IPS</span>
+            <span class="abt-csnp-tag-sub">Police Service</span>
+          </div>
+          <div class="abt-csnp-tag">
+            <span class="abt-csnp-tag-title">IFS</span>
+            <span class="abt-csnp-tag-sub">Foreign Service</span>
+          </div>
+          <div class="abt-csnp-tag">
+            <span class="abt-csnp-tag-title">IRF</span>
+            <span class="abt-csnp-tag-sub">Revenue Service</span>
+          </div>
+        </div>
+
+        <!-- Full-width image (moved inside the flow so mobile CSS can reorder it) -->
+        <div class="abt-csnp-img-col" id="csnp-hero-webgl"></div>
+
+        <!-- Skills row over image -->
+        <div class="abt-csnp-main-row">
+          <!-- Left skills -->
+          <div class="abt-csnp-skills">
+            <div class="abt-csnp-skill-item">
+              <div class="abt-csnp-skill-icon"><i class="fa fa-book"></i></div>
+              <div class="abt-csnp-skill-label">Knowledge</div>
+            </div>
+            <div class="abt-csnp-skill-item">
+              <div class="abt-csnp-skill-icon"><i class="fa fa-lightbulb-o"></i></div>
+              <div class="abt-csnp-skill-label">Analytical<br>Thinking</div>
+            </div>
+            <div class="abt-csnp-skill-item">
+              <div class="abt-csnp-skill-icon"><i class="fa fa-comments"></i></div>
+              <div class="abt-csnp-skill-label">Communication<br>Skills</div>
+            </div>
+          </div>
+
+          <!-- empty center space for the image to show through -->
+          <div style="flex:1"></div>
+
+          <!-- Right skills -->
+          <div class="abt-csnp-skills">
+            <div class="abt-csnp-skill-item">
+              <div class="abt-csnp-skill-icon"><i class="fa fa-newspaper-o"></i></div>
+              <div class="abt-csnp-skill-label">Current Affairs<br>Awareness</div>
+            </div>
+            <div class="abt-csnp-skill-item">
+              <div class="abt-csnp-skill-icon"><i class="fa fa-users"></i></div>
+              <div class="abt-csnp-skill-label">Confidence</div>
+            </div>
+            <div class="abt-csnp-skill-item">
+              <div class="abt-csnp-skill-icon"><i class="fa fa-line-chart"></i></div>
+              <div class="abt-csnp-skill-label">Leadership<br>Qualities</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer text -->
+        <p class="abt-csnp-footer slide-in-up">
+          The programme focuses on developing knowledge, analytical thinking, communication skills, current affairs awareness, confidence and leadership qualities, laying a strong foundation for future competitive examination success.
+        </p>
+        <div class="abt-csnp-footer-line"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Golden divider -->
+  <div class="section-divider-gold"></div>
+
+  <!-- Innovation in Education -->
+  <section class="about-innovation-section" id="about-innovation">
+    <div class="abt-inn-bg"></div>
+    <div class="container">
+
+      <div class="abt-inn-heading slide-in-up">
+        <span class="line1">Innovation </span><span class="line2">in Education</span>
+      </div>
+      <div class="abt-inn-underline"></div>
+
+      <p class="abt-inn-intro slide-in-up">
+        Innovation has been an integral part of Aashirwad's educational journey. Through initiatives such as Aashirwad Rank File and Aashirwad EduVerse, we integrate technology with conventional learning to provide students with structured, accessible and engaging digital educational resources.
+      </p>
+
+      <!-- Timeline -->
+      <div class="abt-inn-timeline" id="innTimeline">
+
+        <!-- SVG wavy connector line -->
+        <svg class="abt-inn-svg" id="innSvg" preserveAspectRatio="none"></svg>
+
+        <div class="abt-inn-item slide-in-up">
+          <div class="abt-inn-dot"></div>
+          <div class="abt-inn-img-wrap">
+            <img src="assets/images/aboutinnovation1.webp" alt="Conventional Learning">
+          </div>
+          <div class="abt-inn-item-title">Conventional<br>Learning</div>
+          <div class="abt-inn-item-desc">Timeless values<br>of teaching<br>and mentorship</div>
+        </div>
+
+        <div class="abt-inn-item slide-in-up">
+          <div class="abt-inn-dot"></div>
+          <div class="abt-inn-img-wrap">
+            <img src="assets/images/aboutinnovation2.webp" alt="Aashirwad Rank File">
+          </div>
+          <div class="abt-inn-item-title gold">Aashirwad<br>Rank File</div>
+          <div class="abt-inn-item-desc">Curated previous<br>year papers and<br>toppers' resources</div>
+        </div>
+
+        <div class="abt-inn-item slide-in-up">
+          <div class="abt-inn-dot"></div>
+          <div class="abt-inn-img-wrap">
+            <img src="assets/images/aboutinnovation3.webp" alt="Structured Study Materials">
+          </div>
+          <div class="abt-inn-item-title">Structured<br>Study Materials</div>
+          <div class="abt-inn-item-desc">Comprehensive<br>and organised<br>content</div>
+        </div>
+
+        <div class="abt-inn-item slide-in-up">
+          <div class="abt-inn-dot"></div>
+          <div class="abt-inn-img-wrap">
+            <img src="assets/images/aboutinnovation4.webp" alt="Digital Innovation">
+          </div>
+          <div class="abt-inn-item-title gold">Digital Innovation<br>Aashirwad EduVerse</div>
+          <div class="abt-inn-item-desc">Technology-enabled<br>learning resources</div>
+        </div>
+
+        <div class="abt-inn-item slide-in-up">
+          <div class="abt-inn-dot"></div>
+          <div class="abt-inn-img-wrap">
+            <img src="assets/images/aboutinnovation5.webp" alt="Learning Beyond Boundaries">
+          </div>
+          <div class="abt-inn-item-title">Learning<br>Beyond Boundaries</div>
+          <div class="abt-inn-item-desc">Accessible, flexible<br>and engaging learning<br>for every aspirant</div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="abt-inn-footer-wrap slide-in-up">
+        <p class="abt-inn-footer">
+          Our digital learning ecosystem brings together rank files, study materials, current affairs, multimedia resources and interactive learning tools, enabling learners to continue their preparation beyond the traditional classroom.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+  /* Draw wavy SVG connector line through the dots */
+  (function () {
+    function drawLine() {
+      var timeline = document.getElementById('innTimeline');
+      var svg      = document.getElementById('innSvg');
+      if (!timeline || !svg) return;
+
+      var dots = timeline.querySelectorAll('.abt-inn-dot');
+      if (dots.length < 2) return;
+
+      var tlRect = timeline.getBoundingClientRect();
+      var points = [];
+
+      dots.forEach(function (dot) {
+        var r = dot.getBoundingClientRect();
+        points.push({
+          x: r.left - tlRect.left + r.width / 2,
+          y: r.top  - tlRect.top  + r.height / 2
+        });
+      });
+
+      /* Build a smooth cubic bezier through the points */
+      var d = 'M ' + points[0].x + ' ' + points[0].y;
+      for (var i = 1; i < points.length; i++) {
+        var prev = points[i - 1];
+        var curr = points[i];
+        var cpx  = (prev.x + curr.x) / 2;
+        /* slight wave: alternate up/down */
+        var cpy1 = prev.y + (i % 2 === 1 ? -18 : 18);
+        var cpy2 = curr.y + (i % 2 === 1 ? -18 : 18);
+        d += ' C ' + cpx + ' ' + cpy1 + ' ' + cpx + ' ' + cpy2 + ' ' + curr.x + ' ' + curr.y;
+      }
+
+      svg.innerHTML =
+        '<path d="' + d + '" fill="none" stroke="#C49A00" stroke-width="1.5" stroke-dasharray="5,4"/>' +
+        /* arrow at end */
+        '<polygon points="' +
+          (points[points.length-1].x + 10) + ',' + points[points.length-1].y + ' ' +
+          (points[points.length-1].x - 2)  + ',' + (points[points.length-1].y - 6) + ' ' +
+          (points[points.length-1].x - 2)  + ',' + (points[points.length-1].y + 6) +
+        '" fill="#C49A00"/>';
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', drawLine);
+    } else {
+      setTimeout(drawLine, 100);
+    }
+    window.addEventListener('resize', drawLine);
+  })();
+  </script>
+
+  <!-- Learning Beyond the Classroom -->
+  <section class="about-learning-section" id="about-learning">
+
+    <!-- Heading area -->
+    <div class="abt-learn-heading-wrap">
+      <div class="abt-learn-heading slide-in-up">
+        <span class="line1">Learning Beyond</span>
+        <span class="line2">the Classroom</span>
+      </div>
+      <div class="abt-learn-underline"></div>
+      <p class="abt-learn-intro slide-in-up">
+        At Aashirwad, education goes beyond completing a syllabus or preparing for an examination.
+      </p>
+      <p class="abt-learn-intro2 slide-in-up">
+        We believe in developing critical thinking, confidence, communication, discipline, problem-solving skills and a lifelong commitment to learning.
+      </p>
+    </div>
+
+    <div class="container">
+
+      <!-- 6 skills -->
+      <div class="abt-learn-skills-row slide-in-up">
+        <div class="abt-learn-skill-item">
+          <div class="abt-learn-skill-icon"><i class="fa fa-brain"></i></div>
+          <div class="abt-learn-skill-label">Critical<br>Thinking</div>
+        </div>
+        <div class="abt-learn-skill-item">
+          <div class="abt-learn-skill-icon"><i class="fa fa-child"></i></div>
+          <div class="abt-learn-skill-label">Confidence</div>
+        </div>
+        <div class="abt-learn-skill-item">
+          <div class="abt-learn-skill-icon"><i class="fa fa-comments"></i></div>
+          <div class="abt-learn-skill-label">Communication</div>
+        </div>
+        <div class="abt-learn-skill-item">
+          <div class="abt-learn-skill-icon"><i class="fa fa-shield"></i></div>
+          <div class="abt-learn-skill-label">Discipline</div>
+        </div>
+        <div class="abt-learn-skill-item">
+          <div class="abt-learn-skill-icon"><i class="fa fa-puzzle-piece"></i></div>
+          <div class="abt-learn-skill-label">Problem<br>Solving</div>
+        </div>
+        <div class="abt-learn-skill-item">
+          <div class="abt-learn-skill-icon"><i class="fa fa-infinity"></i></div>
+          <div class="abt-learn-skill-label">Lifelong<br>Learning</div>
+        </div>
+      </div>
+
+      <!-- Supported by a strong foundation -->
+      <div class="abt-learn-foundation-label slide-in-up">Supported by a Strong Foundation</div>
+
+      <div class="abt-learn-foundation-row slide-in-up">
+        <div class="abt-learn-foundation-item">Experienced<br>Educators</div>
+        <div class="abt-learn-foundation-item">Structured<br>Curricula</div>
+        <div class="abt-learn-foundation-item">Regular<br>Assessments</div>
+        <div class="abt-learn-foundation-item">Personalised<br>Mentoring</div>
+        <div class="abt-learn-foundation-item">Continuous<br>Learner Support</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Golden divider -->
+  <div class="section-divider-gold"></div>
+
+  <!-- Our Commitment to Results -->
+  <section class="about-commitment-section" id="about-commitment">
+    <div class="about-commitment-pin">
+      <div class="about-commitment-copy">
+        <h2>Our Commitment to Results</h2>
+        <p>We believe that meaningful education should lead to measurable progress and lasting success. Our commitment to learner success is reflected not only in our examination results and ranks but also in the confidence we place in the quality of our training.</p>
+      </div>
+      <div class="about-commitment-stack" id="commitmentStack">
+        <div class="about-commitment-card" data-i="1">
+          <img src="assets/images/Commitment1.webp" alt="Structured training">
+          <h3>Structured training</h3>
+          <p>Systematic preparation built on years of examination expertise.</p>
+        </div>
+        <div class="about-commitment-card" data-i="2">
+          <img src="assets/images/Commitment2.webp" alt="KTET Success Guarantee">
+          <h3>KTET Success Guarantee</h3>
+          <p>Eligible candidates who do not qualify after completing the prescribed training may attend the next training session free of charge, subject to the applicable programme terms and conditions.</p>
+        </div>
+        <div class="about-commitment-card" data-i="3">
+          <img src="assets/images/Commitment3.webp" alt="Confidence in our training">
+          <h3>Confidence in our training</h3>
+          <p>A promise backed by our own trust in the quality of what we teach.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision & Mission -->
+  <section class="about-vision-section" id="about-vision">
+    <div class="container-fluid px-0">
+
+      <!-- Main Cards Row -->
+      <div style="display:flex;align-items:stretch;justify-content:center;gap:0;padding:60px 40px 0;background:#f5f0e8;position:relative;">
+
+        <!-- Left side text: LEARN GROW ACHIEVE BELONG -->
+        <div class="abt-vm-learn-col" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;padding-right:28px;gap:10px;flex-shrink:0;">
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">LEARN</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">GROW</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">ACHIEVE</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">BELONG</span>
+          <div style="width:36px;height:2px;background:#C49A00;border-radius:2px;margin-top:4px;"></div>
+        </div>
+
+        <!-- Vision Card -->
+        <div class="abt-vm-card slide-in-left">
+          <!-- Icon circle -->
+          <div class="abt-vm-icon-wrap">
+            <i class="fa fa-binoculars" style="font-size:28px;color:#A12C2F;"></i>
+          </div>
+
+          <!-- Title -->
+          <h3 class="abt-vm-title">Our <span>Vision</span></h3>
+          <div class="abt-vm-underline"></div>
+
+          <!-- Body text -->
+          <p class="abt-vm-body">
+            To build a trusted, progressive and future-ready educational ecosystem that makes quality education, expert guidance and effective learning resources accessible to every learner.
+          </p>
+
+          <!-- Bottom image -->
+          <div class="abt-vm-img-wrap">
+            <img src="assets/images/aboutvision.webp" alt="Our Vision">
+          </div>
+
+          <!-- Footer tags -->
+          <div class="abt-vm-tags">
+            <span>TRUST</span>
+            <span class="abt-vm-tag-divider">|</span>
+            <span>PROGRESS</span>
+            <span class="abt-vm-tag-divider">|</span>
+            <span>FUTURE</span>
+          </div>
+        </div>
+
+        <!-- Center column: logo + keywords -->
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 36px;flex-shrink:0;gap:0;">
+          <!-- Top dot + line -->
+          <div style="width:1px;height:60px;background:#C49A00;opacity:0.5;"></div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#C49A00;margin:0;"></div>
+
+          <!-- Logo -->
+          <div style="margin:20px 0 8px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <img src="assets/images/logo.png" alt="Aashirwad" style="width:90px;object-fit:contain;">
+            <span style="font-size:13px;font-weight:800;letter-spacing:2px;color:#1F272B;font-family:'Poppins',sans-serif;">AASHIRWAD</span>
+          </div>
+
+          <!-- Keywords -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0;">
+            <span style="font-size:10px;font-weight:700;letter-spacing:3px;color:#999;">PEOPLE</span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:3px;color:#999;">POTENTIAL</span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:3px;color:#999;">PURPOSE</span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:3px;color:#999;">PROGRESS</span>
+          </div>
+
+          <!-- Bottom dot + line -->
+          <div style="width:10px;height:10px;border-radius:50%;background:#C49A00;margin:0;"></div>
+          <div style="width:1px;height:60px;background:#C49A00;opacity:0.5;"></div>
+        </div>
+
+        <!-- Mission Card -->
+        <div class="abt-vm-card slide-in-right">
+          <!-- Icon circle -->
+          <div class="abt-vm-icon-wrap">
+            <i class="fa fa-bullseye" style="font-size:28px;color:#A12C2F;"></i>
+          </div>
+
+          <!-- Title -->
+          <h3 class="abt-vm-title">Our <span>Mission</span></h3>
+          <div class="abt-vm-underline"></div>
+
+          <!-- Body text -->
+          <p class="abt-vm-body">
+            To empower learners, nurture potential and build successful futures through quality education, innovative learning, personalised guidance and an unwavering commitment to excellence.
+          </p>
+
+          <!-- Bottom image -->
+          <div class="abt-vm-img-wrap">
+            <img src="assets/images/aboutmission.webp" alt="Our Mission">
+          </div>
+
+          <!-- Footer tags -->
+          <div class="abt-vm-tags">
+            <span>EMPOWER</span>
+            <span class="abt-vm-tag-divider">|</span>
+            <span>NURTURE</span>
+            <span class="abt-vm-tag-divider">|</span>
+            <span>EXCEL</span>
+          </div>
+        </div>
+
+        <!-- Right side text: BETTER LEARNERS BRIGHTER FUTURES -->
+        <div class="abt-vm-grow-col" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:28px;gap:10px;flex-shrink:0;">
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">BETTER</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">LEARNERS</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">BRIGHTER</span>
+          <span style="font-size:11px;font-weight:700;letter-spacing:3px;color:#999;">FUTURES</span>
+          <div style="width:36px;height:2px;background:#C49A00;border-radius:2px;margin-top:4px;"></div>
+        </div>
+
+      </div>
+
+      <!-- Bottom tagline bar -->
+      <div style="background:#f5f0e8;padding:28px 20px 50px;display:flex;align-items:center;justify-content:center;gap:20px;">
+        <div style="flex:1;max-width:200px;height:1px;background:#C49A00;opacity:0.6;"></div>
+        <span style="font-size:11px;font-weight:700;letter-spacing:4px;color:#A12C2F;text-align:center;font-family:'Poppins',sans-serif;">BUILDING BETTER LEARNERS FOR A BRIGHTER TOMORROW</span>
+        <div style="flex:1;max-width:200px;height:1px;background:#C49A00;opacity:0.6;"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Closing Banner -->
+  <section class="about-closing-section">
+    <div class="container">
+      <div class="about-closing-content slide-in-up">
+        <h2>Aashirwad Institute of Teachers</h2>
+        <p class="about-closing-subtitle">Academy for Competitive Examinations, Research &amp; Training</p>
+        <div class="about-closing-divider"></div>
+        <p class="about-closing-tagline">Building Futures Together</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Shared Footer (injected from components/footer.html) -->
   <div id="site-footer"></div>
+
+  <!-- Floating Contact Buttons -->
+  <div class="fcb-wrapper" id="fcbWrapper">
+    <div class="fcb-child fcb-call" id="fcbCall" title="Call Us">
+      <i class="fa fa-phone"></i>
+    </div>
+    <div class="fcb-child fcb-whatsapp" id="fcbWhatsapp" title="WhatsApp">
+      <i class="fa fa-whatsapp"></i>
+    </div>
+    <div class="fcb-main" id="fcbMain" title="Contact Us">
+      <i class="fa fa-comment fcb-icon-open"></i>
+      <i class="fa fa-times fcb-icon-close"></i>
+    </div>
+  </div>
+  <!-- Scroll to Top Button -->
+  <div class="stt-btn" id="sttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="stt-arrow">&#8593;</div>
+    <div class="stt-letters">
+      <span>T</span><span>O</span><span>P</span>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <!-- Shared components loader (must run before custom.js binds nav) -->
@@ -54,6 +2565,254 @@
   <script src="assets/js/video.js"></script>
   <script src="assets/js/slick-slider.js"></script>
   <script src="assets/js/custom.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script>
+    /* ── Slide-in animation handler ── */
+    (function () {
+      var slideItems = [];
+      document.querySelectorAll('.slide-in-up, .slide-in-left, .slide-in-right').forEach(function (el) {
+        slideItems.push({ el: el, animated: false });
+      });
+
+      var lastScrollY = window.scrollY;
+      window.addEventListener('scroll', function () {
+        var currentScrollY = window.scrollY;
+        var scrollingDown = currentScrollY > lastScrollY;
+
+        slideItems.forEach(function (item) {
+          var el = item.el;
+          if (!el || !el.isConnected) return;
+          var rect = el.getBoundingClientRect();
+          var triggerPoint = window.innerHeight * 0.8;
+
+          if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0 && !item.animated) {
+            item.animated = true;
+            el.classList.add('anim-active');
+          } else if (!scrollingDown && item.animated) {
+            if (rect.top > window.innerHeight) {
+              item.animated = false;
+              el.classList.remove('anim-active');
+            }
+          }
+        });
+
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
+      /* Initial state on load/reload: instantly reveal every section that is
+         at or above the trigger line — including ones already scrolled past
+         ABOVE the viewport (rect.bottom < 0) — so nothing above the current
+         scroll position is left blank. No transition plays for this instant
+         reveal; only sections still below get the normal scroll-triggered
+         animation later. */
+      var triggerPointInit = window.innerHeight * 0.8;
+      slideItems.forEach(function (item) {
+        var rect = item.el.getBoundingClientRect();
+        if (rect.top <= triggerPointInit) {
+          item.animated = true;
+          item.el.classList.add('no-anim-transition');
+          item.el.classList.add('anim-active');
+        }
+      });
+
+      /* Let the browser paint that instant state, then remove the
+         transition-blocker so future reveals animate normally again. */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          document.querySelectorAll('.no-anim-transition').forEach(function (el) {
+            el.classList.remove('no-anim-transition');
+          });
+        });
+      });
+    })();
+
+    /* ── Counter animation ── */
+    (function () {
+      function animateCounter(el) {
+        if (!el || el.dataset.animated) return;
+        el.dataset.animated = '1';
+        var target = parseFloat(el.dataset.target);
+        if (!target) return;
+        var duration = 1200;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var progress = Math.min(elapsed / duration, 1);
+          var eased = 1 - (1 - progress) * (1 - progress);
+          el.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      var statCards = document.querySelectorAll('.about-stat-card');
+      var lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', function () {
+        var currentScrollY = window.scrollY;
+        var scrollingDown = currentScrollY > lastScrollY;
+
+        statCards.forEach(function (card) {
+          var rect = card.getBoundingClientRect();
+          var triggerPoint = window.innerHeight * 0.85;
+
+          if (scrollingDown && rect.top <= triggerPoint && rect.bottom >= 0) {
+            var num = card.querySelector('.stat-number');
+            if (num && !num.dataset.animated) {
+              animateCounter(num);
+            }
+          } else if (!scrollingDown && rect.top > window.innerHeight) {
+            var num = card.querySelector('.stat-number');
+            if (num) {
+              num.dataset.animated = '';
+              num.textContent = '0';
+            }
+          }
+        });
+
+        lastScrollY = currentScrollY;
+      }, { passive: true });
+
+      /* Initial in-view trigger */
+      statCards.forEach(function (card) {
+        var rect = card.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.85) {
+          var num = card.querySelector('.stat-number');
+          if (num) animateCounter(num);
+        }
+      });
+    })();
+
+    /* ── Scroll-to-top button ── */
+    (function () {
+      var sttBtn = document.getElementById('sttBtn');
+      if (!sttBtn) return;
+      var hero = document.querySelector('.heading-page') || document.querySelector('#top');
+
+      window.addEventListener('scroll', function () {
+        var heroBottom = hero ? hero.getBoundingClientRect().bottom : 300;
+        if (heroBottom < 0) {
+          sttBtn.classList.add('stt-visible');
+        } else {
+          sttBtn.classList.remove('stt-visible');
+        }
+      }, { passive: true });
+    })();
+
+    /* ── Commitment Card Stack Animation (GSAP) ── */
+    (function () {
+      gsap.registerPlugin(ScrollTrigger);
+
+      var isMobile = window.innerWidth <= 767;
+
+      if (isMobile) {
+        /* ── Mobile: stack cards vertically, no overlap ── */
+
+        /* Reset any default stacking styles */
+        gsap.set('.about-commitment-card', { x: 0, rotate: 0, y: 0 });
+
+        /* Override the absolute positioning to flow vertically */
+        var cards = document.querySelectorAll('.about-commitment-card');
+        var stack = document.getElementById('commitmentStack');
+
+        /* Make the stack a normal vertical flow container on mobile */
+        if (stack) {
+          stack.style.height = 'auto';
+          stack.style.display = 'flex';
+          stack.style.flexDirection = 'column';
+          stack.style.alignItems = 'center';
+          stack.style.gap = '20px';
+          stack.style.paddingBottom = '20px';
+        }
+
+        cards.forEach(function (card) {
+          /* Remove absolute positioning so they flow naturally */
+          card.style.position = 'relative';
+          card.style.left = 'unset';
+          card.style.top = 'unset';
+          card.style.transform = 'none';
+          card.style.width = '85%';
+          card.style.maxWidth = '320px';
+        });
+
+        /* Animate each card sliding in from below, one after another */
+        var commitTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#about-commitment',
+            start: 'top 60%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        cards.forEach(function (card, i) {
+          /* Start each card translated down, fade in upward */
+          gsap.set(card, { y: 60, opacity: 0 });
+
+          commitTl.to(card, {
+            y: 0,
+            opacity: 1,
+            duration: 0.65,
+            ease: 'power2.out'
+          }, 0.15 + i * 0.18);
+        });
+
+      } else {
+        /* ── Desktop: original left/right spread animation ── */
+        var cardOffsets = [{ x: -300, r: -8 }, { x: 0, r: 0 }, { x: 300, r: 8 }];
+        gsap.set('.about-commitment-card', { y: 0 });
+
+        var commitTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: '#about-commitment',
+            start: 'top 60%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        document.querySelectorAll('.about-commitment-card').forEach(function (card, i) {
+          var o = cardOffsets[i] || { x: 0, r: 0 };
+          commitTl.to(card, {
+            x: o.x,
+            rotate: o.r,
+            y: i === 1 ? -30 : 20,
+            duration: 0.8,
+            ease: 'power2.out'
+          }, 0.1 + i * 0.1);
+        });
+      }
+
+    })();
+
+    /* ── Floating Contact Buttons ── */
+    (function () {
+      var wrapper = document.getElementById('fcbWrapper');
+      var main = document.getElementById('fcbMain');
+      var call = document.getElementById('fcbCall');
+      var wa = document.getElementById('fcbWhatsapp');
+
+      if (!main) return;
+
+      main.addEventListener('click', function () {
+        wrapper.classList.toggle('fcb-open');
+      });
+
+      call.addEventListener('click', function () {
+        window.location.href = 'tel:+918547577007';
+      });
+
+      wa.addEventListener('click', function () {
+        window.open('https://wa.me/918547935616', '_blank');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!wrapper.contains(e.target)) {
+          wrapper.classList.remove('fcb-open');
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>

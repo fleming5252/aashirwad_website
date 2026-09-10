@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aashirwad EduVerse — Preloader</title>
+<style>
+  :root{
+    --burgundy-deep:   #5c0000;
+    --burgundy-base:   #7A0000;
+    --burgundy-bright: #8B0000;
+    --burgundy-edge:   #300000;
+    --white:           #FFFFFF;
+  }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--burgundy-edge);
+    overflow: hidden;
+  }
+
+  #preloader{
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 50% 45%, var(--burgundy-bright) 0%, var(--burgundy-base) 45%, var(--burgundy-deep) 78%, var(--burgundy-edge) 100%);
+    z-index: 999999;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
+  }
+
+  #preloader.is-exiting{
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #constellation-wrap{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+  }
+
+  #preloader.is-exiting #constellation-wrap{
+    transform: scale(1.18);
+  }
+
+  #sphere-canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #brand-layer{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  #brand-mark{
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 7vw, 5rem);
+    letter-spacing: 4px;
+    color: var(--white);
+    line-height: 1;
+    text-shadow:
+      0 0 8px rgba(255,255,255,0.55),
+      0 0 24px rgba(255,255,255,0.35),
+      0 0 60px rgba(255,255,255,0.20);
+    animation: brand-breathe 3.6s ease-in-out infinite;
+  }
+
+  @keyframes brand-breathe{
+    0%, 100% {
+      text-shadow:
+        0 0 8px rgba(255,255,255,0.45),
+        0 0 24px rgba(255,255,255,0.28),
+        0 0 60px rgba(255,255,255,0.16);
+    }
+    50% {
+      text-shadow:
+        0 0 12px rgba(255,255,255,0.75),
+        0 0 34px rgba(255,255,255,0.45),
+        0 0 80px rgba(255,255,255,0.28);
+    }
+  }
+
+  #progress-text{
+    margin-top: 22px;
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 500;
+    font-size: clamp(0.68rem, 1.6vw, 0.85rem);
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.82);
+    min-width: 260px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 480px){
+    #progress-text{ min-width: 220px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    #brand-mark{ animation: none; }
+    #constellation-wrap{ transition: none; }
+    #preloader{ transition: opacity 0.4s linear; }
+  }
+</style>
+</head>
+<body>
+
+<div id="preloader" role="status" aria-live="polite" aria-label="Loading Aashirwad EduVerse">
+  <div id="constellation-wrap">
+    <canvas id="sphere-canvas"></canvas>
+  </div>
+  <div id="brand-layer">
+    <div id="brand-mark">AEV</div>
+    <div id="progress-text">FORMING NETWORK: 0%</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var preloader   = document.getElementById('preloader');
+  var wrap        = document.getElementById('constellation-wrap');
+  var canvas      = document.getElementById('sphere-canvas');
+  var ctx         = canvas.getContext('2d');
+  var progressEl  = document.getElementById('progress-text');
+
+  var dpr = Math.max(1, window.devicePixelRatio || 1);
+  var W = 0, H = 0, CX = 0, CY = 0;
+  var sphereRadius = 0;
+
+  function resize(){
+    W = window.innerWidth;
+    H = window.innerHeight;
+    dpr = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width  = Math.floor(W * dpr);
+    canvas.height = Math.floor(H * dpr);
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+    CX = W / 2;
+    CY = H / 2;
+    sphereRadius = Math.min(W, H) * 0.24;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // ---------------------------------------------------------------
+  // Sphere geometry — Fibonacci sphere distribution (unit vectors)
+  // ---------------------------------------------------------------
+  var NODE_COUNT = 148;
+  var nodes = [];
+  var goldenAngle = Math.PI * (3 - Math.sqrt(5));
+
+  for (var i = 0; i < NODE_COUNT; i++){
+    var yFrac = 1 - (i / (NODE_COUNT - 1)) * 2;   // 1 -> -1
+    var radiusAtY = Math.sqrt(Math.max(0, 1 - yFrac * yFrac));
+    var theta = goldenAngle * i;
+
+    var ux = Math.cos(theta) * radiusAtY;
+    var uy = yFrac;
+    var uz = Math.sin(theta) * radiusAtY;
+
+    var isPulse = Math.random() < 0.32;
+
+    nodes.push({
+      ux: ux, uy: uy, uz: uz,   // base unit-sphere position
+      x: 0, y: 0, z: 0,          // rotated, scaled position (per frame)
+      sx: 0, sy: 0,               // projected screen position
+      scrScale: 1,
+      isPulse: isPulse,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.9 + Math.random() * 1.6,
+      peak: 0.55 + Math.random() * 0.45,
+      baseR: 1.3 + Math.random() * 1.4
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // Precompute constellation edges once — rotation preserves
+  // relative 3D distance, so we only need to do this a single time.
+  // ---------------------------------------------------------------
+  var CONNECT_THRESHOLD = 0.40; // in unit-sphere distance
+  var edges = [];
+  for (var a = 0; a < nodes.length; a++){
+    for (var b = a + 1; b < nodes.length; b++){
+      var dx = nodes[a].ux - nodes[b].ux;
+      var dy = nodes[a].uy - nodes[b].uy;
+      var dz = nodes[a].uz - nodes[b].uz;
+      var dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+      if (dist < CONNECT_THRESHOLD){
+        edges.push({ a: a, b: b, dist: dist });
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // Rotation state + inertial mouse/touch control
+  // ---------------------------------------------------------------
+  var rotY = 0, rotX = 0;
+  var velY = 0.0032, velX = 0.0011;   // current velocity (radians/frame)
+  var ambientVelY = 0.0032, ambientVelX = 0.0011;
+  var targetVelY = ambientVelY, targetVelX = ambientVelX;
+  var MAX_EXTRA_VEL = 0.020;
+  var LERP_DAMPING = 0.045;
+  var pointerActive = false;
+
+  function updateTargetFromPointer(nx, ny){
+    // nx, ny normalized -1..1 relative to canvas center
+    targetVelY = ambientVelY + nx * MAX_EXTRA_VEL;
+    targetVelX = ambientVelX - ny * MAX_EXTRA_VEL;
+  }
+
+  function onPointerMove(clientX, clientY){
+    var nx = (clientX - CX) / (W / 2);
+    var ny = (clientY - CY) / (H / 2);
+    nx = Math.max(-1, Math.min(1, nx));
+    ny = Math.max(-1, Math.min(1, ny));
+    pointerActive = true;
+    updateTargetFromPointer(nx, ny);
+  }
+
+  function onPointerLeave(){
+    pointerActive = false;
+    targetVelY = ambientVelY;
+    targetVelX = ambientVelX;
+  }
+
+  window.addEventListener('mousemove', function(e){
+    onPointerMove(e.clientX, e.clientY);
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', onPointerLeave, { passive: true });
+
+  window.addEventListener('touchmove', function(e){
+    if (e.touches && e.touches.length > 0){
+      onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', onPointerLeave, { passive: true });
+
+  // ---------------------------------------------------------------
+  // Progress counter
+  // ---------------------------------------------------------------
+  var progress = 0;
+  var PROGRESS_DURATION = 3400; // ms
+  var startTime = null;
+  var finished = false;
+
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+
+  function updateProgress(now){
+    if (startTime === null) startTime = now;
+    var elapsed = now - startTime;
+    var t = Math.min(1, elapsed / PROGRESS_DURATION);
+    progress = Math.round(easeOutCubic(t) * 100);
+    progressEl.textContent = 'FORMING NETWORK: ' + progress + '%';
+    if (t >= 1 && !finished){
+      finished = true;
+      finishSequence();
+    }
+  }
+
+  function finishSequence(){
+    setTimeout(function(){
+      preloader.classList.add('is-exiting');
+      var cleanupDone = false;
+      var cleanup = function(){
+        if (cleanupDone) return;
+        cleanupDone = true;
+        running = false;
+        window.removeEventListener('resize', resize);
+        window.removeEventListener('mousemove', onPointerMove);
+        if (preloader && preloader.parentNode){
+          preloader.parentNode.removeChild(preloader);
+        }
+      };
+      preloader.addEventListener('transitionend', function onEnd(e){
+        if (e.target !== preloader) return;
+        preloader.removeEventListener('transitionend', onEnd);
+        cleanup();
+      });
+      // safety fallback in case transitionend doesn't fire
+      setTimeout(cleanup, 950);
+    }, 260);
+  }
+
+  // ---------------------------------------------------------------
+  // Main render loop
+  // ---------------------------------------------------------------
+  var running = true;
+  var focalLength = 480;
+  var cameraDist = 620;
+
+  function rotateAndProject(){
+    var cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+    var cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+
+    for (var i = 0; i < nodes.length; i++){
+      var n = nodes[i];
+      var px = n.ux * sphereRadius;
+      var py = n.uy * sphereRadius;
+      var pz = n.uz * sphereRadius;
+
+      // rotate around Y
+      var x1 = px * cosY + pz * sinY;
+      var z1 = -px * sinY + pz * cosY;
+      var y1 = py;
+
+      // rotate around X
+      var y2 = y1 * cosX - z1 * sinX;
+      var z2 = y1 * sinX + z1 * cosX;
+      var x2 = x1;
+
+      n.x = x2; n.y = y2; n.z = z2;
+
+      var scale = focalLength / (z2 + cameraDist);
+      n.sx = CX + x2 * scale;
+      n.sy = CY + y2 * scale;
+      n.scrScale = scale;
+    }
+  }
+
+  function draw(time){
+    ctx.clearRect(0, 0, W, H);
+
+    // depth range for normalizing opacity/size
+    var minZ = -sphereRadius, maxZ = sphereRadius;
+
+    // --- connecting lines ---
+    for (var e = 0; e < edges.length; e++){
+      var edge = edges[e];
+      var na = nodes[edge.a], nb = nodes[edge.b];
+      var avgZ = (na.z + nb.z) / 2;
+      var depthT = (avgZ - minZ) / (maxZ - minZ); // 0 (far) -> 1 (near)
+      var proximity = 1 - (edge.dist / CONNECT_THRESHOLD);
+      var alpha = Math.max(0, 0.05 + proximity * 0.22) * (0.35 + depthT * 0.65);
+      if (alpha <= 0.012) continue;
+
+      ctx.strokeStyle = 'rgba(255,255,255,' + alpha.toFixed(3) + ')';
+      ctx.lineWidth = 0.4 + depthT * 0.9;
+      ctx.beginPath();
+      ctx.moveTo(na.sx, na.sy);
+      ctx.lineTo(nb.sx, nb.sy);
+      ctx.stroke();
+    }
+
+    // --- nodes, back-to-front for correct depth layering ---
+    var order = nodes.slice().sort(function(p, q){ return p.z - q.z; });
+
+    for (var i = 0; i < order.length; i++){
+      var n = order[i];
+      var depthT = (n.z - minZ) / (maxZ - minZ); // 0 far -> 1 near
+      var baseOpacity = 0.22 + depthT * 0.55;
+      var size = n.baseR * (0.55 + depthT * 0.85);
+
+      var glow = 1;
+      var isFlaring = false;
+      if (n.isPulse){
+        var s = (Math.sin(time * 0.001 * n.speed + n.phase) + 1) / 2; // 0..1
+        glow = 0.35 + s * n.peak;
+        isFlaring = s > 0.86;
+      }
+
+      var opacity = Math.min(1, baseOpacity * glow);
+
+      if (isFlaring){
+        var flareR = size * 9;
+        var grad = ctx.createRadialGradient(n.sx, n.sy, 0, n.sx, n.sy, flareR);
+        grad.addColorStop(0, 'rgba(255,255,255,' + (0.5 * opacity).toFixed(3) + ')');
+        grad.addColorStop(0.4, 'rgba(255,255,255,' + (0.16 * opacity).toFixed(3) + ')');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(n.sx, n.sy, flareR, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.fillStyle = 'rgba(255,255,255,' + opacity.toFixed(3) + ')';
+      ctx.beginPath();
+      ctx.arc(n.sx, n.sy, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function tick(time){
+    if (!running) return;
+
+    // inertial easing toward target velocity
+    velY += (targetVelY - velY) * LERP_DAMPING;
+    velX += (targetVelX - velX) * LERP_DAMPING;
+
+    rotY += velY;
+    rotX += velX;
+
+    rotateAndProject();
+    draw(time);
+    updateProgress(time);
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+
+})();
+</script>
+
+</body>
+</html>

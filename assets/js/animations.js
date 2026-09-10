@@ -36,9 +36,13 @@
   function initLoader() {
     var loader = document.getElementById('page-loader');
     if (!loader) return;
-    window.addEventListener('load', function () {
-      setTimeout(function () { loader.classList.add('loaded'); }, 400);
-    });
+    /* The constellation preloader script removes itself when finished.
+       This is only a safety net in case that script fails to load. */
+    setTimeout(function () {
+      if (document.body.contains(loader)) {
+        loader.classList.add('loaded');
+      }
+    }, 8000);
   }
 
   /* ───────── SCROLL PROGRESS BAR ───────── */
