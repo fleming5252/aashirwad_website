@@ -147,11 +147,9 @@
 
   /* ───────── APPLY REVEAL CLASSES TO KEY ELEMENTS ───────── */
   function addRevealClasses() {
-    /* Services section */
-    document.querySelectorAll('.services .item').forEach(function (el, i) {
-      el.classList.add('reveal', 'reveal-bottom');
-      if (i < 4) el.classList.add('delay-' + (i + 1));
-    });
+    /* Services carousel slides stay always visible — they auto-slide, so the
+       scroll-reveal (opacity 0 until scrolling down) would leave them hidden
+       when the section is scrolled into view from below/above. */
 
     /* Section headings */
     document.querySelectorAll('.section-heading').forEach(function (el) {

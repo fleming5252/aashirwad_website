@@ -75,16 +75,18 @@
           uColor:        { value: colorTex },
           uDepth:        { value: depthTex },
           uMouse:        { value: new THREE.Vector2(0, 0) },
+          uShiftX:       { value: 0.045 },          /* constant right-shift so the zoomed image feels centered — tune this */
           uStrength:     { value: 0.032 },          /* parallax intensity — tune this */
           uImageAspect:  { value: imageAspect },
           uScreenAspect: { value: sz.w / sz.h }
         },
         vertexShader: [
           "varying vec2 vUv;",
+          "uniform float uShiftX;",
           "void main() {",
           /* slight overscale so we never expose edges during parallax */
           "  vUv = uv;",
-          "  gl_Position = vec4(position * 1.08, 1.0);",
+          "  gl_Position = vec4(position * 1.08 + vec3(uShiftX, 0.0, 0.0), 1.0);",
           "}"
         ].join("\n"),
         fragmentShader: [
@@ -136,12 +138,12 @@
 
       var t0 = performance.now();
 
-      /* ── Intersection Observer — pause when off-screen ── */
+      /* ── Intersection Observer — pause when less than 50% visible ── */
       var visible = true;
       if (typeof IntersectionObserver === "function") {
         new IntersectionObserver(function (entries) {
           visible = entries[0].isIntersecting;
-        }, { threshold: 0.01 }).observe(container);
+        }, { threshold: 0.5 }).observe(container);
       }
 
       /* ── Render loop ── */

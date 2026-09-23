@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -23,6 +23,59 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <style>
+      /* CSS animations inside a section only play while that section is
+         mostly on screen (>75% of itself visible, or covering >75% of the
+         viewport). Otherwise they are paused to save CPU. */
+      .anim-paused, .anim-paused *, .anim-paused::before, .anim-paused::after,
+      .anim-paused *::before, .anim-paused *::after {
+        animation-play-state: paused !important;
+      }
+      /* Toppers marquee: paused while less than half the section is visible */
+      .toppers-track.track-paused {
+        animation-play-state: paused !important;
+      }
+      /* Services sliding cards: round the clipping container's corners so
+         cards sliding past the edge disappear behind a curve, matching
+         the cards' own border-radius. */
+      .owl-service-item,
+      .owl-service-item .owl-stage-outer {
+        border-radius: 20px;
+      }
+
+      /* Global safety net: prevent any horizontal overflow on mobile.
+         Use `clip` (not `hidden`) so it doesn't create a scroll container,
+         which would break the sticky navbar. */
+      html, body {
+        overflow-x: clip;
+      }
+    </style>
+    <script>
+      /* window.__animGate(el, onIn, onOut)
+         Calls onIn() while el is mostly on screen, onOut() otherwise. */
+      window.__animGate = window.__animGate || (function () {
+        if (!('IntersectionObserver' in window)) return function () {};
+        var THRESH = [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
+                      0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1];
+        function mostlyOnScreen(entry) {
+          var vw = entry.rootBounds ? entry.rootBounds.width * entry.rootBounds.height : 0;
+          var iv = entry.intersectionRect.width * entry.intersectionRect.height;
+          return entry.intersectionRatio >= 0.75 || (vw > 0 && iv / vw >= 0.75);
+        }
+        return function (el, onIn, onOut) {
+          if (!el) return;
+          if (typeof onIn  !== 'function') onIn  = function () {};
+          if (typeof onOut !== 'function') onOut = function () {};
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (mostlyOnScreen(entry)) onIn(); else onOut();
+            });
+          }, { threshold: THRESH });
+          io.observe(el);
+          return io;
+        };
+      })();
+    </script>
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -220,7 +273,7 @@
         font-family: 'Poppins', sans-serif;
         font-size: 13px;
         font-weight: 500;
-        color: #FFFFFF;
+        color: #1a1a1a;
         transition: transform 0.3s, box-shadow 0.3s;
         cursor: default;
         flex: 0 1 auto;
@@ -242,7 +295,7 @@
         color: #fff;
       }
       .app-store-row {
-        margin-top: 44px;
+        margin-top: 20px;
         display: flex;
         gap: 16px;
         flex-wrap: wrap;
@@ -307,6 +360,53 @@
       }
       @media (min-width: 768px) {
         .mobile-float-badges { display: none; }
+      }
+      /* Mobile only: reorder "Our Mobile App" section to
+         Heading -> Paragraph -> Frame -> 4 badges -> Store buttons */
+      @media (max-width: 767px) {
+        #mobileapp {
+          display: flex;
+          flex-direction: column;
+        }
+        #mobileapp .row,
+        #mobileapp .row > [class*="col"],
+        #mobileapp .app-intro-content-wrapper {
+          display: contents;
+        }
+        #mobileapp .app-intro-subheading,
+        #mobileapp .app-intro-content-wrapper h2,
+        #mobileapp .app-intro-divider { order: 1; }
+        #mobileapp .app-intro-content-wrapper .intro-text { order: 2; }
+        #mobileapp .app-frame-stage { order: 3; }
+        #mobileapp .app-intro-content-wrapper .app-feature-badges { order: 4; }
+        #mobileapp .app-store-row { order: 5; }
+
+        /* With display: contents on columns and wrapper, the actual rendered
+           elements are direct flex children with no box — padding on the
+           transparent columns is ignored. Add horizontal padding to each
+           rendered element so content has equal spacing on both sides. */
+        #mobileapp .app-intro-subheading,
+        #mobileapp .app-intro-content-wrapper h2,
+        #mobileapp .app-intro-divider,
+        #mobileapp .app-intro-content-wrapper .intro-text,
+        #mobileapp .app-intro-content-wrapper .app-feature-badges {
+          padding-left: 15px;
+          padding-right: 15px;
+          box-sizing: border-box;
+        }
+
+        /* The scroll-reveal observer watches the wrapper, but with
+           display: contents it has no box, so content-revealed never
+           fires. Force the section content visible on mobile. */
+        #mobileapp .app-intro-content-wrapper h4,
+        #mobileapp .app-intro-content-wrapper h2,
+        #mobileapp .app-intro-divider,
+        #mobileapp .app-intro-content-wrapper .intro-text,
+        #mobileapp .app-intro-content-wrapper .app-feature-badges,
+        #mobileapp .app-store-row {
+          opacity: 1;
+          transform: none;
+        }
       }
       .map-marker-label {
         background: transparent !important;
@@ -382,7 +482,639 @@
       .form-field-animate.field-visible {
         animation: slideUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
       }
-    </style>
+
+
+      /* ── App Intro: Interactive Experience ── */
+      .app-intro-panel {
+        overflow: visible;
+      }
+
+      /* Phone entrance animation */
+      .app-phone-container {
+        opacity: 0;
+        transform: translateY(60px) scale(0.85);
+        filter: blur(8px);
+        transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1),
+                    transform 0.9s cubic-bezier(0.22,1,0.36,1),
+                    filter 0.9s ease;
+      }
+
+      .app-phone-container.phone-arrived {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+      }
+
+      /* Float labels: hidden initially, appear one by one after phone arrives */
+      .app-float-label {
+        opacity: 0;
+        transform: translateX(0) scale(0.8);
+        transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        pointer-events: none;
+      }
+
+      .app-float-label.label-visible {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+
+      /* Staggered float directions per label */
+      .app-float-tl { transform: translate(-20px, -10px) scale(0.8); }
+      .app-float-tr { transform: translate(20px, -10px) scale(0.8); }
+      .app-float-bl { transform: translate(-20px, 10px) scale(0.8); }
+      .app-float-br { transform: translate(20px, 10px) scale(0.8); }
+
+      .app-float-tl.label-visible,
+      .app-float-tr.label-visible,
+      .app-float-bl.label-visible,
+      .app-float-br.label-visible {
+        transform: none;
+      }
+
+      /* Phone screen swap: wrapper clips the screen area */
+      .app-phone-screen-wrap {
+        position: absolute;
+        top: 13%;
+        left: 12%;
+        right: 12%;
+        bottom: 12%;
+        border-radius: 20px;
+        overflow: hidden;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .app-screen-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: top center;
+        opacity: 0;
+        transform: translateY(20px) scale(1.04);
+        transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22,1,0.36,1);
+        border-radius: 20px;
+      }
+
+      .app-screen-slide.screen-active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Feature badges: interactive states */
+      .app-feature-badge {
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border-color 0.3s !important;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .app-feature-badge.badge-active,
+      .app-feature-badge:hover {
+        background: rgba(245,164,37,0.22) !important;
+        border-color: rgba(245,164,37,0.5) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 20px rgba(245,164,37,0.18) !important;
+      }
+
+      /* Feature badge icons glow on active */
+      .app-feature-badge.badge-active .badge-icon {
+        box-shadow: 0 0 14px rgba(245,164,37,0.5);
+      }
+
+      /* Inactive badges pulse every second to hint they are clickable */
+      .app-feature-badge:not(.badge-active) {
+        animation: badgeGlowPulse 1s ease-in-out infinite;
+      }
+      .app-feature-badge:not(.badge-active):hover {
+        animation: none;
+      }
+      @keyframes badgeGlowPulse {
+        0%, 100% {
+          background: rgba(255,255,255,0.12);
+          border-color: rgba(245,164,37,0.3);
+          box-shadow: 0 0 0 rgba(245,164,37,0);
+        }
+        50% {
+          background: rgba(255,255,255,0.85);
+          border-color: rgba(245,164,37,0.85);
+          box-shadow: 0 0 16px rgba(245,164,37,0.55);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .app-feature-badge:not(.badge-active) {
+          animation: none;
+        }
+      }
+
+      /* Right column: text reveals on scroll */
+      .app-intro-content-wrapper h4,
+      .app-intro-content-wrapper h2,
+      .app-intro-divider,
+      .app-intro-content-wrapper .intro-text,
+      .app-intro-content-wrapper .app-feature-badges,
+      .app-store-row {
+        opacity: 0;
+        transform: translateX(30px);
+        transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22,1,0.36,1);
+      }
+
+      .app-intro-content-wrapper.content-revealed h4 { opacity:1; transform:none; transition-delay:0s; }
+      .app-intro-content-wrapper.content-revealed h2 { opacity:1; transform:none; transition-delay:0.1s; }
+      .app-intro-content-wrapper.content-revealed .app-intro-divider { opacity:1; transform:none; transition-delay:0.2s; }
+      .app-intro-content-wrapper.content-revealed .intro-text { opacity:1; transform:none; transition-delay:0.3s; }
+      .app-intro-content-wrapper.content-revealed .app-feature-badges { opacity:1; transform:none; transition-delay:0.4s; }
+      .app-intro-content-wrapper.content-revealed + .app-store-row,
+      .app-store-row.content-revealed { opacity:1; transform:none; transition-delay:0.5s; }
+
+      /* Left side: video-like frame animation stage
+         Adjust WIDTH / HEIGHT below to resize the frame.
+         --frame-zoom: enlarge the inner image to crop it (1 = no crop). */
+.app-frame-stage {
+        position: relative;
+        width: 100%;
+        max-width: 320px;
+        height: 400px;
+        margin: 0 auto;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 1;
+        --frame-zoom: 1;
+      }
+
+      /* Let the grid columns shrink so content wraps inside instead of overflowing
+         into the neighbouring column (avoids overlaps on narrower screens) */
+      #mobileapp .row > [class*="col"] {
+        min-width: 0;
+      }
+
+      .app-frame-stage canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        max-width: none;
+        max-height: none;
+        pointer-events: none;
+      }
+
+      /* Active screen label shown in orb on mobile */
+      .app-active-screen-label {
+        display: none;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #f5a425;
+        margin-top: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      @media (max-width: 767px) {
+        .app-active-screen-label { display: block; }
+      }
+
+      /* ── Decorative right-edge badge images ── */
+      .app-intro-panel {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .app-badge-bg-wrap {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 340px;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+
+      .app-intro-panel .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      .app-badge-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        aspect-ratio: 1092 / 1441;
+        object-fit: cover;
+        object-position: top right;
+        opacity: 0;
+        transform: scale(0.92) translateX(20px);
+        transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        -webkit-mask-image:
+          linear-gradient(to top, transparent 0, transparent 15px, #000 30px),
+          linear-gradient(to right, transparent 0, #000 10px);
+        -webkit-mask-composite: source-in;
+        mask-image:
+          linear-gradient(to top, transparent 0, transparent 15px, #000 30px),
+          linear-gradient(to right, transparent 0, #000 10px);
+        mask-composite: intersect;
+      }
+
+      .app-badge-bg.active {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+      }
+
+      .app-badge-bg[data-badge="games"] {
+        width: 90%;
+        aspect-ratio: 1092 / 1441;
+      }
+
+      .app-badge-bg[data-badge="news"] {
+        width: 130%;
+        aspect-ratio: 1448 / 1086;
+      }
+
+      .app-badge-bg[data-badge="contests"] {
+        width: 90%;
+        aspect-ratio: 1080 / 1456;
+      }
+
+      .app-badge-bg[data-badge="progress"] {
+        width: 90%;
+        aspect-ratio: 1055 / 1491;
+      }
+
+      @media (max-width: 991px) {
+        .app-badge-bg-wrap {
+          width: 220px;
+          opacity: 0.5;
+        }
+      }
+
+      @media (max-width: 767px) {
+        section.app-showcase {
+          overflow: hidden;
+        }
+
+        .app-badge-bg-wrap {
+          display: none;
+        }
+
+        .app-intro-panel {
+          overflow: hidden;
+        }
+
+        .app-intro-content-wrapper {
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+          width: 100%;
+          box-sizing: border-box;
+        }
+
+        #mobileapp {
+          padding-left: 15px;
+          padding-right: 15px;
+          box-sizing: border-box;
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+
+            /* ════ About Section — Creative Illustrated Layout ════ */
+.about-new-wrap {
+  padding: 60px 0 80px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+      .about-new-left { padding-right: 40px; }
+
+      .about-new-eyebrow {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #a12c2f;
+        margin-bottom: 12px;
+      }
+
+      .about-new-title {
+        font-size: clamp(32px, 4vw, 52px);
+        font-weight: 800;
+        color: #1a1a1a;
+        margin: 0 0 6px;
+        line-height: 1.1;
+      }
+
+      .about-new-title-red { color: #a12c2f; }
+
+      .about-new-tagline {
+        font-size: 17px;
+        color: #555;
+        font-weight: 400;
+        margin-bottom: 20px;
+      }
+
+      .about-new-body {
+        font-size: 15px;
+        color: #444;
+        line-height: 1.85;
+        text-align: justify;
+        margin-bottom: 32px;
+      }
+
+      .about-new-pills {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+
+      /* Normal-flow image — hidden on desktop so it never affects
+         the desktop layout (desktop keeps the ::after background). */
+      .about-new-img {
+        display: none;
+      }
+
+      .about-new-pill {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: 1.5px solid rgba(161,44,47,0.25);
+        border-radius: 16px;
+        padding: 18px 20px;
+        background: #fff;
+        min-width: 110px;
+        text-align: center;
+        box-shadow: 0 2px 12px rgba(161,44,47,0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .about-new-pill:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(161,44,47,0.14);
+      }
+
+      .about-new-pill-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(161,44,47,0.08);
+        color: #a12c2f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+      }
+
+      .about-new-pill span {
+        font-size: 12px;
+        font-weight: 600;
+        color: #333;
+        line-height: 1.3;
+      }
+
+      .about-new-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 36px;
+        background: #a12c2f;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 18px rgba(161,44,47,0.3);
+      }
+
+      .about-new-btn:hover {
+        background: #661a1d;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(161,44,47,0.4);
+        color: #fff;
+      }
+
+.about-new-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  background: url('assets/images/indexabout.webp') right center / contain no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-new-wrap .container {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 991px) {
+  .about-new-left { padding-right: 0; }
+  .about-new-wrap::after {
+    width: 50%;
+    opacity: 0.18;
+  }
+}
+
+@media (max-width: 767px) {
+  section.upcoming-meetings {
+    overflow: hidden;
+  }
+  .about-new-wrap {
+    overflow: hidden;
+  }
+  .about-new-left {
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .about-new-left p,
+  .about-new-tagline {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  .about-new-wrap::after { display: none; }
+  .about-new-img {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 28px;
+    border-radius: 16px;
+  }
+  #about { padding-bottom: 30px; }
+  #about .about-new-wrap { padding-bottom: 20px; }
+  .about-new-pills { justify-content: center; }
+  .about-new-body { text-align: justify; }
+}
+
+/* Mobile only: Journey book — frame takes full width, arrows sit below it */
+@media (max-width: 767px) {
+  .journey-book-wrap {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .jb-frame-wrap {
+    order: 1;
+    width: 110% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+  }
+  .jb-arrow,
+  .jb-arrow.jb-white,
+  .jb-arrow.jb-red {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    order: 2;
+    margin: 12px 10px 0;
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 16px !important;
+    line-height: 1;
+  }
+  .jb-arrow.jb-white,
+  .jb-arrow.jb-red,
+  .jb-arrow.jb-red:hover {
+    transform: none !important;
+  }
+  .jb-dots {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .jb-hint { order: 4; }
+}
+
+/* Mobile only: "See It In Action" — show one big centered phone instead of tiny side-by-side ones */
+@media (max-width: 767px) {
+  .aia-phone-slot[data-pos="-2"],
+  .aia-phone-slot[data-pos="-1"],
+  .aia-phone-slot[data-pos="1"],
+  .aia-phone-slot[data-pos="2"] {
+    display: none;
+  }
+  .aia-phone-slot {
+    margin: 0 auto;
+  }
+  .aia-phone-slot[data-pos="0"] {
+    transform: none;
+    z-index: 10;
+    opacity: 1;
+  }
+  .aia-phone-slot[data-pos="0"] img {
+    width: clamp(150px, 62vw, 300px);
+  }
+  .aia-stage {
+    padding: 0 30px;
+  }
+  .aia-dots {
+    display: none;
+  }
+}
+
+/* Mobile only: raise the rank stage image so its top half tucks under the cards */
+@media (max-width: 767px) {
+  .rank-cylinder-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* Extra bottom padding replaces the arrow row's original height so the
+       wrap's total height (and therefore the rankstage image position) is
+       unchanged while the arrows are pulled up beneath the sliding cards. */
+    padding-bottom: 116px;
+  }
+  .rank-cylinder-stage {
+    order: 1;
+    width: 100%;
+    margin-left: 20px;
+  }
+  .rank-arrow,
+  .rank-arrow.rank-arrow-left,
+  .rank-arrow.rank-arrow-right {
+    position: relative;
+    order: 2;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    /* -100px top margin pulls the arrows up right below the rankstage image;
+       8px side margins keep the two arrows close together */
+    margin: -100px 8px 0;
+    z-index: 10;
+  }
+  .rank-stage-bg {
+    bottom: 215px;
+    transform: translateX(-50%) translateY(-8%);
+    width: 98% !important;
+    max-width: none !important;
+  }
+  .rank-cylinder-stage {
+    z-index: 3;
+  }
+}
+
+/* Small phones: the wrap has different padding (base 50px vs 60px), so use
+   a matching compensation to keep the wrap height (and rankstage image) fixed. */
+@media (max-width: 640px) {
+  .rank-cylinder-wrap {
+    padding-bottom: 106px;
+  }
+}
+
+/* Tablets (768-991px): the base CSS pins the arrows to the far screen edges,
+   leaving a huge gap between them. Bring them inward to a close centered
+   pair sitting just below the sliding cards, without touching the stage or
+   the rankstage image (inline absolute placement keeps the wrap height fixed). */
+@media (min-width: 768px) and (max-width: 991px) {
+  .rank-cylinder-wrap .rank-arrow {
+    position: absolute;
+    top: auto;
+    bottom: 12px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  .rank-cylinder-wrap .rank-arrow-left {
+    margin-left: -52px;
+  }
+  .rank-cylinder-wrap .rank-arrow-right {
+    margin-left: 8px;
+  }
+}
+#rankConfettiCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 30;
+  will-change: transform;
+}
+
+      .toppers-section {
+        position: relative;
+        overflow: hidden;
+      }
+</style>
 <!--
 
 TemplateMo 569 Edu Meeting
@@ -422,7 +1154,7 @@ https://templatemo.com/tm-569-edu-meeting
 
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
-      <video autoplay muted loop playsinline id="bg-video">
+      <video autoplay muted loop playsinline id="bg-video" poster="assets/images/heading-bg.jpg">
           <source src="assets/images/course-video.mp4" type="video/mp4" />
       </video>
 
@@ -480,7 +1212,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="item">
               <div class="service-item-card">
                 <div class="icon">
-                  <img src="assets/images/service-icon-01.png" alt="Expert Coaching">
+                  <img src="assets/images/service-icon-01.webp" alt="Expert Coaching">
                 </div>
                 <div class="down-content">
                   <h4>Expert Coaching</h4>
@@ -492,7 +1224,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="item">
               <div class="service-item-card">
                 <div class="icon">
-                  <img src="assets/images/service-icon-02.png" alt="4D Learning Framework">
+                  <img src="assets/images/service-icon-02.webp" alt="4D Learning Framework">
                 </div>
                 <div class="down-content">
                   <h4>Comprehensive Study Material</h4>
@@ -504,7 +1236,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="item">
               <div class="service-item-card">
                 <div class="icon">
-                  <img src="assets/images/service-icon-03.png" alt="Proven Track Record">
+                  <img src="assets/images/service-icon-03.webp" alt="Proven Track Record">
                 </div>
                 <div class="down-content">
                   <h4>Proven Track Record</h4>
@@ -516,7 +1248,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="item">
               <div class="service-item-card">
                 <div class="icon">
-                  <img src="assets/images/service-icon-02.png" alt="Smart Evaluations">
+                  <img src="assets/images/service-icon-02.webp" alt="Smart Evaluations">
                 </div>
                 <div class="down-content">
                   <h4>Smart Evaluations</h4>
@@ -528,7 +1260,7 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="item">
               <div class="service-item-card">
                 <div class="icon">
-                  <img src="assets/images/service-icon-03.png" alt="Success Guarantee">
+                  <img src="assets/images/service-icon-03.webp" alt="Success Guarantee">
                 </div>
                 <div class="down-content">
                   <h4>Success Guarantee</h4>
@@ -548,225 +1280,147 @@ https://templatemo.com/tm-569-edu-meeting
 
 
   <section class="upcoming-meetings" id="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 about-section-top-space">
-          <div class="col-lg-12">
-            <div class="section-heading">
-              <h2>About Us</h2>
+    <div class="about-new-wrap" id="aboutNew">
+      <div class="container">
+        <div class="row align-items-center">
+
+          <!-- LEFT: Text content -->
+          <div class="col-lg-7 col-md-10 col-12 about-new-left">
+            <span class="about-new-eyebrow">WHO WE ARE</span>
+            <h2 class="about-new-title">About <span class="about-new-title-red">Aashirwad</span></h2>
+            <p class="about-new-tagline">16+ Years of Transforming Aspirations</p>
+            <p class="about-new-body">
+              Founded in 2009, Aashirwad Institute of Teachers is a premier institution in Kerala,
+              specializing in competitive exam coaching, with a particular focus on PSC and KTET training.
+              We believe in personalized guidance, innovative learning tools, and a strong support system
+              to help students achieve their dreams.
+            </p>
+
+            <img src="assets/images/indexabout.webp" alt="Students at Aashirwad" class="about-new-img">
+
+            <div class="about-new-pills">
+              <div class="about-new-pill">
+                <div class="about-new-pill-icon"><i class="fa fa-book"></i></div>
+                <span>Quality Coaching</span>
+              </div>
+              <div class="about-new-pill">
+                <div class="about-new-pill-icon"><i class="fa fa-users"></i></div>
+                <span>Experienced Faculty</span>
+              </div>
+              <div class="about-new-pill">
+                <div class="about-new-pill-icon"><i class="fa fa-bullseye"></i></div>
+                <span>Proven Results</span>
+              </div>
             </div>
+
+            <a href="about.html" class="about-new-btn scroll-to-section">ABOUT US &rarr;</a>
           </div>
-        </div>
-        
-        <div class="col-lg-12">
-          <div class="about-video-card">
-            
-            <video autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" x5-video-player-fullscreen="false" preload="auto" id="about-bg-video" class="about-card-video">
-              <source src="assets/video/About.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            
-            <div class="about-card-overlay"></div>
-            
-            <div class="about-card-content">
-              <h3>About</h3>
-              <p>
-                Founded in 2009, Aashirwad Institute of Teachers is a premier institution in Kerala, specializing in competitive exam coaching, with a particular focus on PSC and KTET training. Headquartered in Vaikom, the institute has grown to include multiple branches across Kerala, offering personalized coaching and innovative learning tools to help students achieve success in their academic and professional aspirations. At Aashirwad, we offer a wide array of courses including PSC, KTET, Navodaya Entrance, Civil Service Nurturing Programs, and more. Our curriculum is designed to foster critical thinking and practical skills, with a commitment to excellence that has earned us 23 first ranks in PSC exams and a consistent record of Navodaya admissions from Kottayam since 2010. We are proud innovators, introducing India’s first digital rank file with interactive features, enhancing the learning experience for our students. With a strong emphasis on results, our “Success Guarantee” ensures that if KTET candidates do not pass, they can avail of the next training session free of charge. Our publications, including subject-specific rank files and current affairs updates, further support students in their preparation. Aashirwad remains dedicated to shaping future leaders by providing world-class education and unmatched guidance.
-              </p>
-              <p>
-                Contact Information: Aashirwad Institute of Teachers Kacherikavala, Vaikom, Kottayam, Kerala 686141 Helpline: 8547 577 007 | WhatsApp: 8547 935 616
-              </p>
-            </div>
-            
-          </div>
-        </div>
-        </div>
-    </div>
-  </section>
 
-    <!-- -- Golden divider -- -->
-    <div class="section-divider-gold"></div>
 
-  <section class="journey-section" id="journey">
 
-    <!-- Ambient dark background layer: particles + radial glow, sits behind everything -->
-    <div class="journey-bg">
-      <div class="journey-particles" id="journeyParticles"></div>
-    </div>
-
-    <!-- Heading block -->
-    <div class="container journey-heading">
-      <span class="journey-eyebrow">Our Journey of Excellence</span>
-      <h2 class="journey-title">16 Years of <span class="gold-text">Transforming Aspirations</span></h2>
-      <p class="journey-subtitle">A journey built on trust, guided by passion, and driven by the success of our students.</p>
-      <div class="journey-title-divider"></div>
-    </div>
-
-    <!-- The winding path + milestones live inside this wrapper -->
-    <div class="journey-path-wrap" id="journeyPathWrap">
-
-      <!-- Memory background images opposite each milestone -->
-      <div class="memory-bg memory-left"  data-memory="1" style="top: calc(8% - 100px); left: calc(2% - 180px); width: 46.656%; height: 233px;"><img src="assets/images/memory1.png" alt=""></div>
-      <div class="memory-bg memory-right" data-memory="2" style="top: calc(24% - 120px); right: calc(2% - 210px); width: 45.36%; height: 227px;"><img src="assets/images/memory2.png" alt=""></div>
-      <div class="memory-bg memory-left"  data-memory="3" style="top: calc(36% - 130px); left: calc(2% - 170px); width: 37.8%; height: 189px;"><img src="assets/images/memory3.png" alt=""></div>
-      <div class="memory-bg memory-right" data-memory="4" style="top: calc(48% - 80px); right: calc(2% - 30px); width: 37.8%; height: 189px;"><img src="assets/images/memory4.png" alt=""></div>
-      <div class="memory-bg memory-left"  data-memory="5" style="top: calc(60% - 50px); left: calc(2% - 130px); width: 45.36%; height: 227px;"><img src="assets/images/memory5.png" alt=""></div>
-
-      <div class="memory-bg memory-right" data-memory="6" style="top: calc(72% + 100px); width: 45.36%; height: 227px;"><img src="assets/images/memory6.png" alt=""></div>
-      <!-- SVG path: two overlapping paths, one dim (always visible), one bright
-           (revealed progressively on scroll via stroke-dashoffset, see Part 4 JS) -->
-      <svg class="journey-svg" id="journeySvg" viewBox="0 866 800 1734" preserveAspectRatio="none">
-        <path id="journeyPathDim" class="journey-path-dim"
-              d="M400,866
-                 C380,910 260,920 260,980 C260,1080 540,1060 540,1180
-                 C540,1280 280,1300 280,1400 C280,1500 500,1480 500,1600
-                 C500,1700 300,1720 300,1820 C300,1920 480,1900 480,2000
-                  C480,2100 350,2120 350,2220 C350,2350 400,2400 400,2480
-                  L400,2600" />
-        <path id="journeyPathBright" class="journey-path-bright"
-              d="M400,866
-                 C380,910 260,920 260,980 C260,1080 540,1060 540,1180
-                 C540,1280 280,1300 280,1400 C280,1500 500,1480 500,1600
-                 C500,1700 300,1720 300,1820 C300,1920 480,1900 480,2000
-                 C480,2100 350,2120 350,2220 C350,2350 400,2400 400,2480
-                 L400,2600" />
-      </svg>
-
-      <!-- Milestone 1: 2009 (LEFT) -->
-      <div class="milestone milestone-right" data-milestone="0" style="top: 12%;">
-        <div class="milestone-media">
-          <img src="assets/images/mcard1.png" alt="2009 founding photo">
         </div>
-        <div class="milestone-content">
-          <span class="milestone-year">2009</span>
-          <h3 class="milestone-title">The Beginning</h3>
-          <p class="milestone-text">A dream took shape in Vaikom. A small classroom, a handful of students, and a vision to create meaningful opportunities through education.</p>
-        </div>
-        <div class="milestone-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22c0-6 0-10 0-12M7 14c2-2 5-2 5-2s0 3-2 5-5-1-3-3zM17 8c-2 2-5 2-5 2s0-3 2-5 5 1 3 3z"/></svg>
-        </div>
-      </div>
-
-      <!-- Milestone 2: 2011 (RIGHT) -->
-      <div class="milestone milestone-left" data-milestone="1" style="top: 24%;">
-        <div class="milestone-media">
-          <img src="assets/images/mcard2.png" alt="2011 early batch photo">
-        </div>
-        <div class="milestone-content">
-          <span class="milestone-year">2011</span>
-          <h3 class="milestone-title">First Milestones</h3>
-          <p class="milestone-text">The first major victories arrived. Students began turning effort into achievement, and confidence started spreading beyond the classroom.</p>
-        </div>
-        <div class="milestone-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4a3 3 0 0 0 3 4M17 5h3a3 3 0 0 1-3 4"/><path d="M12 13v3M9 20h6M9 17h6v3H9z"/></svg>
-        </div>
-      </div>
-
-      <!-- Milestone 3: 2014 (LEFT) -->
-      <div class="milestone milestone-right" data-milestone="2" style="top: 36%;">
-        <div class="milestone-media">
-          <img src="assets/images/mcard3.png" alt="2014 campus photo">
-        </div>
-        <div class="milestone-content">
-          <span class="milestone-year">2014</span>
-          <h3 class="milestone-title">Growing Stronger</h3>
-          <p class="milestone-text">New programs were introduced. More students joined the journey. What started small began creating a larger impact.</p>
-        </div>
-        <div class="milestone-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
-        </div>
-      </div>
-
-      <!-- Milestone 4: 2018 (RIGHT) -->
-      <div class="milestone milestone-left" data-milestone="3" style="top: 48%;">
-        <div class="milestone-media">
-          <img src="assets/images/mcard4.png" alt="2018 community photo">
-        </div>
-        <div class="milestone-content">
-          <span class="milestone-year">2018</span>
-          <h3 class="milestone-title">A Community of Achievers</h3>
-          <p class="milestone-text">Thousands of learners became part of the journey. A community built on trust, discipline, and determination continued to grow.</p>
-        </div>
-        <div class="milestone-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M15 20c0-2.5 1.5-4.5 4-4.5"/></svg>
-        </div>
-      </div>
-
-      <!-- Milestone 5: 2022 (LEFT) -->
-      <div class="milestone milestone-right" data-milestone="4" style="top: 60%;">
-        <div class="milestone-media">
-          <img src="assets/images/mcard5.png" alt="2022 app digital photo">
-        </div>
-        <div class="milestone-content">
-          <span class="milestone-year">2022</span>
-          <h3 class="milestone-title">Embracing the Future</h3>
-          <p class="milestone-text">Learning expanded beyond physical classrooms. Digital transformation opened new possibilities for students everywhere.</p>
-        </div>
-        <div class="milestone-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 19h2"/></svg>
-        </div>
-      </div>
-
-      <!-- Milestone 6: 2025+ (RIGHT) -->
-      <div class="milestone milestone-left" data-milestone="5" style="top: 72%;">
-        <div class="milestone-media">
-          <img src="assets/images/mcard6.png" alt="2025 recent achievement photo">
-        </div>
-        <div class="milestone-content">
-          <span class="milestone-year">2026+</span>
-          <h3 class="milestone-title">Continuing Excellence</h3>
-          <p class="milestone-text">The journey continues. Built on legacy, inspired by students, and driven by a commitment to keep getting better every year.</p>
-        </div>
-        <div class="milestone-node">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg>
-        </div>
-      </div>
-
-    </div><!-- /journey-path-wrap -->
-
-    <!-- Final destination marker -->
-    <div class="journey-destination" id="journeyDestination">
-      <div class="destination-arcs">
-        <div class="arc-ring arc-ring-1"></div>
-        <div class="arc-ring arc-ring-2"></div>
-        <div class="arc-ring arc-ring-3"></div>
-      </div>
-      <div class="destination-rings"></div>
-      <div class="destination-marker">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10L12 6 2 10l10 4 10-4z"/><path d="M6 12v5c3 1.5 9 1.5 12 0v-5"/></svg>
-      </div>
-      <span class="destination-range">2009 &ndash; 2026+</span>
-      <h3 class="destination-heading">Thank You For Being Part Of Our Journey</h3>
-      <p class="destination-subtext">The next chapter is still being written.<br>And the best is yet to come.</p>
-    </div>
-
-    <!-- Trust bar -->
-    <div class="container journey-trust-bar">
-      <div class="trust-item">
-        <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-4.5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-8 11-8 11z"/></svg></span>
-        <div><strong>Thousands of Dreams Nurtured</strong><span>Every student, our priority</span></div>
-      </div>
-      <div class="trust-item">
-        <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
-        <div><strong>Excellence in Every Step</strong><span>Quality that speaks results</span></div>
-      </div>
-      <div class="trust-item">
-        <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M15 20c0-2.5 1.5-4.5 4-4.5"/></svg></span>
-        <div><strong>Guided by Experts, Driven by Passion</strong><span>A team committed to your success</span></div>
-      </div>
-      <div class="trust-item">
-        <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></span>
-        <div><strong>A Legacy That Continues</strong><span>More to come, greater to achieve</span></div>
       </div>
     </div>
 
   </section>
+
+<!-- -- Golden divider -- -->
+<div class="section-divider-gold"></div>
+
+<section class="journey-section" id="journey">
+
+  <!-- Decorative side images -->
+  <img src="assets/images/book-left.webp"  class="journey-side-img journey-side-left"  alt="">
+  <img src="assets/images/book-right.webp" class="journey-side-img journey-side-right" alt="">
+
+  <div class="journey-bg">
+    <div class="journey-particles" id="journeyParticles"></div>
+  </div>
+
+  <!-- Heading block -->
+  <div class="container journey-heading">
+<span class="journey-eyebrow">OUR JOURNEY OF</span>
+    <h2 class="journey-title">Excellence</h2>
+    <p style="font-family:'Poppins',sans-serif;font-size:clamp(18px,2.5vw,28px);font-weight:700;color:#1B3A5C;margin:0 0 8px;letter-spacing:0.5px;">16 Years of Transforming Aspirations</p>
+    <p class="journey-subtitle" style="color:#000000 !important;">A journey built on trust, guided by passion, and driven by the success of our students.</p>
+    <div class="journey-title-divider"></div>
+    <p class="journey-year-range" style="color:#8B1A1A;font-size:18px;font-weight:700;margin-top:12px;letter-spacing:2px;">2009 &ndash; 2026+</p>
+  </div>
+
+  <!-- Animated Book Stage -->
+  <div class="journey-book-wrap" id="journeyBookWrap">
+
+    <!-- Left Arrow -->
+    <button class="jb-arrow jb-arrow-left" id="jbArrowLeft" aria-label="Previous chapter">&#8249;</button>
+
+    <!-- The book frame: images are placed here via JS -->
+    <div class="jb-frame-wrap" id="jbFrameWrap">
+      <canvas class="jb-canvas" id="jbCanvas"></canvas>
+      <!-- Left / Right click zones -->
+      <div class="jb-click-left"  id="jbClickLeft"></div>
+      <div class="jb-click-right" id="jbClickRight"></div>
+    </div>
+
+    <!-- Right Arrow -->
+    <button class="jb-arrow jb-arrow-right" id="jbArrowRight" aria-label="Next chapter">&#8250;</button>
+
+    <!-- Dot indicators -->
+    <div class="jb-dots" id="jbDots">
+      <span class="jb-dot jb-dot-active"></span>
+      <span class="jb-dot"></span>
+      <span class="jb-dot"></span>
+      <span class="jb-dot"></span>
+      <span class="jb-dot"></span>
+      <span class="jb-dot"></span>
+      <span class="jb-dot"></span>
+    </div>
+    <p class="jb-hint">Turn the Page to the Next Chapter</p>
+  </div>
+
+  <!-- Destination / Thank You -->
+  <div class="journey-destination" id="journeyDestination">
+    <div class="destination-arcs">
+      <div class="arc-ring arc-ring-1"></div>
+      <div class="arc-ring arc-ring-2"></div>
+      <div class="arc-ring arc-ring-3"></div>
+    </div>
+    <div class="destination-rings"></div>
+    <div class="destination-marker">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 10L12 6 2 10l10 4 10-4z"/><path d="M6 12v5c3 1.5 9 1.5 12 0v-5"/></svg>
+    </div>
+    <span class="destination-range">2009 &ndash; 2026+</span>
+    <h3 class="destination-heading">Thank You For Being Part Of Our Journey</h3>
+    <p class="destination-subtext">The next chapter is still being written.<br>And the best is yet to come.</p>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="container journey-trust-bar">
+    <div class="trust-item">
+      <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-8-4.5-8-11a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-8 11-8 11z"/></svg></span>
+      <div><strong>Thousands of Dreams Nurtured</strong><span>Every student, our priority</span></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+      <div><strong>Excellence in Every Step</strong><span>Quality that speaks results</span></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6M15 20c0-2.5 1.5-4.5 4-4.5"/></svg></span>
+      <div><strong>Guided by Experts, Driven by Passion</strong><span>A team committed to your success</span></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z"/></svg></span>
+      <div><strong>A Legacy That Continues</strong><span>More to come, greater to achieve</span></div>
+    </div>
+  </div>
+
+</section>
 
     <!-- -- Golden divider -- -->
     <div class="section-divider-gold"></div>
 
     <!-- ── SECTION: Rank Holders / Toppers Wall ── -->
-    <section class="toppers-section">
+    <section class="toppers-section" id="toppersSection">
+      <canvas id="rankConfettiCanvas"></canvas>
       <div class="container">
         <div class="cp-heading">
           <span class="cp-label section-visible slide-in-left">Our Achievers</span>
@@ -800,30 +1454,26 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
       </div>
 
-      <!-- Center detection marker for featured card -->
-      <div class="hof-center-marker" id="hofCenterMarker"></div>
-
-      <div class="toppers-track-wrap slide-in-right">
-        <div class="toppers-track" id="toppersTrack">
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank1.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Arya S.</h4><p>KTET Topper 2025</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank2.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Vishnu P.</h4><p>LDC Rank 3</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank3.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Lakshmi K.</h4><p>Police Constable Topper</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank4.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Rahul M.</h4><p>Degree Level Rank 1</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank5.png" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Neha J.</h4><p>Secretariat Rank 5</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank6.png" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Anand R.</h4><p>LGS Topper 2025</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank7.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Priya D.</h4><p>CTET Qualifier</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank8.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Arun T.</h4><p>Civil Services Mains</p></div></div>
-          <!-- Duplicate for seamless loop -->
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank1.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Arya S.</h4><p>KTET Topper 2025</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank2.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Vishnu P.</h4><p>LDC Rank 3</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank3.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Lakshmi K.</h4><p>Police Constable Topper</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank4.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Rahul M.</h4><p>Degree Level Rank 1</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank5.png" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Neha J.</h4><p>Secretariat Rank 5</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank6.png" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Anand R.</h4><p>LGS Topper 2025</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank7.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Priya D.</h4><p>CTET Qualifier</p></div></div>
-          <div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank8.jpg" alt="Rank Holder"><span class="topper-rank-badge"><i class="fa fa-trophy"></i> RANK HOLDER</span></div><div class="topper-info"><i class="fa fa-star topper-star"></i><h4>Arun T.</h4><p>Civil Services Mains</p></div></div>
-        </div>
-      </div>
+      <!-- Rank Holders Slider -->
+<div class="rank-cylinder-wrap" id="rankCylinderWrap">
+  <button class="rank-arrow rank-arrow-left" id="rankArrowLeft" aria-label="Previous">&#8249;</button>
+  <div class="rank-cylinder-stage" id="rankCylinderStage">
+    <div class="rank-cylinder-item" data-index="0"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/1.webp" alt="Rank 1"></div></div></div>
+    <div class="rank-cylinder-item" data-index="1"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/2.webp" alt="Rank 2"></div></div></div>
+    <div class="rank-cylinder-item" data-index="2"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/3.webp" alt="Rank 3"></div></div></div>
+    <div class="rank-cylinder-item" data-index="3"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/4.webp" alt="Rank 4"></div></div></div>
+    <div class="rank-cylinder-item" data-index="4"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/5.webp" alt="Rank 5"></div></div></div>
+    <div class="rank-cylinder-item" data-index="5"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/6.webp" alt="Rank 6"></div></div></div>
+    <div class="rank-cylinder-item" data-index="6"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/7.webp" alt="Rank 7"></div></div></div>
+    <div class="rank-cylinder-item" data-index="7"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/8.webp" alt="Rank 8"></div></div></div>
+    <div class="rank-cylinder-item" data-index="8"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/9.webp" alt="Rank 9"></div></div></div>
+    <div class="rank-cylinder-item" data-index="9"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/10.webp" alt="Rank 10"></div></div></div>
+    <div class="rank-cylinder-item" data-index="10"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/11.webp" alt="Rank 11"></div></div></div>
+    <div class="rank-cylinder-item" data-index="11"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/12.webp" alt="Rank 12"></div></div></div>
+  </div>
+  <button class="rank-arrow rank-arrow-right" id="rankArrowRight" aria-label="Next">&#8250;</button>
+  <img src="assets/images/rankstage.webp" class="rank-stage-bg" alt="">
+</div>
       <div class="toppers-wave-divider">
         <svg viewBox="0 0 1600 140" preserveAspectRatio="none">
           <defs>
@@ -846,7 +1496,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="cp-heading">
         <span class="cp-label">Explore Programs</span>
         <h2 class="cp-title">Courses Built For Your Success</h2>
-        <p class="cp-subtitle">Six curated programs, one goal &mdash; your success. Explore the rest on our courses page.</p>
+        <p class="cp-subtitle">Several curated programs, one goal &mdash; your success. Explore the rest on our courses page.</p>
         <div class="cp-underline"></div>
       </div>
 
@@ -1034,52 +1684,13 @@ https://templatemo.com/tm-569-edu-meeting
   <div class="app-intro-panel">
     <div class="container" id="mobileapp">
       <div class="row align-items-center">
-        <div class="col-lg-4 col-md-5 text-center">
-          <div class="app-intro-image-wrapper">
-            <div class="app-phone-container">
-              <div class="app-phone-glow"></div>
-              <img src="assets/images/mobile.png" alt="Aashirwad Eduverse Mobile App" class="img-fluid app-phone-mockup app-phone-float">
-
-              <span class="app-float-label app-float-tl">
-                <span class="float-icon float-icon-read"><i class="fa fa-book"></i></span>
-                Reading Mode
-              </span>
-              <span class="app-float-label app-float-tr">
-                <span class="float-icon float-icon-write"><i class="fa fa-pencil"></i></span>
-                Writing Mode
-              </span>
-              <span class="app-float-label app-float-bl">
-                <span class="float-icon float-icon-listen"><i class="fa fa-headphones"></i></span>
-                Audio Learning
-              </span>
-              <span class="app-float-label app-float-br">
-                <span class="float-icon float-icon-watch"><i class="fa fa-play-circle"></i></span>
-                Video Learning
-              </span>
-            </div>
-
-            <div class="mobile-float-badges">
-              <span class="app-float-label">
-                <span class="float-icon float-icon-read"><i class="fa fa-book"></i></span>
-                Reading Mode
-              </span>
-              <span class="app-float-label">
-                <span class="float-icon float-icon-write"><i class="fa fa-pencil"></i></span>
-                Writing Mode
-              </span>
-              <span class="app-float-label">
-                <span class="float-icon float-icon-listen"><i class="fa fa-headphones"></i></span>
-                Audio Learning
-              </span>
-              <span class="app-float-label">
-                <span class="float-icon float-icon-watch"><i class="fa fa-play-circle"></i></span>
-                Video Learning
-              </span>
-            </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="app-frame-stage" id="appFrameStage">
+            <canvas id="app-frame-canvas"></canvas>
           </div>
         </div>
 
-        <div class="col-lg-8 col-md-7">
+        <div class="col-lg-8 col-md-6">
           <div class="app-intro-content-wrapper">
             <h4 class="app-intro-subheading slide-in-up" style="transition-delay: 0s;">Our Mobile App</h4>
             <h2 class="slide-in-up" style="transition-delay: 0.1s;">Meet the New Era of </br><span class="highlight">Competitive Exam Prep</span></h2>
@@ -1096,23 +1707,19 @@ https://templatemo.com/tm-569-edu-meeting
             </p>
 
             <div class="app-feature-badges slide-in-up" style="transition-delay: 0.4s;">
-              <span class="app-feature-badge">
-                <span class="badge-icon"><i class="fa fa-refresh"></i></span>
-                Smart Revision
-              </span>
-              <span class="app-feature-badge">
-                <span class="badge-icon"><i class="fa fa-trophy"></i></span>
-                Live Contests & Mock Exams
-              </span>
-              <span class="app-feature-badge">
+              <span class="app-feature-badge badge-active" data-screen="games">
                 <span class="badge-icon"><i class="fa fa-gamepad"></i></span>
                 Educational Game Zone
               </span>
-              <span class="app-feature-badge">
+              <span class="app-feature-badge" data-screen="contests">
+                <span class="badge-icon"><i class="fa fa-trophy"></i></span>
+                Live Contests & Mock Exams
+              </span>
+              <span class="app-feature-badge" data-screen="progress">
                 <span class="badge-icon"><i class="fa fa-bar-chart"></i></span>
                 Progress Levels
               </span>
-              <span class="app-feature-badge">
+              <span class="app-feature-badge" data-screen="news">
                 <span class="badge-icon"><i class="fa fa-newspaper-o"></i></span>
                 Daily Current Affairs
               </span>
@@ -1129,10 +1736,17 @@ https://templatemo.com/tm-569-edu-meeting
           <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
         </a>
       </div>
-    </div>
+    </div><!-- /container#mobileapp -->
+
+  <!-- Decorative right-edge badge images -->
+  <div class="app-badge-bg-wrap" id="appBadgeBgWrap" aria-hidden="true">
+    <img src="assets/images/animate/game-bg.png"         class="app-badge-bg active" data-badge="games"    alt="">
+    <img src="assets/images/animate/exam-bg.png"          class="app-badge-bg"        data-badge="contests"  alt="">
+    <img src="assets/images/animate/progresslevel-bg.png" class="app-badge-bg"        data-badge="progress"  alt="">
+    <img src="assets/images/animate/news-bg.png"         class="app-badge-bg"        data-badge="news"      alt="">
   </div>
- 
-  <!-- ── Sticky scroll scene ──────────────────────────────── -->
+
+  </div><!-- /app-intro-panel -->
   <div id="app-scroll-scene">
     <div class="app-sticky-frame" id="appStickyFrame">
  
@@ -1425,6 +2039,7 @@ https://templatemo.com/tm-569-edu-meeting
 </section>
 
 <section class="app-in-action" id="app-in-action">
+  <div class="aia-bg-glow"></div>
   <div class="container">
     <div class="app-action-heading">
       <p class="app-action-eyebrow">See It In Action</p>
@@ -1432,25 +2047,35 @@ https://templatemo.com/tm-569-edu-meeting
       <p class="app-action-subtitle">Real screens. Real learning. Real results.</p>
       <div class="app-action-underline"></div>
     </div>
+  </div>
 
-    <div class="app-action-gallery">
-      <button class="app-action-arrow app-action-arrow-prev" aria-label="Previous">
-        <i class="fa fa-chevron-left"></i>
-      </button>
-      <div class="app-action-track" id="appActionTrack">
-        <img src="assets/images/mobile1.png" alt="App Screen 1">
-        <img src="assets/images/mobile.png" alt="App Screen 2">
-        <img src="assets/images/mobile3.png" alt="App Screen 3">
-        <img src="assets/images/mobile2.png" alt="App Screen 4">
-        <img src="assets/images/mobile1.png" alt="App Screen 5">
-        <img src="assets/images/mobile.png" alt="App Screen 6">
-        <img src="assets/images/mobile3.png" alt="App Screen 7">
-        <img src="assets/images/mobile2.png" alt="App Screen 8">
+  <div class="aia-carousel-wrap">
+    <button class="aia-arrow aia-arrow-left" id="aiaArrowLeft" aria-label="Previous">&#8249;</button>
+
+    <div class="aia-stage" id="aiaStage">
+      <div class="aia-phone-slot" data-pos="-2">
+        <img src="assets/images/mobile/screen1.webp" alt="App Screen">
       </div>
-      <button class="app-action-arrow app-action-arrow-next" aria-label="Next">
-        <i class="fa fa-chevron-right"></i>
-      </button>
+      <div class="aia-phone-slot" data-pos="-1">
+        <img src="assets/images/mobile/screen2.webp" alt="App Screen">
+      </div>
+      <div class="aia-phone-slot" data-pos="0">
+        <img src="assets/images/mobile/screen3.webp" alt="App Screen">
+      </div>
+      <div class="aia-phone-slot" data-pos="1">
+        <img src="assets/images/mobile/screen4.webp" alt="App Screen">
+      </div>
+      <div class="aia-phone-slot" data-pos="2">
+        <img src="assets/images/mobile/screen5.webp" alt="App Screen">
+      </div>
     </div>
+
+    <button class="aia-arrow aia-arrow-right" id="aiaArrowRight" aria-label="Next">&#8250;</button>
+  </div>
+
+  <div class="aia-dots-row">
+    <div class="aia-dots" id="aiaDots"></div>
+    <span class="aia-counter" id="aiaCounter">05 / 06</span>
   </div>
 </section>
   <section class="contact-us" id="contact">
@@ -1554,10 +2179,7 @@ https://templatemo.com/tm-569-edu-meeting
 
         <div class="testimonial-slide t-active">
           <div class="testimonial-avatar" data-name="Arjun Menon">
-            <img src="assets/images/testimonials/arjun-menon.jpg" 
-                 alt="Arjun Menon"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="avatar-initials" style="display:none;">AM</span>
+            <span class="avatar-initials">AM</span>
           </div>
           <h4 class="testimonial-name">Arjun Menon</h4>
           <span class="testimonial-role">LDC Rank Holder, Kerala PSC</span>
@@ -1569,10 +2191,7 @@ https://templatemo.com/tm-569-edu-meeting
 
         <div class="testimonial-slide">
           <div class="testimonial-avatar" data-name="Priya Nair">
-            <img src="assets/images/testimonials/priya-nair.jpg" 
-                 alt="Priya Nair"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="avatar-initials" style="display:none;">PN</span>
+            <span class="avatar-initials">PN</span>
           </div>
           <h4 class="testimonial-name">Priya Nair</h4>
           <span class="testimonial-role">KTET Qualified, Thrissur</span>
@@ -1584,10 +2203,7 @@ https://templatemo.com/tm-569-edu-meeting
 
         <div class="testimonial-slide">
           <div class="testimonial-avatar" data-name="Vishnu Krishnan">
-            <img src="assets/images/testimonials/vishnu-krishnan.jpg" 
-                 alt="Vishnu Krishnan"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="avatar-initials" style="display:none;">VK</span>
+            <span class="avatar-initials">VK</span>
           </div>
           <h4 class="testimonial-name">Vishnu Krishnan</h4>
           <span class="testimonial-role">SI Police, Kerala PSC</span>
@@ -1599,10 +2215,7 @@ https://templatemo.com/tm-569-edu-meeting
 
         <div class="testimonial-slide">
           <div class="testimonial-avatar" data-name="Anju Rajan">
-            <img src="assets/images/testimonials/anju-rajan.jpg" 
-                 alt="Anju Rajan"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <span class="avatar-initials" style="display:none;">AR</span>
+            <span class="avatar-initials">AR</span>
           </div>
           <h4 class="testimonial-name">Anju Rajan</h4>
           <span class="testimonial-role">Degree Level Preliminary, Kottayam</span>
@@ -1647,6 +2260,27 @@ https://templatemo.com/tm-569-edu-meeting
     <script src="assets/js/slick-slider.js"></script>
     <script src="assets/js/custom.js"></script>
     <script>
+      /* ── Services carousel: auto-slide only while more than 40% of the
+         carousel container is visible in the viewport ── */
+      (function () {
+        var carousel = document.querySelector('.owl-service-item');
+        if (!carousel || !('IntersectionObserver' in window)) return;
+
+        function playAuto() { $(carousel).trigger('play.owl.autoplay', [4000]); }
+        function stopAuto() { $(carousel).trigger('stop.owl.autoplay'); }
+
+        $(function () {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.intersectionRatio > 0.4) playAuto();
+              else stopAuto();
+            });
+          }, { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] });
+          io.observe(carousel);
+        });
+      })();
+    </script>
+    <script>
       /* ── Equalize service card heights ── */
       (function () {
         var MAX_HEIGHT = 350;
@@ -1679,75 +2313,213 @@ https://templatemo.com/tm-569-edu-meeting
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""></script>
     <script>
-(function() {
-  var track = document.getElementById('appActionTrack');
-  if (!track) return;
-  var imgs = track.querySelectorAll('img');
-  var total = imgs.length;
-  if (total < 2) return;
+/* ── AIA Center Focus Carousel with smooth slide animation ── */
+(function () {
+  var images = [
+    'assets/images/mobile/screen1.webp',
+    'assets/images/mobile/screen2.webp',
+    'assets/images/mobile/screen3.webp',
+    'assets/images/mobile/screen4.webp',
+    'assets/images/mobile/screen5.webp',
+    'assets/images/mobile/screen6.webp',
+    'assets/images/mobile/screen7.webp',
+    'assets/images/mobile/screen8.webp',
+    'assets/images/mobile/screen9.webp',
+    'assets/images/mobile/screen10.webp',
+    'assets/images/mobile/screen11.webp',
+    'assets/images/mobile/screen12.webp',
+    'assets/images/mobile/screen13.webp',
+    'assets/images/mobile/screen14.webp',
+    'assets/images/mobile/screen15.webp',
+    'assets/images/mobile/screen16.webp',
+    'assets/images/mobile/screen17.webp',
+    'assets/images/mobile/screen18.webp',
+    'assets/images/mobile/screen19.webp',
+    'assets/images/mobile/screen20.webp',
+    'assets/images/mobile/screen21.webp',
+    'assets/images/mobile/screen22.webp',
+    'assets/images/mobile/screen23.webp',
+    'assets/images/mobile/screen24.webp',
+    'assets/images/mobile/screen25.webp',
+    'assets/images/mobile/screen26.webp',
+    'assets/images/mobile/screen27.webp',
+    'assets/images/mobile/screen28.webp'
+  ];
 
-  for (var i = 0; i < 4; i++) {
-    track.appendChild(imgs[i].cloneNode(true));
+  var total    = images.length;
+  var current  = 0;
+  var animating = false;
+  var stage    = document.getElementById('aiaStage');
+  var dotsWrap = document.getElementById('aiaDots');
+  var counter  = document.getElementById('aiaCounter');
+  var leftBtn  = document.getElementById('aiaArrowLeft');
+  var rightBtn = document.getElementById('aiaArrowRight');
+  if (!stage) return;
+
+  var slots = Array.from(stage.querySelectorAll('.aia-phone-slot'));
+
+  /* Build dots */
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('span');
+    d.className = 'aia-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('data-i', i);
+    dotsWrap.appendChild(d);
   }
 
-  var idx = 0, imgW = 0, gap = 0;
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-  function meas() {
-    var fi = track.querySelector('img');
-    if (!fi) return;
-    var g = window.getComputedStyle(track).gap || '0px';
-    gap = parseFloat(g) || 0;
-    imgW = fi.offsetWidth + gap;
+  function imgAt(offset) {
+    return images[((current + offset) % total + total) % total];
   }
 
-  function go(i) {
-    meas();
-    track.style.transform = 'translateX(' + (-i * imgW) + 'px)';
+  /* Assign images to slots without animation */
+  function assignImages() {
+    var positions = [-2, -1, 0, 1, 2];
+    positions.forEach(function (pos, i) {
+      slots[i].setAttribute('data-pos', pos);
+      slots[i].querySelector('img').src = imgAt(pos);
+    });
   }
 
-  function jump(i) {
-    track.style.transition = 'none';
-    idx = i;
-    go(i);
-    track.offsetHeight;
-    track.style.transition = 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+  function updateDots() {
+    var dots = dotsWrap.querySelectorAll('.aia-dot');
+    dots.forEach(function (d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    if (counter) counter.textContent = pad(current + 1) + ' / ' + pad(total);
   }
 
-  function slide(i) {
-    idx = i;
-    go(i);
+  var animT1 = null;
+  var animT2 = null;
+
+  /* Cancel any in-flight animation so a new one can start immediately */
+  function interruptAnim() {
+    if (animT1) { clearTimeout(animT1); animT1 = null; }
+    if (animT2) { clearTimeout(animT2); animT2 = null; }
+    animating = false;
+    slots.forEach(function (s) {
+      s.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-from-left', 'slide-in-from-right');
+    });
   }
 
-  function next() {
-    if (idx >= total) { jump(0); restart(); return; }
-    slide(idx + 1);
-    restart();
+  function go(direction) {
+    /* direction: 1 = next (right), -1 = prev (left) */
+    interruptAnim();
+    animating = true;
+
+    /* Step 1: animate current slots sliding out */
+    slots.forEach(function (slot) {
+      if (direction > 0) {
+        slot.classList.add('slide-out-left');
+      } else {
+        slot.classList.add('slide-out-right');
+      }
+    });
+
+    animT1 = setTimeout(function () {
+      animT1 = null;
+      /* Step 2: update index and images instantly (no transition) */
+      current = (current + direction + total) % total;
+      updateDots();
+
+      /* remove slide-out, add slide-in-from opposite side */
+      slots.forEach(function (slot) {
+        slot.classList.remove('slide-out-left', 'slide-out-right');
+        if (direction > 0) {
+          slot.classList.add('slide-in-from-right');
+        } else {
+          slot.classList.add('slide-in-from-left');
+        }
+      });
+
+      assignImages();
+
+      /* Step 3: force reflow, then remove slide-in class so
+         the normal data-pos transition takes over → smooth slide in */
+      void stage.offsetHeight;
+
+      slots.forEach(function (slot) {
+        slot.classList.remove('slide-in-from-left', 'slide-in-from-right');
+      });
+
+      animT2 = setTimeout(function () {
+        animT2 = null;
+        animating = false;
+      }, 700);
+
+    }, 450);
   }
 
-  function prev() {
-    if (idx <= 0) { jump(total); slide(idx - 1); restart(); return; }
-    slide(idx - 1);
-    restart();
+  function next() { go(1);  }
+  function prev() { go(-1); }
+
+  /* Auto-play timer */
+  var AUTO_MS = 4000;
+  var timer;
+
+  function restartTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, AUTO_MS);
   }
 
-  var gal = track.closest('.app-action-gallery');
-  var iv;
-  function start() { iv = setInterval(next, 5000); }
-  function stop() { clearInterval(iv); }
-  function restart() { stop(); start(); }
+  function manualNav(fn) {
+    fn();
+    restartTimer();
+  }
 
-  gal.addEventListener('mouseenter', stop);
-  gal.addEventListener('mouseleave', start);
+  rightBtn.addEventListener('click', function () { manualNav(next); });
+  leftBtn.addEventListener('click',  function () { manualNav(prev); });
 
-  document.querySelector('.app-action-arrow-next').addEventListener('click', next);
-  document.querySelector('.app-action-arrow-prev').addEventListener('click', prev);
-
-  meas(); slide(0); start();
-
-  var rt;
-  window.addEventListener('resize', function() {
-    clearTimeout(rt); rt = setTimeout(function() { meas(); go(idx); }, 150);
+  dotsWrap.addEventListener('click', function (e) {
+    var dot = e.target.closest('.aia-dot');
+    if (!dot) return;
+    var target = parseInt(dot.getAttribute('data-i'), 10);
+    var dir = target > current ? 1 : -1;
+    current = target;
+    updateDots();
+    assignImages();
+    restartTimer();
   });
+
+  /* Click side phones to navigate */
+  slots.forEach(function (slot) {
+    slot.addEventListener('click', function () {
+      var pos = parseInt(slot.getAttribute('data-pos'), 10);
+      if (pos < 0) manualNav(prev);
+      else if (pos > 0) manualNav(next);
+    });
+  });
+
+  /* Touch swipe */
+  var tx = 0;
+  stage.addEventListener('touchstart', function (e) {
+    tx = e.touches[0].clientX;
+  }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) {
+      manualNav(dx < 0 ? next : prev);
+    }
+  }, { passive: true });
+
+  /* Pause auto-play while the section is less than 50% visible */
+  var aiaSection = stage.closest('section');
+  if (aiaSection && ('IntersectionObserver' in window)) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var vw = entry.rootBounds ? entry.rootBounds.width * entry.rootBounds.height : 0;
+        var iv = entry.intersectionRect.width * entry.intersectionRect.height;
+        var inView = entry.intersectionRatio >= 0.5 || (vw > 0 && iv / vw >= 0.5);
+        if (inView) restartTimer();
+        else clearInterval(timer);
+      });
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(aiaSection);
+  }
+
+  /* Init */
+  assignImages();
+  updateDots();
+  restartTimer();
 })();
     </script>
     <script>
@@ -2382,7 +3154,24 @@ https://templatemo.com/tm-569-edu-meeting
             slides[current].classList.add('active');
           }
 
-          setInterval(showNext, 5000);
+          var timer = null;
+          function startAuto() {
+            clearInterval(timer);
+            timer = setInterval(showNext, 5000);
+          }
+
+          /* Only auto-advance while more than half the section is visible */
+          var heroSec = slides.length ? slides[0].closest('section') : null;
+          if (heroSec && ('IntersectionObserver' in window)) {
+            new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.intersectionRatio >= 0.5) startAuto();
+                else clearInterval(timer);
+              });
+            }, { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(heroSec);
+          }
+
+          startAuto();
         })();
 
         /* ── Testimonial Slider ── */
@@ -2407,10 +3196,26 @@ https://templatemo.com/tm-569-edu-meeting
             dots[current].classList.add('t-dot-active');
           }
 
-          /* Auto-advance every 4 seconds */
-          setInterval(function () {
-            showSlide((current + 1) % slides.length);
-          }, 4000);
+          var timer = null;
+          function startAuto() {
+            clearInterval(timer);
+            timer = setInterval(function () {
+              showSlide((current + 1) % slides.length);
+            }, 4000);
+          }
+
+          /* Only auto-advance while more than half the section is visible */
+          var testiSec = slides.length ? slides[0].closest('section') : null;
+          if (testiSec && ('IntersectionObserver' in window)) {
+            new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.intersectionRatio >= 0.5) startAuto();
+                else clearInterval(timer);
+              });
+            }, { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(testiSec);
+          }
+
+          startAuto();
 
           /* Click dots to jump */
           dots.forEach(function (dot, i) {
@@ -2718,8 +3523,154 @@ https://templatemo.com/tm-569-edu-meeting
           updateFeatured();
           window.addEventListener('scroll', onScroll, { passive: true });
           window.addEventListener('resize', onScroll, { passive: true });
-          setInterval(updateFeatured, 500);
+          var featuredTimer = setInterval(updateFeatured, 500);
         })();
+    </script>
+
+    <script>
+    /* ── Rank Holders Cylindrical Carousel ── */
+    (function () {
+      var stage    = document.getElementById('rankCylinderStage');
+      var leftBtn  = document.getElementById('rankArrowLeft');
+      var rightBtn = document.getElementById('rankArrowRight');
+      if (!stage) return;
+
+      var items    = Array.from(stage.querySelectorAll('.rank-cylinder-item'));
+      var total    = items.length;
+      var current  = 0;
+      var animating = false;
+      var autoTimer = null;
+
+      /* How many items are visible across the stage */
+      var VISIBLE  = 5;   /* odd number — centre + 2 each side */
+      var CARD_W   = stage.querySelector('.rank-cylinder-item').offsetWidth || 220;
+
+      /* Cylindrical geometry: each visible slot maps to an arc position */
+      function getSlotProps(offset, cardW) {
+        var maxOffset = Math.floor(VISIBLE / 2);
+        var t = offset / maxOffset;
+        var angle  = t * 52;
+        var rad    = angle * Math.PI / 180;
+        var radius = 500;
+
+        var tx      = Math.sin(rad) * radius;
+        var tz      = Math.cos(rad) * radius - radius;
+        var cosRad  = Math.cos(rad);
+        var opacity = 0.75 + 0.25 * cosRad;
+        var blur    = (1 - cosRad) * 1.2;
+        var heightScale = 0.88 + 0.12 * cosRad;
+
+        return { tx: tx, tz: tz, opacity: opacity, blur: blur,
+                 rotY: angle, heightScale: heightScale };
+      }
+
+      function render() {
+        var stageW   = stage.offsetWidth;
+        var cardW    = items[0] ? items[0].offsetWidth : 260;
+
+        /* How far apart each card sits horizontally. */
+        var slotSpacing = stageW / 4.7;
+
+        items.forEach(function (item, i) {
+          var raw  = i - current;
+          var half = Math.floor(total / 2);
+          if (raw > half)  raw -= total;
+          if (raw < -half) raw += total;
+
+          var maxSide = Math.floor(VISIBLE / 2);
+          var visible = Math.abs(raw) <= maxSide;
+
+          if (!visible) {
+            item.style.opacity       = '0';
+            item.style.pointerEvents = 'none';
+            item.style.zIndex        = '0';
+            return;
+          }
+
+          var p = getSlotProps(raw, cardW);
+
+          item.style.pointerEvents = 'auto';
+          item.style.zIndex        = String(10 - Math.abs(raw));
+
+          /* Use slotSpacing-driven translateX instead of the radius-arc tx
+             so cards never overlap regardless of zoom/screen size */
+          var tx = raw * slotSpacing;
+
+          /* Nudge the outermost cards slightly inward */
+          if (Math.abs(raw) === maxSide) {
+            tx += (raw < 0 ? 1 : -1) * 50;
+          }
+
+          item.style.transform =
+            'translateX(' + tx + 'px)' +
+            ' translateZ(' + p.tz + 'px)' +
+            ' rotateY(' + p.rotY + 'deg)';
+
+          /* Mobile only: drop the centre card a little lower and enlarge it;
+                shrink the two outermost cards */
+          if (window.innerWidth <= 767) {
+            if (raw === 0) {
+              item.style.transform += ' translateY(18px) scale(1.08)';
+            } else if (Math.abs(raw) === maxSide) {
+              item.style.transform += ' scale(0.80)';
+            }
+          }
+
+          var baseH = 380;
+          item.style.height  = Math.round(baseH * p.heightScale) + 'px';
+          item.style.opacity = String(p.opacity);
+          item.style.filter  = p.blur > 0 ? 'blur(' + p.blur + 'px)' : 'none';
+        });
+      }
+
+      function go(dir) {
+        if (animating) return;
+        animating = true;
+        current = ((current + dir) % total + total) % total;
+        render();
+        setTimeout(function () { animating = false; }, 800);
+      }
+
+      /* Click side cards to navigate */
+      items.forEach(function (item, i) {
+        item.addEventListener('click', function () {
+          var raw = i - current;
+          var half = Math.floor(total / 2);
+          if (raw > half)  raw -= total;
+          if (raw < -half) raw += total;
+          if (raw === 0) return;
+          go(raw > 0 ? 1 : -1);
+          restartAuto();
+        });
+      });
+
+      /* Arrow buttons */
+      leftBtn.addEventListener('click',  function () { go(-1); restartAuto(); });
+      rightBtn.addEventListener('click', function () { go(1);  restartAuto(); });
+
+      /* Touch swipe */
+      var tx0 = 0;
+      stage.addEventListener('touchstart', function (e) { tx0 = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend',   function (e) {
+        var dx = e.changedTouches[0].clientX - tx0;
+        if (Math.abs(dx) > 50) { go(dx < 0 ? 1 : -1); restartAuto(); }
+      }, { passive: true });
+
+      /* Auto-rotate */
+      function startAuto()   { autoTimer = setInterval(function () { go(1); }, 3000); }
+      function stopAuto()    { clearInterval(autoTimer); }
+      function restartAuto() { stopAuto(); startAuto(); }
+
+      stage.addEventListener('mouseenter', stopAuto);
+      stage.addEventListener('mouseleave', startAuto);
+
+      /* Pause auto-rotate while the section is not mostly on screen */
+      window.__animGate && window.__animGate(stage.closest('section'), restartAuto, stopAuto);
+
+      /* Init */
+      render();
+      startAuto();
+    })();
     </script>
 
     <script>
@@ -2883,6 +3834,9 @@ https://templatemo.com/tm-569-edu-meeting
       /* ── Hover pause / resume ── */
       stage.addEventListener('mouseenter', function () { hoverPaused = true; });
       stage.addEventListener('mouseleave', function () { hoverPaused = false; });
+
+      /* Pause auto-rotate while the section is not mostly on screen */
+      window.__animGate && window.__animGate(stage.closest('section'), startAutoRotate, stopAutoRotate);
 
       /* ── Arrow handlers (reset timer on click) ── */
       var arrowLeft = stage.querySelector('.deck-arrow-left');
@@ -3107,6 +4061,9 @@ https://templatemo.com/tm-569-edu-meeting
         }
       }, { passive: true });
 
+      /* Pause auto-rotate while the section is not mostly on screen */
+      window.__animGate && window.__animGate(stage.closest('section'), startAuto, stopAuto);
+
       startAuto();
     })();
     </script>
@@ -3122,6 +4079,15 @@ https://templatemo.com/tm-569-edu-meeting
       var pathLength = brightPath.getTotalLength();
       var milestoneNodes = Array.from(document.querySelectorAll('.milestone-node'));
       var memoryBgs = Array.from(document.querySelectorAll('.memory-bg'));
+
+      /* ═══ TUNNEL ANIMATION CONFIG — edit these values to fine-tune ═══ */
+      var TUNNEL_CONFIG = {
+        revealOffset: 0.06,   // how early to reveal (fraction of section height before node)
+        exitOffset: 0.03,     // how far past the node before exiting (fly past viewer)
+      };
+
+      /* Track each memory image's state: 'hidden' | 'revealed' | 'exited' */
+      var memoryState = memoryBgs.map(function () { return 'hidden'; });
 
       /* ── Remember each memory photo's original spot in the DOM so we
            can put it back exactly when the screen returns to desktop width ── */
@@ -3172,6 +4138,13 @@ https://templatemo.com/tm-569-edu-meeting
           });
         }
         mobileLayoutActive = shouldBeMobile;
+        /* Reset all memory states so they re-trigger on next scroll */
+        memoryBgs.forEach(function (m, i) {
+          m.classList.remove('is-revealed', 'is-exiting');
+          memoryState[i] = 'hidden';
+        });
+        /* Force immediate re-evaluation of visibility */
+        updateProgress();
       }
 
       function updateProgress() {
@@ -3204,7 +4177,27 @@ https://templatemo.com/tm-569-edu-meeting
             m.classList.remove('is-active', 'is-visited');
           }
           if (memoryBgs[i]) {
-            memoryBgs[i].classList.toggle('is-revealed', centerPct >= (nodePct - 0.025));
+            var bg = memoryBgs[i];
+            var exitOffset = parseFloat(bg.getAttribute('data-exit-offset')) || TUNNEL_CONFIG.exitOffset;
+            var shouldReveal = centerPct >= (nodePct - TUNNEL_CONFIG.revealOffset);
+            var shouldExit    = centerPct >= (nodePct + exitOffset);
+            var currentState  = memoryState[i];
+
+            if (shouldExit && currentState !== 'exited') {
+              /* Image has scrolled past — fly it out */
+              bg.classList.remove('is-revealed');
+              bg.classList.add('is-exiting');
+              memoryState[i] = 'exited';
+            } else if (shouldReveal && !shouldExit && currentState !== 'revealed') {
+              /* Image is in view — fly it in */
+              bg.classList.add('is-revealed');
+              bg.classList.remove('is-exiting');
+              memoryState[i] = 'revealed';
+            } else if (!shouldReveal && currentState !== 'hidden') {
+              /* Scrolled back up — reset to hidden */
+              bg.classList.remove('is-revealed', 'is-exiting');
+              memoryState[i] = 'hidden';
+            }
           }
         });
 
@@ -3396,5 +4389,1012 @@ https://templatemo.com/tm-569-edu-meeting
       });
     })();
   </script>
+  <script>
+  /* ── App Intro: Interactive Experience ── */
+  (function () {
+    var phoneContainer = document.querySelector('.app-intro-panel .app-phone-container');
+    var floatLabels    = document.querySelectorAll('.app-intro-panel .app-float-label');
+    var contentWrapper = document.querySelector('.app-intro-content-wrapper');
+    var storeRow       = document.querySelector('.app-intro-panel .app-store-row');
+    var badges         = document.querySelectorAll('.app-feature-badge[data-screen]');
+    var screens        = document.querySelectorAll('.app-screen-slide');
+    var activeLabel    = document.getElementById('appActiveLabel');
+
+    if (phoneContainer) {
+      /* ── Map screen keys to your actual app screenshot images ── */
+      var SCREEN_IMAGES = {
+        'default':  'assets/images/mobile.webp',
+        'revision': 'assets/images/mobile1.webp',
+        'contests': 'assets/images/mobile2.webp',
+        'games':    'assets/images/mobile3.webp',
+        'progress': 'assets/images/mobile1.webp',
+        'news':     'assets/images/mobile2.webp'
+      };
+
+      /* Pre-set background images */
+      screens.forEach(function (s) {
+        var key = s.getAttribute('data-screen');
+        if (SCREEN_IMAGES[key]) {
+          s.style.backgroundImage = 'url(' + SCREEN_IMAGES[key] + ')';
+        }
+      });
+
+      /* ── Screen swap function ── */
+      function activateScreen(key) {
+        screens.forEach(function (s) {
+          s.classList.toggle('screen-active', s.getAttribute('data-screen') === key);
+        });
+        if (activeLabel) {
+          var badge = document.querySelector('.app-feature-badge[data-screen="' + key + '"]');
+          activeLabel.textContent = badge ? badge.textContent.trim() : 'App Home';
+          activeLabel.style.opacity = '1';
+        }
+      }
+
+      /* ── Badge background image swap ── */
+      function activateBadgeBg(key) {
+        var bgs = document.querySelectorAll('.app-badge-bg');
+        bgs.forEach(function (bg) {
+          if (bg.getAttribute('data-badge') === key) {
+            bg.classList.add('active');
+          } else {
+            bg.classList.remove('active');
+          }
+        });
+      }
+
+      /* ── Badge click / hover ── */
+      badges.forEach(function (badge) {
+        badge.addEventListener('click', function () {
+          badges.forEach(function (b) { b.classList.remove('badge-active'); });
+          badge.classList.add('badge-active');
+          var key = badge.getAttribute('data-screen');
+          activateScreen(key);
+          /* swap decorative right-edge image */
+          document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+            bg.classList.toggle('active', bg.getAttribute('data-badge') === key);
+          });
+        });
+
+        badge.addEventListener('mouseenter', function () {
+          activateScreen(badge.getAttribute('data-screen'));
+        });
+
+        badge.addEventListener('mouseleave', function () {
+          var active = document.querySelector('.app-feature-badge.badge-active');
+          if (active) activateScreen(active.getAttribute('data-screen'));
+        });
+      });
+
+      /* Set initial screen from first badge-active */
+      var firstActive = document.querySelector('.app-feature-badge.badge-active');
+      if (firstActive) {
+        var key = firstActive.getAttribute('data-screen');
+        activateScreen(key);
+        document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+          bg.classList.toggle('active', bg.getAttribute('data-badge') === key);
+        });
+      }
+
+      /* ── Phone entrance animation ── */
+      var phoneAnimated = false;
+
+      var phoneObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || phoneAnimated) return;
+          phoneAnimated = true;
+
+          phoneContainer.classList.add('phone-arrived');
+
+          var labelList = Array.from(floatLabels);
+          labelList.forEach(function (label, i) {
+            setTimeout(function () {
+              label.classList.add('label-visible');
+            }, 500 + i * 180);
+          });
+        });
+      }, { threshold: 0.3 });
+
+      phoneObserver.observe(phoneContainer);
+
+      /* ── Auto-cycle badges every 3 s (pauses on user interaction) ── */
+      var badgeList  = Array.from(badges);
+      var cycleIndex = 0;
+      var cycleTimer = null;
+      var userTouched = false;
+
+      function cycleBadge() {
+        if (userTouched) return;
+        cycleIndex = (cycleIndex + 1) % badgeList.length;
+        badgeList.forEach(function (b) { b.classList.remove('badge-active'); });
+        badgeList[cycleIndex].classList.add('badge-active');
+        var key = badgeList[cycleIndex].getAttribute('data-screen');
+        activateScreen(key);
+        document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+          bg.classList.toggle('active', bg.getAttribute('data-badge') === key);
+        });
+      }
+
+      function startCycle() { cycleTimer = setInterval(cycleBadge, 3000); }
+      function stopCycle()  { clearInterval(cycleTimer); }
+
+      badges.forEach(function (badge) {
+        badge.addEventListener('click', function () {
+          userTouched = true;
+          stopCycle();
+        });
+      });
+
+      /* Only auto-cycle while the section is mostly on screen */
+      var appPromoEl = phoneContainer.closest('section') || document.querySelector('.app-intro-panel');
+      var appInView  = false;
+      window.__animGate && window.__animGate(
+        appPromoEl,
+        function () {
+          appInView = true;
+          if (!userTouched) { stopCycle(); startCycle(); }
+        },
+        function () { appInView = false; stopCycle(); }
+      );
+
+      setTimeout(function () {
+        if (!userTouched && appInView) startCycle();
+      }, 2500);
+    }
+
+    /* ── Content entrance animation (always runs) ── */
+    var contentAnimated = false;
+
+    if (contentWrapper) {
+      var contentObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || contentAnimated) return;
+          contentAnimated = true;
+          contentWrapper.classList.add('content-revealed');
+          if (storeRow) {
+            setTimeout(function () {
+              storeRow.classList.add('content-revealed');
+            }, 600);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      contentObserver.observe(contentWrapper);
+    }
+  })();
+  </script>
+  <script>
+  /* ── App Intro: button-driven frame sequence animation ── */
+  (function () {
+    var canvas = document.getElementById('app-frame-canvas');
+    var stage  = document.getElementById('appFrameStage');
+    if (!canvas || !stage) return;
+
+    var ctx = canvas.getContext('2d');
+    var FRAME_COUNT = 159;
+    var FRAME_PATH = 'assets/images/animate/frame/frame_';
+    var FPS = 30;
+    var frames = [];
+    var lastDrawnFrame = 0;
+
+    function pad(n) { return String(n).padStart(4, '0'); }
+
+    for (var i = 1; i <= FRAME_COUNT; i++) {
+      var img = new Image();
+      img.src = FRAME_PATH + pad(i) + '.webp';
+      frames.push(img);
+    }
+
+    function resizeCanvas() {
+      drawFrame(lastDrawnFrame);
+    }
+
+    function drawFrame(idx) {
+      var img = frames[idx];
+      if (!img.complete || !img.naturalWidth) return;
+      var dpr = window.devicePixelRatio || 1;
+      var boxW = stage.clientWidth;
+      var boxH = stage.clientHeight;
+      var zoom = parseFloat(getComputedStyle(stage).getPropertyValue('--frame-zoom')) || 1;
+      /* keep the same cover-fit scale as before, but draw the WHOLE image
+         so it can overflow the box instead of being cropped */
+      var scale = Math.max(boxW / img.naturalWidth, boxH / img.naturalHeight) * zoom;
+      var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+      canvas.width  = Math.round(dw * dpr * 2);
+      canvas.height = Math.round(dh * dpr * 2);
+      canvas.style.width  = Math.round(dw) + 'px';
+      canvas.style.height = Math.round(dh) + 'px';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      lastDrawnFrame = idx;
+    }
+
+    window.addEventListener('resize', function () { resizeCanvas(); });
+
+    /* ── Feature segments (frame ranges) ──
+       Each feature occupies a contiguous block of frames and rests on the
+       last frame of its block. Clicking another feature plays the current
+       block backward (rest → start), then the target block forward
+       (start → rest), ending on its resting frame (not looping). */
+    var SEGMENTS = {
+      games:    { start: 1,   rest: 40  },
+      contests: { start: 41,  rest: 79  },
+      news:     { start: 80,  rest: 119 },
+      progress: { start: 120, rest: 159 }
+    };
+
+    var badges = Array.prototype.slice.call(
+      document.querySelectorAll('.app-intro-panel .app-feature-badge[data-screen]')
+    );
+
+    var currentRest = 'games';    /* feature currently resting (frame 40, idle) */
+    var pendingTarget = 'games';
+    var playing = false;
+    var rafId = 0;
+
+    function stopPlay() {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = 0;
+      playing = false;
+    }
+
+    function setActive(key) {
+      badges.forEach(function (b) {
+        b.classList.toggle('badge-active', b.getAttribute('data-screen') === key);
+      });
+    }
+
+    function buildPath(source, target) {
+      var list = [];
+      var s = SEGMENTS[source], t = SEGMENTS[target];
+      /* reverse the current feature's block: rest → start */
+      for (var f = s.rest; f >= s.start; f--) list.push(f);
+      /* play the target feature's block forward: start → rest */
+      for (var f = t.start; f <= t.rest; f++) list.push(f);
+      return list;
+    }
+
+    function playPath(framesList) {
+      stopPlay();
+      if (!framesList.length) {
+        currentRest = pendingTarget;
+        return;
+      }
+      playing = true;
+      var startTime = null;
+
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = (ts - startTime) / 1000;
+        var idx = Math.floor(elapsed * FPS);
+        if (idx >= framesList.length) {
+          drawFrame(framesList[framesList.length - 1] - 1);
+          playing = false;
+          currentRest = pendingTarget;
+          return;
+        }
+        drawFrame(framesList[idx] - 1);
+        rafId = requestAnimationFrame(step);
+      }
+
+      rafId = requestAnimationFrame(step);
+    }
+
+    badges.forEach(function (badge) {
+      badge.addEventListener('click', function () {
+        var target = badge.getAttribute('data-screen');
+        if (!SEGMENTS[target]) return;
+        if (target === currentRest) return;   /* already selected — do nothing */
+        if (playing) return;                  /* ignore clicks while an animation is playing */
+
+        var source = currentRest;
+        stopPlay();
+        pendingTarget = target;
+        setActive(target);
+        document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+          bg.classList.toggle('active', bg.getAttribute('data-badge') === target);
+        });
+        playPath(buildPath(source, target));
+      });
+    });
+
+    setActive(currentRest);
+    document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+      bg.classList.toggle('active', bg.getAttribute('data-badge') === currentRest);
+    });
+
+    /* Draw the default resting frame (games → frame 40) as soon as it's ready */
+    var INITIAL_IDX = SEGMENTS[currentRest].rest - 1;
+    if (frames[INITIAL_IDX].complete && frames[INITIAL_IDX].naturalWidth) {
+      resizeCanvas();
+      drawFrame(INITIAL_IDX);
+    } else {
+      frames[INITIAL_IDX].onload = function () { resizeCanvas(); drawFrame(INITIAL_IDX); };
+    }
+  })();
+  </script>
+<script>
+/* =============================================================
+   JOURNEY BOOK - Animated frame sequence player
+   Frames: assets/images/animate2/frames3/frame_0001.webp ... frame_0174.webp
+   Steps (frame boundaries): 1 | 34 | 70 | 101 | 124 | 149 | 174
+   ============================================================= */
+(function () {
+
+  /* Config */
+  var FRAME_DIR   = 'assets/images/animate2/frames3/';
+  var FRAME_COUNT = 174;
+  var FPS         = 35;          /* playback speed */
+  var STEPS       = [1, 34, 70, 101, 124, 149, 174]; /* 7 boundary frames */
+
+  /* DOM */
+  var canvas    = document.getElementById('jbCanvas');
+  var wrap      = document.getElementById('jbFrameWrap');
+  var leftBtn   = document.getElementById('jbArrowLeft');
+  var rightBtn  = document.getElementById('jbArrowRight');
+  var clickL    = document.getElementById('jbClickLeft');
+  var clickR    = document.getElementById('jbClickRight');
+  var dotsWrap  = document.getElementById('jbDots');
+  if (!canvas) return;
+
+  var ctx   = canvas.getContext('2d');
+  var dots  = Array.from(dotsWrap.querySelectorAll('.jb-dot'));
+
+  /* State */
+  var currentStep  = 0;          /* index into STEPS[] */
+  var currentFrame = 1;          /* 1-based */
+  var playing      = false;
+  var rafId        = 0;
+
+  /* Pre-load all frames */
+  var frames = [];
+  for (var i = 1; i <= FRAME_COUNT; i++) {
+    var img = new Image();
+    img.src = FRAME_DIR + 'frame_' + pad4(i) + '.webp';
+    frames.push(img);
+  }
+
+  function pad4(n) {
+    return ('000' + n).slice(-4);
+  }
+
+  /* Canvas sizing */
+  function resizeCanvas() {
+    var img = frames[currentFrame - 1];
+    if (img && img.complete && img.naturalWidth) {
+      /* Match canvas pixels to the image's own aspect ratio */
+      var w = wrap.clientWidth;
+      var h = Math.round(w * img.naturalHeight / img.naturalWidth);
+      canvas.width  = w * (window.devicePixelRatio || 1);
+      canvas.height = h * (window.devicePixelRatio || 1);
+      canvas.style.width  = w + 'px';
+      canvas.style.height = h + 'px';
+      wrap.style.height   = h + 'px';
+    }
+    drawFrameAt(currentFrame);
+  }
+  window.addEventListener('resize', resizeCanvas);
+
+  /* Draw a single frame (1-based index) */
+  function drawFrameAt(idx) {
+    var img = frames[idx - 1];
+    if (!img || !img.complete || !img.naturalWidth) {
+      img.onload = function () { drawFrameAt(idx); };
+      return;
+    }
+    var cw = canvas.width, ch = canvas.height;
+    var scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
+    var dw = img.naturalWidth  * scale;
+    var dh = img.naturalHeight * scale;
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+    currentFrame = idx;
+  }
+
+  /* Animate between two frames (inclusive) */
+  function animateTo(targetFrame, onDone) {
+    if (playing) cancelAnimationFrame(rafId);
+    playing = true;
+    var startFrame = currentFrame;
+    var direction  = targetFrame >= startFrame ? 1 : -1;
+    var startTime  = null;
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var elapsed = (ts - startTime) / 1000;
+      var framesToDraw = Math.round(elapsed * FPS);
+      var f = startFrame + direction * framesToDraw;
+
+      if (direction > 0 ? f >= targetFrame : f <= targetFrame) {
+        drawFrameAt(targetFrame);
+        playing = false;
+        if (onDone) onDone();
+        return;
+      }
+      drawFrameAt(f);
+      rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  /* Update arrow colours */
+  function updateArrows() {
+    var atStart = currentStep === 0;
+    var atEnd   = currentStep === STEPS.length - 1;
+    leftBtn.className  = 'jb-arrow jb-arrow-left  ' + (atStart ? 'jb-white' : 'jb-red');
+    rightBtn.className = 'jb-arrow jb-arrow-right ' + (atEnd   ? 'jb-white' : 'jb-red');
+  }
+
+  /* Update dots */
+  function updateDots() {
+    dots.forEach(function (d, i) {
+      d.classList.toggle('jb-dot-active', i === currentStep);
+    });
+  }
+
+  /* Navigate to a step */
+  function goToStep(newStep) {
+    if (newStep < 0 || newStep >= STEPS.length) return;
+    if (playing) return;            /* ignore while animating */
+    currentStep = newStep;
+    updateArrows();
+    updateDots();
+    animateTo(STEPS[currentStep]);
+  }
+
+  /* Canvas click: left half -> previous step, right half -> next step.
+     Boundary rules:
+       At step 0 (frame 1):        both halves -> next step (1)
+       At last step (frame 300):   both halves -> previous step (5) */
+  function handleCanvasLeft() {
+    if (currentStep === 0) {
+      goToStep(1);
+    } else if (currentStep === STEPS.length - 1) {
+      goToStep(STEPS.length - 2);
+    } else {
+      goToStep(currentStep - 1);
+    }
+  }
+
+  function handleCanvasRight() {
+    if (currentStep === 0) {
+      goToStep(1);
+    } else if (currentStep === STEPS.length - 1) {
+      goToStep(STEPS.length - 2);
+    } else {
+      goToStep(currentStep + 1);
+    }
+  }
+
+  /* Dot clicks */
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () { goToStep(i); });
+  });
+
+  /* Wire up buttons & zones */
+  leftBtn.addEventListener('click',  function () { goToStep(currentStep - 1); });
+  rightBtn.addEventListener('click', function () { goToStep(currentStep + 1); });
+  clickL.addEventListener('click',   handleCanvasLeft);
+  clickR.addEventListener('click',   handleCanvasRight);
+
+  /* ── Press-and-hold zoom magnifier (mobile only) ── */
+  var jbMagnifier    = null;
+  var jbHoldTimer    = null;
+  var jbIsHolding    = false;
+  var jbHoldStartX   = 0;
+  var jbHoldStartY   = 0;
+  var JB_HOLD_DELAY  = 350;
+  var JB_MOVE_CANCEL = 10;
+  var JB_LENS_W       = 320;
+  var JB_LENS_H       = 320;
+  var JB_ZOOM          = 4;
+
+  function jbIsMobileViewport() {
+    return window.innerWidth <= 767;
+  }
+
+  function jbEnsureMagnifier() {
+    if (jbMagnifier) return jbMagnifier;
+    jbMagnifier = document.createElement('div');
+    jbMagnifier.className = 'jb-magnifier';
+    document.body.appendChild(jbMagnifier);
+    return jbMagnifier;
+  }
+
+  function jbPositionMagnifier(touchClientX) {
+    var lens        = jbEnsureMagnifier();
+    var frameRect   = wrap.getBoundingClientRect();
+    var spaceAbove  = frameRect.top;
+    var spaceBelow  = window.innerHeight - frameRect.bottom;
+    var top;
+
+    if (spaceAbove >= JB_LENS_H + 16 && spaceAbove >= spaceBelow) {
+      top = frameRect.top - JB_LENS_H - 12;
+    } else if (spaceBelow >= JB_LENS_H + 16) {
+      top = frameRect.bottom + 12;
+    } else {
+      top = spaceAbove > spaceBelow
+        ? Math.max(8, frameRect.top - JB_LENS_H - 12)
+        : Math.min(window.innerHeight - JB_LENS_H - 8, frameRect.bottom + 12);
+    }
+
+    var left = touchClientX - JB_LENS_W / 2;
+    left = Math.max(8, Math.min(window.innerWidth - JB_LENS_W - 8, left));
+
+    lens.style.top  = top + 'px';
+    lens.style.left = left + 'px';
+  }
+
+  function jbUpdateMagnifierImage(touch) {
+    var canvasRect = canvas.getBoundingClientRect();
+    var relX = (touch.clientX - canvasRect.left) / canvasRect.width;
+    var relY = (touch.clientY - canvasRect.top)  / canvasRect.height;
+    relX = Math.max(0, Math.min(1, relX));
+    relY = Math.max(0, Math.min(1, relY));
+
+    var img = frames[currentFrame - 1];
+    if (!img || !img.complete) return;
+
+    var lens = jbEnsureMagnifier();
+    var bgW  = canvasRect.width  * JB_ZOOM;
+    var bgH  = canvasRect.height * JB_ZOOM;
+    var bgX  = -(relX * bgW - JB_LENS_W / 2);
+    var bgY  = -(relY * bgH - JB_LENS_H / 2);
+
+    lens.style.backgroundImage    = 'url(' + img.src + ')';
+    lens.style.backgroundSize     = bgW + 'px ' + bgH + 'px';
+    lens.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
+
+    jbPositionMagnifier(touch.clientX);
+  }
+
+  function jbStartHold(touch) {
+    jbIsHolding = true;
+    var lens = jbEnsureMagnifier();
+    lens.style.width   = JB_LENS_W + 'px';
+    lens.style.height  = JB_LENS_H + 'px';
+    lens.style.display = 'block';
+    jbUpdateMagnifierImage(touch);
+  }
+
+  function jbEndHold() {
+    jbIsHolding = false;
+    if (jbMagnifier) jbMagnifier.style.display = 'none';
+  }
+
+  function jbClearHoldTimer() {
+    if (jbHoldTimer) { clearTimeout(jbHoldTimer); jbHoldTimer = null; }
+  }
+
+  wrap.addEventListener('touchstart', function (e) {
+    if (!jbIsMobileViewport() || playing) return;
+    var t = e.touches[0];
+    jbHoldStartX = t.clientX;
+    jbHoldStartY = t.clientY;
+    jbClearHoldTimer();
+    jbHoldTimer = setTimeout(function () { jbStartHold(t); }, JB_HOLD_DELAY);
+  }, { passive: true });
+
+  wrap.addEventListener('touchmove', function (e) {
+    if (!jbIsMobileViewport()) return;
+    var t = e.touches[0];
+    if (jbIsHolding) {
+      e.preventDefault();
+      jbUpdateMagnifierImage(t);
+    } else if (jbHoldTimer) {
+      var dx = Math.abs(t.clientX - jbHoldStartX);
+      var dy = Math.abs(t.clientY - jbHoldStartY);
+      if (dx > JB_MOVE_CANCEL || dy > JB_MOVE_CANCEL) jbClearHoldTimer();
+    }
+  }, { passive: false });
+
+  wrap.addEventListener('touchend', function (e) {
+    if (!jbIsMobileViewport()) return;
+    jbClearHoldTimer();
+    if (jbIsHolding) {
+      e.preventDefault();
+      jbEndHold();
+    }
+  }, { passive: false });
+
+  wrap.addEventListener('touchcancel', function () {
+    jbClearHoldTimer();
+    jbEndHold();
+  }, { passive: true });
+
+  /* Destination reveal on scroll */
+var dest = document.getElementById('journeyDestination');
+  if (dest) {
+    window.addEventListener('scroll', function () {
+      var rect = dest.getBoundingClientRect();
+      var inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      if (inView) {
+        dest.classList.add('is-active');
+      } else {
+        dest.classList.remove('is-active');
+      }
+    }, { passive: true });
+  }
+
+  /* Journey particles */
+  var pContainer = document.getElementById('journeyParticles');
+  if (pContainer) {
+    for (var p = 0; p < 22; p++) {
+      var pel  = document.createElement('div');
+      var size = Math.random() * 5 + 3;
+      pel.className = 'j-particle';
+      pel.style.cssText = [
+        'width:' + size + 'px',
+        'height:' + size + 'px',
+        'left:' + (Math.random() * 100) + '%',
+        'top:' + (Math.random() * 100) + '%',
+        'animation-duration:' + (Math.random() * 10 + 8) + 's',
+        'animation-delay:' + (Math.random() * 8) + 's'
+      ].join(';');
+      pContainer.appendChild(pel);
+    }
+  }
+
+  /* Initial render */
+  function init() {
+    if (frames[0].complete && frames[0].naturalWidth) {
+      resizeCanvas();
+      drawFrameAt(1);
+    } else {
+      frames[0].onload = function () {
+        resizeCanvas();
+        drawFrameAt(1);
+      };
+    }
+    updateArrows();
+    updateDots();
+  }
+  init();
+
+})();
+</script>
+<script>
+/* ════════════════════════════════════════════════════
+   PREMIUM POPPER CONFETTI — Rank Holders Section
+   ════════════════════════════════════════════════════ */
+(function () {
+  var canvas  = document.getElementById('rankConfettiCanvas');
+  var section = document.getElementById('toppersSection');
+  if (!canvas || !section) return;
+
+  var ctx       = canvas.getContext('2d');
+  var particles = [];
+  var rafId     = null;
+  var fired     = false;
+  var pending   = 0;
+
+  var COLORS = [
+    '#F5C04A', '#D6B46D', '#FFD700', '#C68A2D',
+    '#FFF0A0', '#E8A020', '#A8822F', '#FFFBE6',
+    '#F5A425', '#ffffff', '#FFE566', '#FFC200',
+    '#FFECAA', '#E0A800', '#fff5cc'
+  ];
+
+  var SHAPES = ['circle', 'rect', 'ribbon', 'star', 'triangle', 'diamond'];
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+  function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
+  function pick(arr) { return arr[randInt(0, arr.length - 1)]; }
+
+  function resize() {
+    canvas.width  = section.offsetWidth;
+    canvas.height = section.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function createParticle(side) {
+    var isLeft = side === 'left';
+    var x = isLeft
+      ? rand(canvas.width * 0.04, canvas.width * 0.18)
+      : rand(canvas.width * 0.82, canvas.width * 0.96);
+    var y = rand(canvas.height * 0.38, canvas.height * 0.58);
+
+    var angle = isLeft ? rand(-70, 15) : rand(-110, -165);
+    var rad   = angle * Math.PI / 180;
+    var speed = rand(9, 22);
+
+    return {
+      x: x, y: y,
+      vx: Math.cos(rad) * speed,
+      vy: Math.sin(rad) * speed,
+      gravity: rand(0.35, 0.55),
+      drag: rand(0.987, 0.996),
+      rotation: rand(0, 360),
+      rotSpeed: rand(-7, 7),
+      shape: pick(SHAPES),
+      color: pick(COLORS),
+      size: rand(6, 15),
+      ribbonLen: rand(18, 38),
+      alpha: rand(0.6, 1.0),
+      fade: rand(0.014, 0.025),
+      wobble: rand(0, Math.PI * 2),
+      wobbleSpeed: rand(0.05, 0.16),
+      wobbleAmp: rand(0.6, 2.6),
+      alive: true
+    };
+  }
+
+  function createSparkle(side) {
+    var isLeft = side === 'left';
+    var x = isLeft
+      ? rand(canvas.width * 0.02, canvas.width * 0.35)
+      : rand(canvas.width * 0.65, canvas.width * 0.98);
+    var y = rand(canvas.height * 0.20, canvas.height * 0.75);
+    return {
+      x: x, y: y,
+      vx: isLeft ? rand(0.2, 1.2) : rand(-1.2, -0.2),
+      vy: rand(-0.8, 0.8),
+      size: rand(2, 5),
+      alpha: rand(0.5, 1.0),
+      fade: rand(0.018, 0.035),
+      phase: rand(0, Math.PI * 2),
+      speed: rand(0.12, 0.28),
+      type: 'sparkle',
+      alive: true
+    };
+  }
+
+  function drawSparkle(p) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.alpha);
+    ctx.translate(p.x, p.y);
+    var r = p.size, r2 = r * 0.25;
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    for (var i = 0; i < 8; i++) {
+      var a = (i * Math.PI) / 4;
+      var d = i % 2 === 0 ? r : r2;
+      if (i === 0) ctx.moveTo(Math.cos(a) * d, Math.sin(a) * d);
+      else         ctx.lineTo(Math.cos(a) * d, Math.sin(a) * d);
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawParticle(p) {
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, p.alpha);
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation * Math.PI / 180);
+    ctx.fillStyle   = p.color;
+    ctx.strokeStyle = p.color;
+
+    if (p.shape === 'circle') {
+      ctx.beginPath();
+      ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+      ctx.fill();
+
+    } else if (p.shape === 'rect') {
+      ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+
+    } else if (p.shape === 'ribbon') {
+      ctx.lineWidth = p.size;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(0, -p.ribbonLen / 2);
+      ctx.bezierCurveTo(
+        p.size * 2, -p.ribbonLen / 4,
+        -p.size * 2,  p.ribbonLen / 4,
+        0,            p.ribbonLen / 2
+      );
+      ctx.stroke();
+
+    } else if (p.shape === 'star') {
+      var r1 = p.size / 2, r2s = p.size / 4.5, spikes = 5;
+      ctx.beginPath();
+      for (var i = 0; i < spikes * 2; i++) {
+        var r   = i % 2 === 0 ? r1 : r2s;
+        var ang = (i * Math.PI) / spikes - Math.PI / 2;
+        if (i === 0) ctx.moveTo(Math.cos(ang) * r, Math.sin(ang) * r);
+        else         ctx.lineTo(Math.cos(ang) * r, Math.sin(ang) * r);
+      }
+      ctx.closePath();
+      ctx.fill();
+
+    } else if (p.shape === 'triangle') {
+      var h = p.size * 0.866;
+      ctx.beginPath();
+      ctx.moveTo(0, -h * 0.67);
+      ctx.lineTo(p.size / 2, h * 0.33);
+      ctx.lineTo(-p.size / 2, h * 0.33);
+      ctx.closePath();
+      ctx.fill();
+
+    } else if (p.shape === 'diamond') {
+      var d = p.size / 2;
+      ctx.beginPath();
+      ctx.moveTo(0, -d);
+      ctx.lineTo(d * 0.6, 0);
+      ctx.lineTo(0, d);
+      ctx.lineTo(-d * 0.6, 0);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function updateParticle(p) {
+    if (p.type === 'sparkle') {
+      p.phase += p.speed;
+      p.x     += p.vx;
+      p.y     += p.vy + Math.sin(p.phase) * 0.4;
+      p.alpha -= p.fade;
+      if (p.alpha <= 0) p.alive = false;
+      return;
+    }
+    p.wobble   += p.wobbleSpeed;
+    p.x        += p.vx + Math.sin(p.wobble) * p.wobbleAmp;
+    p.y        += p.vy;
+    p.vy       += p.gravity;
+    p.vx       *= p.drag;
+    p.vy       *= p.drag;
+    p.rotation += p.rotSpeed;
+    p.alpha    -= p.fade;
+    if (p.alpha <= 0 || p.y > canvas.height + 60) p.alive = false;
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles = particles.filter(function (p) { return p.alive; });
+    particles.forEach(function (p) {
+      updateParticle(p);
+      if (p.type === 'sparkle') drawSparkle(p);
+      else drawParticle(p);
+    });
+    if (pending > 0 || particles.length > 0) {
+      rafId = requestAnimationFrame(loop);
+    } else {
+      rafId = null;
+    }
+  }
+
+  function fire() {
+    resize();
+    var COUNT    = 110;
+    var SPARKLES = 26;
+
+    function schedule(fn, d) {
+      pending++;
+      setTimeout(function () {
+        particles.push(fn());
+        pending--;
+      }, d);
+    }
+
+    for (var i = 0; i < COUNT; i++) {
+      (function (d) {
+        schedule(function () { return createParticle('left'); }, d);
+      })(i * 4);
+    }
+    for (var s = 0; s < SPARKLES; s++) {
+      (function (d) {
+        schedule(function () { return createSparkle('left'); }, d);
+      })(s * 20 + rand(0, 150));
+    }
+
+    setTimeout(function () {
+      for (var j = 0; j < COUNT; j++) {
+        (function (d) {
+          schedule(function () { return createParticle('right'); }, d);
+        })(j * 4);
+      }
+      for (var t = 0; t < SPARKLES; t++) {
+        (function (d) {
+          schedule(function () { return createSparkle('right'); }, d);
+        })(t * 20 + rand(0, 150));
+      }
+    }, 90);
+
+    if (!rafId) rafId = requestAnimationFrame(loop);
+  }
+
+  /* Trigger: fire the confetti each time the user scrolls DOWN and the
+     section centre passes the centre of the screen (top 50%). When the user
+     scrolls UP and the section centre crosses back below the screen centre,
+     the trigger resets so the next downward pass fires again. */
+  var lastConfettiScrollY = window.scrollY;
+  var confettiDirI        = 'down';
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > lastConfettiScrollY) confettiDirI = 'down';
+    else if (window.scrollY < lastConfettiScrollY) confettiDirI = 'up';
+    lastConfettiScrollY = window.scrollY;
+  }, { passive: true });
+
+  function updateConfettiState() {
+    var rect           = section.getBoundingClientRect();
+    var sectionCenterY = rect.top + rect.height / 2;
+    var mid            = window.innerHeight / 2;
+    if (confettiDirI === 'up') {
+      if (sectionCenterY >= mid) fired = false;
+    } else if (!fired && sectionCenterY <= mid) {
+      fired = true;
+      fire();
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    var confettiObs = new IntersectionObserver(function (entries) {
+      var e = entries[entries.length - 1];
+      if (e.isIntersecting) updateConfettiState();
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    confettiObs.observe(section);
+  }
+  window.addEventListener('scroll', updateConfettiState, { passive: true });
+})();
+</script>
+
+<script>
+  /* ── Hero video: play only while at least 50% of it is visible.
+     When the hero scrolls mostly out of view the video pauses (keeping
+     the last frame/poster so the section is never empty). */
+  (function () {
+    var video = document.getElementById('bg-video');
+    if (!video || !('IntersectionObserver' in window)) return;
+
+    function mostlyOnScreen(entry) {
+      var vw = entry.rootBounds ? entry.rootBounds.width * entry.rootBounds.height : 0;
+      var iv = entry.intersectionRect.width * entry.intersectionRect.height;
+      return entry.intersectionRatio >= 0.5 || (vw > 0 && iv / vw >= 0.5);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (mostlyOnScreen(entry)) {
+          var p = video.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    io.observe(video);
+  })();
+</script>
+
+<script>
+  /* ── Toppers marquee: slide only while more than half the section
+     is visible. Paused otherwise (track-paused overrides the global
+     anim gate). */
+  (function () {
+    var track = document.querySelector('.toppers-track');
+    if (!track || !('IntersectionObserver' in window)) return;
+    var sec = track.closest('section');
+    if (!sec) return;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        track.classList.toggle('track-paused', entry.intersectionRatio < 0.5);
+      });
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(sec);
+  })();
+</script>
+
+<script>
+  /* ── Section-aware animation gating ──
+     Pause CSS animations inside a section while it is not mostly on
+     screen (less than 75% of the section visible AND it covers less
+     than 75% of the viewport). */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var sections = document.querySelectorAll('section');
+    if (!sections.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var vw = entry.rootBounds ? entry.rootBounds.width * entry.rootBounds.height : 0;
+        var iv = entry.intersectionRect.width * entry.intersectionRect.height;
+        var mostly = entry.intersectionRatio >= 0.75 || (vw > 0 && iv / vw >= 0.75);
+        entry.target.classList.toggle('anim-paused', !mostly);
+      });
+    }, { threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5,
+                     0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1] });
+    sections.forEach(function (s) { io.observe(s); });
+  })();
+</script>
 </body>
 </html>

@@ -29,6 +29,223 @@ TemplateMo 569 Edu Meeting
 https://templatemo.com/tm-569-edu-meeting
 
 -->
+
+  <style>
+    .app-frame-stage {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      height: 400px;
+      margin: 0 auto;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 1;
+      --frame-zoom: 1;
+    }
+
+    #mobileapp .row > [class*="col"] {
+      min-width: 0;
+    }
+
+    .app-frame-stage canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      max-width: none;
+      max-height: none;
+      pointer-events: none;
+    }
+
+    .app-intro-panel {
+      position: relative;
+    }
+
+    .app-badge-bg-wrap {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 340px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .app-intro-panel .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .app-badge-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      aspect-ratio: 1092 / 1441;
+      object-fit: cover;
+      object-position: top right;
+      opacity: 0;
+      transform: scale(0.92) translateX(20px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      -webkit-mask-image:
+        linear-gradient(to top, transparent 0, transparent 15px, #000 30px),
+        linear-gradient(to right, transparent 0, #000 10px);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        linear-gradient(to top, transparent 0, transparent 15px, #000 30px),
+        linear-gradient(to right, transparent 0, #000 10px);
+      mask-composite: intersect;
+    }
+
+    .app-badge-bg.active {
+      opacity: 1;
+      transform: scale(1) translateX(0);
+    }
+
+    .app-badge-bg[data-badge="games"] {
+      width: 90%;
+      aspect-ratio: 1092 / 1441;
+    }
+
+    .app-badge-bg[data-badge="news"] {
+      width: 130%;
+      aspect-ratio: 1448 / 1086;
+    }
+
+    .app-badge-bg[data-badge="contests"] {
+      width: 90%;
+      aspect-ratio: 1080 / 1456;
+    }
+
+    .app-badge-bg[data-badge="progress"] {
+      width: 90%;
+      aspect-ratio: 1055 / 1491;
+    }
+
+    /* Feature badges: interactive states */
+    .app-feature-badge {
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border-color 0.3s !important;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .app-feature-badge.badge-active,
+    .app-feature-badge:hover {
+      background: rgba(245,164,37,0.22) !important;
+      border-color: rgba(245,164,37,0.5) !important;
+      transform: translateY(-3px) !important;
+      box-shadow: 0 6px 20px rgba(245,164,37,0.18) !important;
+    }
+
+    /* Feature badge icons glow on active */
+    .app-feature-badge.badge-active .badge-icon {
+      box-shadow: 0 0 14px rgba(245,164,37,0.5);
+    }
+
+    /* Inactive badges pulse every second to hint they are clickable */
+    .app-feature-badge:not(.badge-active) {
+      animation: badgeGlowPulse 1s ease-in-out infinite;
+    }
+    .app-feature-badge:not(.badge-active):hover {
+      animation: none;
+    }
+    @keyframes badgeGlowPulse {
+      0%, 100% {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(245,164,37,0.3);
+        box-shadow: 0 0 0 rgba(245,164,37,0);
+      }
+      50% {
+        background: rgba(255,255,255,0.85);
+        border-color: rgba(245,164,37,0.85);
+        box-shadow: 0 0 16px rgba(245,164,37,0.55);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .app-feature-badge:not(.badge-active) {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .app-badge-bg-wrap {
+        width: 220px;
+        opacity: 0.5;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .app-badge-bg-wrap {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #mobileapp {
+        display: flex;
+        flex-direction: column;
+      }
+      #mobileapp .row,
+      #mobileapp .row > [class*="col"],
+      #mobileapp .app-intro-content-wrapper {
+        display: contents;
+      }
+      #mobileapp .app-intro-subheading,
+      #mobileapp .app-intro-content-wrapper h2,
+      #mobileapp .app-intro-divider { order: 1; }
+      #mobileapp .app-intro-content-wrapper .intro-text { order: 2; }
+      #mobileapp .app-frame-stage { order: 3; }
+      #mobileapp .app-intro-content-wrapper .app-feature-badges { order: 4; }
+      #mobileapp .app-store-row { order: 5; }
+
+      #mobileapp .app-intro-subheading,
+      #mobileapp .app-intro-content-wrapper h2,
+      #mobileapp .app-intro-divider,
+      #mobileapp .app-intro-content-wrapper .intro-text,
+      #mobileapp .app-intro-content-wrapper .app-feature-badges {
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+      }
+
+      #mobileapp .app-intro-content-wrapper h4,
+      #mobileapp .app-intro-content-wrapper h2,
+      #mobileapp .app-intro-divider,
+      #mobileapp .app-intro-content-wrapper .intro-text,
+      #mobileapp .app-intro-content-wrapper .app-feature-badges,
+      #mobileapp .app-store-row {
+        opacity: 1;
+        transform: none;
+      }
+
+      .aia-phone-slot[data-pos="-2"],
+      .aia-phone-slot[data-pos="-1"],
+      .aia-phone-slot[data-pos="1"],
+      .aia-phone-slot[data-pos="2"] {
+        display: none;
+      }
+      .aia-phone-slot {
+        margin: 0 auto;
+      }
+      .aia-phone-slot[data-pos="0"] {
+        transform: none;
+        z-index: 10;
+        opacity: 1;
+      }
+      .aia-phone-slot[data-pos="0"] img {
+        width: clamp(150px, 62vw, 300px);
+      }
+      .aia-stage {
+        padding: 0 30px;
+      }
+      .aia-dots {
+        display: none;
+      }
+    }
+  </style>
   </head>
 
 <body>
@@ -103,7 +320,7 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="app-about-glow"></div>
           <div class="app-about-deco-circle deco-1"></div>
           <div class="app-about-deco-circle deco-2"></div>
-          <img src="assets/images/mobile8.png" alt="Aashirwad Eduverse App" class="app-about-phone-img">
+          <img src="assets/images/mobile8.webp" alt="Aashirwad Eduverse App" class="app-about-phone-img">
         </div>
       </div>
 
@@ -190,12 +407,24 @@ https://templatemo.com/tm-569-edu-meeting
       </div>
     </div>
   </div>
+  <div class="ad-mobile-image-wrap">
+    <img src="assets/images/app-get-mobile.webp" alt="Get the Aashirwad Eduverse App" class="ad-mobile-image">
+    <div class="app-download-buttons ad-mobile-buttons">
+      <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn app-store-btn-dark" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn app-store-btn-dark" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+      </a>
+    </div>
+  </div>
 </section>
 
 <script>
 (function() {
   var sec = document.querySelector('.app-download-bg-img');
   if (!sec) return;
+  if (window.innerWidth <= 767) return;
   var img = new Image();
   img.onload = function() {
     var ratio = img.naturalHeight / img.naturalWidth;
@@ -241,7 +470,7 @@ https://templatemo.com/tm-569-edu-meeting
         From exam selection to mastering every concept through 4 powerful learning modes, our app ensures you never lose track of what to study next—all within an affordable learning experience designed to make quality education accessible to every aspirant.
       </p>
 
-      <img src="assets/images/mobile4.png" alt="" class="gj-hero-phone-mobile">
+      <img src="assets/images/mobile4.webp" alt="" class="gj-hero-phone-mobile">
 
       <div class="gj-journey-heading">
         <span class="gj-journey-line"></span>
@@ -277,7 +506,7 @@ https://templatemo.com/tm-569-edu-meeting
             </div>
 
             <div class="gj-card-phone">
-              <img src="assets/images/appstep1.png" alt="Choose Your Exam screen" class="gj-card-phone-img">
+              <img src="assets/images/appstep1.webp" alt="Choose Your Exam screen" class="gj-card-phone-img">
             </div>
           </div>
         </div>
@@ -332,7 +561,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="gj-phone-stage">
         <div class="gj-phone-glow"></div>
         <div class="gj-pedestal"></div>
-        <img src="assets/images/mobile4.png" alt="Aashirwad Eduverse App" class="gj-hero-phone">
+        <img src="assets/images/mobile4.webp" alt="Aashirwad Eduverse App" class="gj-hero-phone">
 
         <div class="gj-callout gj-callout-1">
           <div class="gj-callout-connector"></div>
@@ -405,58 +634,19 @@ https://templatemo.com/tm-569-edu-meeting
   <div class="app-intro-panel">
     <div class="container" id="mobileapp">
       <div class="row align-items-center">
-        <div class="col-lg-4 col-md-5 text-center">
-          <div class="app-intro-image-wrapper">
-            <div class="app-phone-container">
-              <div class="app-phone-glow"></div>
-              <img src="assets/images/mobile.png" alt="Aashirwad Eduverse Mobile App" class="img-fluid app-phone-mockup app-phone-float">
-
-              <span class="app-float-label app-float-tl">
-                <span class="float-icon float-icon-read"><i class="fa fa-book"></i></span>
-                Reading Mode
-              </span>
-              <span class="app-float-label app-float-tr">
-                <span class="float-icon float-icon-write"><i class="fa fa-pencil"></i></span>
-                Writing Mode
-              </span>
-              <span class="app-float-label app-float-bl">
-                <span class="float-icon float-icon-listen"><i class="fa fa-headphones"></i></span>
-                Audio Learning
-              </span>
-              <span class="app-float-label app-float-br">
-                <span class="float-icon float-icon-watch"><i class="fa fa-play-circle"></i></span>
-                Video Learning
-              </span>
-            </div>
-
-            <div class="mobile-float-badges">
-              <span class="app-float-label">
-                <span class="float-icon float-icon-read"><i class="fa fa-book"></i></span>
-                Reading Mode
-              </span>
-              <span class="app-float-label">
-                <span class="float-icon float-icon-write"><i class="fa fa-pencil"></i></span>
-                Writing Mode
-              </span>
-              <span class="app-float-label">
-                <span class="float-icon float-icon-listen"><i class="fa fa-headphones"></i></span>
-                Audio Learning
-              </span>
-              <span class="app-float-label">
-                <span class="float-icon float-icon-watch"><i class="fa fa-play-circle"></i></span>
-                Video Learning
-              </span>
-            </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="app-frame-stage" id="appFrameStage">
+            <canvas id="app-frame-canvas"></canvas>
           </div>
         </div>
 
-        <div class="col-lg-8 col-md-7">
+        <div class="col-lg-8 col-md-6">
           <div class="app-intro-content-wrapper">
-            <h4 class="app-intro-subheading">Our Mobile App</h4>
-            <h2>Meet the New Era of </br> <span class="highlight">Competitive Exam Prep</span></h2>
-            <div class="app-intro-divider"></div>
+            <h4 class="app-intro-subheading slide-in-up" style="transition-delay: 0s;">Our Mobile App</h4>
+            <h2 class="slide-in-up" style="transition-delay: 0.1s;">Meet the New Era of </br><span class="highlight">Competitive Exam Prep</span></h2>
+            <div class="app-intro-divider slide-in-up" style="transition-delay: 0.2s;"></div>
 
-            <p class="intro-text">
+            <p class="intro-text slide-in-up" style="transition-delay: 0.3s;">
               Empower your study routine with <strong>Aashirwad Eduverse</strong>, our intelligent,
               adaptive mobile application designed to bring comprehensive Kerala PSC and competitive
               exam preparation straight to your smartphone. Built with a sleek, modern user interface,
@@ -466,24 +656,20 @@ https://templatemo.com/tm-569-edu-meeting
               tailored for Kerala PSC aspirants.
             </p>
 
-            <div class="app-feature-badges">
-              <span class="app-feature-badge">
-                <span class="badge-icon"><i class="fa fa-refresh"></i></span>
-                Smart Revision
-              </span>
-              <span class="app-feature-badge">
-                <span class="badge-icon"><i class="fa fa-trophy"></i></span>
-                Live Contests & Mock Exams
-              </span>
-              <span class="app-feature-badge">
+            <div class="app-feature-badges slide-in-up" style="transition-delay: 0.4s;">
+              <span class="app-feature-badge badge-active" data-screen="games">
                 <span class="badge-icon"><i class="fa fa-gamepad"></i></span>
                 Educational Game Zone
               </span>
-              <span class="app-feature-badge">
+              <span class="app-feature-badge" data-screen="contests">
+                <span class="badge-icon"><i class="fa fa-trophy"></i></span>
+                Live Contests & Mock Exams
+              </span>
+              <span class="app-feature-badge" data-screen="progress">
                 <span class="badge-icon"><i class="fa fa-bar-chart"></i></span>
                 Progress Levels
               </span>
-              <span class="app-feature-badge">
+              <span class="app-feature-badge" data-screen="news">
                 <span class="badge-icon"><i class="fa fa-newspaper-o"></i></span>
                 Daily Current Affairs
               </span>
@@ -501,7 +687,16 @@ https://templatemo.com/tm-569-edu-meeting
         </a>
       </div>
     </div>
+
+  <!-- Decorative right-edge badge images -->
+  <div class="app-badge-bg-wrap" id="appBadgeBgWrap" aria-hidden="true">
+    <img src="assets/images/animate/game-bg.png"         class="app-badge-bg active" data-badge="games"    alt="">
+    <img src="assets/images/animate/exam-bg.png"          class="app-badge-bg"        data-badge="contests"  alt="">
+    <img src="assets/images/animate/progresslevel-bg.png" class="app-badge-bg"        data-badge="progress"  alt="">
+    <img src="assets/images/animate/news-bg.png"         class="app-badge-bg"        data-badge="news"      alt="">
   </div>
+
+  </div><!-- /app-intro-panel -->
  
   <!-- ── Sticky scroll scene ──────────────────────────────── -->
   <div id="app-scroll-scene">
@@ -749,7 +944,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-gold"></div>
-          <img src="assets/images/mobile9.png" alt="Syllabus Tree" class="pf-mockup-img">
+          <img src="assets/images/mobile9.webp" alt="Syllabus Tree" class="pf-mockup-img">
         </div>
       </div>
     </div>
@@ -766,7 +961,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-dark"></div>
-          <img src="assets/images/search.png" alt="Keyword Search" class="pf-mockup-img">
+          <img src="assets/images/search.webp" alt="Keyword Search" class="pf-mockup-img">
         </div>
       </div>
       <div class="pf-content-side">
@@ -805,7 +1000,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-red"></div>
-          <img src="assets/images/contest.png" alt="Smart Exam" class="pf-mockup-img">
+          <img src="assets/images/contest.webp" alt="Smart Exam" class="pf-mockup-img">
         </div>
       </div>
     </div>
@@ -822,7 +1017,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-dark"></div>
-          <img src="assets/images/mobile3.png" alt="Game Zone" class="pf-mockup-img">
+          <img src="assets/images/mobile3.webp" alt="Game Zone" class="pf-mockup-img">
         </div>
       </div>
       <div class="pf-content-side">
@@ -861,7 +1056,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-gold"></div>
-          <img src="assets/images/news.png" alt="Current Affairs" class="pf-mockup-img">
+          <img src="assets/images/news.webp" alt="Current Affairs" class="pf-mockup-img">
         </div>
       </div>
     </div>
@@ -967,13 +1162,14 @@ https://templatemo.com/tm-569-edu-meeting
     <div class="faq-right-col">
       <div class="faq-phone-wrapper">
         <div class="faq-phone-glow"></div>
-        <img src="assets/images/mobile.png" alt="Aashirwad Eduverse Mobile App" class="faq-phone-img">
+        <img src="assets/images/mobile.webp" alt="Aashirwad Eduverse Mobile App" class="faq-phone-img">
       </div>
     </div>
   </div>
 </section>
 
 <section class="app-in-action" id="app-in-action">
+  <div class="aia-bg-glow"></div>
   <div class="container">
     <div class="app-action-heading">
       <p class="app-action-eyebrow">See It In Action</p>
@@ -981,25 +1177,35 @@ https://templatemo.com/tm-569-edu-meeting
       <p class="app-action-subtitle">Real screens. Real learning. Real results.</p>
       <div class="app-action-underline"></div>
     </div>
+  </div>
 
-    <div class="app-action-gallery">
-      <button class="app-action-arrow app-action-arrow-prev" aria-label="Previous">
-        <i class="fa fa-chevron-left"></i>
-      </button>
-      <div class="app-action-track" id="appActionTrack">
-        <img src="assets/images/mobile1.png" alt="App Screen 1">
-        <img src="assets/images/mobile.png" alt="App Screen 2">
-        <img src="assets/images/mobile3.png" alt="App Screen 3">
-        <img src="assets/images/mobile2.png" alt="App Screen 4">
-        <img src="assets/images/mobile1.png" alt="App Screen 5">
-        <img src="assets/images/mobile.png" alt="App Screen 6">
-        <img src="assets/images/mobile3.png" alt="App Screen 7">
-        <img src="assets/images/mobile2.png" alt="App Screen 8">
+  <div class="aia-carousel-wrap">
+    <button class="aia-arrow aia-arrow-left" id="aiaArrowLeft" aria-label="Previous">&#8249;</button>
+
+    <div class="aia-stage" id="aiaStage">
+      <div class="aia-phone-slot" data-pos="-2">
+        <img src="assets/images/mobile/screen1.webp" alt="App Screen">
       </div>
-      <button class="app-action-arrow app-action-arrow-next" aria-label="Next">
-        <i class="fa fa-chevron-right"></i>
-      </button>
+      <div class="aia-phone-slot" data-pos="-1">
+        <img src="assets/images/mobile/screen2.webp" alt="App Screen">
+      </div>
+      <div class="aia-phone-slot" data-pos="0">
+        <img src="assets/images/mobile/screen3.webp" alt="App Screen">
+      </div>
+      <div class="aia-phone-slot" data-pos="1">
+        <img src="assets/images/mobile/screen4.webp" alt="App Screen">
+      </div>
+      <div class="aia-phone-slot" data-pos="2">
+        <img src="assets/images/mobile/screen5.webp" alt="App Screen">
+      </div>
     </div>
+
+    <button class="aia-arrow aia-arrow-right" id="aiaArrowRight" aria-label="Next">&#8250;</button>
+  </div>
+
+  <div class="aia-dots-row">
+    <div class="aia-dots" id="aiaDots"></div>
+    <span class="aia-counter" id="aiaCounter">05 / 06</span>
   </div>
 </section>
 <!-- Shared Footer (injected from components/footer.html) -->
@@ -1022,75 +1228,213 @@ https://templatemo.com/tm-569-edu-meeting
     <script src="assets/js/slick-slider.js"></script>
     <script src="assets/js/custom.js"></script>
     <script>
-(function() {
-  var track = document.getElementById('appActionTrack');
-  if (!track) return;
-  var imgs = track.querySelectorAll('img');
-  var total = imgs.length;
-  if (total < 2) return;
+/* ── AIA Center Focus Carousel with smooth slide animation ── */
+(function () {
+  var images = [
+    'assets/images/mobile/screen1.webp',
+    'assets/images/mobile/screen2.webp',
+    'assets/images/mobile/screen3.webp',
+    'assets/images/mobile/screen4.webp',
+    'assets/images/mobile/screen5.webp',
+    'assets/images/mobile/screen6.webp',
+    'assets/images/mobile/screen7.webp',
+    'assets/images/mobile/screen8.webp',
+    'assets/images/mobile/screen9.webp',
+    'assets/images/mobile/screen10.webp',
+    'assets/images/mobile/screen11.webp',
+    'assets/images/mobile/screen12.webp',
+    'assets/images/mobile/screen13.webp',
+    'assets/images/mobile/screen14.webp',
+    'assets/images/mobile/screen15.webp',
+    'assets/images/mobile/screen16.webp',
+    'assets/images/mobile/screen17.webp',
+    'assets/images/mobile/screen18.webp',
+    'assets/images/mobile/screen19.webp',
+    'assets/images/mobile/screen20.webp',
+    'assets/images/mobile/screen21.webp',
+    'assets/images/mobile/screen22.webp',
+    'assets/images/mobile/screen23.webp',
+    'assets/images/mobile/screen24.webp',
+    'assets/images/mobile/screen25.webp',
+    'assets/images/mobile/screen26.webp',
+    'assets/images/mobile/screen27.webp',
+    'assets/images/mobile/screen28.webp'
+  ];
 
-  for (var i = 0; i < 4; i++) {
-    track.appendChild(imgs[i].cloneNode(true));
+  var total    = images.length;
+  var current  = 0;
+  var animating = false;
+  var stage    = document.getElementById('aiaStage');
+  var dotsWrap = document.getElementById('aiaDots');
+  var counter  = document.getElementById('aiaCounter');
+  var leftBtn  = document.getElementById('aiaArrowLeft');
+  var rightBtn = document.getElementById('aiaArrowRight');
+  if (!stage) return;
+
+  var slots = Array.from(stage.querySelectorAll('.aia-phone-slot'));
+
+  /* Build dots */
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement('span');
+    d.className = 'aia-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('data-i', i);
+    dotsWrap.appendChild(d);
   }
 
-  var idx = 0, imgW = 0, gap = 0;
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
-  function meas() {
-    var fi = track.querySelector('img');
-    if (!fi) return;
-    var g = window.getComputedStyle(track).gap || '0px';
-    gap = parseFloat(g) || 0;
-    imgW = fi.offsetWidth + gap;
+  function imgAt(offset) {
+    return images[((current + offset) % total + total) % total];
   }
 
-  function go(i) {
-    meas();
-    track.style.transform = 'translateX(' + (-i * imgW) + 'px)';
+  /* Assign images to slots without animation */
+  function assignImages() {
+    var positions = [-2, -1, 0, 1, 2];
+    positions.forEach(function (pos, i) {
+      slots[i].setAttribute('data-pos', pos);
+      slots[i].querySelector('img').src = imgAt(pos);
+    });
   }
 
-  function jump(i) {
-    track.style.transition = 'none';
-    idx = i;
-    go(i);
-    track.offsetHeight;
-    track.style.transition = 'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)';
+  function updateDots() {
+    var dots = dotsWrap.querySelectorAll('.aia-dot');
+    dots.forEach(function (d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    if (counter) counter.textContent = pad(current + 1) + ' / ' + pad(total);
   }
 
-  function slide(i) {
-    idx = i;
-    go(i);
+  var animT1 = null;
+  var animT2 = null;
+
+  /* Cancel any in-flight animation so a new one can start immediately */
+  function interruptAnim() {
+    if (animT1) { clearTimeout(animT1); animT1 = null; }
+    if (animT2) { clearTimeout(animT2); animT2 = null; }
+    animating = false;
+    slots.forEach(function (s) {
+      s.classList.remove('slide-out-left', 'slide-out-right', 'slide-in-from-left', 'slide-in-from-right');
+    });
   }
 
-  function next() {
-    if (idx >= total) { jump(0); restart(); return; }
-    slide(idx + 1);
-    restart();
+  function go(direction) {
+    /* direction: 1 = next (right), -1 = prev (left) */
+    interruptAnim();
+    animating = true;
+
+    /* Step 1: animate current slots sliding out */
+    slots.forEach(function (slot) {
+      if (direction > 0) {
+        slot.classList.add('slide-out-left');
+      } else {
+        slot.classList.add('slide-out-right');
+      }
+    });
+
+    animT1 = setTimeout(function () {
+      animT1 = null;
+      /* Step 2: update index and images instantly (no transition) */
+      current = (current + direction + total) % total;
+      updateDots();
+
+      /* remove slide-out, add slide-in-from opposite side */
+      slots.forEach(function (slot) {
+        slot.classList.remove('slide-out-left', 'slide-out-right');
+        if (direction > 0) {
+          slot.classList.add('slide-in-from-right');
+        } else {
+          slot.classList.add('slide-in-from-left');
+        }
+      });
+
+      assignImages();
+
+      /* Step 3: force reflow, then remove slide-in class so
+         the normal data-pos transition takes over → smooth slide in */
+      void stage.offsetHeight;
+
+      slots.forEach(function (slot) {
+        slot.classList.remove('slide-in-from-left', 'slide-in-from-right');
+      });
+
+      animT2 = setTimeout(function () {
+        animT2 = null;
+        animating = false;
+      }, 700);
+
+    }, 450);
   }
 
-  function prev() {
-    if (idx <= 0) { jump(total); slide(idx - 1); restart(); return; }
-    slide(idx - 1);
-    restart();
+  function next() { go(1);  }
+  function prev() { go(-1); }
+
+  /* Auto-play timer */
+  var AUTO_MS = 4000;
+  var timer;
+
+  function restartTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, AUTO_MS);
   }
 
-  var gal = track.closest('.app-action-gallery');
-  var iv;
-  function start() { iv = setInterval(next, 5000); }
-  function stop() { clearInterval(iv); }
-  function restart() { stop(); start(); }
+  function manualNav(fn) {
+    fn();
+    restartTimer();
+  }
 
-  gal.addEventListener('mouseenter', stop);
-  gal.addEventListener('mouseleave', start);
+  rightBtn.addEventListener('click', function () { manualNav(next); });
+  leftBtn.addEventListener('click',  function () { manualNav(prev); });
 
-  document.querySelector('.app-action-arrow-next').addEventListener('click', next);
-  document.querySelector('.app-action-arrow-prev').addEventListener('click', prev);
-
-  meas(); slide(0); start();
-
-  var rt;
-  window.addEventListener('resize', function() {
-    clearTimeout(rt); rt = setTimeout(function() { meas(); go(idx); }, 150);
+  dotsWrap.addEventListener('click', function (e) {
+    var dot = e.target.closest('.aia-dot');
+    if (!dot) return;
+    var target = parseInt(dot.getAttribute('data-i'), 10);
+    var dir = target > current ? 1 : -1;
+    current = target;
+    updateDots();
+    assignImages();
+    restartTimer();
   });
+
+  /* Click side phones to navigate */
+  slots.forEach(function (slot) {
+    slot.addEventListener('click', function () {
+      var pos = parseInt(slot.getAttribute('data-pos'), 10);
+      if (pos < 0) manualNav(prev);
+      else if (pos > 0) manualNav(next);
+    });
+  });
+
+  /* Touch swipe */
+  var tx = 0;
+  stage.addEventListener('touchstart', function (e) {
+    tx = e.touches[0].clientX;
+  }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) {
+      manualNav(dx < 0 ? next : prev);
+    }
+  }, { passive: true });
+
+  /* Pause auto-play while the section is less than 50% visible */
+  var aiaSection = stage.closest('section');
+  if (aiaSection && ('IntersectionObserver' in window)) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var vw = entry.rootBounds ? entry.rootBounds.width * entry.rootBounds.height : 0;
+        var iv = entry.intersectionRect.width * entry.intersectionRect.height;
+        var inView = entry.intersectionRatio >= 0.5 || (vw > 0 && iv / vw >= 0.5);
+        if (inView) restartTimer();
+        else clearInterval(timer);
+      });
+    }, { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(aiaSection);
+  }
+
+  /* Init */
+  assignImages();
+  updateDots();
+  restartTimer();
 })();
     </script>
     <script>
@@ -2165,7 +2509,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-th-large', text: 'Everything organized in one place' },
               { icon: 'fa-star', text: 'Personalized preparation path' }
             ],
-            img: 'assets/images/appstep1.png'
+            img: 'assets/images/appstep1.webp'
           },
           {
             badge: 'STEP 2 OF 7',
@@ -2177,7 +2521,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-th-large', text: 'Easy category navigation' },
               { icon: 'fa-star', text: 'No unnecessary distractions' }
             ],
-            img: 'assets/images/appstep2.png'
+            img: 'assets/images/appstep2.webp'
           },
           {
             badge: 'STEP 3 OF 7',
@@ -2189,7 +2533,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-th-large', text: 'Complete syllabus coverage' },
               { icon: 'fa-star', text: 'Organized academic structure' }
             ],
-            img: 'assets/images/appstep3.png'
+            img: 'assets/images/appstep3.webp'
           },
           {
             badge: 'STEP 4 OF 7',
@@ -2201,7 +2545,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-th-large', text: 'Easier concept discovery' },
               { icon: 'fa-star', text: 'Step-by-step progression' }
             ],
-            img: 'assets/images/appstep4.png'
+            img: 'assets/images/appstep4.webp'
           },
           {
             badge: 'STEP 5 OF 7',
@@ -2213,7 +2557,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-th-large', text: 'Better understanding' },
               { icon: 'fa-star', text: 'Structured chapter navigation' }
             ],
-            img: 'assets/images/appstep5.png'
+            img: 'assets/images/appstep5.webp'
           },
           {
             badge: 'STEP 6 OF 7',
@@ -2225,7 +2569,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-th-large', text: 'Chapter-wise learning materials' },
               { icon: 'fa-star', text: 'Everything in one place' }
             ],
-            img: 'assets/images/appstep6.png'
+            img: 'assets/images/appstep6.webp'
           },
           {
             badge: 'STEP 7 OF 7',
@@ -2237,7 +2581,7 @@ https://templatemo.com/tm-569-edu-meeting
               { icon: 'fa-film', text: 'Watch engaging video lessons' },
               { icon: 'fa-headphones', text: 'Listen anytime & Practice through writing' }
             ],
-            img: 'assets/images/appstep7.png'
+            img: 'assets/images/appstep7.webp'
           }
         ];
 
@@ -2510,9 +2854,157 @@ https://templatemo.com/tm-569-edu-meeting
       });
     })();
   </script>
-  </body>
 
+  <script>
+  /* ── App Intro: button-driven frame sequence animation ── */
+  (function () {
+    var canvas = document.getElementById('app-frame-canvas');
+    var stage  = document.getElementById('appFrameStage');
+    if (!canvas || !stage) return;
 
+    var ctx = canvas.getContext('2d');
+    var FRAME_COUNT = 159;
+    var FRAME_PATH = 'assets/images/animate/frame/frame_';
+    var FPS = 30;
+    var frames = [];
+    var lastDrawnFrame = 0;
+
+    function pad(n) { return String(n).padStart(4, '0'); }
+
+    for (var i = 1; i <= FRAME_COUNT; i++) {
+      var img = new Image();
+      img.src = FRAME_PATH + pad(i) + '.webp';
+      frames.push(img);
+    }
+
+    function resizeCanvas() {
+      drawFrame(lastDrawnFrame);
+    }
+
+    function drawFrame(idx) {
+      var img = frames[idx];
+      if (!img.complete || !img.naturalWidth) return;
+      var dpr = window.devicePixelRatio || 1;
+      var boxW = stage.clientWidth;
+      var boxH = stage.clientHeight;
+      var zoom = parseFloat(getComputedStyle(stage).getPropertyValue('--frame-zoom')) || 1;
+      /* keep the same cover-fit scale as before, but draw the WHOLE image
+         so it can overflow the box instead of being cropped */
+      var scale = Math.max(boxW / img.naturalWidth, boxH / img.naturalHeight) * zoom;
+      var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+      canvas.width  = Math.round(dw * dpr * 2);
+      canvas.height = Math.round(dh * dpr * 2);
+      canvas.style.width  = Math.round(dw) + 'px';
+      canvas.style.height = Math.round(dh) + 'px';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      lastDrawnFrame = idx;
+    }
+
+    window.addEventListener('resize', function () { resizeCanvas(); });
+
+    /* ── Feature segments (frame ranges) ──
+       Each feature occupies a contiguous block of frames and rests on the
+       last frame of its block. Clicking another feature plays the current
+       block backward (rest → start), then the target block forward
+       (start → rest), ending on its resting frame (not looping). */
+    var SEGMENTS = {
+      games:    { start: 1,   rest: 40  },
+      contests: { start: 41,  rest: 79  },
+      news:     { start: 80,  rest: 119 },
+      progress: { start: 120, rest: 159 }
+    };
+
+    var badges = Array.prototype.slice.call(
+      document.querySelectorAll('.app-intro-panel .app-feature-badge[data-screen]')
+    );
+
+    var currentRest = 'games';
+    var pendingTarget = 'games';
+    var playing = false;
+    var rafId = 0;
+
+    function stopPlay() {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = 0;
+      playing = false;
+    }
+
+    function setActive(key) {
+      badges.forEach(function (b) {
+        b.classList.toggle('badge-active', b.getAttribute('data-screen') === key);
+      });
+    }
+
+    function buildPath(source, target) {
+      var list = [];
+      var s = SEGMENTS[source], t = SEGMENTS[target];
+      /* reverse the current feature's block: rest → start */
+      for (var f = s.rest; f >= s.start; f--) list.push(f);
+      /* play the target feature's block forward: start → rest */
+      for (var f = t.start; f <= t.rest; f++) list.push(f);
+      return list;
+    }
+
+    function playPath(framesList) {
+      stopPlay();
+      if (!framesList.length) {
+        currentRest = pendingTarget;
+        return;
+      }
+      playing = true;
+      var startTime = null;
+
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var elapsed = (ts - startTime) / 1000;
+        var idx = Math.floor(elapsed * FPS);
+        if (idx >= framesList.length) {
+          drawFrame(framesList[framesList.length - 1] - 1);
+          playing = false;
+          currentRest = pendingTarget;
+          return;
+        }
+        drawFrame(framesList[idx] - 1);
+        rafId = requestAnimationFrame(step);
+      }
+
+      rafId = requestAnimationFrame(step);
+    }
+
+    badges.forEach(function (badge) {
+      badge.addEventListener('click', function () {
+        var target = badge.getAttribute('data-screen');
+        if (!SEGMENTS[target]) return;
+        if (target === currentRest) return;   /* already selected — do nothing */
+        if (playing) return;                  /* ignore clicks while an animation is playing */
+
+        var source = currentRest;
+        stopPlay();
+        pendingTarget = target;
+        setActive(target);
+        document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+          bg.classList.toggle('active', bg.getAttribute('data-badge') === target);
+        });
+        playPath(buildPath(source, target));
+      });
+    });
+
+    setActive(currentRest);
+    document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
+      bg.classList.toggle('active', bg.getAttribute('data-badge') === currentRest);
+    });
+
+    /* Draw the default resting frame (games → frame 40) as soon as it's ready */
+    var INITIAL_IDX = SEGMENTS[currentRest].rest - 1;
+    if (frames[INITIAL_IDX].complete && frames[INITIAL_IDX].naturalWidth) {
+      resizeCanvas();
+      drawFrame(INITIAL_IDX);
+    } else {
+      frames[INITIAL_IDX].onload = function () { resizeCanvas(); drawFrame(INITIAL_IDX); };
+    }
+  })();
+  </script>
 
   </body>
 

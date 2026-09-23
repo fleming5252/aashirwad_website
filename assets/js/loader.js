@@ -81,7 +81,8 @@
     ctx.scale(dpr, dpr);
     CX = W / 2;
     CY = H / 2;
-    sphereRadius = Math.min(W, H) * 0.24;
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+    sphereRadius = Math.min(W, H) * (isMobile ? 0.40 : 0.24);
   }
   resize();
   window.addEventListener('resize', resize);
@@ -144,25 +145,71 @@
   pickNewSpin();
   setInterval(pickNewSpin, 2600 + Math.random() * 2400);
 
-  /* Progress counter */
-  var progress = 0;
+  /* ── Progress counter ──
+     The loader is NOT time-based: it stays up until the ENTIRE page has
+     finished loading (window 'load' — images, fonts, scripts, CSS etc.).
+     While waiting, the counter ramps to ~90% (time + real image
+     progress) so it feels alive but never claims 100% before the page is
+     actually ready. When the load event fires it glides to 100% and the
+     loader exits. A generous safety timer guarantees the page is never
+     blocked forever if a resource fails to load. */
   var lastProgress = -1;
-  var PROGRESS_DURATION = 2000; // ms
-  var startTime = null;
   var finished = false;
+  var pageLoaded = false;
+  var loadStartTime = null;
+  var finishStartTime = null;
 
   function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
-  function updateProgress(now) {
-    if (startTime === null) startTime = now;
-    var elapsed = now - startTime;
-    var t = Math.min(1, elapsed / PROGRESS_DURATION);
-    progress = Math.round(easeOutCubic(t) * 100);
-    if (progress !== lastProgress) {
-      lastProgress = progress;
-      progressEl.textContent = 'FORMING NETWORK: ' + progress + '%';
+  function setProgress(p) {
+    p = Math.round(Math.max(0, Math.min(100, p)));
+    if (p === lastProgress) return;
+    lastProgress = p;
+    progressEl.textContent = 'FORMING NETWORK: ' + p + '%';
+  }
+
+  /* Fraction of <img> elements already fetched (rough real-world progress). */
+  function imageLoadFraction() {
+    var imgs = document.images;
+    if (!imgs.length) return 0;
+    var done = 0;
+    for (var i = 0; i < imgs.length; i++) {
+      if (imgs[i].complete && imgs[i].naturalWidth > 0) done++;
     }
-    if (t >= 1 && !finished) {
+    return done / imgs.length;
+  }
+
+  function onFullPageLoad() {
+    pageLoaded = true;
+  }
+
+  if (document.readyState === 'complete') {
+    pageLoaded = true;
+  } else {
+    window.addEventListener('load', onFullPageLoad);
+  }
+
+  /* Safety net: never let the loader block the page forever if something
+     fails to load (offline CDN, broken image, slow third-party script). */
+  setTimeout(function () { pageLoaded = true; }, 12000);
+
+  function updateProgress(now) {
+    if (loadStartTime === null) loadStartTime = now;
+
+    if (!pageLoaded) {
+      /* Still loading: ramp to 90% (time + images), then hold. */
+      var t = Math.min(1, (now - loadStartTime) / 2000);
+      var timePct = 90 * easeOutCubic(t);
+      var imgPct = 90 * imageLoadFraction();
+      setProgress(Math.max(timePct, imgPct));
+      return;
+    }
+
+    /* Page fully loaded: glide to 100% and exit. */
+    if (finishStartTime === null) finishStartTime = now;
+    var f = Math.min(1, (now - finishStartTime) / 350);
+    setProgress(lastProgress + (100 - lastProgress) * easeOutCubic(f));
+    if (f >= 1 && !finished) {
       finished = true;
       finishSequence();
     }

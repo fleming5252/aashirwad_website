@@ -128,6 +128,28 @@
 		});
 	}
 
+	// Auto-hide navbar on scroll down, reveal on scroll up
+	(function() {
+		var headerEl = $('.header-area');
+		if (!headerEl.length) return;
+
+		var lastScrollTop = 0;
+		var hideAfter = 120; // only start hiding after scrolling this far
+
+		$(window).on('scroll', function() {
+			var st = $(window).scrollTop();
+			if (st < 0) st = 0;
+
+			var menuOpen = $('.menu-trigger').hasClass('active');
+			if (st > lastScrollTop && st > hideAfter && !menuOpen) {
+				headerEl.addClass('nav-hidden');
+			} else if (st < lastScrollTop) {
+				headerEl.removeClass('nav-hidden');
+			}
+			lastScrollTop = st;
+		});
+	})();
+
 
 	// Menu elevator animation
 	$('.scroll-to-section a[href*=\\#]:not([href=\\#])').on('click', function() {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;font-family:monospace;font-size:11px">
+<iframe id="f" src="/index.html" style="width:100%;height:900px;border:0;display:block"></iframe>
+<pre id="out"></pre>
+<script>
+var f = document.getElementById('f');
+f.onload = function () {
+  setTimeout(function () {
+    var w = f.contentWindow, d = f.contentDocument;
+    var sec = d.getElementById('about');
+    if (sec) sec.scrollIntoView({ block: 'start' });
+    setTimeout(function () {
+      function r(sel) {
+        var el = d.querySelector(sel);
+        if (!el) return 'N/A';
+        var b = el.getBoundingClientRect();
+        var cs = getComputedStyle(el);
+        return {
+          w: Math.round(el.offsetWidth),
+          left: Math.round(b.left), right: Math.round(b.right),
+          padL: cs.paddingLeft, padR: cs.paddingRight,
+          marL: cs.marginLeft, marR: cs.marginRight,
+          textAlign: cs.textAlign
+        };
+      }
+      var o = {
+        winW: w.innerWidth,
+        col: r('.about-new-left'),
+        tagline: r('.about-new-tagline'),
+        body: r('.about-new-body'),
+        pills: r('.about-new-pills'),
+        btn: r('.about-new-btn')
+      };
+      document.getElementById('out').textContent = JSON.stringify(o, null, 2);
+    }, 1500);
+  }, 3000);
+};
+</script>
+</body>
+</html>

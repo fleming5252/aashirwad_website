@@ -51,14 +51,16 @@
     }
 
     .pp-topbar-brand {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
-      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
     }
 
-    .pp-topbar-brand span {
-      color: var(--red);
+    .pp-topbar-logo {
+      height: 46px;
+      width: auto;
+      display: block;
+      object-fit: contain;
     }
 
     .pp-topbar-actions {
@@ -425,17 +427,12 @@
     }
 
     .pp-signoff-logo {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 24px;
-      color: #fff;
-      font-weight: 800;
+      display: block;
+      width: 180px;
+      max-width: 70%;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
     }
 
     .pp-signoff h3 {
@@ -508,7 +505,9 @@
 
   <!-- Top bar -->
   <div class="pp-topbar">
-    <div class="pp-topbar-brand">Aashirwad <span>EduVerse</span></div>
+    <a href="index.html" class="pp-topbar-brand">
+      <img src="assets/images/logo3.png" alt="Aashirwad EduVerse" class="pp-topbar-logo">
+    </a>
     <div class="pp-topbar-actions">
       <button class="pp-btn" type="button" onclick="history.back()">&#8592; Back</button>
       <a class="pp-btn pp-btn-primary" href="index.html">&#8962; Home</a>
@@ -755,10 +754,7 @@
 
       <!-- Sign-off -->
       <div class="pp-signoff">
-        <div class="pp-signoff-logo">A</div>
-        <h3>Aashirwad EduVerse</h3>
-        <p>Knowledge at Your Fingertips</p>
-        <div class="pp-signoff-divider"></div>
+        <img src="assets/images/logo3.png" alt="Aashirwad EduVerse" class="pp-signoff-logo">
       </div>
 
     </main>
