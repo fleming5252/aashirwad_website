@@ -111,7 +111,7 @@
         padding: 6px 16px;
         border-radius: 50px;
         background: rgba(255,255,255,0.95);
-        color: #a12c2f;
+        color: var(--color-red);
         font-family: 'Poppins', sans-serif;
         font-size: 13px;
         font-weight: 600;
@@ -273,7 +273,7 @@
         font-family: 'Poppins', sans-serif;
         font-size: 13px;
         font-weight: 500;
-        color: #1a1a1a;
+        color: var(--color-red);
         transition: transform 0.3s, box-shadow 0.3s;
         cursor: default;
         flex: 0 1 auto;
@@ -291,7 +291,7 @@
         justify-content: center;
         font-size: 14px;
         flex-shrink: 0;
-        background: linear-gradient(135deg, #F5A425, #A12C2F);
+        background: linear-gradient(135deg, var(--color-gold), var(--color-red));
         color: #fff;
       }
       .app-store-row {
@@ -456,7 +456,7 @@
       }
 
       .privacy-link span {
-        color: #a12c2f;
+        color: var(--color-red);
         font-weight: 600;
         text-decoration: underline;
         text-underline-offset: 2px;
@@ -467,7 +467,7 @@
       }
 
       .privacy-link:hover span {
-        color: #661a1d;
+        color: var(--color-red-dark);
       }
 
       @keyframes slideUp {
@@ -797,7 +797,7 @@
         font-weight: 700;
         letter-spacing: 4px;
         text-transform: uppercase;
-        color: #a12c2f;
+        color: var(--color-red);
         margin-bottom: 12px;
       }
 
@@ -809,7 +809,7 @@
         line-height: 1.1;
       }
 
-      .about-new-title-red { color: #a12c2f; }
+      .about-new-title-red { color: var(--color-red); }
 
       .about-new-tagline {
         font-size: 17px;
@@ -845,27 +845,27 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
-        border: 1.5px solid rgba(161,44,47,0.25);
+        border: 1.5px solid rgba(var(--color-red-rgb), 0.25);
         border-radius: 16px;
         padding: 18px 20px;
         background: #fff;
         min-width: 110px;
         text-align: center;
-        box-shadow: 0 2px 12px rgba(161,44,47,0.06);
+        box-shadow: 0 2px 12px rgba(var(--color-red-rgb), 0.06);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .about-new-pill:hover {
         transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(161,44,47,0.14);
+        box-shadow: 0 8px 24px rgba(var(--color-red-rgb), 0.14);
       }
 
       .about-new-pill-icon {
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: rgba(161,44,47,0.08);
-        color: #a12c2f;
+        background: rgba(var(--color-red-rgb), 0.08);
+        color: var(--color-red);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -884,7 +884,7 @@
         align-items: center;
         gap: 8px;
         padding: 14px 36px;
-        background: #a12c2f;
+        background: var(--color-red);
         color: #fff;
         font-size: 13px;
         font-weight: 700;
@@ -893,13 +893,13 @@
         border-radius: 50px;
         text-decoration: none;
         transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-        box-shadow: 0 4px 18px rgba(161,44,47,0.3);
+        box-shadow: 0 4px 18px rgba(var(--color-red-rgb), 0.3);
       }
 
       .about-new-btn:hover {
-        background: #661a1d;
+        background: var(--color-red-dark);
         transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(161,44,47,0.4);
+        box-shadow: 0 8px 28px rgba(var(--color-red-rgb), 0.4);
         color: #fff;
       }
 
@@ -1344,7 +1344,7 @@ https://templatemo.com/tm-569-edu-meeting
     <p style="font-family:'Poppins',sans-serif;font-size:clamp(18px,2.5vw,28px);font-weight:700;color:#1B3A5C;margin:0 0 8px;letter-spacing:0.5px;">16 Years of Transforming Aspirations</p>
     <p class="journey-subtitle" style="color:#000000 !important;">A journey built on trust, guided by passion, and driven by the success of our students.</p>
     <div class="journey-title-divider"></div>
-    <p class="journey-year-range" style="color:#8B1A1A;font-size:18px;font-weight:700;margin-top:12px;letter-spacing:2px;">2009 &ndash; 2026+</p>
+    <p class="journey-year-range" style="color:var(--color-red-deep);font-size:18px;font-weight:700;margin-top:12px;letter-spacing:2px;">2009 &ndash; 2026+</p>
   </div>
 
   <!-- Animated Book Stage -->
@@ -2167,7 +2167,10 @@ https://templatemo.com/tm-569-edu-meeting
 
   </section>
     <section class="testimonials-section">
-    <div class="container">
+    <video class="testimonials-bg" muted loop playsinline>
+      <source src="assets/images/testimony/bg-2out.mp4" type="video/mp4">
+    </video>
+    <div class="container testimonials-content">
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading">
@@ -2586,61 +2589,51 @@ https://templatemo.com/tm-569-edu-meeting
 
           function isMobile() { return window.innerWidth < 992; }
 
-          if (isMobile()) {
-            scene.style.height = 'auto';
-          }
+          /* ── Convert the pinned scroll scene into a normal section ── */
+          if (scene) scene.style.height = 'auto';
+          if (hint) hint.style.display = 'none';
 
-          if (isMobile()) {
-            var stickyFrame = document.getElementById('appStickyFrame');
-            if (stickyFrame) {
-              stickyFrame.style.position = 'relative';
+          var stickyFrame = document.getElementById('appStickyFrame');
+          if (stickyFrame) {
+            stickyFrame.style.position = 'relative';
+            if (isMobile()) {
               stickyFrame.style.height = 'auto';
               stickyFrame.style.minHeight = '100vh';
             }
           }
 
-          var mobileAutoTimer = null;
+          /* ── Auto-spin every 4 seconds (manual clicks restart the timer) ──
+             The timer only runs while the section is more than 50% visible
+             and the user is not pressing-and-holding to pause. */
+          var AUTO_DELAY = 4000;
+          var autoTimer  = null;
+          var isInView   = false;
+          var holdActive = false;
 
-          function startMobileAuto() {
-            if (!isMobile()) return;
-            stopMobileAuto();
-            mobileAutoTimer = setInterval(function () {
+          function startAuto() {
+            stopAuto();
+            if (!isInView || holdActive) return;
+            autoTimer = setInterval(function () {
               var next = (currentStep + 1) % TOTAL_STEPS;
               applyStep(next, 1);
-            }, 3000);
+            }, AUTO_DELAY);
           }
 
-          function stopMobileAuto() {
-            if (mobileAutoTimer) {
-              clearInterval(mobileAutoTimer);
-              mobileAutoTimer = null;
+          function stopAuto() {
+            if (autoTimer) {
+              clearInterval(autoTimer);
+              autoTimer = null;
             }
           }
 
-          function resetMobileAuto() {
-            stopMobileAuto();
-            startMobileAuto();
+          function resetAuto() {
+            startAuto();
           }
-
-          var resizeMobileTimer;
-          window.addEventListener('resize', function () {
-            clearTimeout(resizeMobileTimer);
-            resizeMobileTimer = setTimeout(function () {
-              if (isMobile()) {
-                startMobileAuto();
-              } else {
-                stopMobileAuto();
-              }
-            }, 200);
-          });
 
           /* ── State ── */
           var currentStep    = 0;
           var stepInProgress = false;
-          var STEP_COOLDOWN  = isMobile() ? 1000 : 650; /* longer cooldown on mobile to prevent momentum-scroll step skipping */
-          var scrollLocked   = false;
-          var scrollLockTimer   = null;
-          var scrollAnchor   = 0;
+          var STEP_COOLDOWN  = isMobile() ? 1000 : 650;
           var cumulativeDeg  = 0;
 
           /* -- Apply a step (0-3) -- */
@@ -2690,258 +2683,6 @@ https://templatemo.com/tm-569-edu-meeting
 
             setTimeout(function () { stepInProgress = false; }, STEP_COOLDOWN);
           }
-
-          /*
-           * ── Scroll-zone detection ──
-           * The scene is 500vh tall with a sticky frame inside.
-           * We are "in the zone" when:
-           *   rect.top <= 0  (scene has started pinning)
-           *   rect.bottom >= viewport height  (scene hasn't finished yet)
-           */
-          function inScrollZone() {
-            var rect = scene.getBoundingClientRect();
-            var vh   = window.innerHeight;
-            return rect.top <= 1 && rect.bottom >= vh - 1;
-          }
-
-          /*
-           * ── Derive current step from actual scroll position ──
-           * The scene is 500vh. The first vh is just entering; the next 400vh
-           * is the 4-step travel (100vh each).
-           */
-          function stepFromScroll() {
-            var rect     = scene.getBoundingClientRect();
-            var scrolled = -rect.top;
-            var vh       = window.innerHeight;
-            if (scrolled < 0) return 0;
-            var step = Math.floor(scrolled / vh);
-            return Math.max(0, Math.min(TOTAL_STEPS - 1, step));
-          }
-
-          /* ── Sync wheel hijacking: intercept scroll, do a programmatic scroll ── */
-          var scrolling  = false; /* rAF guard */
-          var pendingDir = 0;
-
-          function scrollToStep(targetStep) {
-            if (targetStep < 0 || targetStep >= TOTAL_STEPS) return;
-            var vh         = window.innerHeight;
-            var sceneTop   = scene.getBoundingClientRect().top + window.pageYOffset;
-            var targetY    = sceneTop + targetStep * vh;
-            window.scrollTo({ top: targetY, behavior: isMobile() ? 'instant' : 'smooth' });
-          }
-
-          function onWheel(e) {
-            if (!inScrollZone()) return;
-
-            var goingDown = e.deltaY > 0;
-            var goingUp   = !goingDown && e.deltaY < 0;
-
-            var intercept = (goingDown && currentStep < TOTAL_STEPS - 1) ||
-                            (goingUp   && currentStep > 0);
-
-            if (intercept) {
-              e.preventDefault();
-              if (!stepInProgress) {
-                var target = goingDown ? currentStep + 1 : currentStep - 1;
-                applyStep(target, goingDown ? 1 : -1);
-                scrollToStep(target);
-              }
-            }
-          }
-
-          /* ── Sync on real scroll (handles keyboard, scrollbar drag, etc.) ── */
-          window.addEventListener('scroll', function () {
-            if (isMobile()) return;
-            var inZone = inScrollZone();
-            if (!inZone) return;
-            if (stepInProgress) return;
-            /*if (scrollLocked) return;*/
-            if (scrollLocked && currentStep > 0 && currentStep < TOTAL_STEPS - 1) return;
-            var s = stepFromScroll();
-            if (s !== currentStep) {
-              var diff = Math.abs(s - currentStep);
-              if (diff === 1) {
-                applyStep(s, s > currentStep ? 1 : -1);
-                lockScroll();
-              } else if (diff > 1) {
-                /* Entering from outside — snap directly without animation */
-                cumulativeDeg = s * 90;
-                ring.style.transition = 'none';
-                innerEls.forEach(function (el) { el.style.transition = 'none'; });
-                sparkleWrappers.forEach(function (w) { w.style.transition = 'none'; });
-                ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
-                innerEls.forEach(function (el) { el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)'; });
-                sparkleWrappers.forEach(function (w) { w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)'; });
-                void ring.offsetHeight;
-                ring.style.transition = '';
-                innerEls.forEach(function (el) { el.style.transition = ''; });
-                sparkleWrappers.forEach(function (w) { w.style.transition = ''; });
-                nodes.forEach(function (n, i) {
-                  var nodeStep = (TOTAL_STEPS - i) % TOTAL_STEPS;
-                  n.classList.toggle('active-node', nodeStep === s % TOTAL_STEPS);
-                });
-                orbName.textContent = MODES[s];
-                cards.forEach(function (card, i) {
-                  card.classList.remove('active', 'exit-up', 'exit-down');
-                  if (i === s) card.classList.add('active');
-                });
-                dots.forEach(function (d, i) { d.classList.toggle('active', i === s); });
-                if (s > 0) hint.classList.add('hidden');
-                else hint.classList.remove('hidden');
-                currentStep = s;
-                lockScroll();
-              }
-            }
-          }, { passive: true });
-
-          /* ── Wheel & touch interception scoped to scene only ── */
-          var touchStartY       = 0;
-          var touchHandled      = false;
-          var SWIPE_THRESHOLD   = 60;
-          var zoneEnteredThisGesture = false;
-          var boundaryLockActive = false;
-          var boundaryLockTimeout = null;
-
-          scene.addEventListener('wheel', function onWheel(e) {
-            if (isMobile()) return;
-            var inZone = inScrollZone();
-            if (!inZone) return;
-            /*if (scrollLocked) { e.preventDefault(); return; }*/
-            if (scrollLocked) { return; }
-
-            var goingDown = e.deltaY > 0;
-            var goingUp   = !goingDown && e.deltaY < 0;
-
-            var atTopBoundary    = (currentStep === 0 && goingUp);
-            var atBottomBoundary = (currentStep === TOTAL_STEPS - 1 && goingDown);
-            if (atTopBoundary || atBottomBoundary) return;
-
-            var intercept = (goingDown && currentStep < TOTAL_STEPS - 1) ||
-                            (goingUp   && currentStep > 0);
-
-            if (intercept) {
-              e.preventDefault();
-              if (!stepInProgress) {
-                var target = goingDown ? currentStep + 1 : currentStep - 1;
-                applyStep(target, goingDown ? 1 : -1);
-                scrollToStep(target);
-                lockScroll();
-              }
-            }
-          }, { passive: false });
-
-          function isWheelVisible() {
-            var scene = document.getElementById('app-scroll-scene');
-            if (!scene) return false;
-            var rect = scene.getBoundingClientRect();
-            // True if the wheel scene is currently in the active viewport view
-            return (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5);
-          }
-
-          function lockScroll() {
-            var LOCK_MS = isMobile() ? 900 : 900;
-            scrollLocked = true;
-            stepInProgress = true;
-
-            if (boundaryLockTimeout) {
-              clearTimeout(boundaryLockTimeout);
-            }
-
-            /*if (currentStep === 0 || currentStep === TOTAL_STEPS - 1) {
-              boundaryLockActive = true;
-            }*/
-
-            setTimeout(function () {
-              scrollLocked = false;
-              stepInProgress = false;
-
-              if (boundaryLockActive) {
-                boundaryLockTimeout = setTimeout(function() {
-                  boundaryLockActive = false;
-                }, 800);
-              }
-            }, LOCK_MS);
-          }
-
-          window.addEventListener('touchstart', function (e) {
-            if (isMobile()) return;
-            zoneEnteredThisGesture = false;
-            if (!isWheelVisible()) return;
-            touchStartY = e.touches[0].clientY;
-            touchHandled = false;
-            scrollAnchor = scene.getBoundingClientRect().top + window.pageYOffset;
-          }, { passive: true });
-
-          scene.addEventListener('touchmove', function (e) {
-            if (isMobile()) return;
-            if (!inScrollZone()) return;
-
-            /*if (touchHandled) {
-              e.preventDefault();
-              return;
-            }*/
-            if (touchHandled) {
-              if (currentStep > 0 && currentStep < TOTAL_STEPS - 1) {
-                e.preventDefault();
-              }
-              return;
-            }
-
-            /* Re-baseline the very first time this gesture finds
-               itself inside the strictly-pinned zone. touchstart is
-               bound to window using a looser visibility check, so
-               touchStartY may have been captured slightly before
-               pinning actually began. Block scroll on this frame too
-               so nothing leaks through while we recalibrate. */
-            if (!zoneEnteredThisGesture) {
-              zoneEnteredThisGesture = true;
-              touchStartY  = e.touches[0].clientY;
-              scrollAnchor = scene.getBoundingClientRect().top + window.pageYOffset;
-              e.preventDefault();
-              return;
-            }
-
-            var deltaY    = touchStartY - e.touches[0].clientY;
-            var goingDown = deltaY > 0;
-            var intercept = (goingDown && currentStep < TOTAL_STEPS - 1) ||
-                            (!goingDown && currentStep > 0);
-
-            /* Not a direction we intend to handle (true boundary,
-               e.g. already on step 0 swiping further up, or step 3
-               swiping further down) — let native scroll continue
-               normally so the user can leave the section. */
-            if (!intercept) return;
-
-            /* THE ACTUAL FIX: block native scroll immediately once we
-               know this swipe is one we're going to handle — even
-               before the 50px activation threshold below is reached.
-               Previously, returning early here without preventDefault
-               let the browser perform a small native scroll during
-               the build-up to the threshold, which is what caused the
-               page to visibly jump BEFORE the wheel animation played. */
-            e.preventDefault();
-
-            if (Math.abs(deltaY) < 50) return;
-
-            if (!stepInProgress) {
-              touchHandled = true;
-              var target = goingDown ? currentStep + 1 : currentStep - 1;
-              var dir    = goingDown ? 1 : -1;
-              var vh     = window.innerHeight;
-
-              applyStep(target, dir);
-
-              var targetY = scrollAnchor + target * vh;
-              window.scrollTo({ top: targetY, behavior: 'instant' });
-              scrollAnchor = targetY;
-            }
-          }, { passive: false });
-
-          window.addEventListener('touchend', function (e) {
-            if (isMobile()) return;
-            touchHandled = false;
-            zoneEnteredThisGesture = false;
-          }, { passive: true });
 
           /* ── Spawn decorative particles ── */
           var container = document.getElementById('appParticles');
@@ -3003,12 +2744,10 @@ https://templatemo.com/tm-569-edu-meeting
             if (target > 0) hint.classList.add('hidden');
             else hint.classList.remove('hidden');
             currentStep = target;
-            if (isMobile()) resetMobileAuto();
+            resetAuto();
           }
 
           if (isMobile()) {
-            startMobileAuto();
-
             nodes.forEach(function (node) {
               var nodeIndex = nodes.indexOf(node);
               var target = parseInt(node.getAttribute('data-node'), 10);
@@ -3100,19 +2839,56 @@ https://templatemo.com/tm-569-edu-meeting
             leftBtn.addEventListener('click', function () {
               var prev = (currentStep - 1 + TOTAL_STEPS) % TOTAL_STEPS;
               applyStep(prev, -1);
-              resetMobileAuto();
+              resetAuto();
             });
 
             rightBtn.addEventListener('click', function () {
               var next = (currentStep + 1) % TOTAL_STEPS;
               applyStep(next, 1);
-              resetMobileAuto();
+              resetAuto();
             });
 
             if (rightPane) {
               rightPane.appendChild(leftBtn);
               rightPane.appendChild(rightBtn);
             }
+          }
+
+          /* ── Press & hold to pause, release to resume ── */
+          function pauseHold() {
+            holdActive = true;
+            stopAuto();
+          }
+
+          function resumeHold() {
+            if (!holdActive) return;
+            holdActive = false;
+            startAuto();
+          }
+
+          scene.addEventListener('pointerdown', pauseHold, { passive: true });
+          window.addEventListener('pointerup', resumeHold);
+          window.addEventListener('pointercancel', resumeHold);
+          scene.addEventListener('pointerleave', function () {
+            if (holdActive) resumeHold();
+          });
+
+          /* ── Only run the auto-spin while the section is more than 50% visible ── */
+          if ('IntersectionObserver' in window) {
+            var autoplayObserver = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                var visible = entry.intersectionRatio >= 0.5;
+                isInView = visible;
+                startAuto();
+                Array.from(ring.querySelectorAll('.sparkle')).forEach(function (s) {
+                  s.style.animationPlayState = visible ? 'running' : 'paused';
+                });
+              });
+            }, { threshold: 0.5 });
+            autoplayObserver.observe(scene);
+          } else {
+            isInView = true;
+            startAuto();
           }
         })();
 
@@ -3223,6 +2999,28 @@ https://templatemo.com/tm-569-edu-meeting
               if (i !== current) showSlide(i);
             });
           });
+        })();
+
+        /* Play the testimonials background video only while the section is
+           more than 50% visible; pause otherwise. */
+        (function () {
+          var bgVideo = document.querySelector('.testimonials-bg');
+          var testiSec = document.querySelector('.testimonials-section');
+          if (!bgVideo || !testiSec || !('IntersectionObserver' in window)) return;
+          var playing = false;
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.intersectionRatio >= 0.5) {
+                if (!playing) {
+                  playing = true;
+                  bgVideo.play().catch(function () { /* ignore */ });
+                }
+              } else if (playing) {
+                playing = false;
+                bgVideo.pause();
+              }
+            });
+          }, { threshold: [0, 0.25, 0.5, 0.75, 1] }).observe(testiSec);
         })();
 
         /* ── Leaflet Map ── */
@@ -5396,5 +5194,7 @@ var dest = document.getElementById('journeyDestination');
     sections.forEach(function (s) { io.observe(s); });
   })();
 </script>
+  <!-- Navbar theme picker -->
+  <script src="assets/js/theme-picker.js"></script>
 </body>
 </html>

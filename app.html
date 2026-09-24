@@ -41,10 +41,46 @@ https://templatemo.com/tm-569-edu-meeting
       pointer-events: none;
       z-index: 1;
       --frame-zoom: 1;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .app-frame-stage canvas {
+      opacity: 1 !important;
+      transform: translate(-50%, -50%) !important;
     }
 
     #mobileapp .row > [class*="col"] {
       min-width: 0;
+    }
+
+    .app-intro-panel .slide-in-up,
+    .app-intro-panel .slide-in-left,
+    .app-intro-panel .slide-in-right {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .app-intro-panel .col-lg-4,
+    .app-intro-panel .col-md-6,
+    .app-intro-panel .row {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+
+    .gj-section .slide-in-up,
+    .gj-section .slide-in-left,
+    .gj-section .slide-in-right {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .app-about-image-col,
+    .app-about-text-col,
+    .app-about-card {
+      opacity: 1 !important;
+      transform: none !important;
     }
 
     .app-frame-stage canvas {
@@ -131,6 +167,23 @@ https://templatemo.com/tm-569-edu-meeting
       transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border-color 0.3s !important;
       border: 1px solid rgba(255,255,255,0.2);
     }
+
+    /* Right column: text reveals on scroll */
+    .app-intro-content-wrapper h4,
+    .app-intro-content-wrapper h2,
+    .app-intro-divider,
+    .app-intro-content-wrapper .intro-text,
+    .app-intro-content-wrapper .app-feature-badges {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .app-intro-content-wrapper.content-revealed h4 { opacity:1; transform:none; transition-delay:0s; }
+    .app-intro-content-wrapper.content-revealed h2 { opacity:1; transform:none; transition-delay:0.1s; }
+    .app-intro-content-wrapper.content-revealed .app-intro-divider { opacity:1; transform:none; transition-delay:0.2s; }
+    .app-intro-content-wrapper.content-revealed .intro-text { opacity:1; transform:none; transition-delay:0.3s; }
+    .app-intro-content-wrapper.content-revealed .app-feature-badges { opacity:1; transform:none; transition-delay:0.4s; }
 
     .app-feature-badge.badge-active,
     .app-feature-badge:hover {
@@ -1581,6 +1634,30 @@ https://templatemo.com/tm-569-edu-meeting
           });
         })();
 
+        /* ── Content entrance animation (mirrors index.html) ── */
+        (function () {
+          var contentWrapper = document.querySelector('.app-intro-content-wrapper');
+          var storeRow       = document.querySelector('.app-intro-panel .app-store-row');
+          var contentAnimated = false;
+
+          if (contentWrapper) {
+            var contentObserver = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting || contentAnimated) return;
+                contentAnimated = true;
+                contentWrapper.classList.add('content-revealed');
+                if (storeRow) {
+                  setTimeout(function () {
+                    storeRow.classList.add('content-revealed');
+                  }, 600);
+                }
+              });
+            }, { threshold: 0.2 });
+
+            contentObserver.observe(contentWrapper);
+          }
+        })();
+
         (function () {
           var MODES       = ['Read', 'Write', 'Listen', 'Watch'];
           var TOTAL_STEPS = MODES.length;
@@ -1598,61 +1675,51 @@ https://templatemo.com/tm-569-edu-meeting
 
           function isMobile() { return window.innerWidth < 992; }
 
-          if (isMobile()) {
-            scene.style.height = 'auto';
-          }
+          if (scene) scene.style.height = 'auto';
+          if (hint) hint.style.display = 'none';
 
-          if (isMobile()) {
-            var stickyFrame = document.getElementById('appStickyFrame');
-            if (stickyFrame) {
-              stickyFrame.style.position = 'relative';
+          var stickyFrame = document.getElementById('appStickyFrame');
+          if (stickyFrame) {
+            stickyFrame.style.position = 'relative';
+            if (isMobile()) {
               stickyFrame.style.height = 'auto';
               stickyFrame.style.minHeight = '100vh';
             }
           }
 
-          var mobileAutoTimer = null;
+          /* ── Auto-spin every 4 seconds (manual clicks restart the timer) ──
+             The timer only runs while the section is more than 50% visible
+             and the user is not pressing-and-holding to pause. */
+          var AUTO_DELAY = 4000;
+          var autoTimer  = null;
+          var isInView   = false;
+          var holdActive = false;
 
-          function startMobileAuto() {
-            if (!isMobile()) return;
-            stopMobileAuto();
-            mobileAutoTimer = setInterval(function () {
+          function startAuto() {
+            stopAuto();
+            if (!isInView || holdActive) return;
+            autoTimer = setInterval(function () {
               var next = (currentStep + 1) % TOTAL_STEPS;
               applyStep(next, 1);
-            }, 3000);
+            }, AUTO_DELAY);
           }
 
-          function stopMobileAuto() {
-            if (mobileAutoTimer) {
-              clearInterval(mobileAutoTimer);
-              mobileAutoTimer = null;
+          function stopAuto() {
+            if (autoTimer) {
+              clearInterval(autoTimer);
+              autoTimer = null;
             }
           }
 
-          function resetMobileAuto() {
-            stopMobileAuto();
-            startMobileAuto();
+          function resetAuto() {
+            startAuto();
           }
-
-          var resizeMobileTimer;
-          window.addEventListener('resize', function () {
-            clearTimeout(resizeMobileTimer);
-            resizeMobileTimer = setTimeout(function () {
-              if (isMobile()) {
-                startMobileAuto();
-              } else {
-                stopMobileAuto();
-              }
-            }, 200);
-          });
 
           /* ── State ── */
           var currentStep    = 0;
           var stepInProgress = false;
-          var scrollLocked   = false;
-          var scrollLockTimer   = null;
-          var cumulativeDeg     = 0;
-          var STEP_COOLDOWN     = isMobile() ? 1000 : 650;
+          var cumulativeDeg  = 0;
+          var STEP_COOLDOWN  = isMobile() ? 1000 : 650;
 
           /* ── Apply a step (0-3) ── */
           function applyStep(step, direction) {
@@ -1701,221 +1768,6 @@ https://templatemo.com/tm-569-edu-meeting
 
             setTimeout(function () { stepInProgress = false; }, STEP_COOLDOWN);
           }
-
-          /*
-           * ── Scroll-zone detection ──
-           * The scene is 500vh tall with a sticky frame inside.
-           * We are "in the zone" when:
-           *   rect.top <= 0  (scene has started pinning)
-           *   rect.bottom >= viewport height  (scene hasn't finished yet)
-           */
-          function inScrollZone() {
-            var rect  = scene.getBoundingClientRect();
-            var vh    = window.innerHeight;
-            /* Use 60px tolerance to account for mobile browser chrome changes */
-            return rect.top <= 60 && rect.bottom >= vh - 60;
-          }
-
-          /*
-           * ── Derive current step from actual scroll position ──
-           * The scene is 500vh. The first vh is just entering; the next 400vh
-           * is the 4-step travel (100vh each).
-           */
-          function stepFromScroll() {
-            var rect     = scene.getBoundingClientRect();
-            var scrolled = -rect.top;
-            var vh       = window.innerHeight;
-            if (scrolled < 0) return 0;
-            /* Use integer division — each vh of scroll = one step.
-               The 0.1 offset prevents jitter exactly at step boundaries. */
-            var raw = Math.floor(scrolled / vh);
-            return Math.max(0, Math.min(TOTAL_STEPS - 1, raw));
-          }
-
-          /* ── Sync wheel hijacking: intercept scroll, do a programmatic scroll ── */
-          var scrolling  = false; /* rAF guard */
-          var pendingDir = 0;
-
-          function scrollToStep(targetStep) {
-            if (targetStep < 0 || targetStep >= TOTAL_STEPS) return;
-            var vh         = window.innerHeight;
-            var sceneTop   = scene.getBoundingClientRect().top + window.pageYOffset;
-            var targetY    = sceneTop + targetStep * vh;
-            window.scrollTo({ top: targetY, behavior: isMobile() ? 'instant' : 'smooth' });
-          }
-
-          function onWheel(e) {
-            if (isMobile()) return;
-            var inZone = inScrollZone();
-            if (!inZone) return;
-            if (scrollLocked || stepInProgress) { e.preventDefault(); return; }
-
-            var goingDown = e.deltaY > 0;
-            var goingUp   = !goingDown && e.deltaY < 0;
-
-            var intercept = (goingDown && currentStep < TOTAL_STEPS - 1) ||
-                            (goingUp   && currentStep > 0);
-
-            if (intercept) {
-              e.preventDefault();
-              var target = goingDown ? currentStep + 1 : currentStep - 1;
-              applyStep(target, goingDown ? 1 : -1);
-              scrollToStep(target);
-              lockScroll(650);
-            }
-          }
-
-          window.addEventListener('wheel', onWheel, { passive: false });
-
-          var touchStartY       = 0;
-          var touchHandled      = false;
-          var SWIPE_THRESHOLD   = 60;
-          var boundaryLockActive = false;
-          var boundaryLockTimeout = null;
-
-          function isWheelVisible() {
-            var scene = document.getElementById('app-scroll-scene');
-            if (!scene) return false;
-            var rect = scene.getBoundingClientRect();
-            // True if the wheel scene is currently in the active viewport view
-            return (rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5);
-          }
-
-          function lockScroll() {
-            var LOCK_MS = isMobile() ? 900 : 700;
-            scrollLocked = true;
-            stepInProgress = true;
-
-            if (boundaryLockTimeout) {
-              clearTimeout(boundaryLockTimeout);
-            }
-
-            if (currentStep === 0 || currentStep === TOTAL_STEPS - 1) {
-              boundaryLockActive = true;
-            }
-
-            setTimeout(function () {
-              scrollLocked = false;
-              stepInProgress = false;
-
-              if (boundaryLockActive) {
-                boundaryLockTimeout = setTimeout(function() {
-                  boundaryLockActive = false;
-                }, 800);
-              }
-            }, LOCK_MS);
-          }
-
-          window.addEventListener('touchstart', function (e) {
-            if (isMobile()) return;
-            if (!isWheelVisible()) return;
-            touchStartY = e.touches[0].clientY;
-            touchHandled = false;
-          }, { passive: true });
-
-          window.addEventListener('touchmove', function (e) {
-            if (isMobile()) return;
-            if (!isWheelVisible()) return;
-
-            // If an animation translation sequence is running, force kill layout creep
-            if (scrollLocked || stepInProgress) {
-              e.preventDefault();
-              return;
-            }
-
-            var currentY = e.touches[0].clientY;
-            var deltaY = touchStartY - currentY;
-            var absDeltaY = Math.abs(deltaY);
-
-            if (absDeltaY < SWIPE_THRESHOLD) {
-              // Early tracking guard: If we are at the end boundary and the safety timer is active,
-              // kill the micro-movement to prevent layout drifting.
-              if (boundaryLockActive) {
-                var initialDown = deltaY > 0;
-                if ((initialDown && currentStep === TOTAL_STEPS - 1) || (!initialDown && currentStep === 0)) {
-                  e.preventDefault();
-                }
-              }
-              return;
-            }
-
-            var goingDown = deltaY > 0;
-            var intercept = (goingDown && currentStep < TOTAL_STEPS - 1) ||
-                            (!goingDown && currentStep > 0);
-
-            if (intercept) {
-              // Active navigation frame inside internal step blocks: intercept cleanly
-              e.preventDefault();
-              if (!touchHandled) {
-                touchHandled = true;
-                var target   = goingDown ? currentStep + 1 : currentStep - 1;
-                var dir      = goingDown ? 1 : -1;
-
-                applyStep(target, dir);
-                scrollToStep(target);
-                lockScroll(1200);
-
-                touchStartY = currentY;
-              }
-            } else {
-              // EXIT STRATEGY: The user wants to leave the section.
-              if (boundaryLockActive) {
-                // If the cooldown timer hasn't finished absorbing inertia yet, hold the position.
-                e.preventDefault();
-              } else {
-                // Cooldown over! Let the browser natively scroll up past Step 1 or down past Step 5.
-                // Do NOT call e.preventDefault() here.
-              }
-            }
-          }, { passive: false });
-
-          window.addEventListener('touchend', function (e) {
-            if (isMobile()) return;
-            touchHandled = false;
-          }, { passive: true });
-
-          /* ── Sync on real scroll (handles keyboard, scrollbar drag, etc.) ── */
-          window.addEventListener('scroll', function () {
-            if (isMobile()) return;
-            if (!inScrollZone()) return;
-            if (scrollLocked) return;
-            if (stepInProgress) return;
-            var s = stepFromScroll();
-            if (s !== currentStep) {
-              var diff = Math.abs(s - currentStep);
-              if (diff === 1) {
-                applyStep(s, s > currentStep ? 1 : -1);
-                lockScroll();
-              } else if (diff > 1) {
-                /* Entering from outside — snap directly without animation */
-                cumulativeDeg = s * 90;
-                ring.style.transition = 'none';
-                innerEls.forEach(function (el) { el.style.transition = 'none'; });
-                sparkleWrappers.forEach(function (w) { w.style.transition = 'none'; });
-                ring.style.transform = 'translate(-50%,-50%) rotate(' + cumulativeDeg + 'deg)';
-                innerEls.forEach(function (el) { el.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)'; });
-                sparkleWrappers.forEach(function (w) { w.style.transform = 'rotate(' + (-cumulativeDeg) + 'deg)'; });
-                void ring.offsetHeight;
-                ring.style.transition = '';
-                innerEls.forEach(function (el) { el.style.transition = ''; });
-                sparkleWrappers.forEach(function (w) { w.style.transition = ''; });
-                nodes.forEach(function (n, i) {
-                  var nodeStep = (TOTAL_STEPS - i) % TOTAL_STEPS;
-                  n.classList.toggle('active-node', nodeStep === s % TOTAL_STEPS);
-                });
-                orbName.textContent = MODES[s];
-                cards.forEach(function (card, i) {
-                  card.classList.remove('active', 'exit-up', 'exit-down');
-                  if (i === s) card.classList.add('active');
-                });
-                dots.forEach(function (d, i) { d.classList.toggle('active', i === s); });
-                if (s > 0) hint.classList.add('hidden');
-                else hint.classList.remove('hidden');
-                currentStep = s;
-                lockScroll();
-              }
-            }
-          }, { passive: true });
 
           /* ── Spawn decorative particles ── */
           var container = document.getElementById('appParticles');
@@ -1994,12 +1846,10 @@ https://templatemo.com/tm-569-edu-meeting
             if (target > 0) hint.classList.add('hidden');
             else hint.classList.remove('hidden');
             currentStep = target;
-            if (isMobile()) resetMobileAuto();
+            resetAuto();
           }
 
           if (isMobile()) {
-            startMobileAuto();
-
             nodes.forEach(function (node) {
               var nodeIndex = nodes.indexOf(node);
               var target = parseInt(node.getAttribute('data-node'), 10);
@@ -2091,19 +1941,56 @@ https://templatemo.com/tm-569-edu-meeting
             leftBtn.addEventListener('click', function () {
               var prev = (currentStep - 1 + TOTAL_STEPS) % TOTAL_STEPS;
               applyStep(prev, -1);
-              resetMobileAuto();
+              resetAuto();
             });
 
             rightBtn.addEventListener('click', function () {
               var next = (currentStep + 1) % TOTAL_STEPS;
               applyStep(next, 1);
-              resetMobileAuto();
+              resetAuto();
             });
 
             if (rightPane) {
               rightPane.appendChild(leftBtn);
               rightPane.appendChild(rightBtn);
             }
+          }
+
+          /* ── Press & hold to pause, release to resume ── */
+          function pauseHold() {
+            holdActive = true;
+            stopAuto();
+          }
+
+          function resumeHold() {
+            if (!holdActive) return;
+            holdActive = false;
+            startAuto();
+          }
+
+          scene.addEventListener('pointerdown', pauseHold, { passive: true });
+          window.addEventListener('pointerup', resumeHold);
+          window.addEventListener('pointercancel', resumeHold);
+          scene.addEventListener('pointerleave', function () {
+            if (holdActive) resumeHold();
+          });
+
+          /* ── Only run the auto-spin while the section is more than 50% visible ── */
+          if ('IntersectionObserver' in window) {
+            var autoplayObserver = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                var visible = entry.intersectionRatio >= 0.5;
+                isInView = visible;
+                startAuto();
+                Array.from(ring.querySelectorAll('.sparkle')).forEach(function (s) {
+                  s.style.animationPlayState = visible ? 'running' : 'paused';
+                });
+              });
+            }, { threshold: 0.5 });
+            autoplayObserver.observe(scene);
+          } else {
+            isInView = true;
+            startAuto();
           }
         })();
 
@@ -3006,6 +2893,8 @@ https://templatemo.com/tm-569-edu-meeting
   })();
   </script>
 
+  <!-- Navbar theme picker -->
+  <script src="assets/js/theme-picker.js"></script>
   </body>
 
 </html>

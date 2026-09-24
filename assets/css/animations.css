@@ -55,7 +55,7 @@ html { scroll-behavior: smooth; }
   inset: 0;
   border-radius: inherit;
   border: 2px solid transparent;
-  background: linear-gradient(135deg, #f5a425, #a12c2f) border-box;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-red)) border-box;
   -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -206,7 +206,7 @@ html { scroll-behavior: smooth; }
 .section-divider-pulse {
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #f5a425, #a12c2f);
+  background: linear-gradient(90deg, var(--color-gold), var(--color-red));
   border-radius: 2px;
   margin: 0 auto;
   animation: pulseWidth 3s ease-in-out infinite;
@@ -219,7 +219,7 @@ html { scroll-behavior: smooth; }
 
 /* ── Gradient text for special headings ── */
 .gradient-text {
-  background: linear-gradient(135deg, #f5a425, #a12c2f);
+  background: linear-gradient(135deg, var(--color-gold), var(--color-red));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -370,7 +370,7 @@ html { scroll-behavior: smooth; }
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #f5a425, #a12c2f);
+  background: linear-gradient(90deg, var(--color-gold), var(--color-red));
   z-index: 99998;
   width: 0;
   transition: width 0.1s linear;

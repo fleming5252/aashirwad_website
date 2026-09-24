@@ -10,12 +10,13 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/animations.css">
   <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --red:      #a12c2f;
-      --red-dark: #661a1d;
+      --red:      var(--color-red);
+      --red-dark: var(--color-red-dark);
       --gold:     #f5a425;
       --gold-mid: #D6B46D;
       --gold-pale:#FEF3DC;
@@ -247,7 +248,7 @@
     .pp-toc a:hover,
     .pp-toc a.active {
       color: var(--red);
-      background: rgba(161,44,47,0.06);
+      background: rgba(var(--color-red-rgb),0.06);
       border-left-color: var(--red);
       padding-left: 14px;
     }
@@ -850,5 +851,6 @@
     })();
   </script>
 
+  <script src="assets/js/theme-picker.js"></script>
 </body>
 </html>

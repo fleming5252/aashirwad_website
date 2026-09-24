@@ -55,7 +55,9 @@
     document.querySelectorAll('video').forEach(function (v) { v.pause(); });
   }
   function resumeVideos() {
-    document.querySelectorAll('video').forEach(function (v) {
+    /* The testimonials background video is visibility-controlled by its own
+       IntersectionObserver, so don't auto-play it here. */
+    document.querySelectorAll('video:not(.testimonials-bg)').forEach(function (v) {
       try { v.play(); } catch (e) { /* ignore */ }
     });
   }
@@ -146,13 +148,11 @@
   setInterval(pickNewSpin, 2600 + Math.random() * 2400);
 
   /* ── Progress counter ──
-     The loader is NOT time-based: it stays up until the ENTIRE page has
-     finished loading (window 'load' — images, fonts, scripts, CSS etc.).
-     While waiting, the counter ramps to ~90% (time + real image
-     progress) so it feels alive but never claims 100% before the page is
-     actually ready. When the load event fires it glides to 100% and the
-     loader exits. A generous safety timer guarantees the page is never
-     blocked forever if a resource fails to load. */
+     The loader stays up until the ENTIRE page has finished loading (window
+     'load' event). The counter ramps smoothly from 0 to ~96% using a blend
+     of elapsed time and real image-load progress, then glides to 100% once
+     the page is ready. A safety timer at 12 s guarantees the page is never
+     blocked forever. */
   var lastProgress = -1;
   var finished = false;
   var pageLoaded = false;
@@ -197,17 +197,18 @@
     if (loadStartTime === null) loadStartTime = now;
 
     if (!pageLoaded) {
-      /* Still loading: ramp to 90% (time + images), then hold. */
-      var t = Math.min(1, (now - loadStartTime) / 2000);
-      var timePct = 90 * easeOutCubic(t);
-      var imgPct = 90 * imageLoadFraction();
+      /* Still loading: blend time + real image progress toward 96% cap. */
+      var elapsed = now - loadStartTime;
+      var t = Math.min(1, elapsed / 8000);
+      var timePct = 96 * easeOutCubic(t);
+      var imgPct = 96 * imageLoadFraction();
       setProgress(Math.max(timePct, imgPct));
       return;
     }
 
     /* Page fully loaded: glide to 100% and exit. */
     if (finishStartTime === null) finishStartTime = now;
-    var f = Math.min(1, (now - finishStartTime) / 350);
+    var f = Math.min(1, (now - finishStartTime) / 600);
     setProgress(lastProgress + (100 - lastProgress) * easeOutCubic(f));
     if (f >= 1 && !finished) {
       finished = true;

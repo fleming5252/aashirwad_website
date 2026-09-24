@@ -71,7 +71,7 @@
       }
       .cp-title { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.2; }
       .cp-subtitle { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 540px; margin: 0 auto 16px; }
-      .cp-underline { width: 60px; height: 3px; background: linear-gradient(90deg, #f5a425, #a12c2f); border-radius: 2px; margin: 0 auto; }
+      .cp-underline { width: 60px; height: 3px; background: linear-gradient(90deg, #f5a425, var(--color-red)); border-radius: 2px; margin: 0 auto; }
 
       .toppers-section .cp-heading { position: relative; z-index: 2; }
       .toppers-section .cp-label { color: #F5C04A; background: rgba(245,192,74,0.08); border: 1px solid #D6A63A; }
@@ -1343,5 +1343,7 @@ function step(timestamp) {
     window.addEventListener('scroll',function(){var r=section.getBoundingClientRect(),iv=r.top<window.innerHeight*.75&&r.bottom>0,sd=window.scrollY>lastSY;lastSY=window.scrollY;if(iv&&sd&&!rafId)fired=false;if(!fired&&iv&&sd){fired=true;fire()}},{passive:true});
   })();
   </script>
+<!-- Navbar theme picker -->
+<script src="assets/js/theme-picker.js"></script>
 </body>
 </html>

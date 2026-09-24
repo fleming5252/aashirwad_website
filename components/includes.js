@@ -109,4 +109,15 @@
       }
     }
   }
+
+  /* ── Popup banner script — loaded on every page via the shared footer setup ── */
+  if (!document.getElementById('popupScript')) {
+    var popupScript = document.createElement('script');
+    popupScript.id = 'popupScript';
+    popupScript.src = 'assets/js/popup.js';
+    popupScript.async = true;
+    try {
+      (document.body || document.documentElement).appendChild(popupScript);
+    } catch (e) { /* never block page load over the popup */ }
+  }
 })();

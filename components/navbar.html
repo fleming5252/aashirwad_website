@@ -1,3 +1,73 @@
+<!-- Theme restore: apply the saved theme before paint. NOTE: scripts injected via
+     outerHTML (components/includes.js) are NOT executed by browsers, so this also
+     lives (runs) inside assets/js/theme-picker.js which loads sync at end of body. -->
+<script>
+(function () {
+  try {
+    var saved = window.localStorage && localStorage.getItem('themeColor');
+    if (!saved) return;
+    var m = /^#?([0-9a-fA-F]{6})$/.exec(String(saved).trim());
+    if (!m) return;
+    var r = parseInt(m[1].substring(0, 2), 16) / 255,
+        g = parseInt(m[1].substring(2, 4), 16) / 255,
+        b = parseInt(m[1].substring(4, 6), 16) / 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min, h;
+    if (d === 0) h = 0;
+    else if (max === r) h = ((g - b) / d) % 6;
+    else if (max === g) h = (b - r) / d + 2;
+    else h = (r - g) / d + 4;
+    h = Math.round(h * 60);
+    if (h < 0) h += 360;
+    var triplet = function (s, l) {
+      var f = function (n) {
+        var k = (n + h / 30) % 12;
+        var a = s * Math.min(l, 1 - l);
+        return Math.round(255 * (l - a * Math.max(-1, Math.min(k - 3, Math.min(9 - k, 1)))));
+      };
+      return f(0) + ', ' + f(8) + ', ' + f(4);
+    };
+    var bgs = [[35, '../images/meetings-page-bg-Amber.webp'], [144, '../images/meetings-page-bg-Forest Green.webp'],
+               [193, '../images/meetings-page-bg-Teal.webp'], [216, '../images/meetings-page-bg-navyblue.png'],
+               [313, '../images/meetings-page-bg-Purple.webp'], [358, '../images/meetings-page-bg-red.webp']];
+    var nh = ((h % 360) + 360) % 360, best = bgs[0], bestD = 361;
+    for (var bi = 0; bi < bgs.length; bi++) {
+      var d = Math.abs(((bgs[bi][0] - nh + 540) % 360) - 180);
+      if (d < bestD) { bestD = d; best = bgs[bi]; }
+    }
+    var root = document.documentElement;
+    root.style.setProperty('--color-red', 'hsl(' + h + ', 70%, 38%)');
+    root.style.setProperty('--color-red-dark', 'hsl(' + h + ', 72%, 24%)');
+    root.style.setProperty('--color-red-deep', 'hsl(' + h + ', 68%, 32%)');
+    root.style.setProperty('--color-red-rgb', triplet(0.70, 0.38));
+    root.style.setProperty('--color-red-dark-rgb', triplet(0.72, 0.24));
+    root.style.setProperty('--theme-bg-image', "url('" + best[1] + "')");
+    var docUrl = best[1].replace('../images/', 'assets/images/');
+    var presetHues = [35,144,193,216,313,358];
+    var nh = ((h % 360) + 360) % 360;
+    var isPreset = false;
+    presetHues.forEach(function (ph) { if (Math.abs(((ph-nh+540)%360)-180) < 15) isPreset = true; });
+    var tint = 'hsl(' + h + ', 60%, 30%)';
+    var selectors = 'section.our-courses, section.learning-process, .pf-slide[data-bg="red"], .about-commitment-section';
+    document.querySelectorAll(selectors).forEach(function (el) {
+      el.style.backgroundImage = "url('" + docUrl + "')";
+      var ov = el.querySelector('.theme-tint-overlay');
+      if (!isPreset) {
+        if (!ov) { ov = document.createElement('div'); ov.className='theme-tint-overlay'; ov.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:0;mix-blend-mode:multiply;'; el.style.position=el.style.position||'relative'; el.appendChild(ov); }
+        ov.style.backgroundColor = tint;
+      } else if (ov) { ov.remove(); }
+    });
+    var wave = document.querySelector('.toppers-wave-divider');
+    if (wave) {
+      wave.style.setProperty('--theme-bg-image', "url('" + best[1] + "')");
+      var wov = wave.querySelector('.theme-tint-overlay');
+      if (!isPreset) {
+        if (!wov) { wov = document.createElement('div'); wov.className='theme-tint-overlay'; wov.style.cssText='position:absolute;inset:0;pointer-events:none;z-index:2;mix-blend-mode:multiply;'; wave.appendChild(wov); }
+        wov.style.backgroundColor = tint;
+      } else if (wov) { wov.remove(); }
+    }
+  } catch (e) {}
+})();
+</script>
 <!-- Sub Header -->
 <div class="sub-header">
     <div class="container">
@@ -39,6 +109,23 @@
                           <li><a href="courses.html" data-nav-page="courses">Courses</a></li>
                           <li><a href="app.html" data-nav-page="app">Mobile App</a></li>
                           <li><a href="contact.html" data-nav-page="contact">Contact Us</a></li>
+                          <li class="theme-picker-wrap">
+                              <button type="button" class="theme-picker-btn" title="Choose theme" aria-label="Choose theme" aria-haspopup="true" aria-expanded="false" style="display:inline-flex; align-items:center; gap:6px;"><i class="fa fa-paint-brush"></i> Theme</button>
+                              <div class="theme-panel" hidden>
+                                  <span class="theme-label">Choose Theme</span>
+                                  <div class="theme-circles">
+                                      <button type="button" class="theme-dot" data-color="#a12c2f" style="--dot:#a12c2f;background:#a12c2f;" aria-label="Red" aria-pressed="true" title="Red"></button>
+                                      <button type="button" class="theme-dot" data-color="#1a3a6b" style="--dot:#1a3a6b;background:#1a3a6b;" aria-label="Navy Blue" aria-pressed="false" title="Navy Blue"></button>
+                                      <button type="button" class="theme-dot" data-color="#1a6b3a" style="--dot:#1a6b3a;background:#1a6b3a;" aria-label="Forest Green" aria-pressed="false" title="Forest Green"></button>
+                                      <button type="button" class="theme-dot" data-color="#6b1a5a" style="--dot:#6b1a5a;background:#6b1a5a;" aria-label="Purple" aria-pressed="false" title="Purple"></button>
+                                      <button type="button" class="theme-dot" data-color="#b56a00" style="--dot:#b56a00;background:#b56a00;" aria-label="Amber" aria-pressed="false" title="Amber"></button>
+                                      <button type="button" class="theme-dot" data-color="#1a5a6b" style="--dot:#1a5a6b;background:#1a5a6b;" aria-label="Teal" aria-pressed="false" title="Teal"></button>
+                                  </div>
+                                  <span class="theme-label">Custom Color</span>
+                                  <input type="range" class="theme-hue-slider" min="0" max="360" value="0" aria-label="Custom color hue">
+                                  <button type="button" class="theme-apply">Apply</button>
+                              </div>
+                          </li>
                       </ul>
                       <a class='menu-trigger'>
                           <span>Menu</span>
