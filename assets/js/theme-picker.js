@@ -55,8 +55,7 @@
     return f(0) + ', ' + f(8) + ', ' + f(4);
   }
 
-  /* Theme backgrounds — one per preset, matched by the preset hue.
-     Values resolve relative to assets/css/templatemo-edu-meeting.css. */
+  /* Theme backgrounds — one per preset, matched by the preset hue. */
   var THEME_BACKGROUNDS = [
     { hue: 35,   url: "../images/meetings-page-bg-Amber.webp" },
     { hue: 144,  url: "../images/meetings-page-bg-Forest Green.webp" },

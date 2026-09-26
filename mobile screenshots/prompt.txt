@@ -1,7 +1,0 @@
-Generate a photorealistic, high-end commercial product shot of the specific smartphone model and metallic grey finish seen in image_0.png. The phone must be positioned in a PERFECT, HEAD-ON, STRAIGHT-ON FRONTAL VIEW, oriented perfectly perpendicular to the camera lens (zero slant, zero angle, zero perspective distortion).
-
-The composition is strictly centered. The physical hardware—including the dark metallic bezels, the exact "Dynamic Island" notch design, and the bottom speaker/port alignment—must be visually identical to image_0.png, but rendered in this new flat, straight-on orientation.
-
-The entire active screen area of this generated phone must be filled by the screenshot provided by the user. Every element of the screenshot—including the green background, the white 'G' logo, the 'GAME ZONE' title, all text (e.g., "Challenge yourself...", "17 Levels", "6177 Done"), and all buttons—must be perfectly preserved, sharp, undistorted, and fully legible.
-
-The screenshot content must be treated as the emissive, bright display layer of the phone, seamlessly integrated. Apply subtle, clean studio rim lighting to the metal frame to give the device 3D depth against the same soft-focus, neutral grey studio background used in image_0.png. The goal is absolute consistency of the phone hardware, with the screen content being the only variable.

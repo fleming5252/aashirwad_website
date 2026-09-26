@@ -5,12 +5,61 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Template Mo">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>Education - List of Meetings</title>
+    <title>Aashirwad EduVerse App | Kerala PSC &amp; Competitive Exam Preparation</title>
+
+    <meta name="description"
+      content="Aashirwad EduVerse mobile app for Kerala PSC and competitive exam preparation with mock exams, current affairs, live contests and progress tracking.">
+    <meta name="keywords" content="Kerala PSC learning app, Kerala PSC preparation app, PSC preparation app Kerala, PSC study app Kerala, government exam preparation app, government exam learning app, competitive exam preparation app Kerala, competitive exam learning app, Kerala PSC mock test app, Kerala PSC quiz app, Kerala PSC study materials app, PSC current affairs app Kerala, PSC online learning app Kerala, PSC exam practice app, Kerala government exam app, KTET preparation app, CTET preparation app, Kerala PSC test series app, PSC live classes app, PSC online coaching app, government job preparation app Kerala, competitive exam mock test app, PSC progress tracking app, PSC exam study app, Kerala exam preparation app, best PSC learning app Kerala, Aashirwad EduVerse app, Aashirwad PSC app, Aashirwad learning app, EduVerse learning app Kerala">
+    <meta name="author" content="Aashirwad Institute of Teachers">
+    <meta name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#a12c2f">
+
+    <!-- iOS Smart App Banner: Safari shows a native install prompt on iPhone
+         and iPad when this is present. The Android equivalent is not a real
+         standard and is ignored by browsers, but it is harmless to declare. -->
+    <meta name="apple-itunes-app" content="app-id=1501952592">
+    <meta name="google-play-app" content="app-id=dev.fle.ashirwad">
+
+    <!-- Geo targeting. Legacy hints: not used by Google or Bing, but harmless and
+         still read by some crawlers and local aggregators. The authoritative local
+         signal is the EducationalOrganization node on the homepage. -->
+    <meta name="geo.region" content="IN-KL">
+    <meta name="geo.placename" content="Vaikom, Kottayam, Kerala">
+    <meta name="geo.position" content="9.755479;76.395364">
+
+    <link rel="canonical" href="https://aitacademyindia.com/app.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Aashirwad EduVerse App | Kerala PSC &amp; Competitive Exam Preparation">
+    <meta property="og:description"
+      content="Explore Aashirwad EduVerse, a mobile learning app for Kerala PSC and competitive exam preparation with structured learning, mock exams, current affairs, live contests and progress tracking.">
+    <meta property="og:url" content="https://aitacademyindia.com/app.html">
+    <meta property="og:site_name" content="Aashirwad EduVerse">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:image" content="https://aitacademyindia.com/assets/images/app-get.webp">
+    <meta property="og:image:alt" content="Aashirwad EduVerse mobile learning app">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="1774">
+    <meta property="og:image:height" content="887">
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Aashirwad EduVerse App | Kerala PSC &amp; Competitive Exam Preparation">
+    <meta name="twitter:description"
+      content="Discover Aashirwad EduVerse for Kerala PSC and competitive exam preparation with structured learning, mock exams, current affairs, live contests and progress tracking.">
+    <meta name="twitter:image" content="https://aitacademyindia.com/assets/images/app-get.webp">
+    <meta name="twitter:image:alt" content="Aashirwad EduVerse mobile learning app">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,13 +71,6 @@
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <link rel="stylesheet" href="assets/css/animations.css">
-<!--
-
-TemplateMo 569 Edu Meeting
-
-https://templatemo.com/tm-569-edu-meeting
-
--->
 
   <style>
     .app-frame-stage {
@@ -298,7 +340,230 @@ https://templatemo.com/tm-569-edu-meeting
         display: none;
       }
     }
+
+    /* Frame animation layout */
+    .frame-anim-container {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 500px;
+      margin: 0 auto;
+    }
+    .frame-anim-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .frame-center {
+      z-index: 3;
+      max-height: 500px;
+      left: 8%;
+    }
+    .frame-left {
+      z-index: 2;
+      width: 82%;
+      height: 82%;
+      top: 10%;
+      right: auto;
+      left: -22%;
+      object-fit: contain;
+    }
+    .frame-right {
+      z-index: 2;
+      width: 82%;
+      height: 82%;
+      top: 10%;
+      left: auto;
+      right: -38%;
+      object-fit: contain;
+    }
+
+    @media (max-width: 767px) {
+      .frame-anim-container {
+        max-width: 260px;
+        height: 320px;
+      }
+      .frame-center {
+        max-height: 320px;
+        left: 5%;
+      }
+      .frame-left {
+        width: 65%;
+        height: 65%;
+        top: 18%;
+        left: -15%;
+      }
+      .frame-right {
+        width: 65%;
+        height: 65%;
+        top: 18%;
+        right: -25%;
+      }
+      .app-about-image-col {
+        order: 2;
+      }
+      .app-about-text-col {
+        order: 1;
+      }
+    }
   </style>
+
+  <!-- WebPage. isPartOf references the WebSite @id declared on the homepage by
+       @id only, so both pages resolve to one site entity instead of declaring
+       a second, conflicting definition of #website. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://aitacademyindia.com/app.html#webpage",
+      "url": "https://aitacademyindia.com/app.html",
+      "name": "Aashirwad EduVerse App",
+      "description": "Aashirwad EduVerse mobile learning app for Kerala PSC and competitive exam preparation.",
+      "isPartOf": {
+        "@id": "https://aitacademyindia.com/#website"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://aitacademyindia.com/assets/images/app-get.webp"
+      }
+    }
+  </script>
+
+  <!-- MobileApplication (a subtype of SoftwareApplication).
+       No aggregateRating / offers / review is declared: the ratings shown on
+       other pages are course ratings, not verified app-store ratings, so
+       claiming them here would misrepresent the page. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "@id": "https://aitacademyindia.com/app.html#software",
+      "name": "Aashirwad EduVerse",
+      "alternateName": "Aashirwad EduVerse App",
+      "description": "A mobile learning application for Kerala PSC and competitive exam preparation with structured learning, mock exams, current affairs, live contests and progress tracking.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Android, iOS",
+      "url": "https://aitacademyindia.com/app.html",
+        "downloadUrl": [
+          "https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN",
+          "https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "INR",
+          "availability": "https://schema.org/InStock",
+          "description": "Free download with 2-day free trial of premium features"
+        },
+        "featureList": [
+          "4-Mode Learning: Reading, Writing, Audio, Video",
+          "Educational Game Zone",
+          "Live Contests and Mock Exams",
+          "Daily Current Affairs",
+          "Progress Tracking",
+          "Keyword Search",
+          "Syllabus Tree",
+          "Previous Year Question Papers",
+          "Offline Study Materials",
+          "2-day free trial"
+        ],
+        "screenshot": [
+          "https://aitacademyindia.com/assets/images/mobile/screen1.webp",
+          "https://aitacademyindia.com/assets/images/mobile/screen2.webp",
+          "https://aitacademyindia.com/assets/images/mobile/screen3.webp"
+        ],
+        "image": "https://aitacademyindia.com/assets/images/app-get.webp",
+      "publisher": {
+        "@type": "EducationalOrganization",
+        "@id": "https://aitacademyindia.com/#organization",
+        "name": "Aashirwad Institute of Teachers",
+        "url": "https://aitacademyindia.com/"
+      }
+    }
+  </script>
+
+  <!-- BreadcrumbList. No visible breadcrumb is required for the markup. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://aitacademyindia.com/app.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aitacademyindia.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "App",
+          "item": "https://aitacademyindia.com/app.html"
+        }
+      ]
+    }
+  </script>
+  
+    <!-- FAQPage. Questions and answers are lifted verbatim from the visible
+         FAQ accordion below, which is required for the markup to be valid.
+         Note: Google only surfaces FAQ rich results for authoritative
+         government/health sites, so expect no stars here. -->
+    <script type="application/ld+json">
+{
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://aitacademyindia.com/app.html#faq",
+      "url": "https://aitacademyindia.com/app.html",
+      "inLanguage": "en-IN",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the 4-Mode learning system actually help me study better?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most of us fall into the trap of passive reading—scrolling through text but forgetting it an hour later. Aashirwad Eduverse fixes this by targeting different parts of your brain. You can read a concept (Reading Mode), lock it into muscle memory by practicing key terms (Writing Mode), listen to expert breakdowns while traveling (Audio Mode), or watch complex topics get simplified (Video Mode). This multi-sensory approach keeps your brain active and ensures you actually retain what you study."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What courses does Aashirwad Eduverse provide?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aashirwad Eduverse provides comprehensive, expert-curated courses specifically designed for Kerala PSC and KTET exams. Our platform ensures that you get structured, module-wise content tailored to the exact requirements of these examinations. For a deeper look into specific batches, syllabus coverage, and features, please refer to the dedicated Courses section on our website."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Aashirwad Eduverse provide only online learning?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, Aashirwad Eduverse does not only provide online learning. While our mobile application offers a world-class digital learning ecosystem, we also provide comprehensive offline training for students. This blended approach ensures you get the flexibility of smart digital tools alongside the invaluable guidance, structured environment, and direct interaction of traditional classroom coaching."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Aashirwad Eduverse provide a free trial?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, absolutely! Aashirwad Eduverse provides a 2-day free trial. This allows you to explore our premium four-dimensional learning modes—Reading, Writing, Audio, and Video—and test out our smart features completely risk-free before making a commitment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the benefit of attending live contests in the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Attending live contests allows you to step into a real-time competitive arena where you can test your skills against thousands of other aspirants. Even better, as you compete and climb the leaderboard, you win reward points. These points can be saved up and used later to purchase premium courses and study materials directly within the app, rewarding your hard work and consistency."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
 
 <body>
@@ -331,15 +596,17 @@ https://templatemo.com/tm-569-edu-meeting
   <!-- Shared Navbar (injected from components/navbar.html) -->
   <div id="site-nav"></div>
 
+  <main>
   <section class="heading-page header-text app-heading-page app-hero" id="top">
     <div class="container">
         <div class="row">
         <div class="col-lg-12">
             <div class="app-title-wrapper">
-            <h2 class="app-main-title">OUR APP</h2>
+            <h1 class="app-main-title">OUR APP</h1>
             <h6 class="app-sub-quote">Knowledge at Your Fingertips</h6>
             </div>
         </div>
+  </div>
   </div>
 </section>
 
@@ -373,7 +640,11 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="app-about-glow"></div>
           <div class="app-about-deco-circle deco-1"></div>
           <div class="app-about-deco-circle deco-2"></div>
-          <img src="assets/images/mobile8.webp" alt="Aashirwad Eduverse App" class="app-about-phone-img">
+          <div class="frame-anim-container">
+            <img class="frame-anim-img frame-center" id="frameCenter" alt="Aashirwad EduVerse mobile app">
+            <img class="frame-anim-img frame-left" id="frameLeft" alt="Aashirwad EduVerse mobile app interface">
+            <img class="frame-anim-img frame-right" id="frameRight" alt="Aashirwad EduVerse mobile learning app">
+          </div>
         </div>
       </div>
 
@@ -450,24 +721,24 @@ https://templatemo.com/tm-569-edu-meeting
         </div>
         <div class="app-download-buttons">
           <div class="ad-btn-glow"></div>
-          <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn app-store-btn-dark" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+          <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn app-store-btn-dark" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" loading="lazy">
           </a>
-          <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn app-store-btn-dark" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+          <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn app-store-btn-dark" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" loading="lazy">
           </a>
         </div>
       </div>
     </div>
   </div>
   <div class="ad-mobile-image-wrap">
-    <img src="assets/images/app-get-mobile.webp" alt="Get the Aashirwad Eduverse App" class="ad-mobile-image">
+    <img src="assets/images/app-get-mobile.webp" alt="Get the Aashirwad EduVerse app" class="ad-mobile-image" decoding="async" loading="lazy">
     <div class="app-download-buttons ad-mobile-buttons">
-      <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn app-store-btn-dark" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+      <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn app-store-btn-dark" rel="noopener noreferrer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" loading="lazy">
       </a>
-      <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn app-store-btn-dark" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+      <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn app-store-btn-dark" rel="noopener noreferrer">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" loading="lazy">
       </a>
     </div>
   </div>
@@ -523,7 +794,7 @@ https://templatemo.com/tm-569-edu-meeting
         From exam selection to mastering every concept through 4 powerful learning modes, our app ensures you never lose track of what to study next—all within an affordable learning experience designed to make quality education accessible to every aspirant.
       </p>
 
-      <img src="assets/images/mobile4.webp" alt="" class="gj-hero-phone-mobile">
+      <img src="assets/images/mobile4.webp" alt="Aashirwad EduVerse mobile learning app" class="gj-hero-phone-mobile" loading="lazy" decoding="async">
 
       <div class="gj-journey-heading">
         <span class="gj-journey-line"></span>
@@ -559,7 +830,7 @@ https://templatemo.com/tm-569-edu-meeting
             </div>
 
             <div class="gj-card-phone">
-              <img src="assets/images/appstep1.webp" alt="Choose Your Exam screen" class="gj-card-phone-img">
+              <img src="assets/images/appstep1.webp" alt="Choose Your Exam screen" class="gj-card-phone-img" loading="lazy" decoding="async">
             </div>
           </div>
         </div>
@@ -614,7 +885,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="gj-phone-stage">
         <div class="gj-phone-glow"></div>
         <div class="gj-pedestal"></div>
-        <img src="assets/images/mobile4.webp" alt="Aashirwad Eduverse App" class="gj-hero-phone">
+        <img src="assets/images/mobile4.webp" alt="Aashirwad EduVerse app" class="gj-hero-phone" loading="lazy" decoding="async">
 
         <div class="gj-callout gj-callout-1">
           <div class="gj-callout-connector"></div>
@@ -732,21 +1003,21 @@ https://templatemo.com/tm-569-edu-meeting
       </div>
 
       <div class="app-store-row">
-        <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+        <a href="https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN" class="app-store-btn" rel="noopener noreferrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" loading="lazy">
         </a>
-        <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn" target="_blank">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store">
+        <a href="https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592" class="app-store-btn" rel="noopener noreferrer">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on the App Store" loading="lazy">
         </a>
       </div>
     </div>
 
   <!-- Decorative right-edge badge images -->
   <div class="app-badge-bg-wrap" id="appBadgeBgWrap" aria-hidden="true">
-    <img src="assets/images/animate/game-bg.png"         class="app-badge-bg active" data-badge="games"    alt="">
-    <img src="assets/images/animate/exam-bg.png"          class="app-badge-bg"        data-badge="contests"  alt="">
-    <img src="assets/images/animate/progresslevel-bg.png" class="app-badge-bg"        data-badge="progress"  alt="">
-    <img src="assets/images/animate/news-bg.png"         class="app-badge-bg"        data-badge="news"      alt="">
+    <img src="assets/images/animate/game-bg.webp"         class="app-badge-bg active" data-badge="games"    alt="">
+    <img src="assets/images/animate/exam-bg.webp"          class="app-badge-bg"        data-badge="contests"  alt="">
+    <img src="assets/images/animate/progresslevel-bg.webp" class="app-badge-bg"        data-badge="progress"  alt="">
+    <img src="assets/images/animate/news-bg.webp"         class="app-badge-bg"        data-badge="news"      alt="">
   </div>
 
   </div><!-- /app-intro-panel -->
@@ -997,7 +1268,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-gold"></div>
-          <img src="assets/images/mobile9.webp" alt="Syllabus Tree" class="pf-mockup-img">
+          <img src="assets/images/mobile9.webp" alt="Syllabus Tree" class="pf-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1014,7 +1285,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-dark"></div>
-          <img src="assets/images/search.webp" alt="Keyword Search" class="pf-mockup-img">
+          <img src="assets/images/search.webp" alt="Keyword Search" class="pf-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="pf-content-side">
@@ -1053,7 +1324,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-red"></div>
-          <img src="assets/images/contest.webp" alt="Smart Exam" class="pf-mockup-img">
+          <img src="assets/images/contest.webp" alt="Smart Exam" class="pf-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1070,7 +1341,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-dark"></div>
-          <img src="assets/images/mobile3.webp" alt="Game Zone" class="pf-mockup-img">
+          <img src="assets/images/mobile3.webp" alt="Game Zone" class="pf-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="pf-content-side">
@@ -1109,7 +1380,7 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="pf-visual-side">
         <div class="pf-mockup-frame">
           <div class="pf-mockup-glow pf-glow-gold"></div>
-          <img src="assets/images/news.webp" alt="Current Affairs" class="pf-mockup-img">
+          <img src="assets/images/news.webp" alt="Current Affairs" class="pf-mockup-img" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1144,7 +1415,7 @@ https://templatemo.com/tm-569-edu-meeting
           </button>
           <div class="faq-answer-wrapper" id="faqAnswer1" role="region">
             <div class="faq-answer-inner">
-              <p class="faq-answer-text">Most of us fall into the trap of passive reading�scrolling through text but forgetting it an hour later. Aashirwad Eduverse fixes this by targeting different parts of your brain. You can read a concept (Reading Mode), lock it into muscle memory by practicing key terms (Writing Mode), listen to expert breakdowns while traveling (Audio Mode), or watch complex topics get simplified (Video Mode). This multi-sensory approach keeps your brain active and ensures you actually retain what you study.</p>
+              <p class="faq-answer-text">Most of us fall into the trap of passive reading—scrolling through text but forgetting it an hour later. Aashirwad Eduverse fixes this by targeting different parts of your brain. You can read a concept (Reading Mode), lock it into muscle memory by practicing key terms (Writing Mode), listen to expert breakdowns while traveling (Audio Mode), or watch complex topics get simplified (Video Mode). This multi-sensory approach keeps your brain active and ensures you actually retain what you study.</p>
             </div>
           </div>
         </div>
@@ -1189,7 +1460,7 @@ https://templatemo.com/tm-569-edu-meeting
           </button>
           <div class="faq-answer-wrapper" id="faqAnswer4" role="region">
             <div class="faq-answer-inner">
-              <p class="faq-answer-text">Yes, absolutely! Aashirwad Eduverse provides a 2-day free trial. This allows you to explore our premium four-dimensional learning modes�Reading, Writing, Audio, and Video�and test out our smart features completely risk-free before making a commitment.</p>
+              <p class="faq-answer-text">Yes, absolutely! Aashirwad Eduverse provides a 2-day free trial. This allows you to explore our premium four-dimensional learning modes—Reading, Writing, Audio, and Video—and test out our smart features completely risk-free before making a commitment.</p>
             </div>
           </div>
         </div>
@@ -1215,7 +1486,7 @@ https://templatemo.com/tm-569-edu-meeting
     <div class="faq-right-col">
       <div class="faq-phone-wrapper">
         <div class="faq-phone-glow"></div>
-        <img src="assets/images/mobile.webp" alt="Aashirwad Eduverse Mobile App" class="faq-phone-img">
+        <img src="assets/images/mobile.webp" alt="Aashirwad EduVerse mobile app" class="faq-phone-img" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -1237,19 +1508,19 @@ https://templatemo.com/tm-569-edu-meeting
 
     <div class="aia-stage" id="aiaStage">
       <div class="aia-phone-slot" data-pos="-2">
-        <img src="assets/images/mobile/screen1.webp" alt="App Screen">
+        <img src="assets/images/mobile/screen1.webp" alt="Aashirwad EduVerse app — home screen" loading="lazy" decoding="async">
       </div>
       <div class="aia-phone-slot" data-pos="-1">
-        <img src="assets/images/mobile/screen2.webp" alt="App Screen">
+        <img src="assets/images/mobile/screen2.webp" alt="Aashirwad EduVerse app — syllabus tree" loading="lazy" decoding="async">
       </div>
       <div class="aia-phone-slot" data-pos="0">
-        <img src="assets/images/mobile/screen3.webp" alt="App Screen">
+        <img src="assets/images/mobile/screen3.webp" alt="Aashirwad EduVerse app — learning modes" loading="lazy" decoding="async">
       </div>
       <div class="aia-phone-slot" data-pos="1">
-        <img src="assets/images/mobile/screen4.webp" alt="App Screen">
+        <img src="assets/images/mobile/screen4.webp" alt="Aashirwad EduVerse app — mock test interface" loading="lazy" decoding="async">
       </div>
       <div class="aia-phone-slot" data-pos="2">
-        <img src="assets/images/mobile/screen5.webp" alt="App Screen">
+        <img src="assets/images/mobile/screen5.webp" alt="Aashirwad EduVerse app — current affairs section" loading="lazy" decoding="async">
       </div>
     </div>
 
@@ -1261,6 +1532,8 @@ https://templatemo.com/tm-569-edu-meeting
     <span class="aia-counter" id="aiaCounter">05 / 06</span>
   </div>
 </section>
+  </main>
+
 <!-- Shared Footer (injected from components/footer.html) -->
   <div id="site-footer"></div>
 
@@ -2731,7 +3004,7 @@ https://templatemo.com/tm-569-edu-meeting
       });
 
       wa.addEventListener('click', function () {
-        window.open('https://wa.me/918547935616', '_blank');
+        window.location.href = 'https://wa.me/918547935616';
       });
 
       document.addEventListener('click', function (e) {
@@ -2753,15 +3026,76 @@ https://templatemo.com/tm-569-edu-meeting
     var FRAME_COUNT = 159;
     var FRAME_PATH = 'assets/images/animate/frame/frame_';
     var FPS = 30;
-    var frames = [];
+    var FRAME_W = 1080, FRAME_H = 1080;   /* intrinsic size of every frame */
+
+    var frames = new Array(FRAME_COUNT);
+    var requested = new Array(FRAME_COUNT);
     var lastDrawnFrame = 0;
 
     function pad(n) { return String(n).padStart(4, '0'); }
 
-    for (var i = 1; i <= FRAME_COUNT; i++) {
-      var img = new Image();
-      img.src = FRAME_PATH + pad(i) + '.webp';
-      frames.push(img);
+    for (var i = 0; i < FRAME_COUNT; i++) {
+      (function (idx) {
+        var img = new Image();
+        img.decoding = 'async';
+        img.addEventListener('load', function () {
+          if (lastDrawnFrame === idx && !playing) drawFrame(idx);
+        });
+        frames[idx] = img;
+      })(i);
+    }
+
+    function isReady(idx) {
+      var im = frames[idx];
+      return !!(im && im.complete && im.naturalWidth);
+    }
+
+    function request(idx) {
+      if (idx < 0 || idx >= FRAME_COUNT || requested[idx]) return;
+      requested[idx] = true;
+      frames[idx].src = FRAME_PATH + pad(idx + 1) + '.webp';
+    }
+
+    /* Fire cb once frame idx is decodable (or has failed, so we never hang). */
+    function onReady(idx, cb) {
+      var im = frames[idx];
+      if (isReady(idx)) { setTimeout(cb, 0); return; }
+      var done = false;
+      function fire() { if (done) return; done = true; cb(); }
+      im.addEventListener('load',  fire, { once: true });
+      im.addEventListener('error', fire, { once: true });
+    }
+
+    /* Request every frame in list (1-based) and run cb once all are ready. */
+    function ensureList(list, cb) {
+      var pending = 0, finished = false;
+      list.forEach(function (n) {
+        pending++;
+        request(n - 1);
+        onReady(n - 1, function () {
+          pending--;
+          if (!finished && pending === 0) { finished = true; cb(); }
+        });
+      });
+      if (pending === 0 && !finished) { finished = true; cb(); }
+    }
+
+    /* Background fetch: small batches on idle time, so these requests never
+       compete with the page's own critical resources. */
+    var bgRunning = false, bgCursor = 0;
+
+    function loadRemaining() {
+      if (bgRunning) return;
+      bgRunning = true;
+      var schedule = window.requestIdleCallback
+        ? function (fn) { window.requestIdleCallback(fn, { timeout: 250 }); }
+        : function (fn) { setTimeout(fn, 20); };
+      function chunk() {
+        var n = 0;
+        while (bgCursor < FRAME_COUNT && n < 5) { request(bgCursor++); n++; }
+        if (bgCursor < FRAME_COUNT) schedule(chunk);
+      }
+      schedule(chunk);
     }
 
     function resizeCanvas() {
@@ -2770,22 +3104,26 @@ https://templatemo.com/tm-569-edu-meeting
 
     function drawFrame(idx) {
       var img = frames[idx];
-      if (!img.complete || !img.naturalWidth) return;
+      if (!img) return;
       var dpr = window.devicePixelRatio || 1;
       var boxW = stage.clientWidth;
       var boxH = stage.clientHeight;
       var zoom = parseFloat(getComputedStyle(stage).getPropertyValue('--frame-zoom')) || 1;
       /* keep the same cover-fit scale as before, but draw the WHOLE image
-         so it can overflow the box instead of being cropped */
-      var scale = Math.max(boxW / img.naturalWidth, boxH / img.naturalHeight) * zoom;
-      var dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+         so it can overflow the box instead of being cropped. Sizing uses the
+         known frame ratio, so the box is stable before any frame arrives. */
+      var scale = Math.max(boxW / FRAME_W, boxH / FRAME_H) * zoom;
+      var dw = FRAME_W * scale, dh = FRAME_H * scale;
       canvas.width  = Math.round(dw * dpr * 2);
       canvas.height = Math.round(dh * dpr * 2);
       canvas.style.width  = Math.round(dw) + 'px';
       canvas.style.height = Math.round(dh) + 'px';
+      lastDrawnFrame = idx;
+      /* Not downloaded yet? Leave the previous frame on screen; the load
+         handler repaints this one once it arrives. */
+      if (!img.complete || !img.naturalWidth) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      lastDrawnFrame = idx;
     }
 
     window.addEventListener('resize', function () { resizeCanvas(); });
@@ -2809,6 +3147,7 @@ https://templatemo.com/tm-569-edu-meeting
     var currentRest = 'games';
     var pendingTarget = 'games';
     var playing = false;
+    var preparing = false;        /* true while ensureList() warms a path */
     var rafId = 0;
 
     function stopPlay() {
@@ -2864,7 +3203,7 @@ https://templatemo.com/tm-569-edu-meeting
         var target = badge.getAttribute('data-screen');
         if (!SEGMENTS[target]) return;
         if (target === currentRest) return;   /* already selected — do nothing */
-        if (playing) return;                  /* ignore clicks while an animation is playing */
+        if (playing || preparing) return;     /* ignore clicks while animating/warming */
 
         var source = currentRest;
         stopPlay();
@@ -2873,7 +3212,16 @@ https://templatemo.com/tm-569-edu-meeting
         document.querySelectorAll('.app-badge-bg').forEach(function (bg) {
           bg.classList.toggle('active', bg.getAttribute('data-badge') === target);
         });
-        playPath(buildPath(source, target));
+
+        /* Don't start a transition through frames that haven't arrived yet —
+           fetch the path, then play it. Clicks are locked out meanwhile. */
+        loadRemaining();
+        var path = buildPath(source, target);
+        preparing = true;
+        ensureList(path, function () {
+          preparing = false;
+          playPath(path);
+        });
       });
     });
 
@@ -2882,14 +3230,95 @@ https://templatemo.com/tm-569-edu-meeting
       bg.classList.toggle('active', bg.getAttribute('data-badge') === currentRest);
     });
 
-    /* Draw the default resting frame (games → frame 40) as soon as it's ready */
+    /* Only the default resting frame is requested while the page loads.
+       The other 158 stream in once the section approaches the viewport. */
     var INITIAL_IDX = SEGMENTS[currentRest].rest - 1;
-    if (frames[INITIAL_IDX].complete && frames[INITIAL_IDX].naturalWidth) {
-      resizeCanvas();
-      drawFrame(INITIAL_IDX);
+    request(INITIAL_IDX);
+    onReady(INITIAL_IDX, function () { resizeCanvas(); drawFrame(INITIAL_IDX); });
+
+    if ('IntersectionObserver' in window) {
+      var appIO = new IntersectionObserver(function (entries) {
+        for (var k = 0; k < entries.length; k++) {
+          if (entries[k].isIntersecting) { loadRemaining(); appIO.disconnect(); return; }
+        }
+      }, { rootMargin: '900px 0px' });
+      appIO.observe(stage);
+    } else if (document.readyState === 'complete') {
+      loadRemaining();
     } else {
-      frames[INITIAL_IDX].onload = function () { resizeCanvas(); drawFrame(INITIAL_IDX); };
+      window.addEventListener('load', loadRemaining);
     }
+  })();
+  </script>
+
+  <!-- About section frame animations -->
+  <script>
+  (function () {
+    var TOTAL = 65;
+    var center = document.getElementById('frameCenter');
+    var leftEl = document.getElementById('frameLeft');
+    var rightEl = document.getElementById('frameRight');
+    if (!center || !leftEl || !rightEl) return;
+
+    var centerFrames = [], leftFrames = [], rightFrames = [];
+    for (var i = 3; i <= TOTAL + 2; i++) {
+      var n = String(i).padStart(4, '0');
+      centerFrames.push('assets/images/about/frame1/frame_' + n + '.webp');
+      leftFrames.push('assets/images/about/frame2/frame_' + n + '.webp');
+      rightFrames.push('assets/images/about/frame3/frame_' + n + '.webp');
+    }
+
+    var idx = 0, running = false;
+    var FPS = 24;
+    var interval = 1000 / FPS;
+    var lastTime = 0;
+    var frameCount = 0;
+
+    function drawFrame() {
+      center.src = centerFrames[idx];
+      leftEl.src = leftFrames[idx];
+      rightEl.src = rightFrames[idx];
+      if (frameCount >= 0) center.style.opacity = '1';
+      if (frameCount >= 0) leftEl.style.opacity = '1';
+      if (frameCount >= 0) rightEl.style.opacity = '1';
+      idx++;
+      frameCount++;
+      if (idx >= TOTAL) { running = false; return; }
+    }
+
+    function loop(time) {
+      if (!running) return;
+      if (time - lastTime >= interval) {
+        drawFrame();
+        lastTime = time;
+      }
+      requestAnimationFrame(loop);
+    }
+
+    var prevTop = null;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var curTop = entry.boundingClientRect.top;
+        var scrollingDown = prevTop === null || curTop < prevTop;
+        prevTop = curTop;
+
+        if (entry.isIntersecting && scrollingDown && !running) {
+          running = true;
+          frameCount = 0;
+          idx = 0;
+          center.style.opacity = '1';
+          leftEl.style.opacity = '0';
+          rightEl.style.opacity = '0';
+          center.src = centerFrames[0];
+          leftEl.src = leftFrames[0];
+          rightEl.src = rightFrames[0];
+          requestAnimationFrame(loop);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    var section = document.querySelector('.frame-anim-container');
+    if (section) observer.observe(section);
   })();
   </script>
 

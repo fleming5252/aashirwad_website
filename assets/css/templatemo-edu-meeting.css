@@ -2134,22 +2134,6 @@ section.meetings-page .pagination ul li a:hover {
   color: var(--color-gold);
 }
 
-/* Meeting item column */
-.templatemo-item-col {
-	width: 31%;
-}
-
-@media (max-width: 992px) {
-	.templatemo-item-col {
-		width: 45%;
-	}
-}
-
-@media (max-width: 767px) {
-	.templatemo-item-col {
-		width: 100%;
-	}
-}
 
 /* 
 ---------------------------------------------
@@ -2437,7 +2421,6 @@ responsive
 
 /* ==========================================================================
    Aashirwad Eduverse — "Study Your Way" App Section
-   Add this block to your templatemo-edu-meeting.css file
    ========================================================================== */
 
 /* ---------------------------------------------------------------
@@ -3605,7 +3588,10 @@ section.app-heading-page .app-title-wrapper {
 }
 
 /* ── Main watermark title ── */
-section.app-heading-page h2.app-main-title {
+/* h1 variant included so pages can use a semantic <h1> for the hero title
+   without changing the rendered result. Selectors are widened, not changed. */
+section.app-heading-page h2.app-main-title,
+section.app-heading-page h1.app-main-title {
   /* FONT SIZE: increase to make "OUR MOBILE APP" bigger */
   font-size: 150px;
 
@@ -3660,7 +3646,8 @@ section.app-heading-page h6.app-sub-quote {
     padding-top: 160px;
     padding-bottom: 120px;
   }
-  section.app-heading-page h2.app-main-title {
+  section.app-heading-page h2.app-main-title,
+  section.app-heading-page h1.app-main-title {
     font-size: 80px;
   }
   section.app-heading-page h6.app-sub-quote {
@@ -3681,7 +3668,8 @@ section.app-heading-page h6.app-sub-quote {
     padding: 0 15px;
     box-sizing: border-box;
   }
-  section.app-heading-page h2.app-main-title {
+  section.app-heading-page h2.app-main-title,
+  section.app-heading-page h1.app-main-title {
     font-size: 52px;
     letter-spacing: 2px;
     max-width: 100%;
@@ -3746,7 +3734,7 @@ section.app-heading-page h6.app-sub-quote {
 }
 
 .app-about-img-wrapper {
-  display: inline-block;
+  display: block;
   max-width: 100%;
 }
 
@@ -3865,6 +3853,8 @@ section.app-heading-page h6.app-sub-quote {
 
 .app-about-img-wrapper {
   position: relative;
+  display: block;
+  max-width: 100%;
 }
 
 /* Orange glow behind phone */
@@ -11293,5 +11283,100 @@ button {
       var(--color-black) var(--screen2-visible),
       transparent var(--screen2-transparent),
       transparent 100%);
+  }
+}
+
+/* ==========================================================================
+   Custom scrollbar (theme-aware)
+   --------------------------------------------------------------------------
+   The website theme is driven by --color-red / --color-red-rgb, which
+   assets/js/theme-picker.js rewrites on <html> whenever a preset or the hue
+   slider is used. Because those are custom properties, the scrollbar inherits
+   the active theme automatically - no reload, no extra JavaScript, no second
+   theme system. The values below are derived from them, not hard-coded.
+   ========================================================================== */
+
+:root {
+  --scrollbar-size: 11px;
+  --scrollbar-size-slim: 8px;
+  --scrollbar-radius: 999px;
+  --scrollbar-track: rgba(var(--color-red-rgb), 0.07);
+  --scrollbar-thumb: rgba(var(--color-red-rgb), 0.88);
+  --scrollbar-thumb-hover: var(--color-red);
+  --scrollbar-thumb-edge: rgba(255, 255, 255, 0.42);
+  --scrollbar-thumb-edge-hover: rgba(255, 255, 255, 0.62);
+  --scrollbar-duration: 220ms;
+}
+
+/* Firefox */
+html,
+.header-area .main-nav .nav,
+.services .service-item-card,
+.gj-step-indicator {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Chromium / Edge / Safari */
+html::-webkit-scrollbar,
+.header-area .main-nav .nav::-webkit-scrollbar,
+.services .service-item-card::-webkit-scrollbar,
+.gj-step-indicator::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+html::-webkit-scrollbar-track,
+.header-area .main-nav .nav::-webkit-scrollbar-track,
+.services .service-item-card::-webkit-scrollbar-track,
+.gj-step-indicator::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--scrollbar-radius);
+}
+
+html::-webkit-scrollbar-thumb,
+.header-area .main-nav .nav::-webkit-scrollbar-thumb,
+.services .service-item-card::-webkit-scrollbar-thumb,
+.gj-step-indicator::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border: 1px solid var(--scrollbar-thumb-edge);
+  background-clip: padding-box;
+  border-radius: var(--scrollbar-radius);
+  transition: background-color var(--scrollbar-duration) ease, border-color var(--scrollbar-duration) ease;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+.header-area .main-nav .nav::-webkit-scrollbar-thumb:hover,
+.services .service-item-card::-webkit-scrollbar-thumb:hover,
+.gj-step-indicator::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  border-color: var(--scrollbar-thumb-edge-hover);
+  background-clip: padding-box;
+}
+
+html::-webkit-scrollbar-corner,
+.header-area .main-nav .nav::-webkit-scrollbar-corner,
+.services .service-item-card::-webkit-scrollbar-corner,
+.gj-step-indicator::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Hide the legacy arrow buttons for a cleaner bar */
+html::-webkit-scrollbar-button,
+.header-area .main-nav .nav::-webkit-scrollbar-button,
+.services .service-item-card::-webkit-scrollbar-button,
+.gj-step-indicator::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Respect reduced-motion: drop the thumb transition, keep full contrast */
+@media (prefers-reduced-motion: reduce) {
+  html::-webkit-scrollbar-thumb,
+  .header-area .main-nav .nav::-webkit-scrollbar-thumb,
+  .services .service-item-card::-webkit-scrollbar-thumb,
+  .gj-step-indicator::-webkit-scrollbar-thumb {
+    transition: none;
   }
 }
