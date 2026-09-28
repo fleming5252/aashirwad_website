@@ -60,7 +60,7 @@
     { hue: 35,   url: "../images/meetings-page-bg-Amber.webp" },
     { hue: 144,  url: "../images/meetings-page-bg-Forest Green.webp" },
     { hue: 193,  url: "../images/meetings-page-bg-Teal.webp" },
-    { hue: 216,  url: "../images/meetings-page-bg-navyblue.png" },
+    { hue: 216,  url: "../images/meetings-page-bg-navyblue.webp" },
     { hue: 313,  url: "../images/meetings-page-bg-Purple.webp" },
     { hue: 358,  url: "../images/meetings-page-bg-red.webp" }
   ];

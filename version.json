@@ -1,0 +1,23 @@
+{
+  "v": "1.0.2",
+  "files": {
+    "css/fontawesome": "1.0.0",
+    "css/templatemo-edu-meeting": "1.0.2",
+    "css/owl": "1.0.0",
+    "css/lightbox": "1.0.0",
+    "css/animations": "1.0.0",
+    "js/loader": "1.0.0",
+    "js/isotope": "1.0.0",
+    "js/owl-carousel": "1.0.0",
+    "js/lightbox": "1.0.0",
+    "js/tabs": "1.0.0",
+    "js/video": "1.0.0",
+    "js/slick-slider": "1.0.0",
+    "js/custom": "1.0.0",
+    "js/animations": "1.0.0",
+    "js/theme-picker": "1.0.0",
+    "js/csnp-hero-depth": "1.0.0",
+    "js/cta-hero-depth": "1.0.0",
+    "js/isotope-page": "1.0.0"
+  }
+}

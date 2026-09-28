@@ -61,11 +61,11 @@
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
-    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.css?v=1.0.0">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/owl.css?v=1.0.0">
+    <link rel="stylesheet" href="assets/css/lightbox.css?v=1.0.0">
+    <link rel="stylesheet" href="assets/css/animations.css?v=1.0.0">
     <style>
       /* ════ TOPPERS SECTION — inline styles (mirrors shared CSS) ════ */
       .toppers-section {
@@ -413,7 +413,7 @@
     </div>
   </div>
 
-  <script src="assets/js/loader.js"></script>
+  <script src="assets/js/loader.js?v=1.0.0"></script>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -972,17 +972,16 @@
   <!-- Shared components loader (must run before custom.js binds nav) -->
   <script src="components/includes.js"></script>
   <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/isotope.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/lightbox.js"></script>
-  <script src="assets/js/tabs.js"></script>
-  <script src="assets/js/video.js"></script>
-  <script src="assets/js/slick-slider.js"></script>
-  <script src="assets/js/custom.js"></script>
-  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/isotope.min.js?v=1.0.0"></script>
+  <script src="assets/js/owl-carousel.js?v=1.0.0"></script>
+  <script src="assets/js/lightbox.js?v=1.0.0"></script>
+  <script src="assets/js/tabs.js?v=1.0.0"></script>
+  <script src="assets/js/video.js?v=1.0.0"></script>
+  <script src="assets/js/slick-slider.js?v=1.0.0"></script>
+  <script src="assets/js/custom.js?v=1.0.0"></script>
+  <script src="assets/js/animations.js?v=1.0.0"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script defer src="assets/js/cta-hero-depth.js"></script>
+  <script defer src="assets/js/cta-hero-depth.js?v=1.0.0"></script>
   <script>
     (function () {
       var lastScrollY = window.scrollY;
@@ -1581,7 +1580,7 @@ function step(timestamp) {
   })();
   </script>
 <!-- Navbar theme picker -->
-<script src="assets/js/theme-picker.js"></script>
+<script src="assets/js/theme-picker.js?v=1.0.0"></script>
 
 <!-- Course card videos: deferred loading.
      The nine course clips total ~6.6 MB. Shipping them with preload="auto"
@@ -1595,8 +1594,10 @@ function step(timestamp) {
       var vids = document.querySelectorAll('video[data-src]');
       for (var i = 0; i < vids.length; i++) {
         vids[i].src = vids[i].getAttribute('data-src');
-        vids[i].load();
-        if (vids[i].play) vids[i].play();
+        if (vids[i].play) {
+          var np = vids[i].play();
+          if (np && np.catch) np.catch(function () {});
+        }
       }
     })();
   </script>
@@ -1606,17 +1607,29 @@ function step(timestamp) {
   var vids = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
   if (!vids.length) return;
 
+  function safePlay(v) {
+    if (!v.play) return;
+    try {
+      var p = v.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () { /* autoplay blocked or interrupted — ignore */ });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  /* Assigning .src already runs the resource selection algorithm, so no
+     explicit load() — calling it here would abort any pending play request.
+     Returns true when this call did the initial wiring. */
   function attach(v) {
-    if (v.dataset.aidLoaded === '1') return;
+    if (v.dataset.aidLoaded === '1') return false;
     v.dataset.aidLoaded = '1';
     v.src = v.getAttribute('data-src');
-    v.load();
-    if (v.play) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    return true;
   }
 
   /* No IntersectionObserver support: behave exactly like the old markup. */
   if (!('IntersectionObserver' in window)) {
-    vids.forEach(attach);
+    vids.forEach(function (v) { attach(v); safePlay(v); });
     return;
   }
 
@@ -1624,10 +1637,10 @@ function step(timestamp) {
     entries.forEach(function (e) {
       var v = e.target;
       if (e.isIntersecting) {
-        attach(v);
-        if (v.dataset.aidLoaded === '1' && v.paused) {
-          var p = v.play(); if (p && p.catch) p.catch(function () {});
-        }
+        /* Exactly one play() per intersecting tick: on a fresh load always
+           play, otherwise only when paused. Two play() calls in the same tick
+           make the second abort the first with an AbortError. */
+        if (attach(v) || v.paused) safePlay(v);
       } else if (v.dataset.aidLoaded === '1' && !v.paused) {
         /* Off-screen: stop decoding. Invisible to the user, saves CPU/battery. */
         v.pause();
@@ -1637,6 +1650,15 @@ function step(timestamp) {
 
   vids.forEach(function (v) { io.observe(v); });
 })();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('[SW] Registered, scope:', reg.scope); })
+        .catch(function(err) { console.warn('[SW] Registration failed:', err); });
+    });
+  }
 </script>
 </body>
 </html>

@@ -9,9 +9,9 @@
   <title>Privacy Policy | Aashirwad EduVerse</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/animations.css">
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
+  <link rel="stylesheet" href="assets/css/animations.css?v=1.0.0">
+  <link rel="stylesheet" href="assets/css/fontawesome.css?v=1.0.0">
+  <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.2">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -500,7 +500,7 @@
     </div>
   </div>
 
-  <script src="assets/js/loader.js"></script>
+  <script src="assets/js/loader.js?v=1.0.0"></script>
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -508,7 +508,7 @@
   <!-- Top bar -->
   <div class="pp-topbar">
     <a href="index.html" class="pp-topbar-brand">
-      <img src="assets/images/logo3.png" alt="Aashirwad EduVerse" class="pp-topbar-logo" loading="lazy">
+      <img src="assets/images/logo3.webp" alt="Aashirwad EduVerse" class="pp-topbar-logo" loading="lazy">
     </a>
     <div class="pp-topbar-actions">
       <button class="pp-btn" type="button" onclick="history.back()">&#8592; Back</button>
@@ -756,7 +756,7 @@
 
       <!-- Sign-off -->
       <div class="pp-signoff">
-        <img src="assets/images/logo3.png" alt="Aashirwad EduVerse" class="pp-signoff-logo" loading="lazy">
+        <img src="assets/images/logo3.webp" alt="Aashirwad EduVerse" class="pp-signoff-logo" loading="lazy">
       </div>
 
     </main>
@@ -782,7 +782,7 @@
     })();
   </script>
 
-  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/animations.js?v=1.0.0"></script>
 
   <!-- Floating Contact Buttons -->
   <div class="fcb-wrapper" id="fcbWrapper">
@@ -852,6 +852,15 @@
     })();
   </script>
 
-  <script src="assets/js/theme-picker.js"></script>
+  <script src="assets/js/theme-picker.js?v=1.0.0"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) { console.log('[SW] Registered, scope:', reg.scope); })
+        .catch(function(err) { console.warn('[SW] Registration failed:', err); });
+    });
+  }
+</script>
 </body>
 </html>

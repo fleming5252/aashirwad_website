@@ -8288,6 +8288,9 @@ section.learning-process .container {
 .deck-card-position .course-item-card {
   width: 240px;
 }
+/* Force images inside deck cards to paint immediately — prevents blank
+   cards caused by will-change: transform on .deck-card-position creating
+   a compositing layer that defers image painting until a hover repaint. */
 .deck-card-position .course-item-card .down-content {
   padding: 16px 14px 14px;
 }

@@ -58,7 +58,13 @@
     /* The testimonials background video is visibility-controlled by its own
        IntersectionObserver, so don't auto-play it here. */
     document.querySelectorAll('video:not(.testimonials-bg)').forEach(function (v) {
-      try { v.play(); } catch (e) { /* ignore */ }
+      if (!v.play) return;
+      try {
+        /* play() returns a promise: a try/catch alone will not catch its
+           rejection (e.g. interrupted by a load request). */
+        var p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+      } catch (e) { /* ignore */ }
     });
   }
   if (document.readyState === 'loading') {
