@@ -165,6 +165,19 @@
   var loadStartTime = null;
   var finishStartTime = null;
 
+  /* Optional page-level preload (e.g. About frame animations): pages expose
+     window.__pagePreloadWait and the loader holds the splash until it fires,
+     so animations never stall waiting on the network. */
+  var pagePreloadReady = true;
+  if (typeof window.__pagePreloadWait === 'function') {
+    pagePreloadReady = false;
+    try {
+      window.__pagePreloadWait(function () { pagePreloadReady = true; });
+    } catch (e) {
+      pagePreloadReady = true;
+    }
+  }
+
   function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
   function setProgress(p) {
@@ -197,7 +210,10 @@
 
   /* Safety net: never let the loader block the page forever if something
      fails to load (offline CDN, broken image, slow third-party script). */
-  setTimeout(function () { pageLoaded = true; }, 12000);
+  setTimeout(function () {
+    pageLoaded = true;
+    pagePreloadReady = true;
+  }, 12000);
 
   function updateProgress(now) {
     if (loadStartTime === null) loadStartTime = now;
@@ -214,6 +230,15 @@
 
     /* Page fully loaded: glide to 100% and exit. */
     if (finishStartTime === null) finishStartTime = now;
+
+    /* Optional page preload still running: hold the loader (near ~96%) so
+       the reveal happens only after the frames are cached. Capped at 8 s so
+       the page is never held longer than the safety net allows. */
+    if (!pagePreloadReady && now - finishStartTime < 8000) {
+      setProgress(96);
+      return;
+    }
+
     var f = Math.min(1, (now - finishStartTime) / 600);
     setProgress(lastProgress + (100 - lastProgress) * easeOutCubic(f));
     if (f >= 1 && !finished) {

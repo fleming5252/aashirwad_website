@@ -1,5 +1,5 @@
 /* Cache name derived from version.json — falls back to hardcoded value */
-let CACHE_NAME = 'aashirwad-v1.0.2';
+let CACHE_NAME = 'aashirwad-v1.0.3';
 const VIDEO_CACHE_NAME = 'aashirwad-video-v1';
 const VERSION_PREFIX = 'aashirwad-v';
 

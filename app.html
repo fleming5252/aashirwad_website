@@ -586,6 +586,60 @@
     </div>
   </div>
 
+  <!-- Preload About frame animations while the preloader plays. Builds the
+       frame URL lists once (window.__aboutFrames), starts fetching every
+       frame, and exposes __pagePreloadWait so loader.js holds the splash
+       until all frames are cached. The animation then plays cache-first
+       with no network stalls. -->
+  <script>
+  (function () {
+    var TOTAL = 65;
+    function makeFrames(dir) {
+      var list = [];
+      for (var i = 1; i <= TOTAL; i++) {
+        var n = String(i).padStart(4, '0');
+        list.push('assets/images/about/' + dir + '/frame_' + n + '.webp');
+      }
+      return list;
+    }
+    var frames = {
+      centerFrames: makeFrames('frame1'),
+      leftFrames: makeFrames('frame2'),
+      rightFrames: makeFrames('frame3')
+    };
+    window.__aboutFrames = frames;
+
+    var urls = frames.centerFrames.concat(frames.leftFrames, frames.rightFrames);
+    var total = urls.length, done = 0, settled = false;
+
+    function tick() {
+      if (settled) return;
+      done++;
+      if (done >= total) settled = true;
+    }
+
+    /* Must exist before loader.js runs — loader.js calls it to gate the
+       page reveal. Failures are counted too so the loader never hangs. */
+    window.__pagePreloadWait = function (cb) {
+      if (typeof cb !== 'function') return;
+      var fired = false;
+      var fire = function () { if (!fired) { fired = true; cb(); } };
+      if (settled) { fire(); return; }
+      var iv = setInterval(function () {
+        if (settled) { clearInterval(iv); fire(); }
+      }, 200);
+      setTimeout(function () { clearInterval(iv); fire(); }, 15000);
+    };
+
+    for (var i = 0; i < total; i++) {
+      var img = new Image();
+      img.onload = tick;
+      img.onerror = tick;
+      img.src = urls[i];
+    }
+  })();
+  </script>
+
   <script src="assets/js/loader.js?v=1.0.0"></script>
 
   <!-- Scroll Progress Bar -->
@@ -3257,13 +3311,18 @@
     var rightEl = document.getElementById('frameRight');
     if (!center || !leftEl || !rightEl) return;
 
-    var centerFrames = [], leftFrames = [], rightFrames = [];
-    for (var i = 3; i <= TOTAL + 2; i++) {
-      var n = String(i).padStart(4, '0');
-      centerFrames.push('assets/images/about/frame1/frame_' + n + '.webp');
-      leftFrames.push('assets/images/about/frame2/frame_' + n + '.webp');
-      rightFrames.push('assets/images/about/frame3/frame_' + n + '.webp');
+    var _preF = window.__aboutFrames;
+    function _makeFrames(dir) {
+      var list = [];
+      for (var i = 1; i <= TOTAL; i++) {
+        var n = String(i).padStart(4, '0');
+        list.push('assets/images/about/' + dir + '/frame_' + n + '.webp');
+      }
+      return list;
     }
+    var centerFrames = _preF ? _preF.centerFrames : _makeFrames('frame1');
+    var leftFrames = _preF ? _preF.leftFrames : _makeFrames('frame2');
+    var rightFrames = _preF ? _preF.rightFrames : _makeFrames('frame3');
 
     var idx = 0, running = false;
     var FPS = 24;
