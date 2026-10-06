@@ -58,9 +58,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Preload Innovation in Education timeline images -->
+    <link rel="preload" as="image" href="assets/images/aboutinnovation1.webp">
+    <link rel="preload" as="image" href="assets/images/aboutinnovation2.webp">
+    <link rel="preload" as="image" href="assets/images/aboutinnovation3.webp">
+    <link rel="preload" as="image" href="assets/images/aboutinnovation4.webp">
+    <link rel="preload" as="image" href="assets/images/aboutinnovation5.webp">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fontawesome.css?v=1.0.0">
-    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.6">
     <link rel="stylesheet" href="assets/css/owl.css?v=1.0.0">
     <link rel="stylesheet" href="assets/css/lightbox.css?v=1.0.0">
     <link rel="stylesheet" href="assets/css/animations.css?v=1.0.0">
@@ -680,6 +687,15 @@
         .abt-eco-stage { height: 340px; max-width: 100%; }
         .abt-eco-center { width: 110px; height: 110px; }
         .abt-eco-center img { height: auto; width: 82px; }
+        /* Tap-and-hold pauses the orbit — keep the hold from selecting text
+           or firing the long-press callout. */
+        .abt-eco-stage {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .abt-eco-stage .abt-eco-item { -webkit-user-select: none; user-select: none; }
       }
       @media (max-width: 480px) {
         .abt-eco-stage { height: 260px; }
@@ -946,14 +962,19 @@
           height: 100% !important;
         }
 
-        /* 6 — Skills row (both columns flattened into one row) */
+        /* 6 — Skills laid out as a clean 3 x 2 grid on mobile.
+           Both .abt-csnp-skills wrappers become display:contents so all six
+           items flow directly into the parent grid instead of sitting in two
+           separate rows. */
         .abt-csnp-main-row {
           order: 6;
-          flex-direction: row !important;
-          flex-wrap: wrap !important;
-          justify-content: center !important;
+          display: grid !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+          grid-auto-rows: auto !important;
+          justify-items: center !important;
+          align-items: start !important;
           padding: 16px 0 !important;
-          gap: 12px !important;
+          gap: 16px 8px !important;
         }
 
         /* Hide empty spacer */
@@ -962,10 +983,7 @@
         }
 
         .abt-csnp-skills {
-          flex-direction: row !important;
-          flex-wrap: wrap !important;
-          justify-content: center !important;
-          gap: 12px 16px !important;
+          display: contents !important;
         }
 
         .abt-csnp-skill-icon {
@@ -976,13 +994,16 @@
 
         .abt-csnp-skill-label { font-size: 10px !important; }
 
-        /* Slow the float drift to half speed on mobile */
-        .abt-csnp-skill-item:nth-child(1) { animation: csnpFloat1 6.4s ease-in-out infinite; }
-        .abt-csnp-skill-item:nth-child(2) { animation: csnpFloat2 5.6s ease-in-out infinite; }
-        .abt-csnp-skill-item:nth-child(3) { animation: csnpFloat3 7.2s ease-in-out infinite; }
-        .abt-csnp-skill-item:nth-child(4) { animation: csnpFloat4 5.0s ease-in-out infinite; }
-        .abt-csnp-skill-item:nth-child(5) { animation: csnpFloat5 6.0s ease-in-out infinite; }
-        .abt-csnp-skill-item:nth-child(6) { animation: csnpFloat6 6.8s ease-in-out infinite; }
+        /* Float drift disabled on mobile — the icons sit still instead */
+        .abt-csnp-skill-item,
+        .abt-csnp-skill-item:nth-child(1),
+        .abt-csnp-skill-item:nth-child(2),
+        .abt-csnp-skill-item:nth-child(3),
+        .abt-csnp-skill-item:nth-child(4),
+        .abt-csnp-skill-item:nth-child(5),
+        .abt-csnp-skill-item:nth-child(6) {
+          animation: none !important;
+        }
 
         /* 7 — Footer text */
         .abt-csnp-footer {
@@ -1161,6 +1182,9 @@
       /* Responsive */
       @media (max-width: 767px) {
         .abt-inn-footer { text-align: justify; }
+        /* Drop the gold dots on either side of the footer text */
+        .abt-inn-footer-wrap::before,
+        .abt-inn-footer-wrap::after { display: none; }
         .abt-inn-timeline { flex-wrap: wrap; gap: 30px; }
         .abt-inn-item { flex: 0 0 45%; }
         .abt-inn-svg { display: none; }
@@ -1630,6 +1654,17 @@
         .abt-vm-grow-col > div {
           margin: 4px auto 0 !important;
         }
+
+        /* Mission image: the 180px tall cover box crops the 1774x887 art off
+           both sides on narrow screens. Let it size to its own ratio instead. */
+        .abt-vm-card.slide-in-right .abt-vm-img-wrap {
+          height: auto;
+          overflow: visible;
+        }
+        .abt-vm-card.slide-in-right .abt-vm-img-wrap img {
+          height: auto;
+          object-fit: contain;
+        }
       }
 
       /* ── Closing Banner ── */
@@ -1682,6 +1717,14 @@
           font-size: 28px;
         }
       }
+      /* Mobile: the 991px block above adds 60px of section padding and the
+         heading wrap adds another 50px, stacking to 110px of blank space
+         before "Learning Beyond the Classroom". Trim both back here. */
+      @media (max-width: 767px) {
+        .about-learning-section { padding-top: 0; }
+        .abt-learn-heading-wrap { padding-top: 12px; }
+      }
+
       @media (max-width: 575px) {
         .about-stat-card {
           padding: 20px 10px;
@@ -2165,13 +2208,38 @@
 
       var stage = document.getElementById('ecoStage');
       if (stage) {
-        stage.addEventListener('mouseenter', function () { paused = true; });
-        stage.addEventListener('mouseleave', function () {
-          paused = false;
-          if (inView && !rafId) {
-            rafId = requestAnimationFrame(animate);
-          }
-        });
+        /* Desktop: hover to pause, un-hover to resume (unchanged).
+           Mobile: tap-and-hold to pause, release to resume. Without this
+           branch, the tap-to-hover emulation leaves the orbit stuck. */
+        var isTouchLayout = (window.matchMedia &&
+          window.matchMedia('(max-width: 767px), (hover: none)').matches);
+
+        if (isTouchLayout) {
+          var holding = false;
+          var resume = function () {
+            if (!holding) return;
+            holding = false;
+            paused = false;
+            if (inView && !rafId) rafId = requestAnimationFrame(animate);
+          };
+          stage.addEventListener('touchstart', function () {
+            holding = true;
+            paused = true;
+          }, { passive: true });
+          stage.addEventListener('touchend', resume, { passive: true });
+          stage.addEventListener('touchcancel', resume, { passive: true });
+          /* A finger dragged off the element still ends on the target, but
+             scrolling cancels cleanly too — catch it if it slips through. */
+          window.addEventListener('touchend', resume, { passive: true });
+        } else {
+          stage.addEventListener('mouseenter', function () { paused = true; });
+          stage.addEventListener('mouseleave', function () {
+            paused = false;
+            if (inView && !rafId) {
+              rafId = requestAnimationFrame(animate);
+            }
+          });
+        }
       }
 
       /* Only rotate the orbit while the section is more than half visible.
@@ -2197,11 +2265,10 @@
          Back items:  z 5–14   (below center)
          Front items: z 25–34  (above center)         */
 
-      function animate() {
-        rafId = null;
-        if (paused || !inView) return;
-        rafId = requestAnimationFrame(animate);
-
+      /* Place every item on its orbit at the current angle.
+         Separate from animate() so items are correctly positioned from the
+         first paint — not only once the section scrolls into view. */
+      function layout() {
         var stage = document.getElementById('ecoStage');
         if (!stage) return;
 
@@ -2212,10 +2279,9 @@
         var rx = W * 0.44;
         var ry = H * 0.28;
 
-        angleOffset += speed;
-
         var items     = stage.querySelectorAll('.abt-eco-item');
         var total     = items.length;
+        if (!total) return;
         var startAngle = -Math.PI / 2;
         var angleStep  = (2 * Math.PI) / total;
 
@@ -2262,14 +2328,32 @@
         });
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () { build(); animate(); });
-      } else {
-        build();
-        animate();
+      function animate() {
+        rafId = null;
+        if (paused || !inView) return;
+        rafId = requestAnimationFrame(animate);
+        angleOffset += speed;
+        layout();
       }
 
-      window.addEventListener('resize', build);
+      function initOrbit() {
+        build();
+        layout();
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initOrbit);
+      } else {
+        initOrbit();
+      }
+
+      /* Re-layout after full load (late fonts/layout) and on resize so
+         items never remain stuck at the top-left of the stage. */
+      window.addEventListener('load', layout);
+      window.addEventListener('resize', function () {
+        build();
+        layout();
+      });
     })();
   </script>
 
@@ -2386,7 +2470,7 @@
         <div class="abt-inn-item slide-in-up">
           <div class="abt-inn-dot"></div>
           <div class="abt-inn-img-wrap">
-            <img src="assets/images/aboutinnovation1.webp" alt="" width="1536" height="1024" loading="eager" decoding="async">
+            <img src="assets/images/aboutinnovation1.webp" alt="" width="1536" height="1024" loading="eager" decoding="sync" fetchpriority="high">
           </div>
           <div class="abt-inn-item-title">Conventional<br>Learning</div>
           <div class="abt-inn-item-desc">Timeless values<br>of teaching<br>and mentorship</div>
@@ -2395,7 +2479,7 @@
         <div class="abt-inn-item slide-in-up">
           <div class="abt-inn-dot"></div>
           <div class="abt-inn-img-wrap">
-            <img src="assets/images/aboutinnovation2.webp" alt="" width="1337" height="1176" loading="eager" decoding="async">
+            <img src="assets/images/aboutinnovation2.webp" alt="" width="1337" height="1176" loading="eager" decoding="sync" fetchpriority="high">
           </div>
           <div class="abt-inn-item-title gold">Aashirwad<br>Rank File</div>
           <div class="abt-inn-item-desc">Curated previous<br>year papers and<br>toppers' resources</div>
@@ -2404,7 +2488,7 @@
         <div class="abt-inn-item slide-in-up">
           <div class="abt-inn-dot"></div>
           <div class="abt-inn-img-wrap">
-            <img src="assets/images/aboutinnovation3.webp" alt="" width="1536" height="1024" loading="eager" decoding="async">
+            <img src="assets/images/aboutinnovation3.webp" alt="" width="1536" height="1024" loading="eager" decoding="sync" fetchpriority="high">
           </div>
           <div class="abt-inn-item-title">Structured<br>Study Materials</div>
           <div class="abt-inn-item-desc">Comprehensive<br>and organised<br>content</div>
@@ -2413,7 +2497,7 @@
         <div class="abt-inn-item slide-in-up">
           <div class="abt-inn-dot"></div>
           <div class="abt-inn-img-wrap">
-            <img src="assets/images/aboutinnovation4.webp" alt="" width="1536" height="1024" loading="eager" decoding="async">
+            <img src="assets/images/aboutinnovation4.webp" alt="" width="1536" height="1024" loading="eager" decoding="sync" fetchpriority="high">
           </div>
           <div class="abt-inn-item-title gold">Digital Innovation<br>Aashirwad EduVerse</div>
           <div class="abt-inn-item-desc">Technology-enabled<br>learning resources</div>
@@ -2422,7 +2506,7 @@
         <div class="abt-inn-item slide-in-up">
           <div class="abt-inn-dot"></div>
           <div class="abt-inn-img-wrap">
-            <img src="assets/images/aboutinnovation5.webp" alt="" width="1327" height="1186" loading="eager" decoding="async">
+            <img src="assets/images/aboutinnovation5.webp" alt="" width="1327" height="1186" loading="eager" decoding="sync" fetchpriority="high">
           </div>
           <div class="abt-inn-item-title">Learning<br>Beyond Boundaries</div>
           <div class="abt-inn-item-desc">Accessible, flexible<br>and engaging learning<br>for every aspirant</div>
@@ -2490,6 +2574,24 @@
       setTimeout(drawLine, 100);
     }
     window.addEventListener('resize', drawLine);
+  })();
+
+  /* Make sure every Innovation timeline image is decoded, then force one
+     repaint — prevents blank images when the slide-in-up parent has a
+     transform (compositing layer defers image paint until a later repaint). */
+  (function () {
+    var imgs = document.querySelectorAll('.abt-inn-img-wrap img');
+    if (!imgs.length) return;
+    Array.from(imgs).forEach(function (img) {
+      var repaint = function () {
+        img.style.visibility = 'hidden';
+        void img.offsetHeight;
+        img.style.visibility = '';
+      };
+      if (img.decode) { img.decode().then(repaint).catch(repaint); }
+      else if (img.complete) { repaint(); }
+      else { img.addEventListener('load', repaint, { once: true }); }
+    });
   })();
   </script>
 
@@ -2746,7 +2848,7 @@
 
   <!-- Scripts -->
   <!-- Shared components loader (must run before custom.js binds nav) -->
-  <script src="components/includes.js"></script>
+  <script src="components/includes.js?v=1.0.1"></script>
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="assets/js/isotope.min.js?v=1.0.0"></script>
   <script src="assets/js/owl-carousel.js?v=1.0.0"></script>

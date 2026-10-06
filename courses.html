@@ -60,9 +60,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+
+    <!-- Preload first-visible rank holder images (initial carousel render) -->
+    <link rel="preload" as="image" href="assets/images/rank/1.webp">
+    <link rel="preload" as="image" href="assets/images/rank/2.webp">
+    <link rel="preload" as="image" href="assets/images/rank/3.webp">
+    <link rel="preload" as="image" href="assets/images/rank/4.webp">
+    <link rel="preload" as="image" href="assets/images/rank/5.webp">
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/fontawesome.css?v=1.0.0">
-    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.6">
     <link rel="stylesheet" href="assets/css/owl.css?v=1.0.0">
     <link rel="stylesheet" href="assets/css/lightbox.css?v=1.0.0">
     <link rel="stylesheet" href="assets/css/animations.css?v=1.0.0">
@@ -847,18 +854,18 @@
       <div class="rank-cylinder-wrap" id="rankCylinderWrap">
         <button class="rank-arrow rank-arrow-left" id="rankArrowLeft" aria-label="Previous">&#8249;</button>
         <div class="rank-cylinder-stage" id="rankCylinderStage">
-          <div class="rank-cylinder-item" data-index="0"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/1.webp" alt="Aashirwad rank holder - Rank 1" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="1"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/2.webp" alt="Aashirwad rank holder - Rank 2" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="2"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/3.webp" alt="Aashirwad rank holder - Rank 3" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="3"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/4.webp" alt="Aashirwad rank holder - Rank 4" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="4"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/5.webp" alt="Aashirwad rank holder - Rank 5" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="5"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/6.webp" alt="Aashirwad rank holder - Rank 6" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="6"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/7.webp" alt="Aashirwad rank holder - Rank 7" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="7"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/8.webp" alt="Aashirwad rank holder - Rank 8" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="8"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/9.webp" alt="Aashirwad rank holder - Rank 9" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="9"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/10.webp" alt="Aashirwad rank holder - Rank 10" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="10"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/11.webp" alt="Aashirwad rank holder - Rank 11" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
-          <div class="rank-cylinder-item" data-index="11"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/12.webp" alt="Aashirwad rank holder - Rank 12" width="600" height="600" loading="lazy" decoding="async"></div></div></div>
+          <div class="rank-cylinder-item" data-index="0"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/1.webp" alt="Aashirwad rank holder - Rank 1" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="1"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/2.webp" alt="Aashirwad rank holder - Rank 2" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="2"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/3.webp" alt="Aashirwad rank holder - Rank 3" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="3"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/4.webp" alt="Aashirwad rank holder - Rank 4" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="4"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/5.webp" alt="Aashirwad rank holder - Rank 5" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="5"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/6.webp" alt="Aashirwad rank holder - Rank 6" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="6"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/7.webp" alt="Aashirwad rank holder - Rank 7" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="7"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/8.webp" alt="Aashirwad rank holder - Rank 8" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="8"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/9.webp" alt="Aashirwad rank holder - Rank 9" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="9"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/10.webp" alt="Aashirwad rank holder - Rank 10" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="10"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/11.webp" alt="Aashirwad rank holder - Rank 11" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+          <div class="rank-cylinder-item" data-index="11"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/12.webp" alt="Aashirwad rank holder - Rank 12" width="600" height="600" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
         </div>
         <button class="rank-arrow rank-arrow-right" id="rankArrowRight" aria-label="Next">&#8250;</button>
         <img src="assets/images/rankstage.webp" class="rank-stage-bg" alt="" width="2172" height="724" loading="lazy" decoding="async">
@@ -970,7 +977,7 @@
 
     <!-- Scripts -->
   <!-- Shared components loader (must run before custom.js binds nav) -->
-  <script src="components/includes.js"></script>
+  <script src="components/includes.js?v=1.0.1"></script>
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="assets/js/isotope.min.js?v=1.0.0"></script>
   <script src="assets/js/owl-carousel.js?v=1.0.0"></script>
@@ -1037,9 +1044,18 @@
       /* Stats */
       document.querySelectorAll('.reveal-stat').forEach(observeWithInitialReveal);
 
-      /* Topper cards */
+      /* Topper cards — entrance animation only when a card is more than
+         40% visible (dedicated observer; not the generic 20% scroll IO). */
+      var topperIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+            entry.target.classList.add('tp-visible');
+            topperIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1] });
       document.querySelectorAll('.topper-card').forEach(function (t) {
-        if (t.offsetParent !== null) observeWithInitialReveal(t);
+        if (t.offsetParent !== null) topperIO.observe(t);
       });
 
       /* CTA section */
@@ -1508,20 +1524,79 @@ function step(timestamp) {
       if (Math.abs(dx) > 50) { go(dx < 0 ? 1 : -1); restartAuto(); }
     }, { passive: true });
 
-    function startAuto()   { autoTimer = setInterval(function () { go(1); }, 3000); }
-    function stopAuto()    { clearInterval(autoTimer); }
-    function restartAuto() { stopAuto(); startAuto(); }
+    /* Auto-rotate — only while the centre card is more than 40% visible */
+    var autoAllowed = false;
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(function () { go(1); }, 3000);
+    }
+    function stopAuto() {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+    function restartAuto() {
+      stopAuto();
+      if (autoAllowed) startAuto();
+    }
+
+    function getCenterCardVisibility() {
+      var centerItem = items[current];
+      if (!centerItem) return 0;
+      var rect = centerItem.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var vw = window.innerWidth || document.documentElement.clientWidth;
+      var visibleH = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+      var visibleW = Math.min(rect.right, vw) - Math.max(rect.left, 0);
+      if (visibleH <= 0 || visibleW <= 0) return 0;
+      var totalArea = rect.width * rect.height;
+      if (totalArea <= 0) return 0;
+      return (visibleW * visibleH) / totalArea;
+    }
+
+    function updateAutoGate() {
+      var vis = getCenterCardVisibility();
+      if (vis > 0.4) {
+        if (!autoAllowed) {
+          autoAllowed = true;
+          startAuto();
+        }
+      } else if (autoAllowed) {
+        autoAllowed = false;
+        stopAuto();
+      }
+    }
 
     stage.addEventListener('mouseenter', stopAuto);
-    stage.addEventListener('mouseleave', startAuto);
-
-    render();
-    startAuto();
-
-    /* Immediately reveal all topper cards so they're visible */
-    document.querySelectorAll('.topper-card').forEach(function (c) {
-      c.classList.add('tp-visible');
+    stage.addEventListener('mouseleave', function () {
+      if (autoAllowed) startAuto();
     });
+
+    /* Gate auto-rotate on centre-card visibility (>40%) */
+    var gateSec = stage.closest('section');
+    if ('IntersectionObserver' in window && gateSec) {
+      new IntersectionObserver(function () {
+        updateAutoGate();
+      }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] }).observe(stage);
+    }
+    window.addEventListener('scroll', updateAutoGate, { passive: true });
+    window.addEventListener('resize', updateAutoGate);
+
+    /* Make sure every rank image is decoded, then force one repaint */
+    Array.from(stage.querySelectorAll('.topper-img-wrap img')).forEach(function (img) {
+      var repaint = function () {
+        img.style.visibility = 'hidden';
+        void img.offsetHeight;
+        img.style.visibility = '';
+      };
+      if (img.decode) { img.decode().then(repaint).catch(repaint); }
+      else if (img.complete) { repaint(); }
+      else { img.addEventListener('load', repaint, { once: true }); }
+    });
+
+    /* Init */
+    render();
+    updateAutoGate();
   })();
   </script>
 
@@ -1574,7 +1649,7 @@ function step(timestamp) {
       setTimeout(function(){for(var j=0;j<C;j++){(function(d){setTimeout(function(){particles.push(createParticle('right'))},d)})(j*4)}for(var t=0;t<S;t++){(function(d){setTimeout(function(){particles.push(createSparkle('right'))},d)})(t*20+rand(0,150))}},90);
       if(!rafId)rafId=requestAnimationFrame(loop);
     }
-    if('IntersectionObserver' in window){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting&&!fired){fired=true;fire();obs.unobserve(section)}})},{threshold:.25});obs.observe(section)}
+    if('IntersectionObserver' in window){var obs=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting&&entry.intersectionRatio>=0.4&&!fired){fired=true;fire();obs.unobserve(section)}})},{threshold:[0,0.2,0.4,0.6,0.8,1]});obs.observe(section)}
     var lastSY=window.scrollY;
     window.addEventListener('scroll',function(){var r=section.getBoundingClientRect(),iv=r.top<window.innerHeight*.75&&r.bottom>0,sd=window.scrollY>lastSY;lastSY=window.scrollY;if(iv&&sd&&!rafId)fired=false;if(!fired&&iv&&sd){fired=true;fire()}},{passive:true});
   })();

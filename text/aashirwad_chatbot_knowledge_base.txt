@@ -1,0 +1,1276 @@
+====================================================================
+AASHIRWAD INSTITUTE OF TEACHERS — CHATBOT KNOWLEDGE BASE
+====================================================================
+
+Purpose:
+This document contains structured information for the Aashirwad Institute
+of Teachers / Aashirwad EduVerse website chatbot.
+
+Primary website:
+https://aitacademyindia.com/
+
+Important source rule:
+- Website information in this knowledge base is based on the supplied
+  Aashirwad website files.
+- Centre history and North Paravur information are additionally based on
+  the supplied "Institutional Profile – North Paravur Centre" document.
+- Where a numerical claim is source-specific, the source wording is kept.
+- Do not invent course schedules, batch dates, admission deadlines, fees,
+  faculty names, centre-specific course availability, or office hours when
+  they are not provided.
+
+
+--------------------------------------------------------------------
+SECTION 1: INSTITUTION OVERVIEW
+--------------------------------------------------------------------
+
+Institution Name:
+Aashirwad Institute of Teachers
+
+Brand / Alternate Names:
+- Aashirwad EduVerse
+- Aashirwad
+
+Tagline / Descriptor:
+"Academy for Competitive Examinations, Research & Training"
+
+Established:
+2009
+
+Head Office:
+Vaikom, Kottayam, Kerala
+
+Industry / Category:
+Education, competitive examination coaching, teacher eligibility
+training, civil service preparation, digital learning and skill
+development.
+
+Website:
+https://aitacademyindia.com/
+
+Aashirwad Institute of Teachers was established in 2009 and is an
+educational institution headquartered in Vaikom, Kottayam, Kerala.
+The institution focuses on quality education, structured training,
+expert guidance and innovative learning solutions.
+
+Aashirwad describes itself as a comprehensive educational ecosystem
+covering competitive examinations, teacher eligibility training,
+school education, civil service preparation, digital learning and
+skill development.
+
+The institution's educational approach emphasizes:
+- Conceptual clarity
+- Systematic preparation
+- Regular assessment
+- Quality learning resources
+- Personalised mentoring
+- Continuous academic support
+
+Aashirwad states that its objective is to identify potential, nurture
+talent and create pathways to academic and professional success.
+
+Aashirwad provides learning opportunities for students and aspirants
+at different stages of their academic and professional journey.
+
+
+--------------------------------------------------------------------
+SECTION 2: CONTACT INFORMATION
+--------------------------------------------------------------------
+
+Head Office Address:
+Aashirwad Institute of Teachers
+Kacherikavala
+Vaikom, Kottayam
+Kerala – 686141
+India
+
+Primary Phone / Helpline:
++91 85475 77007
+
+WhatsApp:
++91 85479 35616
+
+Email:
+info@aitacademyindia.com
+
+Google Maps:
+https://www.google.com/maps/place/Aashirwad+Institute+Of+Teachers./@9.7986126,76.4377363,12.76z/data=!4m6!3m5!1s0x3b08791202bf0249:0xef3dd46b957523ea!8m2!3d9.7554921!4d76.3953634!16s%2Fg%2F11c5s47wt6
+
+Coordinates:
+Latitude: 9.755479
+Longitude: 76.395364
+
+Languages:
+- English
+- Malayalam
+
+Area Served:
+Kerala
+
+Office hours:
+The supplied website does not specify official office working hours.
+Do not invent office hours.
+
+
+--------------------------------------------------------------------
+SECTION 3: SOCIAL MEDIA
+--------------------------------------------------------------------
+
+Facebook:
+https://www.facebook.com/AITkerala/
+
+Instagram:
+https://www.instagram.com/aashirwadinstituteofteachers/?hl=en
+
+YouTube:
+https://www.youtube.com/@aashirwadinstituteofteachers
+
+When users ask for social media accounts, provide the corresponding
+official links above.
+
+
+--------------------------------------------------------------------
+SECTION 4: CENTRES & LOCATIONS
+--------------------------------------------------------------------
+
+The supplied Institutional Profile lists the following Aashirwad
+centres:
+
+1. Vaikom
+   - Head Office
+   - Kottayam District
+
+2. Pallikkathodu
+   - Pallikkathodu Centre
+   - Kottayam District
+
+3. Ettumanoor
+   - Ettumanoor Centre
+   - Kottayam District
+
+4. Thrippunithura
+   - Thrippunithura Centre
+   - Ernakulam District
+
+5. North Paravur
+   - North Paravur Centre
+   - Ernakulam District
+   - Started in 2026
+
+Institutional Journey of Centres:
+- 2009: Aashirwad established in Vaikom and Navodaya training was
+  initiated.
+- 2010: Pallikkathodu Centre established.
+- 2011: Ettumanoor Centre started.
+- 2019: Thrippunithura Centre established.
+- 2026: North Paravur Centre started.
+
+North Paravur Centre:
+The North Paravur Centre represents the expansion of Aashirwad's
+academic activities into North Paravur in 2026.
+
+The centre is intended to provide:
+- Structured training
+- Academic guidance
+- Regular preparation for competitive examinations
+- Eligibility test preparation
+- Scholarship examination preparation
+
+The North Paravur Centre is intended to serve students and aspirants
+in North Paravur and neighbouring areas.
+
+Important:
+The supplied website files do not provide individual phone numbers,
+office hours, exact street address, course-by-course availability or
+batch schedules for each centre. Do not invent these details.
+
+Note on other listings:
+Do not describe Pala/Vellappadu as an official Aashirwad centre unless
+the institution provides a current official confirmation. The supplied
+Institutional Profile's official centre list contains Vaikom,
+Pallikkathodu, Ettumanoor, Thrippunithura and North Paravur.
+
+
+--------------------------------------------------------------------
+SECTION 5: ACADEMIC PROGRAMMES & TRAINING AREAS
+--------------------------------------------------------------------
+
+Aashirwad's wider institutional profile identifies the following
+academic and training areas:
+
+1. Competitive Examination Training
+   - Kerala PSC
+   - Merchant Navy IMU All India CET / IMU-CET
+   - Jawahar Navodaya Vidyalaya Selection Test (JNVST)
+
+2. Teacher Eligibility & Recruitment Examinations
+   - KTET Category I & II
+   - CTET
+   - LPST / UPST
+   - HST
+   - Subject-specific training
+
+3. School Admission & Scholarship Examinations
+   - Jawahar Navodaya Vidyalaya Selection Test (JNVST)
+   - NMMS
+   - LSS
+   - USS
+
+4. Civil Service Foundation Programme
+   - Civil Service Nurture Programme (CSNP)
+   - Foundation training for Classes 8 to Plus Two
+
+5. Typewriting Training
+   - Lower Grade
+   - Higher Grade
+
+6. Tuition Programmes
+   - LKG to Plus Two
+
+7. Language Training
+   - German
+   - Arabic
+   - Malayalam
+   - Sanskrit
+   - Japanese
+   - Hindi
+   - English
+
+8. Sports, Martial Arts & Wellness Training
+   - Chess
+   - Roller Skating
+   - Kung Fu
+   - Karate
+   - Yoga
+   - Meditation
+
+The current supplied website's dedicated Courses page focuses on the
+nine online/course-card programmes listed in Section 6 below.
+
+
+--------------------------------------------------------------------
+SECTION 6: CURRENT WEBSITE COURSE PROGRAMMES
+--------------------------------------------------------------------
+
+The supplied website lists nine course programmes.
+
+IMPORTANT:
+Prices, ratings and student counts below are the values displayed in
+the supplied website files and may change. Treat them as current website
+display values rather than permanent prices or guarantees.
+
+1. WOMEN POLICE
+   Description:
+   Specialized coaching for Women Police constable examinations with
+   physical training and mock interviews.
+
+   Displayed price: ₹2,999
+   Displayed original price: ₹4,999
+   Displayed discount: 40% OFF
+   Displayed rating: 4.8
+   Displayed students: 1.2k+
+
+2. POLICE CONSTABLE
+   Description:
+   Complete preparation for Kerala Police Constable examinations
+   including written, physical and viva preparation.
+
+   Displayed price: ₹3,499
+   Displayed original price: ₹5,499
+   Displayed discount: 36% OFF
+   Displayed rating: 4.7
+   Displayed students: 2.1k+
+
+3. LGS (LOWER GRADE)
+   Description:
+   Thorough coaching for Lower Grade Servants examinations with focus
+   on the Kerala PSC syllabus.
+
+   Displayed price: ₹2,499
+   Displayed original price: ₹3,999
+   Displayed discount: 37% OFF
+   Displayed rating: 4.6
+   Displayed students: 3.4k+
+
+4. LDC CLERK
+   Description:
+   Expert-led coaching for Lower Division Clerk examinations with
+   comprehensive study materials.
+
+   Displayed price: ₹3,999
+   Displayed original price: ₹6,499
+   Displayed discount: 38% OFF
+   Displayed rating: 4.9
+   Displayed students: 5.6k+
+
+5. DEGREE LEVEL
+   Description:
+   Degree-level PSC examination preparation covering all subjects with
+   expert faculty guidance.
+
+   Displayed price: ₹4,499
+   Displayed original price: ₹7,499
+   Displayed discount: 40% OFF
+   Displayed rating: 4.8
+   Displayed students: 4.2k+
+
+6. SECRETARIAT ASSISTANT
+   Description:
+   Specialized coaching for Secretariat Assistant examinations with
+   focus on Kerala PSC standards.
+
+   Displayed price: ₹5,999
+   Displayed original price: ₹8,999
+   Displayed discount: 33% OFF
+   Displayed rating: 4.5
+   Displayed students: 1.8k+
+
+7. KTET
+   Description:
+   Success-guaranteed KTET coaching with mock tests, expert faculty
+   and comprehensive study materials.
+
+   Displayed price: ₹3,999
+   Displayed original price: ₹6,999
+   Displayed discount: 43% OFF
+   Displayed rating: 4.9
+   Displayed students: 6.3k+
+
+8. CTET
+   Description:
+   Central Teacher Eligibility Test preparation with all subjects
+   covered by expert educators.
+
+   Displayed price: ₹4,499
+   Displayed original price: ₹7,499
+   Displayed discount: 40% OFF
+   Displayed rating: 4.7
+   Displayed students: 2.9k+
+
+9. CIVIL SERVICE FOUNDATION
+   Description:
+   Foundation course for Civil Services with comprehensive coverage
+   of the Prelims and Mains syllabus.
+
+   Displayed price: ₹12,999
+   Displayed original price: ₹19,999
+   Displayed discount: 35% OFF
+   Displayed rating: 4.6
+   Displayed students: 1.5k+
+
+Course page:
+https://aitacademyindia.com/courses.html
+
+
+--------------------------------------------------------------------
+SECTION 7: COMPETITIVE EXAMINATION AREAS
+--------------------------------------------------------------------
+
+Aashirwad's supplied website and institutional material mention
+preparation/training for:
+
+- Kerala PSC
+- KTET
+- CTET
+- Police examinations
+- LDC
+- LGS
+- Degree Level PSC examinations
+- Secretariat Assistant
+- Civil Services
+- Navodaya Entrance / JNVST
+- SSC and other competitive examinations
+- Merchant Navy / IMU-CET
+
+Teacher eligibility and recruitment areas include:
+- KTET Category I & II
+- CTET
+- LPST
+- UPST
+- HST
+- Subject-specific training
+
+School-level competitive and scholarship examinations include:
+- JNVST
+- NMMS
+- LSS
+- USS
+
+Do not claim that every listed programme is available at every centre
+unless the website or institution explicitly confirms it.
+
+
+--------------------------------------------------------------------
+SECTION 8: CIVIL SERVICE NURTURE PROGRAMME (CSNP)
+--------------------------------------------------------------------
+
+The Civil Service Nurture Programme (CSNP) is described as one of
+Aashirwad's flagship initiatives.
+
+Purpose:
+To nurture young aspirants from the school level and guide them
+progressively towards Civil Services.
+
+The programme focuses on:
+- Knowledge development
+- Analytical thinking
+- Communication skills
+- Current affairs awareness
+- Confidence
+- Leadership qualities
+- Foundation for future competitive examination success
+
+Institutional history:
+The CSNP was introduced in 2024 according to the supplied
+Institutional Profile.
+
+The profile describes foundation training for students from
+Classes 8 to Plus Two.
+
+
+--------------------------------------------------------------------
+SECTION 9: ACADEMIC APPROACH & LEARNING SUPPORT
+--------------------------------------------------------------------
+
+Aashirwad's academic approach includes:
+
+- Conceptual clarity
+- Systematic preparation
+- Regular assessment
+- Quality learning resources
+- Personalised mentoring
+- Continuous academic support
+
+The institution emphasizes structured preparation and learner support
+rather than only syllabus completion.
+
+The website describes its learning approach as combining:
+- Expert coaching
+- Comprehensive study materials
+- Smart evaluations
+- Regular practice
+- Mock examinations
+- Live contests
+- Digital learning
+- Personal guidance
+
+
+--------------------------------------------------------------------
+SECTION 10: RESULTS, ACHIEVEMENTS & INSTITUTIONAL RECORD
+--------------------------------------------------------------------
+
+Website claims:
+- 16+ years of transforming aspirations / institutional journey
+- 23 first ranks in PSC examinations
+- 15,000+ students guided
+- 500+ ranks achieved
+- 200+ expert classes
+- 95% student satisfaction
+
+The website also describes a consistent record in Jawahar Navodaya
+Vidyalaya admissions.
+
+The About page states that Aashirwad has built a strong reputation
+for result-oriented preparation in Kerala PSC, KTET, CTET, Navodaya
+Entrance, Civil Services, SSC and other national and state-level
+examinations.
+
+Institutional Profile achievement information:
+The supplied North Paravur Institutional Profile separately states:
+- 28 PSC first ranks in the last 10 years
+- 4 PSC first ranks in 2026, including a State Rank
+
+Because these figures come from different supplied materials, the
+chatbot should preserve the source wording rather than silently
+combining them. If a user asks for the institution's latest exact
+rank count, refer to the current official website/institutional
+material rather than inventing a reconciled number.
+
+The Institutional Profile also highlights a historic achievement in
+which Ulsad Uthaman secured 1st rank in two consecutive PSC rank lists
+published on consecutive days.
+
+
+--------------------------------------------------------------------
+SECTION 11: JAWAHAR NAVODAYA VIDYALAYA SUCCESS
+--------------------------------------------------------------------
+
+Aashirwad describes a strong and consistent record in Jawahar
+Navodaya Vidyalaya admissions.
+
+The Institutional Profile highlights an unusual achievement:
+three children from the same family secured admission to Jawahar
+Navodaya Vidyalayas through the Navodaya Selection Test.
+
+The profile identifies this as a rare achievement in the history of
+the examination.
+
+Do not invent a specific number of total Navodaya selections unless
+the institution provides one.
+
+
+--------------------------------------------------------------------
+SECTION 12: KTET SUCCESS GUARANTEE
+--------------------------------------------------------------------
+
+The About page describes a KTET Success Guarantee.
+
+Website wording in substance:
+Eligible candidates who do not qualify after completing the prescribed
+training may attend the next training session free of charge, subject
+to the applicable programme terms and conditions.
+
+Important chatbot rule:
+Do not describe this as an unconditional money-back guarantee or an
+unconditional guarantee of qualification.
+
+When asked about the KTET guarantee, explain that:
+- It applies to eligible candidates.
+- The candidate must complete the prescribed training.
+- If the candidate does not qualify, they may attend the next training
+  session free of charge.
+- Applicable programme terms and conditions apply.
+
+
+--------------------------------------------------------------------
+SECTION 13: AASHIRWAD EDUVERSE MOBILE APP
+--------------------------------------------------------------------
+
+App name:
+Aashirwad EduVerse
+
+Purpose:
+A mobile learning application designed for Kerala PSC and competitive
+examination preparation.
+
+Platforms:
+- Android
+- iOS
+
+Google Play:
+https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN
+
+Apple App Store:
+https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592
+
+The app is presented as a digital learning ecosystem that brings
+structured competitive-exam preparation to smartphones.
+
+The app is described as:
+- Intelligent
+- Adaptive
+- Structured
+- Personalized
+- Designed for on-the-go learning
+
+Digital materials are described as being curated and updated by rank
+holders and subject experts.
+
+
+--------------------------------------------------------------------
+SECTION 14: APP LEARNING MODES
+--------------------------------------------------------------------
+
+Aashirwad EduVerse provides four core learning modes:
+
+1. READING MODE
+   Distraction-free digital reading environments curated by subject
+   experts. Designed for focused study and clear understanding.
+
+2. WRITING MODE
+   Writing and practice exercises designed to support memory retrieval,
+   reinforce key terms and improve long-term retention.
+
+3. AUDIO MODE
+   Professionally explained audio lessons for learning while
+   travelling, exercising or during other screen-free periods.
+
+4. VIDEO MODE
+   Video lessons that simplify complex theories, problem-solving
+   steps and syllabus topics.
+
+
+--------------------------------------------------------------------
+SECTION 15: APP LEARNING JOURNEY
+--------------------------------------------------------------------
+
+The app presents a structured preparation path:
+
+1. Choose Your Exam
+2. Category
+3. Subject
+4. Topic
+5. Sub Topic
+6. Content
+7. Four Learning Modes
+
+The app is designed to organize courses separately so that learners
+can follow a focused preparation path.
+
+The website also describes a broader learning journey:
+- Study
+- Practice
+- Revise
+- Test
+- Analyze
+- Succeed
+
+
+--------------------------------------------------------------------
+SECTION 16: APP FEATURES
+--------------------------------------------------------------------
+
+1. SYLLABUS TREE
+   - Module-wise organization
+   - Subjects
+   - Topics
+   - Subtopics
+   - Chapters
+   - Images and contextual examples
+   - Personal digital short notes
+   - Built-in revision tests
+
+2. KEYWORD SEARCH
+   - Full-text search
+   - Keyword-based chapter filtering
+   - Results grouped by subject and topic
+
+3. SMART EXAM MODES & LIVE CONTESTS
+   - Unlimited practice exams
+   - Mock exams
+   - Test series
+   - Previous year question papers
+   - Real-time live contests
+
+4. EDUCATIONAL GAME ZONE
+   - Educational quizzes
+   - Daily consistency streaks
+   - Momentum-building challenges
+   - Gamified learning
+
+5. DAILY CURRENT AFFAIRS & EDITORIAL INSIGHTS
+   - Daily curated current affairs
+   - Visual aids
+   - Editorial insights
+   - Coverage of major national and global events
+
+6. PROGRESS TRACKING
+   The app tracks the learner's preparation and progress.
+
+7. OFFLINE STUDY MATERIALS
+   Offline study materials are listed as an app feature.
+
+8. REAL-TIME NOTIFICATIONS
+   The courses page identifies real-time notifications as an app
+   feature.
+
+9. LIVE MOCK TESTS & QUIZZES
+   The courses page highlights live tests and quizzes.
+
+10. RANK FILES
+    The app provides access to digital rank files.
+
+
+--------------------------------------------------------------------
+SECTION 17: APP LIVE CONTESTS & REWARD POINTS
+--------------------------------------------------------------------
+
+Live contests allow users to compete in real time against other
+aspirants.
+
+According to the app FAQ:
+- Users can test their skills in live contests.
+- Users can compete on a leaderboard.
+- Users can earn reward points.
+- Reward points can be saved and used later to purchase premium
+  courses and study materials within the app.
+
+The app FAQ describes live contests as a way to build competitive
+practice and consistency.
+
+
+--------------------------------------------------------------------
+SECTION 18: APP FREE TRIAL
+--------------------------------------------------------------------
+
+The supplied app page states that Aashirwad EduVerse provides a
+2-day free trial.
+
+The trial allows users to explore premium features including the
+four learning modes:
+- Reading
+- Writing
+- Audio
+- Video
+
+The app structured data lists the application download price as
+₹0 and describes the 2-day free trial of premium features.
+
+Do not assume that every course inside the app is free.
+
+
+--------------------------------------------------------------------
+SECTION 19: ONLINE + OFFLINE LEARNING
+--------------------------------------------------------------------
+
+Aashirwad EduVerse is not presented as an online-only institution.
+
+The app FAQ explicitly states that Aashirwad also provides
+comprehensive offline training.
+
+The institution therefore describes a blended learning approach:
+- Digital learning through the EduVerse app
+- Offline classroom training
+- Structured academic guidance
+- Direct interaction and mentoring
+
+
+--------------------------------------------------------------------
+SECTION 20: AASHIRWAD RANK FILE & DIGITAL LEARNING
+--------------------------------------------------------------------
+
+Aashirwad Rank File is one of the institution's educational
+initiatives.
+
+The About page describes Aashirwad Rank File and Aashirwad EduVerse
+as initiatives that integrate technology with conventional learning.
+
+The digital learning ecosystem includes:
+- Rank files
+- Study materials
+- Current affairs
+- Multimedia resources
+- Interactive learning tools
+
+The purpose is to allow learners to continue their preparation
+beyond the traditional classroom.
+
+
+--------------------------------------------------------------------
+SECTION 21: PUBLICATIONS & STUDY MATERIALS
+--------------------------------------------------------------------
+
+The supplied Institutional Profile states that Aashirwad publishes
+subject-specific Rank Files and structured study materials to support
+systematic preparation for competitive examinations.
+
+Examples shown in the profile:
+- Aashirwad PSC English Rank File
+- Aashirwad PSC Mathematics Rank File
+
+The profile describes these materials as academic publications.
+
+
+--------------------------------------------------------------------
+SECTION 22: WHY CHOOSE AASHIRWAD / INSTITUTIONAL STRENGTHS
+--------------------------------------------------------------------
+
+The website and supplied institutional material emphasize:
+
+- Established educational institution since 2009
+- Competitive examination expertise
+- Structured training
+- Experienced / expert faculty
+- Conceptual clarity
+- Systematic preparation
+- Regular assessment
+- Personalised mentoring
+- Continuous academic support
+- Comprehensive study materials
+- Digital learning resources
+- Mock tests and practice
+- Live contests
+- Result-oriented preparation
+- Kerala PSC training
+- Teacher eligibility training
+- Civil service foundation training
+- Navodaya preparation
+- Blended online and offline learning
+- Aashirwad EduVerse digital platform
+- Aashirwad Rank Files
+
+
+--------------------------------------------------------------------
+SECTION 23: INSTITUTIONAL VISION & MISSION
+--------------------------------------------------------------------
+
+VISION:
+To build a trusted, progressive and future-ready educational ecosystem
+that makes quality education, expert guidance and effective learning
+resources accessible to every learner.
+
+MISSION:
+To empower learners, nurture potential and build successful futures
+through quality education, innovative learning, personalised guidance
+and an unwavering commitment to excellence.
+
+Educational philosophy:
+Aashirwad states that education should go beyond completing a syllabus
+or preparing for an examination.
+
+The institution aims to develop:
+- Critical thinking
+- Confidence
+- Communication
+- Discipline
+- Problem-solving skills
+- Lifelong commitment to learning
+
+
+--------------------------------------------------------------------
+SECTION 24: INSTITUTIONAL JOURNEY
+--------------------------------------------------------------------
+
+2009:
+Aashirwad Institute of Teachers established in Vaikom.
+Navodaya training was initiated.
+
+2010:
+Pallikkathodu Centre established.
+
+2011:
+Ettumanoor Centre started.
+
+2011:
+Merchant Navy / IMU-CET coaching introduced.
+
+2015:
+Structured Kerala PSC examination training introduced.
+
+2019:
+Thrippunithura Centre established.
+
+2024:
+Civil Service Nurture Programme (CSNP) introduced.
+
+2026:
+North Paravur Centre started.
+
+
+--------------------------------------------------------------------
+SECTION 25: WEBSITE PAGES
+--------------------------------------------------------------------
+
+HOME:
+https://aitacademyindia.com/
+Provides:
+- Institution overview
+- Competitive exam coaching highlights
+- About Aashirwad
+- Institutional journey
+- Achievers / rank holders
+- Course highlights
+- EduVerse app information
+- Learning modes
+- Testimonials
+- Contact/enquiry sections
+
+ABOUT US:
+https://aitacademyindia.com/about.html
+Provides:
+- Institutional history
+- Academic approach
+- Programmes
+- CSNP information
+- Digital learning
+- Commitment to results
+- KTET Success Guarantee
+- Vision
+- Mission
+
+COURSES:
+https://aitacademyindia.com/courses.html
+Provides:
+- Course programmes
+- Course descriptions
+- Displayed prices
+- Ratings
+- Student counts
+- Achievements
+- App information
+- Enrolment calls to action
+
+APP:
+https://aitacademyindia.com/app.html
+Provides:
+- Aashirwad EduVerse app information
+- Learning modes
+- App features
+- Learning journey
+- Live contests
+- Game zone
+- Current affairs
+- FAQ
+- App download links
+
+CONTACT:
+https://aitacademyindia.com/contact.html
+Provides:
+- Contact form
+- Address
+- Phone
+- WhatsApp
+- Email
+- Map
+
+PRIVACY POLICY:
+https://aitacademyindia.com/privacypolicy.html
+Explains how Aashirwad EduVerse collects, uses, stores and protects
+user information.
+
+
+--------------------------------------------------------------------
+SECTION 26: ADMISSIONS & ENQUIRIES
+--------------------------------------------------------------------
+
+The website provides contact options for course and admission enquiries.
+
+Users can:
+- Call the helpline
+- Contact via WhatsApp
+- Email Aashirwad
+- Use the website contact form
+
+Primary helpline:
++91 85475 77007
+
+WhatsApp:
++91 85479 35616
+
+Email:
+info@aitacademyindia.com
+
+Contact page:
+https://aitacademyindia.com/contact.html
+
+Important:
+The supplied website does not provide a universal admission procedure,
+fixed admission deadline, batch timetable, or seat availability.
+Do not invent these details.
+
+For course-specific admission questions, direct users to the
+relevant course page or contact Aashirwad directly.
+
+
+--------------------------------------------------------------------
+SECTION 27: PRIVACY & DATA HANDLING — CHATBOT REFERENCE
+--------------------------------------------------------------------
+
+The supplied Privacy Policy is dated:
+September 5, 2026
+
+Aashirwad states that it may collect, depending on how users interact
+with its services:
+
+Personal information:
+- Name
+- Email address
+- Mobile phone number
+- Account/login information
+- Course or learning activity information
+- Information submitted through forms, messages or support requests
+
+Transaction information:
+Payment-related information may be processed through applicable
+payment service providers. The policy states that Aashirwad does not
+intend to collect or store complete payment card, banking or other
+sensitive payment credentials unless explicitly stated otherwise.
+
+Usage and technical information:
+- Device type and operating system
+- Browser/application information
+- IP address
+- Pages, courses or features accessed
+- Date and time of activity
+- Diagnostic and technical information
+
+Purposes include:
+- Account management
+- Course access
+- Course purchases
+- Customer support
+- Communications
+- Improving services
+- Security
+- Fraud prevention
+- Legal/regulatory compliance
+
+Learning information may include:
+- Course enrolments
+- Progress
+- Practice activities
+- Other learning-related activity
+
+The policy states that Aashirwad does not sell or rent personal
+information to third parties.
+
+Information may be shared with trusted service providers where
+necessary for:
+- Payment processing
+- Hosting
+- Data storage
+- Technical support
+- Communication
+- Analytics/performance monitoring
+- Security and fraud prevention
+
+Third-party websites/services operate under their own privacy policies.
+
+Privacy policy:
+https://aitacademyindia.com/privacypolicy.html
+
+For legal/privacy questions beyond the policy wording, direct users
+to the official Privacy Policy or Aashirwad.
+
+
+--------------------------------------------------------------------
+SECTION 28: FREQUENTLY ASKED QUESTIONS
+--------------------------------------------------------------------
+
+Q: What is Aashirwad Institute of Teachers?
+A: Aashirwad Institute of Teachers is an educational institution
+established in 2009 in Vaikom, Kottayam, Kerala. It provides
+competitive examination training, teacher eligibility training,
+civil service preparation, digital learning and other educational
+programmes.
+
+Q: When was Aashirwad established?
+A: Aashirwad Institute of Teachers was established in 2009.
+
+Q: Where is Aashirwad located?
+A: The head office is at Kacherikavala, Vaikom, Kottayam, Kerala
+686141.
+
+Q: What is Aashirwad EduVerse?
+A: Aashirwad EduVerse is the digital learning platform and mobile
+application of Aashirwad, designed to support Kerala PSC and
+competitive examination preparation.
+
+Q: Which exams does Aashirwad provide coaching for?
+A: Aashirwad provides training/coaching for Kerala PSC, KTET, CTET,
+Police examinations, LDC, LGS, Degree Level PSC examinations,
+Secretariat Assistant, Civil Services and other competitive
+examinations. The institutional profile also lists Navodaya,
+Merchant Navy/IMU-CET, SSC and school-level scholarship examinations.
+
+Q: Do you provide KTET coaching?
+A: Yes. Aashirwad provides KTET coaching with mock tests, expert
+faculty and comprehensive study materials. The website also describes
+a KTET Success Guarantee subject to eligibility and programme terms.
+
+Q: Do you provide CTET coaching?
+A: Yes. Aashirwad provides CTET preparation covering the subjects
+through expert educators.
+
+Q: Do you provide Kerala PSC coaching?
+A: Yes. Kerala PSC is one of Aashirwad's main competitive examination
+training areas. The current course page lists LDC, LGS, Degree Level,
+Secretariat Assistant and other PSC-related programmes.
+
+Q: Do you provide Police Constable coaching?
+A: Yes. The Police Constable course includes preparation for written,
+physical and viva components.
+
+Q: Do you provide Women Police coaching?
+A: Yes. The Women Police programme includes physical training and
+mock interview preparation.
+
+Q: Do you provide Civil Services coaching?
+A: Yes. Aashirwad provides a Civil Service Foundation course and the
+Civil Service Nurture Programme (CSNP).
+
+Q: What is the Civil Service Nurture Programme?
+A: CSNP is a foundation programme designed to nurture young aspirants
+from the school level and progressively develop knowledge, analytical
+thinking, communication, current affairs awareness, confidence and
+leadership skills for future Civil Services preparation.
+
+Q: Do you provide Navodaya coaching?
+A: Yes. Navodaya Entrance / JNVST preparation is part of Aashirwad's
+institutional training areas.
+
+Q: Do you provide scholarship exam coaching?
+A: The institutional profile lists NMMS, LSS and USS among school
+admission and scholarship examination training areas.
+
+Q: Do you provide offline classroom coaching?
+A: Yes. The app FAQ explicitly states that Aashirwad provides
+comprehensive offline training in addition to its digital learning
+platform.
+
+Q: Is Aashirwad EduVerse only an online learning platform?
+A: No. Aashirwad combines digital learning through EduVerse with
+offline training.
+
+Q: Is the Aashirwad EduVerse app available on Android?
+A: Yes. The app is available on Android through Google Play.
+
+Q: Is the Aashirwad EduVerse app available on iPhone/iOS?
+A: Yes. The app is available on the Apple App Store.
+
+Q: Does the app have a free trial?
+A: Yes. The supplied website states that EduVerse provides a 2-day
+free trial for premium features.
+
+Q: What are the four learning modes in EduVerse?
+A: Reading, Writing, Audio and Video.
+
+Q: What is the Syllabus Tree?
+A: It organizes learning content module-wise into subjects, topics,
+subtopics and chapters. It also supports personal digital short notes
+and built-in revision tests.
+
+Q: Does the app provide mock tests?
+A: Yes. The app provides unlimited practice exams, mock exams, test
+series and previous year question papers.
+
+Q: Does the app have live contests?
+A: Yes. Users can participate in real-time live contests and compete
+on leaderboards.
+
+Q: Can users earn rewards through live contests?
+A: According to the app FAQ, users can earn reward points through
+live contests. These points can later be used for premium courses
+and study materials within the app.
+
+Q: Does the app provide current affairs?
+A: Yes. It provides daily curated current affairs, visual aids and
+editorial insights on major national and global events.
+
+Q: Does the app provide offline study materials?
+A: Yes. Offline study materials are listed as an app feature.
+
+Q: How can I contact Aashirwad?
+A: Call +91 85475 77007, WhatsApp +91 85479 35616, email
+info@aitacademyindia.com, or use the contact page:
+https://aitacademyindia.com/contact.html
+
+Q: What is the Aashirwad head office address?
+A: Kacherikavala, Vaikom, Kottayam, Kerala 686141.
+
+Q: What are Aashirwad's official social media accounts?
+A: Facebook: https://www.facebook.com/AITkerala/
+   Instagram: https://www.instagram.com/aashirwadinstituteofteachers/?hl=en
+   YouTube: https://www.youtube.com/@aashirwadinstituteofteachers
+
+Q: Does Aashirwad have a North Paravur centre?
+A: Yes. The supplied Institutional Profile states that the North
+Paravur Centre started in 2026 and extends Aashirwad's academic
+activities into North Paravur and neighbouring areas.
+
+Q: What does the North Paravur Centre provide?
+A: The profile states that it is intended to provide structured
+training, academic guidance, preparation for competitive examinations,
+eligibility tests and scholarship examinations.
+
+Q: What are Aashirwad's other centres?
+A: The supplied Institutional Profile lists Vaikom, Pallikkathodu,
+Ettumanoor, Thrippunithura and North Paravur.
+
+Q: What is Aashirwad's vision?
+A: To build a trusted, progressive and future-ready educational
+ecosystem that makes quality education, expert guidance and effective
+learning resources accessible to every learner.
+
+Q: What is Aashirwad's mission?
+A: To empower learners, nurture potential and build successful futures
+through quality education, innovative learning, personalised guidance
+and an unwavering commitment to excellence.
+
+Q: Does Aashirwad have a KTET success guarantee?
+A: The website states that eligible candidates who do not qualify after
+completing the prescribed training may attend the next training session
+free of charge, subject to applicable programme terms and conditions.
+
+Q: Where can I see the available courses?
+A: Visit:
+https://aitacademyindia.com/courses.html
+
+Q: Where can I learn more about the institution?
+A: Visit:
+https://aitacademyindia.com/about.html
+
+Q: Where can I find information about the app?
+A: Visit:
+https://aitacademyindia.com/app.html
+
+
+--------------------------------------------------------------------
+SECTION 29: CHATBOT RESPONSE RULES
+--------------------------------------------------------------------
+
+1. Answer directly and conversationally.
+2. Use the exact institution terminology where possible.
+3. Do not invent missing information.
+4. Do not invent batch timings, start dates, faculty names, centre
+   phone numbers, seat availability or admission deadlines.
+5. Course prices can change. When discussing price, say that the
+   displayed website price may change and users should confirm before
+   enrolment if necessary.
+6. Do not treat course ratings or student counts as permanent facts.
+7. For centre-specific questions, only provide details explicitly
+   available for that centre.
+8. For North Paravur, explain that the supplied Institutional Profile
+   identifies it as a 2026 centre.
+9. For legal/privacy questions, use the Privacy Policy wording and
+   direct users to the full policy for details.
+10. For questions outside the available information, say that the
+    website does not currently provide that detail and provide the
+    official contact information.
+11. Do not promise admission, rank, job placement or examination
+    success.
+12. The KTET Success Guarantee is subject to eligibility and programme
+    terms; do not describe it as unconditional.
+13. Do not claim that every programme is available at every Aashirwad
+    centre unless explicitly confirmed.
+14. When users ask about the latest fees, schedules or admissions,
+    recommend confirming with Aashirwad because these details can
+    change.
+
+
+--------------------------------------------------------------------
+SECTION 30: IMPORTANT OFFICIAL LINKS
+--------------------------------------------------------------------
+
+Website:
+https://aitacademyindia.com/
+
+About:
+https://aitacademyindia.com/about.html
+
+Courses:
+https://aitacademyindia.com/courses.html
+
+EduVerse App:
+https://aitacademyindia.com/app.html
+
+Contact:
+https://aitacademyindia.com/contact.html
+
+Privacy Policy:
+https://aitacademyindia.com/privacypolicy.html
+
+Google Play:
+https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN
+
+Apple App Store:
+https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592
+
+
+====================================================================
+END OF KNOWLEDGE BASE
+====================================================================
+
+Prepared for:
+Aashirwad Institute of Teachers / Aashirwad EduVerse Chatbot
+
+Primary website:
+https://aitacademyindia.com/
+
+Source materials:
+- Supplied Aashirwad website HTML files
+- Supplied Institutional Profile – North Paravur Centre
+
+Last updated:
+2026
+====================================================================

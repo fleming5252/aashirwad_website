@@ -1,4 +1,4 @@
-/*
+﻿/*
  * components/includes.js
  * Injects the shared navbar and footer components into each page.
  *
@@ -110,6 +110,24 @@
     }
   }
 
+  /* ── Footer email: guarantee a mail client opens on click ──
+     The footer sits under the floating chatbot widget / call / scroll-top
+     buttons, and a `mailto:` call can be swallowed by those overlays or by
+     other click handlers. Intercept the click on the footer email in the
+     capture phase and force the navigation ourselves. */
+  if (footer) {
+    var mailLinks = footer.querySelectorAll('a[href^="mailto:"]');
+    for (var m = 0; m < mailLinks.length; m++) {
+      (function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          window.location.href = link.getAttribute('href');
+        }, true);
+      })(mailLinks[m]);
+    }
+  }
+
   /* ── Popup banner script — loaded on every page via the shared footer setup ── */
   if (!document.getElementById('popupScript')) {
     var popupScript = document.createElement('script');
@@ -119,5 +137,28 @@
     try {
       (document.body || document.documentElement).appendChild(popupScript);
     } catch (e) { /* never block page load over the popup */ }
+  }
+
+  /* ── Bottom-right chatbot frame animation — same shared-loader pattern,
+        so every page with this script gets the widget automatically ── */
+  if (!document.getElementById('chatbotWidgetScript')) {
+    var widgetScript = document.createElement('script');
+    widgetScript.id = 'chatbotWidgetScript';
+    widgetScript.src = 'assets/js/chatbot-widget.js?v=1.0.4';
+    widgetScript.async = true;
+    try {
+      (document.body || document.documentElement).appendChild(widgetScript);
+    } catch (e) { /* never block page load over the widget */ }
+  }
+
+  /* Chatbot logic + window (theme-matched to the site) */
+  if (!document.getElementById('chatbotScript')) {
+    var chatScript = document.createElement('script');
+    chatScript.id = 'chatbotScript';
+    chatScript.src = 'assets/js/chatbot.js?v=1.0.5';
+    chatScript.async = true;
+    try {
+      (document.body || document.documentElement).appendChild(chatScript);
+    } catch (e) { /* never block page load over the chatbot */ }
   }
 })();

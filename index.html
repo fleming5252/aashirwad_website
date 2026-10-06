@@ -58,13 +58,20 @@
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
 
+    <!-- Preload first-visible rank holder images (initial carousel render) -->
+    <link rel="preload" as="image" href="assets/images/rank/1.webp">
+    <link rel="preload" as="image" href="assets/images/rank/2.webp">
+    <link rel="preload" as="image" href="assets/images/rank/3.webp">
+    <link rel="preload" as="image" href="assets/images/rank/4.webp">
+    <link rel="preload" as="image" href="assets/images/rank/5.webp">
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css?v=1.0.0">
-    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.2">
+    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css?v=1.0.6">
     <link rel="stylesheet" href="assets/css/owl.css?v=1.0.0">
     <link rel="stylesheet" href="assets/css/lightbox.css?v=1.0.0">
     <link rel="stylesheet" href="assets/css/animations.css?v=1.0.0">
@@ -995,6 +1002,7 @@
   .about-new-img {
     display: block;
     width: 100%;
+    height: auto;
     max-width: 420px;
     margin: 0 auto 28px;
     border-radius: 16px;
@@ -1744,18 +1752,18 @@
 <div class="rank-cylinder-wrap" id="rankCylinderWrap">
   <button class="rank-arrow rank-arrow-left" id="rankArrowLeft" aria-label="Previous rank holder">&#8249;</button>
   <div class="rank-cylinder-stage" id="rankCylinderStage">
-    <div class="rank-cylinder-item" data-index="0"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/1.webp" alt="Aashirwad PSC rank holder photo 1" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="1"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/2.webp" alt="Aashirwad PSC rank holder photo 2" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="2"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/3.webp" alt="Aashirwad PSC rank holder photo 3" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="3"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/4.webp" alt="Aashirwad PSC rank holder photo 4" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="4"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/5.webp" alt="Aashirwad PSC rank holder photo 5" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="5"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/6.webp" alt="Aashirwad PSC rank holder photo 6" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="6"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/7.webp" alt="Aashirwad PSC rank holder photo 7" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="7"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/8.webp" alt="Aashirwad PSC rank holder photo 8" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="8"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/9.webp" alt="Aashirwad PSC rank holder photo 9" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="9"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/10.webp" alt="Aashirwad PSC rank holder photo 10" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="10"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/11.webp" alt="Aashirwad PSC rank holder photo 11" loading="lazy" decoding="async"></div></div></div>
-    <div class="rank-cylinder-item" data-index="11"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/12.webp" alt="Aashirwad PSC rank holder photo 12" loading="lazy" decoding="async"></div></div></div>
+    <div class="rank-cylinder-item" data-index="0"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/1.webp" alt="Aashirwad PSC rank holder photo 1" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="1"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/2.webp" alt="Aashirwad PSC rank holder photo 2" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="2"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/3.webp" alt="Aashirwad PSC rank holder photo 3" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="3"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/4.webp" alt="Aashirwad PSC rank holder photo 4" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="4"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/5.webp" alt="Aashirwad PSC rank holder photo 5" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="5"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/6.webp" alt="Aashirwad PSC rank holder photo 6" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="6"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/7.webp" alt="Aashirwad PSC rank holder photo 7" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="7"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/8.webp" alt="Aashirwad PSC rank holder photo 8" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="8"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/9.webp" alt="Aashirwad PSC rank holder photo 9" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="9"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/10.webp" alt="Aashirwad PSC rank holder photo 10" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="10"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/11.webp" alt="Aashirwad PSC rank holder photo 11" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
+    <div class="rank-cylinder-item" data-index="11"><div class="topper-card"><div class="topper-img-wrap"><img src="assets/images/rank/12.webp" alt="Aashirwad PSC rank holder photo 12" loading="eager" fetchpriority="high" decoding="sync"></div></div></div>
   </div>
   <button class="rank-arrow rank-arrow-right" id="rankArrowRight" aria-label="Next rank holder">&#8250;</button>
   <img src="assets/images/rankstage.webp" class="rank-stage-bg" alt="" width="2172" height="724" loading="lazy" decoding="async">
@@ -1793,7 +1801,7 @@
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course/KTET.webp" alt="KTET" decoding="async" loading="eager">
+                <img src="assets/images/course/KTET.webp" alt="KTET" decoding="sync" loading="eager">
                 <div class="card-img-overlay"><span>KTET</span></div>
               </div>
               <div class="down-content">
@@ -1820,7 +1828,7 @@
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course/DegreeLevel.webp" alt="Degree Level" decoding="async" loading="eager">
+                <img src="assets/images/course/DegreeLevel.webp" alt="Degree Level" decoding="sync" loading="eager">
                 <div class="card-img-overlay"><span>Degree Level</span></div>
               </div>
               <div class="down-content">
@@ -1847,7 +1855,7 @@
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course/PoliceConstable.webp" alt="Police Constable" decoding="async" loading="eager">
+                <img src="assets/images/course/PoliceConstable.webp" alt="Police Constable" decoding="sync" loading="eager">
                 <div class="card-img-overlay"><span>Police Constable</span></div>
               </div>
               <div class="down-content">
@@ -1874,7 +1882,7 @@
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card popular">
               <div class="card-img-wrap">
-                <img src="assets/images/course/LDClerk.webp" alt="LDC Clerk" decoding="async" loading="eager">
+                <img src="assets/images/course/LDClerk.webp" alt="LDC Clerk" decoding="sync" loading="eager" fetchpriority="high">
                 <div class="card-img-overlay"><span>LDC Clerk</span></div>
               </div>
               <div class="down-content">
@@ -1901,7 +1909,7 @@
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course/CTET.webp" alt="CTET" decoding="async" loading="eager">
+                <img src="assets/images/course/CTET.webp" alt="CTET" decoding="sync" loading="eager">
                 <div class="card-img-overlay"><span>CTET</span></div>
               </div>
               <div class="down-content">
@@ -1928,7 +1936,7 @@
           <div class="deck-card-tilt" tabindex="0">
             <div class="course-item-card">
               <div class="card-img-wrap">
-                <img src="assets/images/course/Civil Service Foundation.webp" alt="Civil Service Foundation" decoding="async" loading="eager">
+                <img src="assets/images/course/Civil Service Foundation.webp" alt="Civil Service Foundation" decoding="sync" loading="eager">
                 <div class="card-img-overlay"><span>Civil Service Foundation</span></div>
               </div>
               <div class="down-content">
@@ -2535,7 +2543,7 @@
 
   <!-- Scripts -->
   <!-- Shared components loader (must run before custom.js binds nav) -->
-  <script src="components/includes.js"></script>
+  <script src="components/includes.js?v=1.0.1"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
 
     <script src="assets/js/isotope.min.js?v=1.0.0"></script>
@@ -3737,20 +3745,67 @@
         if (Math.abs(dx) > 50) { go(dx < 0 ? 1 : -1); restartAuto(); }
       }, { passive: true });
 
-      /* Auto-rotate */
-      function startAuto()   { autoTimer = setInterval(function () { go(1); }, 3000); }
-      function stopAuto()    { clearInterval(autoTimer); }
-      function restartAuto() { stopAuto(); startAuto(); }
+      /* Auto-rotate — only while the centre card is more than 40% visible */
+      var autoAllowed = false;
+
+      function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(function () { go(1); }, 3000);
+      }
+      function stopAuto() {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+      function restartAuto() {
+        stopAuto();
+        if (autoAllowed) startAuto();
+      }
+
+      function getCenterCardVisibility() {
+        var centerItem = items[current];
+        if (!centerItem) return 0;
+        var rect = centerItem.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var vw = window.innerWidth || document.documentElement.clientWidth;
+        var visibleH = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+        var visibleW = Math.min(rect.right, vw) - Math.max(rect.left, 0);
+        if (visibleH <= 0 || visibleW <= 0) return 0;
+        var totalArea = rect.width * rect.height;
+        if (totalArea <= 0) return 0;
+        return (visibleW * visibleH) / totalArea;
+      }
+
+      function updateAutoGate() {
+        var vis = getCenterCardVisibility();
+        if (vis > 0.4) {
+          if (!autoAllowed) {
+            autoAllowed = true;
+            startAuto();
+          }
+        } else if (autoAllowed) {
+          autoAllowed = false;
+          stopAuto();
+        }
+      }
 
       stage.addEventListener('mouseenter', stopAuto);
-      stage.addEventListener('mouseleave', startAuto);
+      stage.addEventListener('mouseleave', function () {
+        if (autoAllowed) startAuto();
+      });
 
-      /* Pause auto-rotate while the section is not mostly on screen */
-      window.__animGate && window.__animGate(stage.closest('section'), restartAuto, stopAuto);
+      /* Gate auto-rotate on centre-card visibility (>40%) */
+      var gateSec = stage.closest('section');
+      if ('IntersectionObserver' in window && gateSec) {
+        new IntersectionObserver(function () {
+          updateAutoGate();
+        }, { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] }).observe(stage);
+      }
+      window.addEventListener('scroll', updateAutoGate, { passive: true });
+      window.addEventListener('resize', updateAutoGate);
 
       /* Init */
       render();
-      startAuto();
+      updateAutoGate();
     })();
     </script>
 
@@ -3934,6 +3989,18 @@
         card.addEventListener('mouseleave', function () {
           card.classList.remove('active-card');
         });
+      });
+
+      /* Make sure every course image is decoded, then force one repaint */
+      Array.from(stage.querySelectorAll('.card-img-wrap img')).forEach(function (img) {
+        var repaint = function () {
+          img.style.visibility = 'hidden';
+          void img.offsetHeight;
+          img.style.visibility = '';
+        };
+        if (img.decode) { img.decode().then(repaint).catch(repaint); }
+        else if (img.complete) { repaint(); }
+        else { img.addEventListener('load', repaint, { once: true }); }
       });
 
       /* ── Initial layout ── */

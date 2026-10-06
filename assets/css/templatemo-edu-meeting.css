@@ -1643,6 +1643,8 @@ section.contact-us {
   background-color: var(--color-red-dark);
   padding: 60px 0 0;
   font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 9996;
 }
 
 .footer .container {
@@ -2394,15 +2396,12 @@ responsive
    ========================================================================== */
 
 .logo .logo-image {
-  height: 60px;          /* Adjust this height value to perfectly match your header line-height */
+  height: 50px;          /* Fits inside the 60px header without clipping */
   width: auto;           /* Automatically calculates the width to prevent stretching or squeezing */
   display: inline-block;
   vertical-align: middle;
   object-fit: contain;
   transition: all 0.3s ease;
-  transform: scale(1.4);
-  transform-origin: center center;
-  margin-top: 12px;
 }
 
 /* Optional hover effect if you want a smooth feedback transition */
@@ -2413,7 +2412,7 @@ responsive
 /* Responsive adjustment for small mobile screens */
 @media (max-width: 767px) {
   .logo .logo-image {
-    height: 54px;
+    height: 42px;
     vertical-align: middle;
     display: inline-block;
   }
@@ -7863,6 +7862,8 @@ section.learning-process .container {
   .app-promo-phone-wrap { max-width: 240px; margin-top: 30px; }
   .app-promo-buttons { flex-direction: column; align-items: center; }
   .app-promo-buttons .app-promo-btn-primary { align-self: center; }
+  /* Feature list items are flex rows — centre each icon+label pair on mobile */
+  .app-promo-features li { justify-content: center; text-align: center; }
 
   .cp-title { font-size: 26px; }
 
@@ -8233,7 +8234,6 @@ section.learning-process .container {
   justify-content: center;
   transform: translate(calc(-50% + var(--dx, 0px)), var(--dy, 0px)) rotate(var(--card-rot, 0deg));
   transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
   z-index: 1;
 }
 
@@ -8288,6 +8288,7 @@ section.learning-process .container {
 .deck-card-position .course-item-card {
   width: 240px;
 }
+
 /* Force images inside deck cards to paint immediately — prevents blank
    cards caused by will-change: transform on .deck-card-position creating
    a compositing layer that defers image painting until a hover repaint. */
@@ -10304,10 +10305,21 @@ section.learning-process .container {
   }}
 
 /* ── Scroll To Top Button ── */
+/* The chatbot frame widget (assets/js/chatbot-widget.js) sits in the bottom
+   right corner, so the stacked buttons are offset by its footprint instead of
+   hard-coded offsets. 142px wide × (648/704) ≈ 131px tall on desktop,
+   108px wide ≈ 99px tall under 480px. */
+:root {
+  --chatbot-widget-width: 142px;
+  --chatbot-widget-height: 131px;
+  --chatbot-widget-bottom: 18px;
+  --stt-height: 119px;
+  --floating-stack-gap: 12px;
+}
 .stt-btn {
   position: fixed;
   right: 24px;
-  bottom: 30px;
+  bottom: calc(var(--chatbot-widget-height) + var(--chatbot-widget-bottom) + var(--floating-stack-gap));
   top: auto;
   transform: translateY(0);
   z-index: 9999;
@@ -10364,7 +10376,7 @@ section.learning-process .container {
 @media (max-width: 767px) {
   .stt-btn {
     right: 14px;
-    bottom: 100px;
+    bottom: calc(var(--chatbot-widget-height) + var(--chatbot-widget-bottom) + var(--floating-stack-gap));
     width: 44px;
     padding: 10px 0 14px;
   }
@@ -10380,7 +10392,7 @@ section.learning-process .container {
 .fcb-wrapper {
   position: fixed;
   right: 24px;
-  bottom: 160px;
+  bottom: calc(var(--chatbot-widget-height) + var(--chatbot-widget-bottom) + var(--floating-stack-gap) + var(--stt-height) + var(--floating-stack-gap));
   z-index: 9998;
   display: flex;
   flex-direction: column;
@@ -10490,9 +10502,15 @@ section.learning-process .container {
 
 /* Mobile */
 @media (max-width: 767px) {
+  :root {
+    --chatbot-widget-width: 108px;
+    --chatbot-widget-height: 99px;
+    --chatbot-widget-bottom: 12px;
+    --stt-height: 97px;
+  }
   .fcb-wrapper {
     right: 14px;
-    bottom: 220px;
+    bottom: calc(var(--chatbot-widget-height) + var(--chatbot-widget-bottom) + var(--floating-stack-gap) + var(--stt-height) + var(--floating-stack-gap));
   }
   .fcb-main {
     width: 46px;
