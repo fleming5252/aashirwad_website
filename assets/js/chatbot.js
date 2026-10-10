@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    AASHIRWAD CHATBOT - chatbot.js
    Injects the chat window and wires it to the bottom-right frame
    animation (#chatbotWidget) so clicking the animation opens chat.

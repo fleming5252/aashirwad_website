@@ -25,6 +25,18 @@
   var BATCH = 8;              /* parallel frame downloads */
   var ID = 'chatbotWidget';
 
+  /* Greeting bubble: shown while frames 153 -> 180 are playing (0-based
+     152 -> 179), i.e. roughly 1.2s on every 10s loop. */
+  var BUBBLE_START = 152;
+  var BUBBLE_END = 179;
+  var BUBBLE_TEXT = 'Hey';
+
+  /* Second bubble ("I'm AIT" / "click me") — shown every loop from frame
+     217 through frame 30 of the next loop (wraps 240 -> 1). */
+  var BUBBLE2_START = 216;   /* frame_0217, 0-based */
+  var BUBBLE2_END = 29;      /* frame_0030 of the next loop, 0-based */
+  var BUBBLE2_TEXT = 'I\'m AIT\nclick me';
+
   var urls = [];
   for (var i = 0; i < FRAME_COUNT; i++) {
     urls.push(FRAME_DIR + 'frame_' + pad(i + 1) + '.webp');
@@ -40,14 +52,34 @@
     var style = document.createElement('style');
     style.id = 'chatbotWidgetStyles';
     style.textContent =
-      '#' + ID + '{position:fixed;right:18px;bottom:18px;z-index:9997;cursor:pointer;' +
+      '#' + ID + '{position:fixed;right:18px;bottom:28px;z-index:9997;cursor:pointer;' +
       'width:142px;max-width:calc(100vw - 36px);line-height:0;' +
       'opacity:0;visibility:hidden;pointer-events:none;' +
       'transition:opacity 0.4s ease;}' +
       '#' + ID + '.is-ready{opacity:1;visibility:visible;pointer-events:auto;}' +
       '#' + ID + ' canvas{display:block;width:100%;height:auto;border-radius:14px;' +
       'filter:drop-shadow(0 10px 24px rgba(0,0,0,0.35));}' +
-      '@media (max-width:480px){#' + ID + '{width:108px;right:12px;bottom:12px;}}';
+      '#' + ID + ' .bubble{position:absolute;left:6px;bottom:calc(100% - 16px);z-index:3;' +
+      'max-width:200px;box-sizing:border-box;padding:6px 12px;' +
+      'background:#ffffff;color:#1A2E25;' +
+      'font-family:"Comic Sans MS","Comic Sans","Chalkboard SE","Marker Felt","Comic Neue",cursive;' +
+      'font-size:13px;font-weight:700;line-height:1.25;text-align:center;' +
+      'white-space:nowrap;border-radius:14px;border:2px solid var(--color-red,#a12c2f);' +
+      'box-shadow:0 4px 14px rgba(0,0,0,0.18);' +
+      'opacity:0;visibility:hidden;pointer-events:none;' +
+      'transform:translateY(8px) scale(0.8) rotate(-3deg);transform-origin:bottom center;' +
+      'transition:opacity 0.25s ease,transform 0.25s ease,visibility 0.25s;}' +
+      '#' + ID + ' .bubble::before{content:"";position:absolute;bottom:-9px;left:50%;margin-left:-10px;' +
+      'border:9px solid transparent;border-top:9px solid var(--color-red,#a12c2f);border-bottom:0;}' +
+      '#' + ID + ' .bubble::after{content:"";position:absolute;bottom:-6px;left:50%;margin-left:-8px;' +
+      'border:8px solid transparent;border-top:8px solid #ffffff;border-bottom:0;}' +
+      '#' + ID + ' .bubble.is-on{opacity:1;visibility:visible;transform:translateY(0) scale(1) rotate(-3deg);}' +
+      '#' + ID + ' .bubble2{left:auto;right:-2px;bottom:-16px;transform-origin:top right;' +
+      'white-space:pre-line;}' +
+      '#' + ID + ' .bubble2::before{top:-9px;bottom:auto;border-top:0;border-bottom:9px solid var(--color-red,#a12c2f);}' +
+      '#' + ID + ' .bubble2::after{top:-6px;bottom:auto;border-top:0;border-bottom:8px solid #ffffff;}' +
+      '@media (max-width:480px){#' + ID + '{width:108px;right:12px;bottom:22px;}' +
+      '#' + ID + ' .bubble{max-width:170px;font-size:12px;padding:5px 10px;}}';
     (document.head || document.documentElement).appendChild(style);
   }
 
@@ -73,6 +105,19 @@
     canvas.height = 177;
 
     box.appendChild(canvas);
+
+    var bubble = document.createElement('div');
+    bubble.className = 'bubble bubble1';
+    bubble.textContent = BUBBLE_TEXT;
+    bubble.setAttribute('aria-hidden', 'true');
+    box.appendChild(bubble);
+
+    var bubble2 = document.createElement('div');
+    bubble2.className = 'bubble bubble2';
+    bubble2.textContent = BUBBLE2_TEXT;
+    bubble2.setAttribute('aria-hidden', 'true');
+    box.appendChild(bubble2);
+
     document.body.appendChild(box);
 
     return box;
@@ -157,11 +202,25 @@
     var index = 0;
     var last = 0;
 
+    function makeToggler(el) {
+      var on = false;
+      return function (state) {
+        if (!el || state === on) return;
+        on = state;
+        el.classList.toggle('is-on', state);
+        el.setAttribute('aria-hidden', state ? 'false' : 'true');
+      };
+    }
+    var setHey = makeToggler(box.querySelector('.bubble1'));
+    var setAit = makeToggler(box.querySelector('.bubble2'));
+
     function draw(i) {
       var im = images[i];
       if (im && im.complete && im.naturalWidth) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(im, 0, 0, canvas.width, canvas.height);
+        setHey(i >= BUBBLE_START && i <= BUBBLE_END);
+        setAit(i >= BUBBLE2_START || i <= BUBBLE2_END);
         return true;
       }
       return false;

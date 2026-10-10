@@ -176,6 +176,110 @@
         background: #fff;
         transform: translateY(-1px);
       }
+
+      .contact-info-card.address-card,
+      .contact-info-card.email-card {
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      }
+
+      .contact-info-card.address-card:hover,
+      .contact-info-card.email-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        border-color: #f5a425;
+      }
+
+      .contact-info-card.address-card {
+        position: relative;
+        z-index: 500;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .contact-info-card.address-card .contact-info-icon { margin-top: 2px; }
+      .contact-info-card.address-card .contact-info-text { flex: 1; padding-right: 90px; }
+
+      .branch-selector {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 600;
+      }
+
+      .branch-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #a12c2f;
+        background: rgba(245, 164, 37, 0.12);
+        border: 1px solid rgba(245, 164, 37, 0.4);
+        border-radius: 50px;
+        padding: 5px 14px;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+      }
+
+      .branch-toggle:hover {
+        background: rgba(245, 164, 37, 0.22);
+        border-color: #f5a425;
+      }
+
+      .branch-toggle .fa { font-size: 10px; transition: transform 0.2s; }
+
+      .branch-selector.open .branch-toggle .fa { transform: rotate(180deg); }
+
+      .branch-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        min-width: 230px;
+        background: #fff;
+        border: 1px solid #f0ebe0;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        padding: 6px;
+        margin: 0;
+        list-style: none;
+        z-index: 700;
+      }
+
+      .branch-selector.open .branch-dropdown { display: block; }
+
+      .branch-dropdown li {
+        padding: 10px 12px;
+        font-size: 13px;
+        color: #444;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+      }
+
+      .branch-dropdown li:hover,
+      .branch-dropdown li.active {
+        background: rgba(245, 164, 37, 0.12);
+        color: #a12c2f;
+        font-weight: 600;
+      }
+
+      .header-area,
+      .background-header { z-index: 2000 !important; }
+      .sub-header { z-index: 2001 !important; }
+
+      .contact-info-card .contact-number-link {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .contact-info-card .contact-number-link:hover {
+        color: var(--color-red);
+        text-decoration: underline;
+      }
+
       /* ── App-intro enhancements ── */
       .app-intro-image-wrapper {
         display: flex;
@@ -948,6 +1052,12 @@
         box-shadow: 0 4px 18px rgba(var(--color-red-rgb), 0.3);
       }
 
+      .about-new-btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
       .about-new-btn:hover {
         background: var(--color-red-dark);
         transform: translateY(-2px);
@@ -1010,6 +1120,7 @@
   #about { padding-bottom: 30px; }
   #about .about-new-wrap { padding-bottom: 20px; }
   .about-new-pills { justify-content: center; }
+  .about-new-btn-row { justify-content: center; }
   .about-new-body { text-align: justify; }
 }
 
@@ -1416,6 +1527,23 @@
         ]
       }
     </script>
+
+    <!-- BreadcrumbList -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://aitacademyindia.com/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://aitacademyindia.com/"
+          }
+        ]
+      }
+    </script>
   </head>
 
 <body>
@@ -1448,7 +1576,7 @@
 
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
-      <video autoplay muted loop playsinline id="bg-video" poster="assets/images/heading-bg.webp" aria-hidden="true">
+      <video playsinline autoplay muted loop id="bg-video" poster="assets/images/heading-bg.webp" aria-hidden="true">
           <source src="assets/images/course-video.mp4" type="video/mp4" />
       </video>
 
@@ -1486,7 +1614,7 @@
                     </div>
                   </div>
                   <div class="main-button-red">
-                    <div class="scroll-to-section"><a href="contact.html">Join Us Now!</a></div>
+                    <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="about-new-btn">Join Us Now!</a>
                   </div>
                 </div>
               </div>
@@ -1607,7 +1735,10 @@
               </div>
             </div>
 
-            <a href="about.html" class="about-new-btn scroll-to-section">ABOUT US &rarr;</a>
+            <div class="about-new-btn-row">
+              <a href="about.html" class="about-new-btn scroll-to-section">ABOUT US &rarr;</a>
+              <a href="psc-coaching-centre-in-kerala.html" class="about-new-btn">WHY AASHIRWAD &rarr;</a>
+            </div>
           </div>
 
 
@@ -1817,7 +1948,7 @@
                   <span class="current-price">₹ 3,999</span>
                   <span class="original-price">₹ 6,999</span>
                   <span class="discount-badge">-43% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
+                  <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -1844,7 +1975,7 @@
                   <span class="current-price">₹ 4,499</span>
                   <span class="original-price">₹ 7,499</span>
                   <span class="discount-badge">-40% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
+                  <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -1871,7 +2002,7 @@
                   <span class="current-price">₹ 3,499</span>
                   <span class="original-price">₹ 5,499</span>
                   <span class="discount-badge">-36% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
+                  <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -1898,7 +2029,7 @@
                   <span class="current-price">₹ 3,999</span>
                   <span class="original-price">₹ 6,499</span>
                   <span class="discount-badge">-38% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
+                  <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -1925,7 +2056,7 @@
                   <span class="current-price">₹ 4,499</span>
                   <span class="original-price">₹ 7,499</span>
                   <span class="discount-badge">-40% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
+                  <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -1952,7 +2083,7 @@
                   <span class="current-price">₹ 12,999</span>
                   <span class="original-price">₹ 19,999</span>
                   <span class="discount-badge">-35% OFF</span>
-                  <a href="#" class="enroll-btn shimmer">Enroll Now</a>
+                  <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                 </div>
               </div>
             </div>
@@ -2415,26 +2546,46 @@
           <p class="contact-info-subtext form-field-animate">Have questions about our courses or admissions? We're here to help you every step of the way.</p>
 
           <div class="contact-info-cards">
-            <div class="contact-info-card form-field-animate">
+            <div class="contact-info-card address-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-map-marker"></i></div>
               <div class="contact-info-text">
                 <strong>Address</strong>
-                <span>Kacherikavala, Vaikom, Kottayam, Kerala 686141</span>
+                <span id="branch-address">Kacherikavala, Vaikom, Kottayam, Kerala 686141</span>
+              </div>
+              <div class="branch-selector">
+                <button type="button" class="branch-toggle" id="branch-toggle">Branch <i class="fa fa-chevron-down"></i></button>
+                <ul class="branch-dropdown" id="branch-dropdown">
+                  <li data-address="Kacherikavala, Vaikom, Kottayam, Kerala 686141" class="active"
+                      data-lat="9.7554921" data-lng="76.3953634" data-label="Aashirwad Institute Of Teachers"
+                      data-map="https://www.google.com/maps/place/Aashirwad+Institute+Of+Teachers./@9.7986126,76.4377363,12.76z/data=!4m6!3m5!1s0x3b08791202bf0249:0xef3dd46b957523ea!8m2!3d9.7554921!4d76.3953634!16s%2Fg%2F11c5s47wt6?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D">Vaikom</li>
+                  <li data-address="Kannankulangara, Thrippunithura, Kochi, Ernakulam, Kerala 682301"
+                      data-lat="9.9430166" data-lng="76.3466051" data-label="Aashirwad PSC Coaching Center Thrippunithura"
+                      data-map="https://www.google.com/maps/place/Aashirwad+psc+coaching+center+thrippunithura/@9.9430219,76.3440302,753m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b087312783c29c1:0x8cfffb95d1885707!8m2!3d9.9430166!4d76.3466051!16s%2Fg%2F11j40y3fn0?authuser=0&entry=ttu&g_ep=EgoyMDI2MTAwNC4wIKXMDSoASAFQAw%3D%3D">Thrippunithura</li>
+                  <li data-address="Pallickathodu, Kerala 686503"
+                      data-lat="9.6024683" data-lng="76.6828011" data-label="Aashirwad PSC Coaching Pallickathod"
+                      data-map="https://www.google.com/maps/place/Aashirwad+PSC+COACHING+PALLICKATHOD/@9.6024683,76.6828011,754m/data=!3m1!1e3!4m17!1m10!3m9!1s0x3b06333713dd23a7:0x24dbddcd3b9c81e9!2sAashirwad+PSC+COACHING+PALLICKATHOD!8m2!3d9.6024683!4d76.6828011!10e5!14m1!1BCgIgAQ!16s%2Fg%2F11td5p6g45!3m5!1s0x3b06333713dd23a7:0x24dbddcd3b9c81e9!8m2!3d9.6024683!4d76.6828011!16s%2Fg%2F11td5p6g45?authuser=0&entry=ttu&g_ep=EgoyMDI2MTAwNC4wIKXMDSoASAFQAw%3D%3D">Pallickathodu</li>
+                  <li data-address="Mariyamman Kovil, Ettumanoor Temple Road, Ettumanoor, Kerala 686631"
+                      data-lat="9.6738168" data-lng="76.5570965" data-label="Aashirwad PSC Coaching Ettumanoor"
+                      data-map="https://www.google.com/maps/place/AASHIRWAD+PSC+COACHING+ETTUMANOOR/@9.6738221,76.5545216,754m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3b07d39089134dbb:0xa11ee658678eee3!8m2!3d9.6738168!4d76.5570965!16s%2Fg%2F11t6f_pbvy?authuser=0&entry=ttu&g_ep=EgoyMDI2MTAwNC4wIKXMDSoASAFQAw%3D%3D">Ettumanoor</li>
+                  <li data-address="North Paravur, Kerala 683513"
+                      data-lat="10.1483208" data-lng="76.2247535" data-label="Aashirwad PSC Coaching North Paravur"
+                      data-map="https://www.google.com/maps/place/North+Paravur+Municipality/@10.1317678,76.2347623,4258m/data=!3m1!1e3!4m6!3m5!1s0x3b081a807efd08e3:0x19e155f2af41e425!8m2!3d10.1483208!4d76.2247535!16s%2Fg%2F1td2fbfv?authuser=0&entry=ttu&g_ep=EgoyMDI2MTAwNC4wIKXMDSoASAFQAw%3D%3D">North Paravur</li>
+                </ul>
               </div>
             </div>
             <div class="contact-info-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-phone"></i></div>
               <div class="contact-info-text">
                 <strong>Phone &amp; WhatsApp</strong>
-                <span>Helpline: 8547 577 007</span>
-                <span>WhatsApp: 8547 935 616</span>
+                <span>Helpline: <a href="tel:+918547577007" class="contact-number-link">8547 577 007</a></span>
+                <span>WhatsApp: <a href="https://wa.me/918547935616" rel="noopener noreferrer" class="contact-number-link">8547 935 616</a></span>
               </div>
             </div>
-            <div class="contact-info-card form-field-animate">
+            <div class="contact-info-card email-card form-field-animate">
               <div class="contact-info-icon"><i class="fa fa-envelope"></i></div>
               <div class="contact-info-text">
                 <strong>Email</strong>
-                <span>info@aitacademyindia.com</span>
+                <a href="mailto:info@aitacademyindia.com" class="contact-number-link">info@aitacademyindia.com</a>
               </div>
             </div>
           </div>
@@ -3352,6 +3503,19 @@
             className: 'map-marker-label'
           });
 
+          window.updateBranchMap = function (opts) {
+            var lat = parseFloat(opts.lat), lng = parseFloat(opts.lng);
+            if (isNaN(lat) || isNaN(lng)) return;
+            marker.setLatLng([lat, lng]);
+            marker.setPopupContent('<strong>' + opts.label + '</strong><br>' + opts.address);
+            marker.setTooltipContent(opts.label);
+            map.setView([lat, lng], 15);
+            if (opts.mapUrl) {
+              var btn = document.querySelector('.map-open-btn');
+              if (btn) btn.href = opts.mapUrl;
+            }
+          };
+
           function resizeMap() {
             if (map) map.invalidateSize();
           }
@@ -3362,6 +3526,59 @@
             resizeMap();
           });
           observer.observe(container.parentNode, { attributes: true, childList: true, subtree: true });
+        })();
+
+        /* ── Contact info cards: click to redirect ── */
+        (function () {
+          // Branch selector dropdown
+          var selector = document.querySelector('.branch-selector');
+          var toggle = document.getElementById('branch-toggle');
+          var dropdown = document.getElementById('branch-dropdown');
+          var addressText = document.getElementById('branch-address');
+          if (selector && toggle && dropdown && addressText) {
+            toggle.addEventListener('click', function (e) {
+              e.stopPropagation();
+              selector.classList.toggle('open');
+            });
+            dropdown.addEventListener('click', function (e) {
+              e.stopPropagation();
+              var li = e.target.closest('li');
+              if (!li) return;
+              addressText.textContent = li.getAttribute('data-address');
+              Array.prototype.forEach.call(dropdown.querySelectorAll('li'), function (item) {
+                item.classList.remove('active');
+              });
+              li.classList.add('active');
+              selector.classList.remove('open');
+              if (window.updateBranchMap) {
+                window.updateBranchMap({
+                  lat: li.getAttribute('data-lat'),
+                  lng: li.getAttribute('data-lng'),
+                  label: li.getAttribute('data-label'),
+                  address: li.getAttribute('data-address'),
+                  mapUrl: li.getAttribute('data-map')
+                });
+              }
+            });
+            document.addEventListener('click', function () {
+              selector.classList.remove('open');
+            });
+          }
+
+          var mapLink = document.querySelector('.map-open-btn');
+          var addressCard = document.querySelector('.address-card');
+          if (mapLink && addressCard) {
+            addressCard.addEventListener('click', function () {
+              window.location.href = mapLink.href;
+            });
+          }
+
+          var emailCard = document.querySelector('.email-card');
+          if (emailCard) {
+            emailCard.addEventListener('click', function () {
+              window.location.href = 'mailto:info@aitacademyindia.com';
+            });
+          }
         })();
 
     </script>
@@ -5649,7 +5866,10 @@ var dest = document.getElementById('journeyDestination');
 <script>
   /* ── Hero video: play only while at least 50% of it is visible.
      When the hero scrolls mostly out of view the video pauses (keeping
-     the last frame/poster so the section is never empty). */
+     the last frame/poster so the section is never empty).
+     On iOS Safari the observer can fire before the video is ready and
+     play() rejects, so wait for canplay (with a 1s fallback) before
+     observing, and retry once on failure. */
   (function () {
     var video = document.getElementById('bg-video');
     if (!video || !('IntersectionObserver' in window)) return;
@@ -5660,17 +5880,34 @@ var dest = document.getElementById('journeyDestination');
       return entry.intersectionRatio >= 0.5 || (vw > 0 && iv / vw >= 0.5);
     }
 
+    function tryPlay() {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {
+        // iOS sometimes needs a second attempt after a short delay
+        setTimeout(function () {
+          video.play().catch(function () {});
+        }, 300);
+      });
+    }
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (mostlyOnScreen(entry)) {
-          var p = video.play();
-          if (p && p.catch) p.catch(function () {});
+          tryPlay();
         } else {
           video.pause();
         }
       });
     }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
-    io.observe(video);
+
+    // Observe the hero section, not the video — on iOS the video element
+    // often has zero dimensions initially, so the observer would think
+    // it's off-screen and never call play().
+    var heroSection = video.closest('section') || video.parentElement;
+    io.observe(heroSection);
+
+    // iOS needs a direct user-gesture-free play() trigger on load
+    video.play().catch(function () {});
   })();
 </script>
 

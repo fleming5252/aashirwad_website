@@ -62,9 +62,10 @@
   /* ── Highlight the matching nav item ── */
   var nav = navHtml ? document.querySelector('header.header-area .main-nav') : null;
   if (nav) {
-    var pg = page.toLowerCase();
+    /*  Pretty-URL slugs and legacy .html names both map to a nav item  */
+    var pg = page.toLowerCase().replace(/\/$/, '');
 
-    if (pg === 'index.html') {
+    if (pg === 'index.html' || pg === '') {
       /* Only the index page uses in-page anchor for Home */
       var home = nav.querySelector('a[data-nav-page="index"]');
       if (home) {
@@ -74,10 +75,10 @@
       }
     } else {
       var activeKey = null;
-      if (pg === 'courses.html') activeKey = 'courses';
-      else if (pg === 'app.html') activeKey = 'app';
-      else if (pg === 'contact.html') activeKey = 'contact';
-      else if (pg === 'about.html') activeKey = 'about';
+      if (pg === 'our-courses' || pg === 'courses.html') activeKey = 'courses';
+      else if (pg === 'our-app' || pg === 'app.html') activeKey = 'app';
+      else if (pg === 'contact-us' || pg === 'contact.html') activeKey = 'contact';
+      else if (pg === 'about-us' || pg === 'about.html') activeKey = 'about';
 
       if (activeKey) {
         var activeLink = nav.querySelector('a[data-nav-page="' + activeKey + '"]');
@@ -89,7 +90,7 @@
   /* ── Footer quick links: use in-page anchors only on the index page ── */
   var footer = footerHtml ? document.querySelector('footer.footer') : null;
   if (footer && page.toLowerCase() === 'index.html') {
-    var fHome = footer.querySelector('.footer-col nav a[href="index.html"]');
+    var fHome = footer.querySelector('.footer-col nav a[href="./"]');
     if (fHome) fHome.setAttribute('href', '#top');
   }
 

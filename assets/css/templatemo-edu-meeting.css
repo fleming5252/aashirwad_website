@@ -871,6 +871,8 @@ banner
 .main-banner .caption p.quote-text {
   font-size: 42px;
   max-width: 100%;
+  color: var(--color-red);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.6);
 }
 
 .main-banner .caption .main-button-red {
@@ -1824,6 +1826,7 @@ section.contact-us {
 .footer-col:nth-child(4) .footer-slide-item:nth-child(2) { transition-delay: 0.2s; }
 .footer-col:nth-child(4) .footer-slide-item:nth-child(3) { transition-delay: 0.3s; }
 .footer-col:nth-child(4) .footer-slide-item:nth-child(4) { transition-delay: 0.4s; }
+.footer-col:nth-child(4) .footer-slide-item:nth-child(5) { transition-delay: 0.5s; }
 
 @media (prefers-reduced-motion: reduce) {
   .footer .footer-slide-item {
@@ -2962,7 +2965,8 @@ responsive
 .quote-text {
   font-size: 90px;
   font-weight: 600;
-  color: var(--color-white);
+  color: var(--color-red);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 255, 255, 0.6);
   line-height: 1.5;
   margin-bottom: 12px;
   font-style: italic;
@@ -3145,6 +3149,7 @@ responsive
   justify-content: center;
   width: 100%;
   height: 100%;
+  display: flex;
 }
 
 /* Name and role */
