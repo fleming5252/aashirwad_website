@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -1754,10 +1754,6 @@
 
 <section class="journey-section" id="journey">
 
-  <!-- Decorative side images -->
-  <img src="assets/images/book-left.webp"  class="journey-side-img journey-side-left"  alt="" loading="lazy">
-  <img src="assets/images/book-right.webp" class="journey-side-img journey-side-right" alt="" loading="lazy">
-
   <div class="journey-bg">
     <div class="journey-particles" id="journeyParticles"></div>
   </div>
@@ -1767,9 +1763,9 @@
 <span class="journey-eyebrow">OUR JOURNEY OF</span>
     <h2 class="journey-title">Excellence</h2>
     <p style="font-family:'Poppins',sans-serif;font-size:clamp(18px,2.5vw,28px);font-weight:700;color:#1B3A5C;margin:0 0 8px;letter-spacing:0.5px;">16 Years of Transforming Aspirations</p>
-    <p class="journey-subtitle" style="color:#000000 !important;">A journey built on trust, guided by passion, and driven by the success of our students.</p>
+    <p class="journey-subtitle" style="color:#ffffff !important;">A journey built on trust, guided by passion, and driven by the success of our students.</p>
     <div class="journey-title-divider"></div>
-    <p class="journey-year-range" style="color:var(--color-red-deep);font-size:18px;font-weight:700;margin-top:12px;letter-spacing:2px;">2009 &ndash; 2026+</p>
+    <p class="journey-year-range" style="color:rgba(240,193,75,0.7);font-size:18px;font-weight:700;margin-top:12px;letter-spacing:2px;">2009 &ndash; 2026+</p>
   </div>
 
   <!-- Animated Book Stage -->
@@ -1781,6 +1777,7 @@
     <!-- The book frame: images are placed here via JS -->
     <div class="jb-frame-wrap" id="jbFrameWrap">
       <canvas class="jb-canvas" id="jbCanvas"></canvas>
+      <img class="jb-ink" src="assets/images/book/ink.png" alt="" aria-hidden="true">
       <!-- Left / Right click zones -->
       <div class="jb-click-left"  id="jbClickLeft"></div>
       <div class="jb-click-right" id="jbClickRight"></div>
@@ -5166,16 +5163,16 @@
 <script>
 /* =============================================================
    JOURNEY BOOK - Animated frame sequence player
-   Frames: assets/images/animate2/frames3/frame_0001.webp ... frame_0174.webp
-   Steps (frame boundaries): 1 | 34 | 70 | 101 | 124 | 149 | 174
+   Frames: assets/images/book/frames3/0001.webp ... 0396.webp
+   Steps (frame boundaries): 1 | 61 | 134 | 207 | 266 | 330 | 396
    ============================================================= */
 (function () {
 
   /* Config */
-  var FRAME_DIR   = 'assets/images/animate2/frames3/';
-  var FRAME_COUNT = 174;
-  var FPS         = 35;          /* playback speed */
-  var STEPS       = [1, 34, 70, 101, 124, 149, 174]; /* 7 boundary frames */
+  var FRAME_DIR   = 'assets/images/book/frames3/';
+  var FRAME_COUNT = 396;
+  var FPS         = 45;          /* playback speed */
+  var STEPS       = [1, 61, 134, 207, 266, 330, 396]; /* 7 boundary frames */
 
   /* DOM */
   var canvas    = document.getElementById('jbCanvas');
@@ -5189,6 +5186,11 @@
 
   var ctx   = canvas.getContext('2d');
   var dots  = Array.from(dotsWrap.querySelectorAll('.jb-dot'));
+
+  /* Load the ink overlay into JS so it can be baked onto the canvas */
+  var inkImg = new Image();
+  inkImg.src = 'assets/images/book/ink.png';
+  var inkDomEl = document.querySelector('.jb-ink');
 
   /* State */
   var currentStep  = 0;          /* index into STEPS[] */
@@ -5231,7 +5233,7 @@
   function request(n) {
     if (n < 1 || n > FRAME_COUNT || requested[n]) return;
     requested[n] = true;
-    frames[n - 1].src = FRAME_DIR + 'frame_' + pad4(n) + '.webp';
+    frames[n - 1].src = FRAME_DIR + pad4(n) + '.webp';
   }
 
   /* Fire cb once frame n is decodable (or has failed, so we never hang). */
@@ -5464,15 +5466,39 @@
     lens.style.left = left + 'px';
   }
 
-  function jbUpdateMagnifierImage(touch) {
-    var canvasRect = canvas.getBoundingClientRect();
-    var relX = (touch.clientX - canvasRect.left) / canvasRect.width;
-    var relY = (touch.clientY - canvasRect.top)  / canvasRect.height;
-    relX = Math.max(0, Math.min(1, relX));
-    relY = Math.max(0, Math.min(1, relY));
+  /* per-frame cache so toDataURL() isn't called on every touchmove pixel */
+  var _magCachedFrame = -1;
+  var _magCachedUrl   = null;
 
-    var img = frames[currentFrame - 1];
-    if (!isReady(currentFrame)) return;   /* never point the lens at an unrequested frame */
+  function jbUpdateMagnifierImage(touch) {
+    if (!isReady(currentFrame)) return;
+
+    var canvasRect = canvas.getBoundingClientRect();
+    var relX = Math.max(0, Math.min(1, (touch.clientX - canvasRect.left) / canvasRect.width));
+    var relY = Math.max(0, Math.min(1, (touch.clientY - canvasRect.top)  / canvasRect.height));
+
+    if (_magCachedFrame !== currentFrame) {
+      /* Build offscreen canvas = frame + ink composited together */
+      var oc  = document.createElement('canvas');
+      oc.width  = canvas.width;
+      oc.height = canvas.height;
+      var oc_ctx = oc.getContext('2d');
+      oc_ctx.drawImage(canvas, 0, 0);   /* copy current frame from main canvas */
+
+      if (inkImg.complete && inkImg.naturalWidth) {
+        var mob = window.innerWidth <= 767;
+        var inkRightPct  = mob ? 0.105 : 0.105;
+        var inkBottomPct = mob ? 0.30 : 0.30;
+        var inkW = oc.width * 0.26;
+        var inkH = inkW * (inkImg.naturalHeight / inkImg.naturalWidth);
+        var inkX = oc.width  * (1 - 0.26 + inkRightPct);
+        var inkY = oc.height * (1 + inkBottomPct) - inkH;
+        oc_ctx.drawImage(inkImg, inkX, inkY, inkW, inkH);
+      }
+
+      _magCachedUrl   = oc.toDataURL();
+      _magCachedFrame = currentFrame;
+    }
 
     var lens = jbEnsureMagnifier();
     var bgW  = canvasRect.width  * JB_ZOOM;
@@ -5480,7 +5506,7 @@
     var bgX  = -(relX * bgW - JB_LENS_W / 2);
     var bgY  = -(relY * bgH - JB_LENS_H / 2);
 
-    lens.style.backgroundImage    = 'url(' + img.src + ')';
+    lens.style.backgroundImage    = 'url(' + _magCachedUrl + ')';
     lens.style.backgroundSize     = bgW + 'px ' + bgH + 'px';
     lens.style.backgroundPosition = bgX + 'px ' + bgY + 'px';
 

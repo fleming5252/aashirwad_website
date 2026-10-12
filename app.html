@@ -653,11 +653,17 @@
       setTimeout(function () { clearInterval(iv); fire(); }, 15000);
     };
 
+    /* Keep strong references to every preloaded Image. Detached Image
+       objects with no references can be garbage-collected mid-download,
+       which aborts the fetch and leaves the animation stalling on the
+       network when its section is reached. */
+    window.__aboutPreloadImages = [];
     for (var i = 0; i < total; i++) {
       var img = new Image();
       img.onload = tick;
       img.onerror = tick;
       img.src = urls[i];
+      window.__aboutPreloadImages.push(img);
     }
   })();
   </script>

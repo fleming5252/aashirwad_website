@@ -8619,7 +8619,7 @@ section.learning-process .container {
   position: relative;
   background: linear-gradient(165deg, var(--color-black-warm) 0%, var(--color-black-warm-5) 40%, var(--color-black-warm-4) 100%);
   padding: 120px 0 160px;
-  overflow: hidden;
+  overflow: visible;
   font-family: 'Poppins', sans-serif;
 }
 .journey-bg {
@@ -10557,10 +10557,38 @@ section.learning-process .container {
   /* No fixed aspect-ratio — height is set dynamically by JS */
 }
 
+.jb-ink {
+  position: absolute;
+  bottom: -30%;
+  right: -10%;
+  width: 26%;
+  height: auto;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@media (max-width: 767px) {
+  .jb-ink {
+    width: 26%;
+    right: -10%;
+    bottom: -30%;
+  }
+}
+
 .jb-canvas {
   display: block !important;
   width: 100% !important;
   height: auto !important;
+  /* Feathered edges: fully transparent by 1% from each border,
+     fading in to fully opaque at 10% inward. */
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent 0%, transparent 1%,  #000 10%, #000 90%, transparent 99%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, transparent 1%,  #000 10%, #000 90%, transparent 99%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right,  transparent 0%, transparent 1%,  #000 10%, #000 90%, transparent 99%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, transparent 1%,  #000 10%, #000 90%, transparent 99%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .jb-canvas {
@@ -10685,9 +10713,9 @@ section.learning-process .container {
   background-color: var(--color-ink);
 }
 
-/* -- Journey section: white background -- */
+/* -- Journey section: white background + full-section desk image -- */
 .journey-section {
-  background: var(--color-white) !important;
+  background: var(--color-white) url('../images/book/desk.png') center 99% / auto 131.4% no-repeat !important;
   padding: 80px 0 60px !important;
 }
 
@@ -10729,7 +10757,7 @@ section.learning-process .container {
   font-size: clamp(48px, 8vw, 96px) !important;
   font-weight: 800 !important;
   font-style: italic !important;
-  color: var(--color-red-deep) !important;
+  color: #fff !important;
   line-height: 1.05 !important;
   margin-bottom: 10px !important;
 }
@@ -10754,7 +10782,7 @@ section.learning-process .container {
   font-family: 'Poppins', sans-serif !important;
   font-size: 22px !important;
   font-weight: 700 !important;
-  color: var(--color-red-deep) !important;
+  color: rgba(240,193,75,0.7) !important;
   letter-spacing: 1px !important;
   display: flex !important;
   align-items: center !important;
@@ -10849,7 +10877,7 @@ section.learning-process .container {
 
 /* -- Hint text -- */
 .jb-hint {
-  color: var(--color-grey) !important;
+  color: #fff !important;
   font-size: 14px !important;
   margin-top: 14px !important;
 }
@@ -10860,20 +10888,23 @@ section.learning-process .container {
 }
 
 .destination-heading {
-  color: var(--color-dark-strong) !important;
+  color: #fff !important;
 }
 
-.destination-heading,
+.destination-heading {
+  color: #fff !important;
+}
+
 .destination-subtext {
-  color: var(--color-charcoal-mid) !important;
+  color: rgba(240,193,75,0.7) !important;
 }
 
 .journey-destination.is-active .destination-heading {
-  color: var(--color-dark-strong) !important;
+  color: #fff !important;
 }
 
 .journey-destination.is-active .destination-subtext {
-  color: var(--color-grey-dark) !important;
+  color: rgba(240,193,75,0.7) !important;
 }
 
 .destination-range {
@@ -10886,24 +10917,26 @@ section.learning-process .container {
 
 /* -- Trust bar on white background -- */
 .journey-trust-bar {
-  border-color: rgba(168,130,47,0.3) !important;
+  border: 2px solid rgba(240,193,75,0.5) !important;
   background: transparent !important;
 }
 
 .trust-item strong {
-  color: var(--color-dark-strong) !important;
+  color: #fff !important;
 }
 
 .trust-item span {
-  color: var(--color-grey-dark) !important;
+  color: #fff !important;
 }
 
 .trust-icon {
-  border-color: rgba(168,130,47,0.5) !important;
+  border: 2px solid rgba(240,193,75,0.6) !important;
 }
 
 .trust-icon svg {
-  color: var(--color-gold-dark-soft) !important;
+  width: 22px;
+  height: 22px;
+  color: var(--color-gold-accent) !important;
 }
 
 /* -- Destination marker: continuous pulse animation when in view -- */
@@ -11133,8 +11166,8 @@ section.learning-process .container {
 }
 
 .trust-icon svg {
-  width: 14px !important;
-  height: 14px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 .trust-item strong {
@@ -11178,7 +11211,7 @@ section.learning-process .container {
 /* -- Journey section: needed for absolute side images -- */
 .journey-section {
   position: relative !important;
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 /* -- Side decorative images -- */
@@ -11235,14 +11268,14 @@ section.learning-process .container {
   color: rgba(240,193,75,0.7) /* --color-gold-accent */ !important;
 }
 
-/* -- Revert subtitle color -- */
+/* -- Subtitle color -- */
 .journey-subtitle {
-  color: var(--color-grey) !important;
+  color: #fff !important;
 }
 
 /* -- Revert year-range color -- higher specificity to beat .journey-heading > p */
 .journey-heading .journey-year-range {
-  color: var(--color-red-deep) !important;
+  color: rgba(240,193,75,0.7) !important;
 }
 
 /* Disable click-and-drag on links and buttons */
