@@ -10715,7 +10715,7 @@ section.learning-process .container {
 
 /* -- Journey section: white background + full-section desk image -- */
 .journey-section {
-  background: var(--color-white) url('../images/book/desk.png') center 99% / auto 131.4% no-repeat !important;
+  background: var(--color-white) url('../images/book/desk.webp') center 99% / auto 131.4% no-repeat !important;
   padding: 80px 0 60px !important;
 }
 

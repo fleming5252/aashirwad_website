@@ -1777,7 +1777,7 @@
     <!-- The book frame: images are placed here via JS -->
     <div class="jb-frame-wrap" id="jbFrameWrap">
       <canvas class="jb-canvas" id="jbCanvas"></canvas>
-      <img class="jb-ink" src="assets/images/book/ink.png" alt="" aria-hidden="true">
+      <img class="jb-ink" src="assets/images/book/ink.webp" alt="" aria-hidden="true">
       <!-- Left / Right click zones -->
       <div class="jb-click-left"  id="jbClickLeft"></div>
       <div class="jb-click-right" id="jbClickRight"></div>
@@ -5163,16 +5163,16 @@
 <script>
 /* =============================================================
    JOURNEY BOOK - Animated frame sequence player
-   Frames: assets/images/book/frames3/0001.webp ... 0396.webp
-   Steps (frame boundaries): 1 | 61 | 134 | 207 | 266 | 330 | 396
+   Frames: assets/images/book/frames4/0001.avif ... 0202.avif
+   Steps (frame boundaries): 1 | 31 | 68 | 105 | 135 | 168 | 202
    ============================================================= */
 (function () {
 
   /* Config */
-  var FRAME_DIR   = 'assets/images/book/frames3/';
-  var FRAME_COUNT = 396;
-  var FPS         = 45;          /* playback speed */
-  var STEPS       = [1, 61, 134, 207, 266, 330, 396]; /* 7 boundary frames */
+  var FRAME_DIR   = 'assets/images/book/frames4/';
+  var FRAME_COUNT = 202;
+  var FPS         = 30;          /* playback speed */
+  var STEPS       = [1, 31, 68, 105, 135, 168, 202]; /* 7 boundary frames */
 
   /* DOM */
   var canvas    = document.getElementById('jbCanvas');
@@ -5189,7 +5189,7 @@
 
   /* Load the ink overlay into JS so it can be baked onto the canvas */
   var inkImg = new Image();
-  inkImg.src = 'assets/images/book/ink.png';
+  inkImg.src = 'assets/images/book/ink.webp';
   var inkDomEl = document.querySelector('.jb-ink');
 
   /* State */
@@ -5233,7 +5233,7 @@
   function request(n) {
     if (n < 1 || n > FRAME_COUNT || requested[n]) return;
     requested[n] = true;
-    frames[n - 1].src = FRAME_DIR + pad4(n) + '.webp';
+    frames[n - 1].src = FRAME_DIR + pad4(n) + '.avif';
   }
 
   /* Fire cb once frame n is decodable (or has failed, so we never hang). */
