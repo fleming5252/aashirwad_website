@@ -24,7 +24,7 @@
       tagline: 'Academy for Competitive Examinations, Research & Training',
       description: 'An educational institution headquartered in Vaikom, Kottayam, Kerala, covering competitive examinations, teacher eligibility training, civil service preparation, digital learning and skill development.',
       approach: ['Conceptual clarity','Systematic preparation','Regular assessment','Quality learning resources','Personalised mentoring','Continuous academic support'],
-      stats: ['16+ years of transforming aspirations','23 first ranks in PSC examinations','15,000+ students guided','500+ ranks achieved','200+ expert classes','95% student satisfaction'],
+      stats: ['16+ years of transforming aspirations','28 first ranks in PSC examinations','15,000+ students guided','500+ ranks achieved','200+ expert classes','95% student satisfaction'],
       journey: [
         { year: 2009, text: 'Aashirwad established in Vaikom; Navodaya training initiated.' },
         { year: 2010, text: 'Pallikkathodu Centre established.' },
@@ -44,7 +44,7 @@
       ulsad: 'Ulsad Uthaman secured 1st rank in two consecutive PSC rank lists published on consecutive days.'
     },
     contact: {
-      address: 'Aashirwad Institute of Teachers, Kacherikavala, Vaikom, Kottayam, Kerala - 686141, India',
+      address: 'Aashirwad Institute of Teachers, Valiyakavala, Vaikom, Kottayam, Kerala - 686141, India',
       phone: '+91 85475 77007',
       whatsapp: '+91 85479 35616',
       email: 'info@aitacademyindia.com',
@@ -183,7 +183,7 @@
       { q: 'When was Aashirwad established?',
         a: 'Aashirwad Institute of Teachers was established in 2009. Navodaya training was initiated the same year in Vaikom.' },
       { q: 'Where is Aashirwad located?',
-        a: 'The head office is at Kacherikavala, Vaikom, Kottayam, Kerala 686141. Other centres: Pallikkathodu, Ettumanoor, Thrippunithura and North Paravur.' },
+        a: 'The head office is at Valiyakavala, Vaikom, Kottayam, Kerala 686141. Other centres: Pallikkathodu (Kottayam), Ettumanoor (Kottayam), Thrippunithura (Ernakulam) and North Paravur (Ernakulam).' },
       { q: 'What is Aashirwad EduVerse?',
         a: 'Aashirwad EduVerse is the digital learning platform and mobile application of Aashirwad, designed to support Kerala PSC and competitive examination preparation.' },
       { q: 'Which exams does Aashirwad provide coaching for?',
@@ -1335,7 +1335,7 @@
       '<strong>What Aashirwad provides:</strong><br>' +
       '• Expert coaching and structured training for competitive examinations such as Kerala PSC, KTET, CTET, Police exams and Civil Services<br>' +
       '• Comprehensive study materials, mock tests, regular assessments and personalised mentoring<br>' +
-      '• A proven institutional record — 23 PSC first ranks, 500+ ranks achieved and 15,000+ students guided (figures as displayed on our website)<br><br>' +
+      '• A proven institutional record — 28 PSC first ranks, 500+ ranks achieved and 15,000+ students guided (figures as displayed on our website)<br><br>' +
       '<strong>What no coaching institute can do:</strong><br>' +
       'Government and competitive examinations are selection-based, not course-completion-based. A candidate must clear the written examination, physical tests (where applicable) and interview conducted by the recruiting authority. <strong>No educational institution can guarantee a job, a rank or examination success</strong> — that depends on each candidate\'s preparation, performance and the competition in that particular exam cycle.<br><br>' +
       '<strong>What this means for you:</strong><br>Joining a PSC course at Aashirwad gives you the training, materials and guidance to prepare seriously — it does not guarantee employment. What it does guarantee is that you will not prepare alone.<br><br>' +

@@ -18,7 +18,7 @@ Name: Aashirwad Institute of Teachers
 Brand: Aashirwad EduVerse
 Also known as: Aashirwad
 Tagline: Academy for Competitive Examinations, Research & Training
-Location: Kacherikavala, Vaikom, Kottayam, Kerala 686141
+Location: Valiyakavala, Vaikom, Kottayam, Kerala 686141
 Website: https://aitacademyindia.com/
 Email: info@aitacademyindia.com
 Phone (helpline): 8547 577 007 (+91 85475 77007)
@@ -98,7 +98,7 @@ The FAQ section states that a 2-day free trial is available, and that the instit
 
 ## Contact
 
-Address: Kacherikavala, Vaikom, Kottayam, Kerala 686141
+Address: Valiyakavala, Vaikom, Kottayam, Kerala 686141
 Email: info@aitacademyindia.com
 Phone (helpline): 8547 577 007 (+91 85475 77007)
 WhatsApp: 8547 935 616 (+91 85479 35616)
@@ -146,7 +146,7 @@ Describes the Aashirwad EduVerse application: its purpose, the Google Play and A
 
 ### Contact
 
-Provides the institute's address in Kacherikavala, Vaikom, the helpline and WhatsApp numbers, the email address, a Google Maps location link and a contact form for enquiries about courses and admissions.
+Provides the institute's address in Valiyakavala, Vaikom, the helpline and WhatsApp numbers, the email address, a Google Maps location link and a contact form for enquiries about courses and admissions.
 
 ### Privacy Policy
 

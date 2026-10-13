@@ -210,6 +210,213 @@
         .stats-subtitle { text-align: justify; }
         .cta-left .cta-text { text-align: justify; }
       }
+
+      /* ── Course Filter Tab Bar ── */
+      .course-filter-wrap {
+        position: relative;
+        margin: 0 -15px 40px -15px; /* break out of Bootstrap container padding */
+        padding: 0;
+      }
+
+      /* Remove the fade gradient edges */
+      .course-filter-wrap::before,
+      .course-filter-wrap::after {
+        display: none;
+      }
+
+      .course-filter-tabs {
+        display: flex;
+        flex-wrap: wrap;           /* wrap to next line instead of scrolling */
+        justify-content: center;   /* center all tabs */
+        gap: 10px;
+        padding: 6px 20px 14px;
+        overflow: visible;         /* no clipping at all */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .course-filter-tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Hide the arrow buttons since we no longer scroll */
+      .cft-arrow {
+        display: none !important;
+      }
+
+      .cft-btn {
+        flex-shrink: 0;
+        position: relative;
+        padding: 10px 24px;
+        border-radius: 50px;
+        border: 1.5px solid #ddd;
+        background: #fff;
+        color: #555;
+        font-family: 'Poppins', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        letter-spacing: 0.2px;
+        white-space: nowrap;
+        transition: 
+          background 0.25s ease,
+          color 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease,
+          transform 0.2s ease;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .cft-btn:hover {
+        border-color: #a12c2f;
+        color: #a12c2f;
+        background: #fff5f5;
+        box-shadow: 0 3px 12px rgba(161,44,47,0.15);
+        transform: translateY(-1px);
+      }
+
+      .cft-btn.active {
+        background: linear-gradient(135deg, #a12c2f 0%, #c0392b 100%);
+        border-color: transparent;
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 
+          0 4px 16px rgba(161,44,47,0.35),
+          0 1px 4px rgba(161,44,47,0.2);
+        transform: translateY(-1px);
+      }
+
+      /* Active tab indicator dot */
+      .cft-btn.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 6px;
+        height: 6px;
+        background: #a12c2f;
+        border-radius: 50%;
+      }
+
+      /* Scroll arrow buttons */
+      .cft-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-60%);
+        z-index: 3;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1.5px solid #ddd;
+        background: #fff;
+        color: #a12c2f;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: background 0.2s, box-shadow 0.2s;
+        line-height: 1;
+        padding: 0;
+      }
+      .cft-arrow:hover {
+        background: #a12c2f;
+        color: #fff;
+        border-color: #a12c2f;
+        box-shadow: 0 4px 12px rgba(161,44,47,0.3);
+      }
+      .cft-arrow-left  { left: 4px; }
+      .cft-arrow-right { right: 4px; }
+      .cft-arrow.hidden { opacity: 0; pointer-events: none; }
+
+      /* Responsive: on mobile reduce padding and font size */
+      @media (max-width: 767px) {
+        .course-filter-wrap {
+          margin: 0 -15px 28px -15px;
+        }
+        .course-filter-tabs {
+          gap: 8px;
+          padding: 6px 16px 10px;
+          justify-content: center;
+        }
+        .cft-btn {
+          font-size: 12px;
+          padding: 8px 16px;
+        }
+      }
+
+      /* ════ COURSE SHOW MORE ════ */
+      .course-showmore-wrap {
+        text-align: center;
+        margin: 32px 0 16px;
+      }
+      .course-showmore-btn {
+        padding: 12px 38px;
+        border-radius: 50px;
+        border: 2px solid #a12c2f;
+        background: transparent;
+        color: #a12c2f;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .course-showmore-btn:hover {
+        background: #a12c2f;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(161,44,47,0.3);
+      }
+      .course-showmore-btn.hidden {
+        display: none;
+      }
+
+      .contact-fee-note {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 13px;
+        color: #888;
+        font-style: italic;
+        font-family: 'Poppins', sans-serif;
+        text-decoration: none;
+      }
+      .contact-fee-note:hover {
+        color: #a12c2f;
+      }
+      .contact-fee-note i {
+        color: #a12c2f;
+        font-size: 13px;
+      }
+
+      .fee-disclaimer-note {
+        margin: 8px 0 0;
+        font-size: 12px;
+        color: #888;
+        font-family: 'Poppins', sans-serif;
+      }
+      .ktet-fee-note {
+        margin: 8px 0 0;
+        font-size: 12px;
+        color: #888;
+        font-family: 'Poppins', sans-serif;
+      }
+      /* Filter visibility — uses opacity+pointer-events instead of
+         display:none so IntersectionObserver keeps working */
+      .course-col-hidden {
+        display: none;
+      }
+
+      .course-col-visible {
+        display: block;
+      }
     </style>
 
     <!-- CollectionPage + ItemList. Each course is marked up with its in-page
@@ -253,24 +460,50 @@
         "@id": "https://aitacademyindia.com/courses.html#courselist",
         "name": "Aashirwad EduVerse Courses",
         "url": "https://aitacademyindia.com/courses.html",
-        "numberOfItems": 9,
+        "numberOfItems": 47,
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
             "item": {
               "@type": "Course",
-              "name": "KTET Coaching",
-              "description": "Success-guaranteed KTET coaching with mock tests, expert faculty, and comprehensive study materials.",
-              "url": "https://aitacademyindia.com/courses.html#ktet",
+              "name": "KTET Category I Coaching",
+              "description": "KTET Category I coaching for Class 1 to 5 teacher eligibility with expert classes, study materials and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#ktet-1",
               "provider": { "@id": "https://aitacademyindia.com/#organization" },
-              "offers": { "@type": "Offer", "price": "3999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
-              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "6300" }
+              "offers": { "@type": "Offer", "price": "13500", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "3200" }
             }
           },
           {
             "@type": "ListItem",
             "position": 2,
+            "item": {
+              "@type": "Course",
+              "name": "KTET Category II Coaching",
+              "description": "KTET Category II coaching for Class 6 to 8 teacher eligibility with expert classes, study materials and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#ktet-2",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "18000", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "2400" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Course",
+              "name": "KTET Category I & II Coaching",
+              "description": "Combined KTET Category I and II coaching covering both papers with comprehensive materials and practice tests.",
+              "url": "https://aitacademyindia.com/courses.html#ktet-1-2",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "22500", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "6300" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
             "item": {
               "@type": "Course",
               "name": "LDC Clerk Coaching",
@@ -283,7 +516,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 3,
+            "position": 5,
             "item": {
               "@type": "Course",
               "name": "Degree Level PSC Coaching",
@@ -296,11 +529,11 @@
           },
           {
             "@type": "ListItem",
-            "position": 4,
+            "position": 6,
             "item": {
               "@type": "Course",
-              "name": "Police Constable Coaching",
-              "description": "Complete preparation for Kerala Police Constable exams including written, physical, and viva.",
+              "name": "Civil Police Officer Coaching",
+              "description": "Complete preparation for Kerala Civil Police Officer exams including written, physical, and viva.",
               "url": "https://aitacademyindia.com/courses.html#police",
               "provider": { "@id": "https://aitacademyindia.com/#organization" },
               "offers": { "@type": "Offer", "price": "3499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
@@ -309,7 +542,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 5,
+            "position": 7,
             "item": {
               "@type": "Course",
               "name": "Women Police Coaching",
@@ -322,7 +555,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 6,
+            "position": 8,
             "item": {
               "@type": "Course",
               "name": "LGS Lower Grade Servant Coaching",
@@ -335,7 +568,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 7,
+            "position": 9,
             "item": {
               "@type": "Course",
               "name": "Secretariat Assistant Coaching",
@@ -348,7 +581,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 8,
+            "position": 10,
             "item": {
               "@type": "Course",
               "name": "CTET Coaching",
@@ -361,7 +594,7 @@
           },
           {
             "@type": "ListItem",
-            "position": 9,
+            "position": 11,
             "item": {
               "@type": "Course",
               "name": "Civil Service Foundation Course",
@@ -370,6 +603,469 @@
               "provider": { "@id": "https://aitacademyindia.com/#organization" },
               "offers": { "@type": "Offer", "price": "12999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
               "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1500" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 12,
+            "item": {
+              "@type": "Course",
+              "name": "Beat Forest Officer Coaching",
+              "description": "Kerala Forest Beat Officer exam coaching with syllabus-wise classes, study materials and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#beat-forest-officer",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "5999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "1400" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 13,
+            "item": {
+              "@type": "Course",
+              "name": "Excise Officer Coaching",
+              "description": "Complete Kerala Excise Officer exam preparation with expert faculty and practice tests.",
+              "url": "https://aitacademyindia.com/courses.html#excise-officer",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "5999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "1100" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 14,
+            "item": {
+              "@type": "Course",
+              "name": "Company Board Assistant Coaching",
+              "description": "Kerala Company Board Assistant exam coaching with comprehensive study materials and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#company-board",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "4499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1600" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 15,
+            "item": {
+              "@type": "Course",
+              "name": "University Assistant Coaching",
+              "description": "Kerala University Assistant exam coaching with updated materials, practice tests and expert guidance.",
+              "url": "https://aitacademyindia.com/courses.html#university-assistant",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "4499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "2300" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 16,
+            "item": {
+              "@type": "Course",
+              "name": "Typist Coaching",
+              "description": "Kerala PSC Typist coaching with speed typing practice, shortcuts and full syllabus coverage.",
+              "url": "https://aitacademyindia.com/courses.html#typist",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "3999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "reviewCount": "1900" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 17,
+            "item": {
+              "@type": "Course",
+              "name": "LP & UP School Teacher Coaching",
+              "description": "Comprehensive LP and UP School Teacher (LPST/UPST) exam coaching with complete syllabus coverage.",
+              "url": "https://aitacademyindia.com/courses.html#lpst-upst",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "6999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "2700" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 18,
+            "item": {
+              "@type": "Course",
+              "name": "SSC Coaching",
+              "description": "All-India SSC coaching for CGL, CHSL and MTS with mock tests and previous-year analysis.",
+              "url": "https://aitacademyindia.com/courses.html#ssc",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "4499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "3100" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 19,
+            "item": {
+              "@type": "Course",
+              "name": "RRB Coaching",
+              "description": "Railway exam coaching for NTPC, Group D and ALP with complete practice sets and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#rrb",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "4499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "2400" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 20,
+            "item": {
+              "@type": "Course",
+              "name": "IMU-CET Coaching",
+              "description": "Merchant Navy entrance coaching for IMU-CET with physics, mathematics and aptitude preparation.",
+              "url": "https://aitacademyindia.com/courses.html#imu-cet",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "8999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "reviewCount": "900" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 21,
+            "item": {
+              "@type": "Course",
+              "name": "Navodaya Entrance Coaching",
+              "description": "JNVST coaching for Class 6 and 9 Navodaya Vidyalaya entrance with mental ability practice and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#navodaya",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "2200" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 22,
+            "item": {
+              "@type": "Course",
+              "name": "Spoken English Course",
+              "description": "Practical spoken English and communication training for interviews, exams and everyday fluency.",
+              "url": "https://aitacademyindia.com/courses.html#english",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "4100" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 23,
+            "item": {
+              "@type": "Course",
+              "name": "Malayalam Language Coaching",
+              "description": "Malayalam language coaching for competitive exams with grammar, comprehension and writing practice.",
+              "url": "https://aitacademyindia.com/courses.html#malayalam",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1700" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 24,
+            "item": {
+              "@type": "Course",
+              "name": "Hindi Language Coaching",
+              "description": "Hindi language training for competitive exams with grammar, translation and practice papers.",
+              "url": "https://aitacademyindia.com/courses.html#hindi",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1500" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 25,
+            "item": {
+              "@type": "Course",
+              "name": "Arabic Language Coaching",
+              "description": "Arabic language coaching for PSC and general purposes with expert-led grammar and conversation classes.",
+              "url": "https://aitacademyindia.com/courses.html#arabic",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.5", "reviewCount": "800" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 26,
+            "item": {
+              "@type": "Course",
+              "name": "German Language Training",
+              "description": "Spoken German training from A1 to B1 levels with certification-oriented classroom sessions.",
+              "url": "https://aitacademyindia.com/courses.html#german",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "1300" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 27,
+            "item": {
+              "@type": "Course",
+              "name": "Japanese Language Training",
+              "description": "Beginner-friendly Japanese classes covering JLPT N5 to N4 level grammar and conversation.",
+              "url": "https://aitacademyindia.com/courses.html#japanese",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "900" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 28,
+            "item": {
+              "@type": "Course",
+              "name": "Bharatanatyam Training",
+              "description": "Certified Bharatanatyam dance training for beginners to advanced learners with stage opportunities.",
+              "url": "https://aitacademyindia.com/courses.html#bharatanatyam",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "2800" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 29,
+            "item": {
+              "@type": "Course",
+              "name": "Mohiniyattam Training",
+              "description": "Traditional Mohiniyattam dance training under expert gurus with focus on grace and expressions.",
+              "url": "https://aitacademyindia.com/courses.html#mohiniyattam",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "2100" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 30,
+            "item": {
+              "@type": "Course",
+              "name": "Kathakali Training",
+              "description": "Classical Kathakali training covering chutti, mudras and abhinaya with experienced artists.",
+              "url": "https://aitacademyindia.com/courses.html#kathakali",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "1600" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 31,
+            "item": {
+              "@type": "Course",
+              "name": "Kuchipudi Training",
+              "description": "Authentic Kuchipudi dance classes for all age groups with flexible batch timings.",
+              "url": "https://aitacademyindia.com/courses.html#kuchipudi",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "1200" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 32,
+            "item": {
+              "@type": "Course",
+              "name": "Kerala Nadanam Training",
+              "description": "Kerala Nadanam training blending classical and folk traditions for competitions and stage shows.",
+              "url": "https://aitacademyindia.com/courses.html#kerala-nadanam",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "1400" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 33,
+            "item": {
+              "@type": "Course",
+              "name": "Chenda Training",
+              "description": "Chenda melam training from basics to advanced rhythms with traditional percussion masters.",
+              "url": "https://aitacademyindia.com/courses.html#chenda",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1100" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 34,
+            "item": {
+              "@type": "Course",
+              "name": "Music Training",
+              "description": "Carnatic and light music training with vocal and instrumental options for all age groups.",
+              "url": "https://aitacademyindia.com/courses.html#music",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2499", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "2600" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 35,
+            "item": {
+              "@type": "Course",
+              "name": "Tabla Training",
+              "description": "Tabla classes for beginners to diploma level with structured syllabus and practice sessions.",
+              "url": "https://aitacademyindia.com/courses.html#tabla",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1800" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 36,
+            "item": {
+              "@type": "Course",
+              "name": "Basic Level Chess Coaching",
+              "description": "Beginner-friendly chess coaching covering board basics, piece movement, fundamental tactics and opening ideas.",
+              "url": "https://aitacademyindia.com/courses.html#chess-basic",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "1200" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 37,
+            "item": {
+              "@type": "Course",
+              "name": "Intermediate Level Chess Coaching",
+              "description": "Structured intermediate training focusing on tactics, positional play, endgame techniques and game analysis.",
+              "url": "https://aitacademyindia.com/courses.html#chess-intermediate",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "900" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 38,
+            "item": {
+              "@type": "Course",
+              "name": "Advanced Level Chess Coaching",
+              "description": "Advanced chess coaching with deep strategy, complex endgames, master game study and personalised feedback.",
+              "url": "https://aitacademyindia.com/courses.html#chess-advanced",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "700" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 39,
+            "item": {
+              "@type": "Course",
+              "name": "Competitive Chess Training",
+              "description": "Tournament-oriented training with practice matches, time-management drills and rating-improvement guidance.",
+              "url": "https://aitacademyindia.com/courses.html#chess-competitive",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "600" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 40,
+            "item": {
+              "@type": "Course",
+              "name": "Karate Training",
+              "description": "Shotokan karate training for self-defence, fitness and belt examinations under certified instructors.",
+              "url": "https://aitacademyindia.com/courses.html#karate",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "3200" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 41,
+            "item": {
+              "@type": "Course",
+              "name": "Kung Fu Training",
+              "description": "Kung Fu classes for discipline, fitness and self-defence with progressive belt grading.",
+              "url": "https://aitacademyindia.com/courses.html#kung-fu",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1900" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 42,
+            "item": {
+              "@type": "Course",
+              "name": "Taekwondo Training",
+              "description": "Olympic-style Taekwondo coaching for kids and adults with sparring and poomsae training.",
+              "url": "https://aitacademyindia.com/courses.html#taekwondo",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "2200" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 43,
+            "item": {
+              "@type": "Course",
+              "name": "Yoga Classes",
+              "description": "Daily yoga classes for stress relief, flexibility and overall wellness with certified instructors.",
+              "url": "https://aitacademyindia.com/courses.html#yoga",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "2900" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 44,
+            "item": {
+              "@type": "Course",
+              "name": "Abacus Training",
+              "description": "Mental arithmetic abacus training for children to boost speed, focus and confidence.",
+              "url": "https://aitacademyindia.com/courses.html#abacus",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "3400" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 45,
+            "item": {
+              "@type": "Course",
+              "name": "Tuition Classes",
+              "description": "Subject-wise tuition for school students from LKG to Plus Two with personal attention and regular tests.",
+              "url": "https://aitacademyindia.com/courses.html#tuition",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "2999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "5200" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 46,
+            "item": {
+              "@type": "Course",
+              "name": "Sanskrit Language Coaching",
+              "description": "Sanskrit language coaching for competitive exams with grammar, comprehension and structured practice.",
+              "url": "https://aitacademyindia.com/courses.html#sanskrit",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "offers": { "@type": "Offer", "price": "1999", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.6", "reviewCount": "1000" }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 47,
+            "item": {
+              "@type": "Course",
+              "name": "Scholarship Training Course",
+              "description": "Scholarship entrance training covering LSS, USS, PCM, NMMS and NTSE examinations with concept classes and mock tests.",
+              "url": "https://aitacademyindia.com/courses.html#scholarship",
+              "provider": { "@id": "https://aitacademyindia.com/#organization" },
+              "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "1600" }
             }
           }
         ]
@@ -492,10 +1188,24 @@
             <div class="cp-section-line"></div>
           </div>
 
+          <!-- ── Filter tabs ── -->
+          <div class="course-filter-wrap">
+            <button class="cft-arrow cft-arrow-left" id="cftArrowLeft" aria-label="Scroll left">&#8249;</button>
+            <div class="course-filter-tabs" id="courseFilterTabs">
+              <button class="cft-btn active" data-filter="all">All</button>
+              <button class="cft-btn" data-filter="institute">Aashirwad Institute of Teachers</button>
+              <button class="cft-btn" data-filter="language">Language Academy</button>
+              <button class="cft-btn" data-filter="arts">Sri Dakshinamurthy Temple of Arts</button>
+              <button class="cft-btn" data-filter="tuition">Aashirwad Tuition</button>
+              <button class="cft-btn" data-filter="chess">Aashirwad Chess Academy</button>
+            </div>
+            <button class="cft-arrow cft-arrow-right" id="cftArrowRight" aria-label="Scroll right">&#8250;</button>
+          </div>
+
           <div class="row courses-grid">
 
             <!-- Women Police -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="women-police">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="women-police" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
@@ -512,46 +1222,48 @@
                     <p class="course-desc slide-in-up">Specialized coaching for Women Police constable exams with physical training and mock interviews.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 2,999</span>
-                      <span class="original-price">₹ 4,999</span>
+                      <span class="current-price">₹ 15,000</span>
+                      <span class="original-price">₹ 25,000</span>
                       <span class="discount-badge">-40% OFF</span>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Police Constable -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="police">
+            <!-- Civil Police Officer -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="police" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <video data-src="assets/images/course/PoliceConstable.mp4" autoplay muted loop playsinline preload="none" aria-label="Police Constable course preview"></video>
-                    <div class="card-img-overlay"><span>Police Constable</span></div>
+                    <video data-src="assets/images/course/PoliceConstable.mp4" autoplay muted loop playsinline preload="none" aria-label="Civil Police Officer course preview"></video>
+                    <div class="card-img-overlay"><span>Civil Police Officer</span></div>
                   </div>
                   <div class="down-content">
-                    <h4>Police Constable</h4>
+                    <h4>Civil Police Officer</h4>
                     <div class="course-rating-row">
                       <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                       <span class="rating-num">(4.7)</span>
                       <span class="student-count">2.1k+ Students</span>
                     </div>
-                    <p class="course-desc slide-in-up">Complete preparation for Kerala Police Constable exams including written, physical, and viva.</p>
+                    <p class="course-desc slide-in-up">Complete preparation for Kerala Civil Police Officer exams including written, physical, and viva.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 3,499</span>
-                      <span class="original-price">₹ 5,499</span>
-                      <span class="discount-badge">-36% OFF</span>
+                      <span class="current-price">₹ 15,000</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-40% OFF</span>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- LGS (Lower Grade) -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="lgs">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="lgs" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
@@ -568,18 +1280,19 @@
                     <p class="course-desc slide-in-up">Thorough coaching for Lower Grade Servants exams with focus on Kerala PSC syllabus.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 2,499</span>
-                      <span class="original-price">₹ 3,999</span>
-                      <span class="discount-badge">-37% OFF</span>
+                      <span class="current-price">₹ 15,000</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-40% OFF</span>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- LDC Clerk (Most Popular) -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ldc">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ldc" data-category="institute">
               <div class="item">
                 <div class="course-item-card popular">
                   <div class="card-img-wrap">
@@ -596,18 +1309,19 @@
                     <p class="course-desc slide-in-up">Expert-led coaching for Lower Division Clerk exams with comprehensive study materials.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 3,999</span>
-                      <span class="original-price">₹ 6,499</span>
-                      <span class="discount-badge">-38% OFF</span>
+                      <span class="current-price">₹ 15,000</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-40% OFF</span>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Degree Level -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="degree">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="degree" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
@@ -624,9 +1338,9 @@
                     <p class="course-desc slide-in-up">Degree-level PSC exam preparation covering all subjects with expert faculty guidance.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 4,499</span>
-                      <span class="original-price">₹ 7,499</span>
-                      <span class="discount-badge">-40% OFF</span>
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
                   </div>
@@ -635,7 +1349,7 @@
             </div>
 
             <!-- Secretariat Assistant -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="secretariat">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="secretariat" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
@@ -652,46 +1366,106 @@
                     <p class="course-desc slide-in-up">Specialized coaching for Secretariat Assistant exams with focus on Kerala PSC standards.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 5,999</span>
-                      <span class="original-price">₹ 8,999</span>
-                      <span class="discount-badge">-33% OFF</span>
+                      <span class="current-price">₹ 17,500</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-30% OFF</span>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- KTET -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ktet">
+            <!-- KTET Category I -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ktet-1" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
-                    <video data-src="assets/images/course/KTET.mp4" autoplay muted loop playsinline preload="none" aria-label="KTET course preview"></video>
-                    <div class="card-img-overlay"><span>KTET</span></div>
+                    <video data-src="assets/images/course/KTET.mp4" autoplay muted loop playsinline preload="none" aria-label="KTET Category I course preview"></video>
+                    <div class="card-img-overlay"><span>KTET Category I</span></div>
                   </div>
                   <div class="down-content">
-                    <h4>KTET</h4>
+                    <h4>KTET Category I</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.9)</span>
+                      <span class="student-count">3.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">KTET Category I coaching for Class 1 to 5 teacher eligibility with expert classes, study materials and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 13,500</span>
+                      <span class="original-price">₹ 15,000</span>
+                      <span class="discount-badge">-10% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- KTET Category II -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ktet-2" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/KTET.mp4" autoplay muted loop playsinline preload="none" aria-label="KTET Category II course preview"></video>
+                    <div class="card-img-overlay"><span>KTET Category II</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>KTET Category II</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">2.4k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">KTET Category II coaching for Class 6 to 8 teacher eligibility with expert classes, study materials and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 18,000</span>
+                      <span class="original-price">₹ 20,000</span>
+                      <span class="discount-badge">-10% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- KTET Category I & II -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ktet-1-2" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/KTET.mp4" autoplay muted loop playsinline preload="none" aria-label="KTET Category I &amp; II course preview"></video>
+                    <div class="card-img-overlay"><span>KTET Category I &amp; II</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>KTET Category I &amp; II</h4>
                     <div class="course-rating-row">
                       <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                       <span class="rating-num">(4.9)</span>
                       <span class="student-count">6.3k+ Students</span>
                     </div>
-                    <p class="course-desc slide-in-up">Success-guaranteed KTET coaching with mock tests, expert faculty, and comprehensive study materials.</p>
+                    <p class="course-desc slide-in-up">Combined KTET Category I and II coaching covering both papers with comprehensive materials and practice tests.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 3,999</span>
-                      <span class="original-price">₹ 6,999</span>
-                      <span class="discount-badge">-43% OFF</span>
+                      <span class="current-price">₹ 22,500</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-10% OFF</span>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- CTET -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ctet">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ctet" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
@@ -708,9 +1482,9 @@
                     <p class="course-desc slide-in-up">Central Teacher Eligibility Test preparation with all subjects covered by expert educators.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 4,499</span>
-                      <span class="original-price">₹ 7,499</span>
-                      <span class="discount-badge">-40% OFF</span>
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
                   </div>
@@ -719,7 +1493,7 @@
             </div>
 
             <!-- Civil Service Foundation -->
-            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="civil-service">
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="civil-service" data-category="institute">
               <div class="item">
                 <div class="course-item-card">
                   <div class="card-img-wrap">
@@ -736,9 +1510,212 @@
                     <p class="course-desc slide-in-up">Foundation course for Civil Services with comprehensive coverage of prelims and mains syllabus.</p>
                     <div class="card-divider"></div>
                     <div class="course-price-row">
-                      <span class="current-price">₹ 12,999</span>
-                      <span class="original-price">₹ 19,999</span>
-                      <span class="discount-badge">-35% OFF</span>
+                      <span class="current-price">₹ 12,000</span>
+                      <span class="original-price">₹ 24,000</span>
+                      <span class="discount-badge">-50% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Beat Forest Officer -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="beat-forest-officer" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/BeatForestOfficer.mp4" autoplay muted loop playsinline preload="none" aria-label="Beat Forest Officer course preview"></video>
+                    <div class="card-img-overlay"><span>Beat Forest Officer</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Beat Forest Officer</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">1.4k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Focused coaching for Kerala Forest Beat Officer exams with syllabus-wise classes and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 15,000</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-40% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Excise Officer -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="excise-officer" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/ExciseOfficer.mp4" autoplay muted loop playsinline preload="none" aria-label="Excise Officer course preview"></video>
+                    <div class="card-img-overlay"><span>Excise Officer</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Excise Officer</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">1.1k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Complete Kerala Excise Officer exam preparation with expert faculty and practice tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 15,000</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-40% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Company Board Assistant -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="company-board" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/CompanyBoard.mp4" autoplay muted loop playsinline preload="none" aria-label="Company Board Assistant course preview"></video>
+                    <div class="card-img-overlay"><span>Company Board Assistant</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Company Board Assistant</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.6k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Kerala Company Board Assistant exam coaching with comprehensive study materials and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 17,500</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-30% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- University Assistant -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="university-assistant" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/UniversityAssistant.mp4" autoplay muted loop playsinline preload="none" aria-label="University Assistant course preview"></video>
+                    <div class="card-img-overlay"><span>University Assistant</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>University Assistant</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">2.3k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Kerala University Assistant exam coaching with updated materials, practice tests and expert guidance.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 17,500</span>
+                      <span class="original-price">₹ 25,000</span>
+                      <span class="discount-badge">-30% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Typist -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="typist" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Typist.mp4" autoplay muted loop playsinline preload="none" aria-label="Typist course preview"></video>
+                    <div class="card-img-overlay"><span>Typist</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Typist</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.5)</span>
+                      <span class="student-count">1.9k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Kerala PSC Typist coaching with speed typing practice, shortcuts and full syllabus coverage.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 14,000</span>
+                      <span class="original-price">₹ 17,500</span>
+                      <span class="discount-badge">-20% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- LP/UP School Teacher -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="lpst-upst" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/LPST-UPST.mp4" autoplay muted loop playsinline preload="none" aria-label="LP/UP School Teacher course preview"></video>
+                    <div class="card-img-overlay"><span>LP/UP School Teacher</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>LP/UP School Teacher</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">2.7k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Comprehensive LP &amp; UP School Teacher (LPST/UPST) exam coaching with complete syllabus coverage.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 14,000</span>
+                      <span class="original-price">₹ 20,000</span>
+                      <span class="discount-badge">-30% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SSC -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="ssc" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/SSC.mp4" autoplay muted loop playsinline preload="none" aria-label="SSC course preview"></video>
+                    <div class="card-img-overlay"><span>SSC</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>SSC</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">3.1k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">All-India SSC coaching (CGL, CHSL, MTS) with topic-wise classes, mock tests and previous-year analysis.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
                       <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
                     </div>
                   </div>
@@ -746,6 +1723,826 @@
               </div>
             </div>
 
+            <!-- RRB -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="rrb" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/RRB.mp4" autoplay muted loop playsinline preload="none" aria-label="RRB course preview"></video>
+                    <div class="card-img-overlay"><span>RRB</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>RRB</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">2.4k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Railway exam coaching for NTPC, Group D and ALP with complete practice sets and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- IMU-CET -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="imu-cet" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/IMU-CET.mp4" autoplay muted loop playsinline preload="none" aria-label="IMU-CET course preview"></video>
+                    <div class="card-img-overlay"><span>IMU-CET</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>IMU-CET</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.5)</span>
+                      <span class="student-count">0.9k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Merchant Navy entrance coaching for IMU-CET with physics, mathematics and aptitude preparation.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <span class="current-price">₹ 18,000</span>
+                      <span class="original-price">₹ 20,000</span>
+                      <span class="discount-badge">-10% OFF</span>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                    <p class="fee-disclaimer-note">Note: Fees are subject to change. Please contact the office to confirm the final fee.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navodaya Entrance -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="navodaya" data-category="institute">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/NavodayaEntrance.mp4" autoplay muted loop playsinline preload="none" aria-label="Navodaya Entrance course preview"></video>
+                    <div class="card-img-overlay"><span>Navodaya Entrance</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Navodaya Entrance</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">2.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">JNVST coaching for Class 6 &amp; 9 Navodaya Vidyalaya entrance with mental ability practice and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Spoken English -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="english" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/English.mp4" autoplay muted loop playsinline preload="none" aria-label="Spoken English course preview"></video>
+                    <div class="card-img-overlay"><span>Spoken English</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Spoken English</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">4.1k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Practical spoken English and communication training for interviews, exams and everyday fluency.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Malayalam -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="malayalam" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Malayalam.mp4" autoplay muted loop playsinline preload="none" aria-label="Malayalam Language course preview"></video>
+                    <div class="card-img-overlay"><span>Malayalam Language</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Malayalam Language</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.7k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Malayalam language coaching for competitive exams with grammar, comprehension and writing practice.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hindi -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="hindi" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Hindi.mp4" autoplay muted loop playsinline preload="none" aria-label="Hindi Language course preview"></video>
+                    <div class="card-img-overlay"><span>Hindi Language</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Hindi Language</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.5k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Hindi language training for competitive exams with grammar, translation and practice papers.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Arabic -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="arabic" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Arabic.mp4" autoplay muted loop playsinline preload="none" aria-label="Arabic Language course preview"></video>
+                    <div class="card-img-overlay"><span>Arabic Language</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Arabic Language</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.5)</span>
+                      <span class="student-count">0.8k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Arabic language coaching for PSC and general purposes with expert-led grammar and conversation classes.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- German -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="german" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/German.mp4" autoplay muted loop playsinline preload="none" aria-label="German Language course preview"></video>
+                    <div class="card-img-overlay"><span>German Language</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>German Language</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">1.3k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Spoken German training from A1 to B1 levels with certification-oriented classroom sessions.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Japanese -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="japanese" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/japanese.mp4" autoplay muted loop playsinline preload="none" aria-label="Japanese Language course preview"></video>
+                    <div class="card-img-overlay"><span>Japanese Language</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Japanese Language</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">0.9k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Beginner-friendly Japanese classes covering JLPT N5&ndash;N4 level grammar and conversation.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sanskrit -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="sanskrit" data-category="language">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Sanskrit.mp4" autoplay muted loop playsinline preload="none" aria-label="Sanskrit Language course preview"></video>
+                    <div class="card-img-overlay"><span>Sanskrit Language</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Sanskrit Language</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.0k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Sanskrit language coaching for competitive exams with grammar, comprehension and structured practice.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bharatanatyam -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="bharatanatyam" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Bharatanatyam.mp4" autoplay muted loop playsinline preload="none" aria-label="Bharatanatyam course preview"></video>
+                    <div class="card-img-overlay"><span>Bharatanatyam</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Bharatanatyam</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.9)</span>
+                      <span class="student-count">2.8k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Certified Bharatanatyam training for beginners to advanced levels with stage performance opportunities.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mohiniyattam -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="mohiniyattam" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Mohiniyattam.mp4" autoplay muted loop playsinline preload="none" aria-label="Mohiniyattam course preview"></video>
+                    <div class="card-img-overlay"><span>Mohiniyattam</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Mohiniyattam</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">2.1k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Traditional Mohiniyattam dance training under expert gurus with focus on grace and expressions.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kathakali -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="kathakali" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Kathakali.mp4" autoplay muted loop playsinline preload="none" aria-label="Kathakali course preview"></video>
+                    <div class="card-img-overlay"><span>Kathakali</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Kathakali</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">1.6k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Classical Kathakali training covering chutti, mudras and abhinaya with experienced artists.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kuchipudi -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="kuchipudi" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/kuchipodi.mp4" autoplay muted loop playsinline preload="none" aria-label="Kuchipudi course preview"></video>
+                    <div class="card-img-overlay"><span>Kuchipudi</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Kuchipudi</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">1.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Authentic Kuchipudi dance classes for all age groups with flexible batch timings.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kerala Nadanam -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="kerala-nadanam" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/KeralaNadanam.mp4" autoplay muted loop playsinline preload="none" aria-label="Kerala Nadanam course preview"></video>
+                    <div class="card-img-overlay"><span>Kerala Nadanam</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Kerala Nadanam</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">1.4k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Kerala Nadanam training blending classical and folk traditions for competitions and stage shows.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chenda -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="chenda" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/chenda.mp4" autoplay muted loop playsinline preload="none" aria-label="Chenda course preview"></video>
+                    <div class="card-img-overlay"><span>Chenda</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Chenda</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.1k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Chenda melam training from basics to advanced rhythms with traditional percussion masters.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Music -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="music" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/music.mp4" autoplay muted loop playsinline preload="none" aria-label="Music course preview"></video>
+                    <div class="card-img-overlay"><span>Music</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Music</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">2.6k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Carnatic and light music training with vocal and instrumental options for all age groups.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabla -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="tabla" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Tabla.mp4" autoplay muted loop playsinline preload="none" aria-label="Tabla course preview"></video>
+                    <div class="card-img-overlay"><span>Tabla</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Tabla</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.8k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Tabla classes for beginners to diploma level with structured syllabus and practice sessions.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Basic Level Chess Coaching -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="chess-basic" data-category="chess">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/chess.mp4" autoplay muted loop playsinline preload="none" aria-label="Basic Level Chess Coaching course preview"></video>
+                    <div class="card-img-overlay"><span>Basic Level Chess Coaching</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Basic Level Chess Coaching</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">1.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Beginner-friendly chess coaching covering board basics, piece movement, fundamental tactics and opening ideas.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intermediate Level Chess Coaching -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="chess-intermediate" data-category="chess">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/IntermediateLevelChess.mp4" autoplay muted loop playsinline preload="none" aria-label="Intermediate Level Chess Coaching course preview"></video>
+                    <div class="card-img-overlay"><span>Intermediate Level Chess Coaching</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Intermediate Level Chess Coaching</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">0.9k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Structured intermediate training focusing on tactics, positional play, endgame techniques and game analysis.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Advanced Level Chess Coaching -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="chess-advanced" data-category="chess">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/AdvancedLevelChess.mp4" autoplay muted loop playsinline preload="none" aria-label="Advanced Level Chess Coaching course preview"></video>
+                    <div class="card-img-overlay"><span>Advanced Level Chess Coaching</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Advanced Level Chess Coaching</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">0.7k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Advanced chess coaching with deep strategy, complex endgames, master game study and personalised feedback.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Competitive Chess Training -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="chess-competitive" data-category="chess">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/CompetitiveChessTraining.mp4" autoplay muted loop playsinline preload="none" aria-label="Competitive Chess Training course preview"></video>
+                    <div class="card-img-overlay"><span>Competitive Chess Training</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Competitive Chess Training</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.9)</span>
+                      <span class="student-count">0.6k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Tournament-oriented training with practice matches, time-management drills and rating-improvement guidance.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Karate -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="karate" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/karate.mp4" autoplay muted loop playsinline preload="none" aria-label="Karate course preview"></video>
+                    <div class="card-img-overlay"><span>Karate</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Karate</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">3.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Shotokan karate training for self-defence, fitness and belt examinations under certified instructors.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kung Fu -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="kung-fu" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Kungfu.mp4" autoplay muted loop playsinline preload="none" aria-label="Kung Fu course preview"></video>
+                    <div class="card-img-overlay"><span>Kung Fu</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Kung Fu</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">1.9k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Kung Fu classes for discipline, fitness and self-defence with progressive belt grading.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taekwondo -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="taekwondo" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/Taekwondo.mp4" autoplay muted loop playsinline preload="none" aria-label="Taekwondo course preview"></video>
+                    <div class="card-img-overlay"><span>Taekwondo</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Taekwondo</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.7)</span>
+                      <span class="student-count">2.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Olympic-style Taekwondo coaching for kids and adults with sparring and poomsae training.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Yoga -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="yoga" data-category="arts">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/yoga.mp4" autoplay muted loop playsinline preload="none" aria-label="Yoga course preview"></video>
+                    <div class="card-img-overlay"><span>Yoga</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Yoga</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">2.9k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Daily yoga classes for stress relief, flexibility and overall wellness with certified instructors.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Abacus -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="abacus" data-category="tuition">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/abacus.mp4" autoplay muted loop playsinline preload="none" aria-label="Abacus course preview"></video>
+                    <div class="card-img-overlay"><span>Abacus</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Abacus</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">3.4k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Mental arithmetic training for children using the abacus method to boost speed, focus and confidence.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tuition -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="tuition" data-category="tuition">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/tution.mp4" autoplay muted loop playsinline preload="none" aria-label="Tuition course preview"></video>
+                    <div class="card-img-overlay"><span>Tuition</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Tuition</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span>
+                      <span class="rating-num">(4.6)</span>
+                      <span class="student-count">5.2k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Subject-wise tuition for school students from LKG to Plus Two with personal attention and regular tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scholarship Training -->
+            <div class="col-lg-4 col-md-6 col-sm-12 course-col" id="scholarship" data-category="tuition">
+              <div class="item">
+                <div class="course-item-card">
+                  <div class="card-img-wrap">
+                    <video data-src="assets/images/course/ScholarshipTraining.mp4" autoplay muted loop playsinline preload="none" aria-label="Scholarship Training course preview"></video>
+                    <div class="card-img-overlay"><span>Scholarship Training</span></div>
+                  </div>
+                  <div class="down-content">
+                    <h4>Scholarship Training</h4>
+                    <div class="course-rating-row">
+                      <span class="stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+                      <span class="rating-num">(4.8)</span>
+                      <span class="student-count">1.6k+ Students</span>
+                    </div>
+                    <p class="course-desc slide-in-up">Scholarship entrance training for school students covering LSS, USS, PCM, NMMS and NTSE examinations with concept classes and mock tests.</p>
+                    <div class="card-divider"></div>
+                    <div class="course-price-row">
+                      <a class="contact-fee-note" href="https://api.whatsapp.com/send/?phone=918547935616&amp;text=&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener">
+                        <i class="fa fa-phone"></i> Contact institution for fee details
+                      </a>
+                      <a href="https://connect.aitacademyindia.com/enquiry/" target="_blank" rel="noopener" class="enroll-btn shimmer">Enroll Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Show More pagination -->
+          <div class="course-showmore-wrap" id="courseShowMoreWrap">
+            <button class="course-showmore-btn" id="courseShowMoreBtn">
+              Show More <i class="fa fa-chevron-down"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -778,7 +2575,7 @@
           <div class="stat-card reveal-stat" data-delay="150">
             <div class="stat-card-icon"><i class="fa fa-trophy"></i></div>
             <div class="stat-card-number">
-              <span class="stat-number" data-target="500">0</span>
+              <span class="stat-number" data-target="5000">0</span>
               <span class="stat-suffix">+</span>
             </div>
             <div class="stat-card-label">RANK HOLDERS</div>
@@ -788,7 +2585,7 @@
           <div class="stat-card reveal-stat" data-delay="300">
             <div class="stat-card-icon"><i class="fa fa-book"></i></div>
             <div class="stat-card-number">
-              <span class="stat-number" data-target="10">0</span>
+              <span class="stat-number" data-target="47">0</span>
               <span class="stat-suffix">+</span>
             </div>
             <div class="stat-card-label">COURSES AVAILABLE</div>
@@ -830,7 +2627,7 @@
         <div class="hof-stats">
           <div class="hof-stat-card reveal-stat" data-delay="0">
             <div class="hof-stat-icon"><i class="fa fa-award"></i></div>
-            <div class="hof-stat-number"><span class="stat-number" data-target="23">0</span><span class="stat-suffix">+</span></div>
+            <div class="hof-stat-number"><span class="stat-number" data-target="28">0</span><span class="stat-suffix">+</span></div>
             <div class="hof-stat-label">PSC First Ranks</div>
           </div>
           <div class="hof-stat-card reveal-stat" data-delay="150">
@@ -1657,11 +3454,12 @@ function step(timestamp) {
 <!-- Navbar theme picker -->
 <script src="assets/js/theme-picker.js?v=1.0.0"></script>
 
-<!-- Course card videos: deferred loading.
-     The nine course clips total ~6.6 MB. Shipping them with preload="auto"
-     made every visitor download all of them before scrolling. Each video now
-     carries data-src + preload="none" and is attached here only when its card
-     comes near the viewport, so the animation is unchanged once visible. -->
+<!-- Course card videos: deferred loading + visibility-gated playback.
+     The course clips total ~114 MB across 47 cards, so each video carries
+     data-src + preload="none" and is attached only when needed. Playback
+     is gated on visibility: a video plays only while more than 40% of its
+     own height is inside the viewport and is paused otherwise, so
+     off-screen or barely-visible cards never burn CPU decoding. -->
 <noscript>
   <script>
     /* No JS: restore the videos so the cards are not empty. */
@@ -1681,6 +3479,12 @@ function step(timestamp) {
 (function () {
   var vids = Array.prototype.slice.call(document.querySelectorAll('video[data-src]'));
   if (!vids.length) return;
+
+  /* Play only while more than this share of the VIDEO element's own
+     height is inside the viewport (1 = fully visible, 0 = fully out).
+     Measured on the <video> itself, not the card, so the surrounding
+     title/price text does not dilute the ratio. */
+  var PLAY_VISIBILITY = 0.4;
 
   function safePlay(v) {
     if (!v.play) return;
@@ -1702,28 +3506,109 @@ function step(timestamp) {
     return true;
   }
 
+  /* Vertical share of the video currently inside the viewport. */
+  function verticalVisibility(v) {
+    var rect = v.getBoundingClientRect();
+    if (rect.height <= 0) return 0;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var visible = Math.min(rect.bottom, vh) - Math.max(rect.top, 0);
+    return visible > 0 ? visible / rect.height : 0;
+  }
+
   /* No IntersectionObserver support: behave exactly like the old markup. */
   if (!('IntersectionObserver' in window)) {
     vids.forEach(function (v) { attach(v); safePlay(v); });
     return;
   }
 
+  /* Intermediate thresholds re-evaluate the 40% rule continuously while
+     scrolling, not just at enter/leave. The 40%-of-height decision itself
+     is made with verticalVisibility(), so horizontal clipping (rare for
+     full-width card videos) cannot skew the result. */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
       var v = e.target;
-      if (e.isIntersecting) {
-        /* Exactly one play() per intersecting tick: on a fresh load always
-           play, otherwise only when paused. Two play() calls in the same tick
-           make the second abort the first with an AbortError. */
-        if (attach(v) || v.paused) safePlay(v);
+      if (verticalVisibility(v) > PLAY_VISIBILITY) {
+        /* Exactly one play() per tick: attach once, then only play when
+           paused. Two play() calls in the same tick make the second abort
+           the first with an AbortError. */
+        attach(v);
+        if (v.paused) safePlay(v);
       } else if (v.dataset.aidLoaded === '1' && !v.paused) {
-        /* Off-screen: stop decoding. Invisible to the user, saves CPU/battery. */
+        /* Below 40% visible (or off-screen): stop decoding. */
         v.pause();
       }
     });
-  }, { rootMargin: '300px 0px', threshold: 0 });
+  }, { rootMargin: '0px', threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] });
 
   vids.forEach(function (v) { io.observe(v); });
+
+  // Re-observe videos whenever a card becomes visible again
+  // by watching for class changes on course-col elements
+  if ('MutationObserver' in window) {
+    var colObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          var col = mutation.target;
+          if (col.classList.contains('course-col-visible')) {
+            var vid = col.querySelector('video[data-src]');
+            if (vid) {
+              // Disconnect and re-observe to force a fresh
+              // intersection check on this newly visible video
+              io.unobserve(vid);
+              io.observe(vid);
+            }
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll('.courses-grid .course-col').forEach(function (col) {
+      colObserver.observe(col, { attributes: true, attributeFilter: ['class'] });
+    });
+  }
+
+  /* ── Eager section-triggered loading ── */
+  function attachAllInCategory(cat) {
+    document.querySelectorAll('.courses-grid .course-col').forEach(function (col) {
+      if (cat !== 'all' && col.getAttribute('data-category') !== cat) return;
+      var v = col.querySelector('video[data-src]');
+      if (v) attach(v); /* attach only — play stays gated by the 40% observer */
+    });
+  }
+
+  /* Intro section ("Find the Right Course for Your Goal") in view:
+     warm up the first 9 videos so the first rows appear instantly. */
+  var introSec = document.querySelector('.courses-intro-new');
+  if (introSec) {
+    var introIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        vids.slice(0, 9).forEach(function (v) { attach(v); });
+        introIO.disconnect();
+      });
+    }, { threshold: 0.25 });
+    introIO.observe(introSec);
+  }
+
+  /* Courses grid section reached: bulk-load every video of the
+     currently active filter (all 42 when "All" is selected). */
+  var coursesSec = document.querySelector('.courses-page');
+  if (coursesSec) {
+    var secIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        attachAllInCategory(window.__courseFilter || 'all');
+        secIO.disconnect();
+      });
+    }, { threshold: 0.1 });
+    secIO.observe(coursesSec);
+  }
+
+  /* Filter tab switch: immediately fetch every video of that filter. */
+  document.addEventListener('coursefilter:bulkload', function (e) {
+    attachAllInCategory((e.detail && e.detail.filter) || 'all');
+  });
 })();
 </script>
 <script>
@@ -1734,6 +3619,156 @@ function step(timestamp) {
         .catch(function(err) { console.warn('[SW] Registration failed:', err); });
     });
   }
+</script>
+<script>
+(function () {
+  var BATCH = 6; // cards shown per load
+  var currentFilter = 'all';
+  var visibleCount = BATCH;
+
+  var allCols = Array.prototype.slice.call(
+    document.querySelectorAll('.courses-grid .course-col')
+  );
+  var filterBtns = document.querySelectorAll('.cft-btn');
+  var showMoreBtn = document.getElementById('courseShowMoreBtn');
+  var showMoreWrap = document.getElementById('courseShowMoreWrap');
+
+  function getFilteredCols() {
+    if (currentFilter === 'all') return allCols;
+    return allCols.filter(function (col) {
+      return col.getAttribute('data-category') === currentFilter;
+    });
+  }
+
+  function applyDisplay() {
+    var filtered = getFilteredCols();
+
+    // Remember which cols were visible before this pass so only the
+    // newly shown ones get the stagger reveal
+    var wasVisible = {};
+    allCols.forEach(function (col) {
+      if (col.classList.contains('course-col-visible')) wasVisible[col.id] = true;
+    });
+
+    // Instead of display:none use a class that keeps the element
+    // in the DOM flow enough for IntersectionObserver to work
+    allCols.forEach(function (col) {
+      col.classList.add('course-col-hidden');
+      col.classList.remove('course-col-visible');
+    });
+
+    var newlyVisible = [];
+    filtered.forEach(function (col, i) {
+      if (i < visibleCount) {
+        col.classList.remove('course-col-hidden');
+        col.classList.add('course-col-visible');
+        if (!wasVisible[col.id]) newlyVisible.push(col);
+      }
+    });
+
+    // Reveal newly shown cards one by one immediately — no waiting
+    // for the user to scroll them into view
+    newlyVisible.forEach(function (col, j) {
+      var card = col.querySelector('.course-item-card');
+      if (card) {
+        setTimeout(function () { card.classList.add('card-visible'); }, j * 100);
+      }
+    });
+
+    // Publish active filter so the video loader can bulk-fetch by category
+    window.__courseFilter = currentFilter;
+
+    // After making cards visible, manually trigger video loading
+    // for any newly visible cards whose videos haven't loaded yet
+    setTimeout(function () {
+      filtered.forEach(function (col, i) {
+        if (i < visibleCount) {
+          var vid = col.querySelector('video[data-src]');
+          if (vid && vid.dataset.aidLoaded !== '1') {
+            vid.dataset.aidLoaded = '1';
+            vid.src = vid.getAttribute('data-src');
+            var playPromise = vid.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(function () {});
+            }
+          } else if (vid && vid.dataset.aidLoaded === '1' && vid.paused) {
+            var playPromise2 = vid.play();
+            if (playPromise2 && typeof playPromise2.catch === 'function') {
+              playPromise2.catch(function () {});
+            }
+          }
+        }
+      });
+    }, 50);
+
+    // Show/hide the Show More button
+    if (visibleCount >= filtered.length) {
+      showMoreWrap.style.display = 'none';
+    } else {
+      showMoreWrap.style.display = 'block';
+      showMoreBtn.innerHTML = 'Show More <i class="fa fa-chevron-down"></i>';
+    }
+  }
+
+  // Filter tab clicks
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentFilter = btn.getAttribute('data-filter');
+      visibleCount = BATCH; // reset to first 6 on filter change
+      applyDisplay();
+      // Bulk-fetch every video belonging to the selected filter
+      // so the whole category is ready without waiting for scroll
+      try {
+        document.dispatchEvent(new CustomEvent('coursefilter:bulkload', {
+          detail: { filter: currentFilter }
+        }));
+      } catch (err) { /* no CustomEvent: eager section triggers still cover it */ }
+    });
+  });
+
+  // Show More click
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', function () {
+      visibleCount += BATCH;
+      applyDisplay();
+    });
+  }
+
+  // Initial render — small delay to let the video observer
+  // set up first before we start showing/hiding cards
+  setTimeout(function () {
+    applyDisplay();
+  }, 100);
+
+  // Arrow scroll buttons for filter tabs
+  (function () {
+    var tabsEl   = document.getElementById('courseFilterTabs');
+    var arrowL   = document.getElementById('cftArrowLeft');
+    var arrowR   = document.getElementById('cftArrowRight');
+    if (!tabsEl || !arrowL || !arrowR) return;
+
+    var SCROLL_AMT = 200;
+
+    function updateArrows() {
+      arrowL.classList.toggle('hidden', tabsEl.scrollLeft <= 4);
+      arrowR.classList.toggle('hidden',
+        tabsEl.scrollLeft + tabsEl.clientWidth >= tabsEl.scrollWidth - 4);
+    }
+
+    arrowL.addEventListener('click', function () {
+      tabsEl.scrollBy({ left: -SCROLL_AMT, behavior: 'smooth' });
+    });
+    arrowR.addEventListener('click', function () {
+      tabsEl.scrollBy({ left: SCROLL_AMT, behavior: 'smooth' });
+    });
+
+    tabsEl.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    updateArrows();
+  })();
+})();
 </script>
 </body>
 </html>
