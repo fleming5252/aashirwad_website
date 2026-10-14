@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    AASHIRWAD CHATBOT - chatbot.js
    Injects the chat window and wires it to the bottom-right frame
    animation (#chatbotWidget) so clicking the animation opens chat.
@@ -24,7 +24,7 @@
       tagline: 'Academy for Competitive Examinations, Research & Training',
       description: 'An educational institution headquartered in Vaikom, Kottayam, Kerala, covering competitive examinations, teacher eligibility training, civil service preparation, digital learning and skill development.',
       approach: ['Conceptual clarity','Systematic preparation','Regular assessment','Quality learning resources','Personalised mentoring','Continuous academic support'],
-      stats: ['16+ years of transforming aspirations','28 first ranks in PSC examinations','15,000+ students guided','500+ ranks achieved','200+ expert classes','95% student satisfaction'],
+      stats: ['16+ years of transforming aspirations','28 first ranks in PSC examinations','15,000+ students guided','5000+ ranks achieved','200+ expert classes','95% student satisfaction'],
       journey: [
         { year: 2009, text: 'Aashirwad established in Vaikom; Navodaya training initiated.' },
         { year: 2010, text: 'Pallikkathodu Centre established.' },
@@ -55,11 +55,11 @@
       youtube: 'https://www.youtube.com/@aashirwadinstituteofteachers'
     },
     centres: [
-      { id: 'vaikom',        name: 'Vaikom',          district: 'Kottayam',   role: 'Head Office', year: '2009' },
-      { id: 'pallikkathodu', name: 'Pallikkathodu',   district: 'Kottayam',   role: 'Centre', year: '2010' },
-      { id: 'ettumanoor',    name: 'Ettumanoor',      district: 'Kottayam',   role: 'Centre', year: '2011' },
-      { id: 'thrippunithura',name: 'Thrippunithura',  district: 'Ernakulam',  role: 'Centre', year: '2019' },
-      { id: 'north-paravur', name: 'North Paravur',   district: 'Ernakulam',  role: 'Centre', year: '2026' }
+      { id: 'vaikom',        name: 'Vaikom',          district: 'Kottayam',   role: 'Head Office', year: '2009', map: 'https://www.google.com/maps/place/Aashirwad+Institute+Of+Teachers./@9.7986126,76.4377363,12.76z/data=!4m6!3m5!1s0x3b08791202bf0249:0xef3dd46b957523ea!8m2!3d9.7554921!4d76.3953634!16s%2Fg%2F11c5s47wt6' },
+      { id: 'pallikkathodu', name: 'Pallikkathodu',   district: 'Kottayam',   role: 'Centre', year: '2010', map: 'https://www.google.com/maps/search/?api=1&query=Aashirwad+Institute+of+Teachers+Pallikkathodu' },
+      { id: 'ettumanoor',    name: 'Ettumanoor',      district: 'Kottayam',   role: 'Centre', year: '2011', map: 'https://www.google.com/maps/search/?api=1&query=Aashirwad+Institute+of+Teachers+Ettumanoor' },
+      { id: 'thrippunithura',name: 'Thrippunithura',  district: 'Ernakulam',  role: 'Centre', year: '2019', map: 'https://www.google.com/maps/search/?api=1&query=Aashirwad+Institute+of+Teachers+Thrippunithura' },
+      { id: 'north-paravur', name: 'North Paravur',   district: 'Ernakulam',  role: 'Centre', year: '2026', map: 'https://www.google.com/maps/search/?api=1&query=Aashirwad+Institute+of+Teachers+North+Paravur' }
     ],
     offlineNote: 'Aashirwad provides comprehensive offline classroom training in addition to its digital learning platform — a blended approach combining the EduVerse app with structured offline training, academic guidance and direct mentoring.',
     centreCaveat: 'The supplied website does not provide individual phone numbers, office hours, exact street addresses, course-by-course availability or batch schedules for each centre. Do not invent these details. Programme availability may vary by centre — please confirm with Aashirwad.',
@@ -73,7 +73,7 @@
       { group: 'Language Training', items: 'German · Arabic · Malayalam · Sanskrit · Japanese · Hindi · English' },
       { group: 'Sports, Martial Arts & Wellness', items: 'Chess · Roller Skating · Kung Fu · Karate · Yoga · Meditation' }
     ],
-    examAreasNote: 'The dedicated Courses page focuses on nine online/course-card programmes. Other training areas are part of the institution\'s wider profile — availability varies by centre, so please confirm with Aashirwad.',
+    examAreasNote: 'The dedicated Courses page lists 47 course cards across institute, language, arts, chess and tuition categories. Other training areas are part of the institution\'s wider profile — availability varies by centre, so please confirm with Aashirwad.',
     csnp: {
       title: 'Civil Service Nurture Programme (CSNP)',
       year: 2024,
@@ -109,32 +109,146 @@
     },
     courses: [
       { id: 'women-police',    icon: '👮‍♀️', title: 'Women Police',
-        desc: 'Specialized coaching for Women Police constable examinations with physical training and mock interviews.',
-        price: '₹2,999', original: '₹4,999', discount: '40% OFF', rating: '4.8', students: '1.2k+' },
-      { id: 'police-constable',icon: '👮‍♂️', title: 'Police Constable',
-        desc: 'Complete preparation for Kerala Police Constable examinations including written, physical and viva preparation.',
-        price: '₹3,499', original: '₹5,499', discount: '36% OFF', rating: '4.7', students: '2.1k+' },
+        desc: 'Specialized coaching for Women Police constable exams with physical training and mock interviews.',
+        price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.8', students: '1.2k+' },
+      { id: 'police',          icon: '👮‍♂️', title: 'Civil Police Officer',
+        desc: 'Complete preparation for Kerala Civil Police Officer exams including written, physical, and viva.',
+        price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.7', students: '2.1k+' },
       { id: 'lgs',             icon: '📝', title: 'LGS (Lower Grade)',
-        desc: 'Thorough coaching for Lower Grade Servants examinations with focus on the Kerala PSC syllabus.',
-        price: '₹2,499', original: '₹3,999', discount: '37% OFF', rating: '4.6', students: '3.4k+' },
+        desc: 'Thorough coaching for Lower Grade Servants exams with focus on Kerala PSC syllabus.',
+        price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.6', students: '3.4k+' },
       { id: 'ldc',             icon: '🗂️', title: 'LDC Clerk',
-        desc: 'Expert-led coaching for Lower Division Clerk examinations with comprehensive study materials.',
-        price: '₹3,999', original: '₹6,499', discount: '38% OFF', rating: '4.9', students: '5.6k+' },
-      { id: 'degree-level',    icon: '🎓', title: 'Degree Level',
-        desc: 'Degree-level PSC examination preparation covering all subjects with expert faculty guidance.',
-        price: '₹4,499', original: '₹7,499', discount: '40% OFF', rating: '4.8', students: '4.2k+' },
+        desc: 'Expert-led coaching for Lower Division Clerk exams with comprehensive study materials.',
+        price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.9', students: '5.6k+' },
+      { id: 'degree',          icon: '🎓', title: 'Degree Level',
+        desc: 'Degree-level PSC exam preparation covering all subjects with expert faculty guidance.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '4.2k+' },
       { id: 'secretariat',     icon: '🏛️', title: 'Secretariat Assistant',
-        desc: 'Specialized coaching for Secretariat Assistant examinations with focus on Kerala PSC standards.',
-        price: '₹5,999', original: '₹8,999', discount: '33% OFF', rating: '4.5', students: '1.8k+' },
-      { id: 'ktet',            icon: '📘', title: 'KTET',
-        desc: 'Success-guaranteed KTET coaching with mock tests, expert faculty and comprehensive study materials.',
-        price: '₹3,999', original: '₹6,999', discount: '43% OFF', rating: '4.9', students: '6.3k+' },
+        desc: 'Specialized coaching for Secretariat Assistant exams with focus on Kerala PSC standards.',
+        price: '₹17,500', original: '₹25,000', discount: '30% OFF', rating: '4.5', students: '1.8k+' },
+      { id: 'ktet-1',          icon: '📘', title: 'KTET Category I',
+        desc: 'KTET Category I coaching for Class 1 to 5 teacher eligibility with expert classes, study materials and mock tests.',
+        price: '₹13,500', original: '₹15,000', discount: '10% OFF', rating: '4.9', students: '3.2k+' },
+      { id: 'ktet-2',          icon: '📗', title: 'KTET Category II',
+        desc: 'KTET Category II coaching for Class 6 to 8 teacher eligibility with expert classes, study materials and mock tests.',
+        price: '₹18,000', original: '₹20,000', discount: '10% OFF', rating: '4.8', students: '2.4k+' },
+      { id: 'ktet-1-2',        icon: '📕', title: 'KTET Category I & II',
+        desc: 'Combined KTET Category I and II coaching covering both papers with comprehensive materials and practice tests.',
+        price: '₹22,500', original: '₹25,000', discount: '10% OFF', rating: '4.9', students: '6.3k+' },
       { id: 'ctet',            icon: '📗', title: 'CTET',
         desc: 'Central Teacher Eligibility Test preparation with all subjects covered by expert educators.',
-        price: '₹4,499', original: '₹7,499', discount: '40% OFF', rating: '4.7', students: '2.9k+' },
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '2.9k+' },
       { id: 'civil-service',   icon: '🇮🇳', title: 'Civil Service Foundation',
-        desc: 'Foundation course for Civil Services with comprehensive coverage of the Prelims and Mains syllabus.',
-        price: '₹12,999', original: '₹19,999', discount: '35% OFF', rating: '4.6', students: '1.5k+' }
+        desc: 'Foundation course for Civil Services with comprehensive coverage of prelims and mains syllabus.',
+        price: '₹12,000', original: '₹24,000', discount: '50% OFF', rating: '4.6', students: '1.5k+' },
+      { id: 'beat-forest-officer', icon: '🌲', title: 'Beat Forest Officer',
+        desc: 'Focused coaching for Kerala Forest Beat Officer exams with syllabus-wise classes and mock tests.',
+        price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.7', students: '1.4k+' },
+      { id: 'excise-officer',  icon: '🚔', title: 'Excise Officer',
+        desc: 'Complete Kerala Excise Officer exam preparation with expert faculty and practice tests.',
+        price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.7', students: '1.1k+' },
+      { id: 'company-board',   icon: '🏢', title: 'Company Board Assistant',
+        desc: 'Kerala Company Board Assistant exam coaching with comprehensive study materials and mock tests.',
+        price: '₹17,500', original: '₹25,000', discount: '30% OFF', rating: '4.6', students: '1.6k+' },
+      { id: 'university-assistant', icon: '🏫', title: 'University Assistant',
+        desc: 'Kerala University Assistant exam coaching with updated materials, practice tests and expert guidance.',
+        price: '₹17,500', original: '₹25,000', discount: '30% OFF', rating: '4.7', students: '2.3k+' },
+      { id: 'typist',          icon: '⌨️', title: 'Typist',
+        desc: 'Kerala PSC Typist coaching with speed typing practice, shortcuts and full syllabus coverage.',
+        price: '₹14,000', original: '₹17,500', discount: '20% OFF', rating: '4.5', students: '1.9k+' },
+      { id: 'lpst-upst',       icon: '👩‍🏫', title: 'LP/UP School Teacher',
+        desc: 'Comprehensive LP & UP School Teacher (LPST/UPST) exam coaching with complete syllabus coverage.',
+        price: '₹14,000', original: '₹20,000', discount: '30% OFF', rating: '4.8', students: '2.7k+' },
+      { id: 'ssc',             icon: '📜', title: 'SSC',
+        desc: 'All-India SSC coaching (CGL, CHSL, MTS) with topic-wise classes, mock tests and previous-year analysis.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '3.1k+' },
+      { id: 'rrb',             icon: '🚆', title: 'RRB',
+        desc: 'Railway exam coaching for NTPC, Group D and ALP with complete practice sets and mock tests.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '2.4k+' },
+      { id: 'imu-cet',         icon: '⚓', title: 'IMU-CET',
+        desc: 'Merchant Navy entrance coaching for IMU-CET with physics, mathematics and aptitude preparation.',
+        price: '₹18,000', original: '₹20,000', discount: '10% OFF', rating: '4.5', students: '0.9k+' },
+      { id: 'navodaya',        icon: '🏫', title: 'Navodaya Entrance',
+        desc: 'JNVST coaching for Class 6 & 9 Navodaya Vidyalaya entrance with mental ability practice and mock tests.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '2.2k+' },
+      { id: 'english',         icon: '🗣️', title: 'Spoken English',
+        desc: 'Practical spoken English and communication training for interviews, exams and everyday fluency.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '4.1k+' },
+      { id: 'malayalam',       icon: '📖', title: 'Malayalam Language',
+        desc: 'Malayalam language coaching for competitive exams with grammar, comprehension and writing practice.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '1.7k+' },
+      { id: 'hindi',           icon: '📕', title: 'Hindi Language',
+        desc: 'Hindi language training for competitive exams with grammar, translation and practice papers.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '1.5k+' },
+      { id: 'arabic',          icon: '🕌', title: 'Arabic Language',
+        desc: 'Arabic language coaching for PSC and general purposes with expert-led grammar and conversation classes.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.5', students: '0.8k+' },
+      { id: 'german',          icon: '🇩🇪', title: 'German Language',
+        desc: 'Spoken German training from A1 to B1 levels with certification-oriented classroom sessions.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '1.3k+' },
+      { id: 'japanese',        icon: '🇯🇵', title: 'Japanese Language',
+        desc: 'Beginner-friendly Japanese classes covering JLPT N5–N4 level grammar and conversation.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '0.9k+' },
+      { id: 'sanskrit',        icon: '🕉️', title: 'Sanskrit Language',
+        desc: 'Sanskrit language coaching for competitive exams with grammar, comprehension and structured practice.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '1.0k+' },
+      { id: 'bharatanatyam',   icon: '💃', title: 'Bharatanatyam',
+        desc: 'Certified Bharatanatyam training for beginners to advanced levels with stage performance opportunities.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.9', students: '2.8k+' },
+      { id: 'mohiniyattam',    icon: '🩰', title: 'Mohiniyattam',
+        desc: 'Traditional Mohiniyattam dance training under expert gurus with focus on grace and expressions.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '2.1k+' },
+      { id: 'kathakali',       icon: '🎭', title: 'Kathakali',
+        desc: 'Classical Kathakali training covering chutti, mudras and abhinaya with experienced artists.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '1.6k+' },
+      { id: 'kuchipudi',       icon: '💃', title: 'Kuchipudi',
+        desc: 'Authentic Kuchipudi dance classes for all age groups with flexible batch timings.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '1.2k+' },
+      { id: 'kerala-nadanam',  icon: '🎶', title: 'Kerala Nadanam',
+        desc: 'Kerala Nadanam training blending classical and folk traditions for competitions and stage shows.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '1.4k+' },
+      { id: 'chenda',          icon: '🥁', title: 'Chenda',
+        desc: 'Chenda melam training from basics to advanced rhythms with traditional percussion masters.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '1.1k+' },
+      { id: 'music',           icon: '🎵', title: 'Music',
+        desc: 'Carnatic and light music training with vocal and instrumental options for all age groups.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '2.6k+' },
+      { id: 'tabla',           icon: '🥁', title: 'Tabla',
+        desc: 'Tabla classes for beginners to diploma level with structured syllabus and practice sessions.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '1.8k+' },
+      { id: 'chess-basic',     icon: '♟️', title: 'Basic Level Chess Coaching',
+        desc: 'Beginner-friendly chess coaching covering board basics, piece movement, fundamental tactics and opening ideas.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '1.2k+' },
+      { id: 'chess-intermediate', icon: '♟️', title: 'Intermediate Level Chess Coaching',
+        desc: 'Structured intermediate training focusing on tactics, positional play, endgame techniques and game analysis.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '0.9k+' },
+      { id: 'chess-advanced',  icon: '♟️', title: 'Advanced Level Chess Coaching',
+        desc: 'Advanced chess coaching with deep strategy, complex endgames, master game study and personalised feedback.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '0.7k+' },
+      { id: 'chess-competitive', icon: '🏆', title: 'Competitive Chess Training',
+        desc: 'Tournament-oriented training with practice matches, time-management drills and rating-improvement guidance.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.9', students: '0.6k+' },
+      { id: 'karate',          icon: '🥋', title: 'Karate',
+        desc: 'Shotokan karate training for self-defence, fitness and belt examinations under certified instructors.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '3.2k+' },
+      { id: 'kung-fu',         icon: '🥋', title: 'Kung Fu',
+        desc: 'Kung Fu classes for discipline, fitness and self-defence with progressive belt grading.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '1.9k+' },
+      { id: 'taekwondo',       icon: '🥋', title: 'Taekwondo',
+        desc: 'Olympic-style Taekwondo coaching for kids and adults with sparring and poomsae training.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.7', students: '2.2k+' },
+      { id: 'yoga',            icon: '🧘', title: 'Yoga',
+        desc: 'Daily yoga classes for stress relief, flexibility and overall wellness with certified instructors.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '2.9k+' },
+      { id: 'abacus',          icon: '🧮', title: 'Abacus',
+        desc: 'Mental arithmetic training for children using the abacus method to boost speed, focus and confidence.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '3.4k+' },
+      { id: 'tuition',         icon: '📚', title: 'Tuition',
+        desc: 'Subject-wise tuition for school students from LKG to Plus Two with personal attention and regular tests.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.6', students: '5.2k+' },
+      { id: 'scholarship',     icon: '🎓', title: 'Scholarship Training',
+        desc: 'Scholarship entrance training for school students covering LSS, USS, PCM, NMMS and NTSE examinations with concept classes and mock tests.',
+        contactFee: true, price: '', original: '', discount: '', rating: '4.8', students: '1.6k+' }
     ],
     programs: [
       { title: 'Competitive Examination Training', items: 'Kerala PSC · Merchant Navy IMU-CET · JNVST' },
@@ -153,7 +267,8 @@
         { title: 'Reading Mode',  desc: 'Distraction-free digital reading environments curated by subject experts.' },
         { title: 'Writing Mode',  desc: 'Writing and practice exercises to support memory retrieval and long-term retention.' },
         { title: 'Audio Mode',    desc: 'Professionally explained audio lessons for learning while travelling or exercising.' },
-        { title: 'Video Mode',    desc: 'Video lessons that simplify complex theories and syllabus topics.' }
+        { title: 'Video Mode',    desc: 'Video lessons that simplify complex theories and syllabus topics.' },
+        { title: 'Live Mode',     desc: 'Live classes and interactive discussions with faculty in real time.' }
       ],
       features: [
         'Syllabus Tree (module-wise subjects, topics, subtopics + revision tests)',
@@ -166,7 +281,7 @@
         'Real-time Notifications',
         'Rank Files access'
       ],
-      journey: 'Choose Your Exam → Category → Subject → Topic → Sub Topic → Content → Four Learning Modes',
+      journey: 'Choose Your Exam → Category → Subject → Topic → Sub Topic → Content → Five Learning Modes',
       webJourney: 'Study → Practice → Revise → Test → Analyze → Succeed',
       freeTrial: '2-day free trial of premium features (Reading, Writing, Audio, Video)',
       rewards: 'Users can compete in live contests, earn reward points on leaderboards, and redeem those points on premium courses and study materials within the app.',
@@ -251,7 +366,7 @@
       { q: 'What is the CSNP?',
         a: 'The Civil Service Nurture Programme (CSNP), introduced in 2024, is a flagship initiative to nurture young aspirants from the school level (Classes 8 to Plus Two) towards Civil Services. It focuses on knowledge development, analytical thinking, communication skills, current affairs awareness, confidence and leadership qualities.' },
       { q: 'What exams do you coach for?',
-        a: 'Competitive exam training covers Kerala PSC, Merchant Navy IMU-CET and JNVST. Teacher eligibility covers KTET Category I & II, CTET, LPST/UPST and HST. School exams cover JNVST, NMMS, LSS and USS. The institutional profile also lists SSC and other competitive examinations. The Courses page lists nine course cards: Women Police, Police Constable, LGS, LDC Clerk, Degree Level, Secretariat Assistant, KTET, CTET and Civil Service Foundation.' }
+          a: 'Competitive exam training covers Kerala PSC, Merchant Navy IMU-CET and JNVST. Teacher eligibility covers KTET Category I & II, CTET, LPST/UPST and HST. School exams cover JNVST, NMMS, LSS and USS. The institutional profile also lists SSC and other competitive examinations. The Courses page lists 47 course cards across institute, language, arts, chess and tuition categories — including Women Police, Civil Police Officer, LGS, LDC Clerk, Degree Level, Secretariat Assistant, KTET (Category I, II and combined), CTET and Civil Service Foundation.' }
     ]
   };
 
@@ -669,7 +784,7 @@
   /* COURSES MENU */
   function showCoursesMenu() {
     if (!window._aiReplaying) logEvent('showCoursesMenu', {});
-    appendBot('Here are the <strong>9 courses</strong> currently listed on our website. Select one to learn more:');
+    appendBot('Here are the <strong>47 courses</strong> currently listed on our website. Select one to learn more:');
     var chips = KB.courses.map(function (s) {
       return { label: s.icon + ' ' + s.title, action: function () { showCourseDetail(s); } };
     });
@@ -679,9 +794,12 @@
 
   function showCourseDetail(s) {
     if (!window._aiReplaying) logEvent('showCourseDetail', { id: s.id });
+    var feeHtml = s.contactFee
+      ? '<strong>💰 Fee:</strong> <a href="https://api.whatsapp.com/send/?phone=918547935616&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener noreferrer">Contact institution for fee details</a><br>'
+      : '<strong>💰 Fee:</strong> ' + s.price + ' <span style="text-decoration:line-through;color:var(--ai-muted);">' + s.original + '</span> <strong style="color:var(--ai-red);">' + s.discount + '</strong><br>';
     var body =
       s.desc + '<br><br>' +
-      '<strong>💰 Fee:</strong> ' + s.price + ' <span style="text-decoration:line-through;color:var(--ai-muted);">' + s.original + '</span> <strong style="color:var(--ai-red);">' + s.discount + '</strong><br>' +
+      feeHtml +
       '<strong>⭐ Rating:</strong> ' + s.rating + ' &nbsp;·&nbsp; <strong>👥 Students:</strong> ' + s.students + '<br>' +
       '<div style="margin-top:8px;font-size:11.5px;color:var(--ai-muted);">Prices, ratings and student counts are the values currently displayed on our website and may change. Please confirm with Aashirwad before enrolment.</div>';
     appendInfoCard(
@@ -704,7 +822,7 @@
     appendInfoCard(
       '🎓',
       'Aashirwad\'s Wider Training Areas',
-      rows + '<br><div style="font-size:11.5px;color:var(--ai-muted);">The Courses page focuses on nine online/course-card programmes. Other areas are part of the institution\'s wider profile - availability varies by centre, so please confirm with Aashirwad.</div>',
+      rows + '<br><div style="font-size:11.5px;color:var(--ai-muted);">The Courses page now lists 47 course cards across institute, language, arts, chess and tuition categories. Other areas are part of the institution\'s wider profile - availability varies by centre, so please confirm with Aashirwad.</div>',
       'See Course Cards',
       'courses.html',
       function () { appendBot('What else can I help you with?'); showMainMenu(); }
@@ -715,19 +833,34 @@
   function showCentres() {
     if (!window._aiReplaying) logEvent('showCentres', {});
     var rows = KB.centres.map(function (c) {
-      return '<div class="ai-contact-row"><span class="ai-contact-icon">📍</span><span><strong>' + c.name + '</strong> — ' + c.district + ' District · ' + c.role + (c.year ? ' · Established ' + c.year : '') + '</span></div>';
+      return '<div class="ai-contact-row"><span class="ai-contact-icon">📍</span><span><strong>' + c.name + '</strong> — ' + c.district + ' District · ' + c.role + (c.year ? ' · Established ' + c.year : '') + '<br><a href="' + c.map + '" target="_blank" rel="noopener noreferrer">View on Google Maps</a></span></div>';
     }).join('');
     appendInfoCard(
       '📍',
       'Our Centres',
-      '<strong>Yes — Aashirwad provides offline classroom training</strong> across its centres, in addition to the EduVerse digital platform.<br><br>' +
+      'Aashirwad has <strong>5 centres</strong> across Kerala:<br><br>' +
       rows + '<br>' +
-      '<strong>Offline Training:</strong> ' + KB.offlineNote + '<br><br>' +
+      '<br><strong>Note:</strong> All centres offer offline classroom training alongside the EduVerse digital platform.<br><br>' +
       '<div style="font-size:11.5px;color:var(--ai-muted);">' + KB.centreCaveat + '</div>',
-      'View on Google Maps',
-      KB.contact.maps,
-      function () { appendBot('What else can I help you with?'); showMainMenu(); }
+      null,
+      null,
+      function () {
+        msgsEl.querySelectorAll('.ai-centre-map-btn').forEach(function (b) { b.remove(); });
+        appendBot('What else can I help you with?');
+        showMainMenu();
+      }
     );
+    KB.centres.forEach(function (c) {
+      var mapBtn = document.createElement('a');
+      mapBtn.className = 'ai-cta-btn ai-centre-map-btn';
+      mapBtn.href = c.map;
+      mapBtn.target = '_blank';
+      mapBtn.rel = 'noopener noreferrer';
+      mapBtn.style.marginTop = '6px';
+      mapBtn.innerHTML = '📍 ' + c.name;
+      msgsEl.appendChild(mapBtn);
+    });
+    scrollIfNearBottom();
   }
 
   /* APP */
@@ -742,7 +875,7 @@
       KB.app.desc + '<br><br>' +
       '<strong>Learning Journey:</strong> ' + KB.app.webJourney + '<br>' +
       '<strong>App Path:</strong> ' + KB.app.journey + '<br><br>' +
-      '<strong>Four Learning Modes:</strong><br>' + modes + '<br>' +
+      '<strong>Five Learning Modes:</strong><br>' + modes + '<br>' +
       '<strong>Free Trial:</strong> ' + KB.app.freeTrial,
       'Download on Google Play',
       KB.app.play,
@@ -948,7 +1081,10 @@
   function showPrice() {
     if (!window._aiReplaying) logEvent('showPrice', {});
     var rows = KB.courses.map(function (c) {
-      return '<div class="ai-contact-row"><span class="ai-contact-icon">' + c.icon + '</span><span><strong>' + c.title + '</strong> — ' + c.price + ' <span style="text-decoration:line-through;color:var(--ai-muted);">' + c.original + '</span> (' + c.discount + ')</span></div>';
+      var fee = c.contactFee
+        ? 'Contact institution for fee details'
+        : c.price + ' <span style="text-decoration:line-through;color:var(--ai-muted);">' + c.original + '</span> (' + c.discount + ')';
+      return '<div class="ai-contact-row"><span class="ai-contact-icon">' + c.icon + '</span><span><strong>' + c.title + '</strong> — ' + fee + '</span></div>';
     }).join('');
     appendInfoCard(
       '💰',
@@ -1335,7 +1471,7 @@
       '<strong>What Aashirwad provides:</strong><br>' +
       '• Expert coaching and structured training for competitive examinations such as Kerala PSC, KTET, CTET, Police exams and Civil Services<br>' +
       '• Comprehensive study materials, mock tests, regular assessments and personalised mentoring<br>' +
-      '• A proven institutional record — 28 PSC first ranks, 500+ ranks achieved and 15,000+ students guided (figures as displayed on our website)<br><br>' +
+      '• A proven institutional record — 28 PSC first ranks, 5000+ ranks achieved and 15,000+ students guided (figures as displayed on our website)<br><br>' +
       '<strong>What no coaching institute can do:</strong><br>' +
       'Government and competitive examinations are selection-based, not course-completion-based. A candidate must clear the written examination, physical tests (where applicable) and interview conducted by the recruiting authority. <strong>No educational institution can guarantee a job, a rank or examination success</strong> — that depends on each candidate\'s preparation, performance and the competition in that particular exam cycle.<br><br>' +
       '<strong>What this means for you:</strong><br>Joining a PSC course at Aashirwad gives you the training, materials and guidance to prepare seriously — it does not guarantee employment. What it does guarantee is that you will not prepare alone.<br><br>' +
@@ -1516,14 +1652,26 @@
       /* If a specific course is named, show that course's card (includes its fee) */
       var courseFeeMap = [
         { id: 'women-police',     re: /women\s*police/ },
-        { id: 'police-constable', re: /police\s*constable|constable/ },
+        { id: 'police',           re: /civil\s*police|police\s*constable|constable/ },
         { id: 'lgs',              re: /\blgs\b|lower\s*grade/ },
         { id: 'ldc',              re: /\bldc\b|lower\s*division|clerk/ },
-        { id: 'degree-level',     re: /degree\s*level|\bdegree\b/ },
+        { id: 'degree',           re: /degree\s*level|\bdegree\b/ },
         { id: 'secretariat',      re: /secretariat/ },
-        { id: 'ktet',             re: /\bktet\b/ },
+        { id: 'ktet-1-2',         re: /\bktet\b/ },
         { id: 'ctet',             re: /\bctet\b/ },
-        { id: 'civil-service',    re: /civil\s*service/ }
+        { id: 'civil-service',    re: /civil\s*service/ },
+        { id: 'beat-forest-officer', re: /forest|beat/ },
+        { id: 'excise-officer',   re: /excise/ },
+        { id: 'company-board',    re: /company\s*board/ },
+        { id: 'university-assistant', re: /university/ },
+        { id: 'typist',           re: /typist|typing/ },
+        { id: 'lpst-upst',        re: /\blpst\b|\bupst\b|lp\s*\/?\s*up/ },
+        { id: 'ssc',              re: /\bssc\b|cgl|chsl|mts/ },
+        { id: 'rrb',              re: /\brrb\b|railway|ntpc/ },
+        { id: 'imu-cet',          re: /imu|merchant\s*navy/ },
+        { id: 'navodaya',         re: /navodaya|jnv/ },
+        { id: 'english',          re: /spoken\s*english|\benglish\b/ },
+        { id: 'chess-basic',      re: /chess/ }
       ];
       var feeMatch = null;
       for (var fi = 0; fi < courseFeeMap.length; fi++) {

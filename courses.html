@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Aashirwad Courses | Kerala PSC, KTET, CTET &amp; Competitive Exam Coaching</title>
+    <title>Aashirwad Courses | Kerala PSC, KTET, CTET, Languages, Arts &amp; Sports Coaching</title>
 
     <meta name="description"
-      content="Explore Aashirwad EduVerse courses for Kerala PSC, KTET, CTET, Police, LDC, LGS, Degree Level and Civil Services exams with mock tests and expert guidance.">
-    <meta name="keywords" content="Kerala PSC courses, PSC coaching courses Kerala, Kerala PSC preparation courses, KTET coaching Kerala, KTET training Kerala, CTET coaching Kerala, CTET training Kerala, LDC coaching Kerala, LGS coaching Kerala, Kerala Police coaching, police exam coaching Kerala, women police coaching Kerala, Secretariat Assistant coaching Kerala, degree level PSC coaching Kerala, civil service coaching Kerala, civil services preparation Kerala, government exam courses Kerala, competitive exam courses Kerala, PSC courses Kottayam, PSC courses Vaikom, PSC coaching courses Kottayam, government exam courses Kottayam, PSC preparation courses Kerala, KTET preparation classes Kerala, CTET preparation classes Kerala, Kerala PSC mock test courses, PSC study materials Kerala, government job preparation Kerala, Aashirwad EduVerse courses, Aashirwad PSC courses">
+      content="Explore 47 Aashirwad courses — Kerala PSC, KTET, CTET, SSC, RRB, Civil Services plus languages, dance, music, chess, karate, yoga, abacus and tuition.">
+    <meta name="keywords" content="Kerala PSC courses, PSC coaching courses Kerala, Kerala PSC preparation courses, KTET coaching Kerala, KTET training Kerala, CTET coaching Kerala, CTET training Kerala, LDC coaching Kerala, LGS coaching Kerala, Kerala Police coaching, police exam coaching Kerala, women police coaching Kerala, Secretariat Assistant coaching Kerala, degree level PSC coaching Kerala, civil service coaching Kerala, civil services preparation Kerala, government exam courses Kerala, competitive exam courses Kerala, PSC courses Kottayam, PSC courses Vaikom, PSC coaching courses Kottayam, government exam courses Kottayam, PSC preparation courses Kerala, KTET preparation classes Kerala, CTET preparation classes Kerala, Kerala PSC mock test courses, PSC study materials Kerala, government job preparation Kerala, Aashirwad EduVerse courses, Aashirwad PSC courses, SSC coaching Kerala, RRB coaching Kerala, IMU CET coaching Kerala, Navodaya coaching Kerala, Beat Forest Officer coaching, Excise Officer coaching Kerala, Company Board Assistant coaching, University Assistant coaching Kerala, Typist coaching Kerala, LP UP ST coaching Kerala, English classes Kerala, Malayalam classes Kerala, Hindi classes Kerala, Arabic classes Kerala, German classes Kerala, Japanese classes Kerala, Sanskrit classes Kerala, Bharatanatyam classes Kerala, Mohiniyattam classes, Kathakali classes, Kuchipudi classes, Kerala Nadanam, Chenda lessons Kerala, music classes Kerala, tabla classes Kerala, chess classes Kerala, karate classes Kerala, kung fu classes Kerala, taekwondo classes Kerala, yoga classes Kerala, abacus classes Kerala, tuition classes Kottayam, scholarship coaching Kerala, kids hobby classes Vaikom">
     <meta name="author" content="Aashirwad Institute of Teachers">
     <meta name="robots"
       content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -34,9 +34,9 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title"
-      content="Aashirwad Courses | Kerala PSC, KTET, CTET &amp; Competitive Exam Coaching">
+      content="Aashirwad Courses | Kerala PSC, KTET, CTET, Languages, Arts &amp; Sports Coaching">
     <meta property="og:description"
-      content="Explore Aashirwad EduVerse courses for Kerala PSC, KTET, CTET, Police, LDC, LGS, Degree-level and Civil Services examinations.">
+      content="Explore 47 Aashirwad courses — Kerala PSC, KTET, CTET, SSC, RRB, Civil Services plus languages, dance, music, chess, karate, yoga, abacus and tuition.">
     <meta property="og:url" content="https://aitacademyindia.com/courses.html">
     <meta property="og:site_name" content="Aashirwad EduVerse">
     <meta property="og:locale" content="en_IN">
@@ -49,9 +49,9 @@
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title"
-      content="Aashirwad Courses | Kerala PSC, KTET, CTET &amp; Competitive Exam Coaching">
+      content="Aashirwad Courses | Kerala PSC, KTET, CTET, Languages, Arts &amp; Sports Coaching">
     <meta name="twitter:description"
-      content="Explore Aashirwad EduVerse courses for Kerala PSC, KTET, CTET, Police, LDC, LGS, Degree-level and Civil Services examinations.">
+      content="Explore 47 Aashirwad courses — Kerala PSC, KTET, CTET, SSC, RRB, Civil Services plus languages, dance, music, chess, karate, yoga, abacus and tuition.">
     <meta name="twitter:image" content="https://aitacademyindia.com/assets/images/courses-hero.webp">
     <meta name="twitter:image:alt" content="Aashirwad EduVerse courses">
 
@@ -439,8 +439,8 @@
         "@type": "CollectionPage",
         "@id": "https://aitacademyindia.com/courses.html#webpage",
         "url": "https://aitacademyindia.com/courses.html",
-        "name": "Aashirwad Courses — Kerala PSC, KTET, CTET & Competitive Exam Coaching",
-        "description": "Courses offered by Aashirwad EduVerse for Kerala PSC, KTET, CTET, Police, Degree-level and Civil Services examination preparation.",
+        "name": "Aashirwad Courses — Kerala PSC, KTET, CTET, Languages, Arts & Sports Coaching",
+        "description": "47 courses offered by Aashirwad EduVerse covering Kerala PSC, KTET, CTET, SSC, RRB, Civil Services, languages, performing arts, chess, martial arts, yoga, abacus and tuition.",
         "isPartOf": {
           "@id": "https://aitacademyindia.com/#website"
         },
@@ -3496,6 +3496,31 @@ function step(timestamp) {
     } catch (e) { /* ignore */ }
   }
 
+  /* ── NEW: limit concurrent decoders to 2 ── */
+  var MAX_CONCURRENT = 3;
+
+  function enforcePlayLimit() {
+    var loaded = vids.filter(function (v) { return v.dataset.aidLoaded === '1'; });
+    var visible = loaded.filter(function (v) { return verticalVisibility(v) > PLAY_VISIBILITY; });
+
+    /* Most-visible first */
+    visible.sort(function (a, b) { return verticalVisibility(b) - verticalVisibility(a); });
+
+    visible.forEach(function (v, i) {
+      if (i < MAX_CONCURRENT) {
+        if (v.paused) safePlay(v);
+      } else {
+        if (!v.paused) v.pause();
+      }
+    });
+
+    /* Pause anything loaded but no longer in viewport */
+    loaded.forEach(function (v) {
+      if (visible.indexOf(v) === -1 && !v.paused) v.pause();
+    });
+  }
+  window.enforcePlayLimit = enforcePlayLimit;
+
   /* Assigning .src already runs the resource selection algorithm, so no
      explicit load() — calling it here would abort any pending play request.
      Returns true when this call did the initial wiring. */
@@ -3529,14 +3554,30 @@ function step(timestamp) {
     entries.forEach(function (e) {
       var v = e.target;
       if (verticalVisibility(v) > PLAY_VISIBILITY) {
-        /* Exactly one play() per tick: attach once, then only play when
-           paused. Two play() calls in the same tick make the second abort
-           the first with an AbortError. */
-        attach(v);
-        if (v.paused) safePlay(v);
+        var isNew = attach(v);
+        if (isNew) {
+          /* canplaythrough = browser has buffered enough to play without
+             interruption. Canplay fires too early on a cold load and
+             causes the stutter you saw. */
+          v.addEventListener('canplaythrough', function onCpt() {
+            v.removeEventListener('canplaythrough', onCpt);
+            if (verticalVisibility(v) > PLAY_VISIBILITY) enforcePlayLimit();
+          });
+          /* Fallback: canplaythrough may never fire on slow connections,
+             so after 800 ms of canplay we try anyway — by then enough
+             data has usually buffered for smooth looping clips. */
+          v.addEventListener('canplay', function onCp() {
+            v.removeEventListener('canplay', onCp);
+            setTimeout(function () {
+              if (v.paused && verticalVisibility(v) > PLAY_VISIBILITY) enforcePlayLimit();
+            }, 800);
+          });
+        } else if (v.paused) {
+          enforcePlayLimit();
+        }
       } else if (v.dataset.aidLoaded === '1' && !v.paused) {
-        /* Below 40% visible (or off-screen): stop decoding. */
         v.pause();
+        enforcePlayLimit(); /* freed a slot — promote the next most-visible */
       }
     });
   }, { rootMargin: '0px', threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1] });
@@ -3570,10 +3611,15 @@ function step(timestamp) {
 
   /* ── Eager section-triggered loading ── */
   function attachAllInCategory(cat) {
+    var pending = [];
     document.querySelectorAll('.courses-grid .course-col').forEach(function (col) {
       if (cat !== 'all' && col.getAttribute('data-category') !== cat) return;
       var v = col.querySelector('video[data-src]');
-      if (v) attach(v); /* attach only — play stays gated by the 40% observer */
+      if (v && v.dataset.aidLoaded !== '1') pending.push(v);
+    });
+    /* Stagger: 3 videos every 200 ms — prevents a sudden 47-request network burst */
+    pending.forEach(function (v, i) {
+      setTimeout(function () { attach(v); }, Math.floor(i / 3) * 200);
     });
   }
 
@@ -3687,15 +3733,18 @@ function step(timestamp) {
           if (vid && vid.dataset.aidLoaded !== '1') {
             vid.dataset.aidLoaded = '1';
             vid.src = vid.getAttribute('data-src');
-            var playPromise = vid.play();
-            if (playPromise && typeof playPromise.catch === 'function') {
-              playPromise.catch(function () {});
-            }
+            vid.addEventListener('canplaythrough', function onCpt() {
+              vid.removeEventListener('canplaythrough', onCpt);
+              enforcePlayLimit();
+            });
+            vid.addEventListener('canplay', function onCp() {
+              vid.removeEventListener('canplay', onCp);
+              setTimeout(function () {
+                if (vid.paused) enforcePlayLimit();
+              }, 800);
+            });
           } else if (vid && vid.dataset.aidLoaded === '1' && vid.paused) {
-            var playPromise2 = vid.play();
-            if (playPromise2 && typeof playPromise2.catch === 'function') {
-              playPromise2.catch(function () {});
-            }
+            enforcePlayLimit();
           }
         }
       });
