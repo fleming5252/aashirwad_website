@@ -294,7 +294,7 @@ display values rather than permanent prices or guarantees.
 
 4. LDC CLERK
    Description:
-   Expert-led coaching for Lower Division Clerk examinations with
+   Structured coaching for Lower Division Clerk examinations with
    comprehensive study materials.
 
    Displayed price: ₹3,999
@@ -602,7 +602,7 @@ The app presents a structured preparation path:
 4. Topic
 5. Sub Topic
 6. Content
-7. Four Learning Modes
+7. Five Learning Modes
 
 The app is designed to organize courses separately so that learners
 can follow a focused preparation path.
@@ -697,11 +697,12 @@ The supplied app page states that Aashirwad EduVerse provides a
 2-day free trial.
 
 The trial allows users to explore premium features including the
-four learning modes:
+five learning modes:
 - Reading
 - Writing
 - Audio
 - Video
+- Live
 
 The app structured data lists the application download price as
 ₹0 and describes the 2-day free trial of premium features.
@@ -1112,8 +1113,8 @@ Q: Does the app have a free trial?
 A: Yes. The supplied website states that EduVerse provides a 2-day
 free trial for premium features.
 
-Q: What are the four learning modes in EduVerse?
-A: Reading, Writing, Audio and Video.
+Q: What are the five learning modes in EduVerse?
+A: Reading, Writing, Audio, Video and Live.
 
 Q: What is the Syllabus Tree?
 A: It organizes learning content module-wise into subjects, topics,

@@ -14,6 +14,7 @@
   var CACHE_TTL_MS = 24 * 60 * 60 * 1000;
   var SESSION_KEY  = 'ai_chat_session';
   var COMPANY_NAME = 'Aashirwad Institute of Teachers';
+  var EXP_YEARS    = new Date().getFullYear() - 2010;
 
   /* KNOWLEDGE BASE (static - zero API credits) */
   var KB = {
@@ -24,7 +25,7 @@
       tagline: 'Academy for Competitive Examinations, Research & Training',
       description: 'An educational institution headquartered in Vaikom, Kottayam, Kerala, covering competitive examinations, teacher eligibility training, civil service preparation, digital learning and skill development.',
       approach: ['Conceptual clarity','Systematic preparation','Regular assessment','Quality learning resources','Personalised mentoring','Continuous academic support'],
-      stats: ['16+ years of transforming aspirations','28 first ranks in PSC examinations','15,000+ students guided','5000+ ranks achieved','200+ expert classes','95% student satisfaction'],
+      stats: [EXP_YEARS + '+ years of transforming aspirations','28 first ranks in PSC examinations','15,000+ students guided','10,000+ ranks achieved','200+ expert classes','95% student satisfaction'],
       journey: [
         { year: 2009, text: 'Aashirwad established in Vaikom; Navodaya training initiated.' },
         { year: 2010, text: 'Pallikkathodu Centre established.' },
@@ -118,7 +119,7 @@
         desc: 'Thorough coaching for Lower Grade Servants exams with focus on Kerala PSC syllabus.',
         price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.6', students: '3.4k+' },
       { id: 'ldc',             icon: '🗂️', title: 'LDC Clerk',
-        desc: 'Expert-led coaching for Lower Division Clerk exams with comprehensive study materials.',
+        desc: 'Structured coaching for Lower Division Clerk exams with comprehensive study materials.',
         price: '₹15,000', original: '₹25,000', discount: '40% OFF', rating: '4.9', students: '5.6k+' },
       { id: 'degree',          icon: '🎓', title: 'Degree Level',
         desc: 'Degree-level PSC exam preparation covering all subjects with expert faculty guidance.',
@@ -283,7 +284,7 @@
       ],
       journey: 'Choose Your Exam → Category → Subject → Topic → Sub Topic → Content → Five Learning Modes',
       webJourney: 'Study → Practice → Revise → Test → Analyze → Succeed',
-      freeTrial: '2-day free trial of premium features (Reading, Writing, Audio, Video)',
+      freeTrial: '2-day free trial of premium features (Reading, Writing, Audio, Video, Live)',
       rewards: 'Users can compete in live contests, earn reward points on leaderboards, and redeem those points on premium courses and study materials within the app.',
       play: 'https://play.google.com/store/apps/details?id=dev.fle.ashirwad&hl=en_IN',
       ios: 'https://apps.apple.com/in/app/aashirwad-eduverse/id1501952592'
@@ -331,8 +332,8 @@
         a: 'Yes. The app is available on the Apple App Store.' },
       { q: 'Does the app have a free trial?',
         a: 'Yes. The website states that EduVerse provides a 2-day free trial for premium features.' },
-      { q: 'What are the four learning modes in EduVerse?',
-        a: 'Reading, Writing, Audio and Video.' },
+      { q: 'What are the five learning modes in EduVerse?',
+        a: 'Reading, Writing, Audio, Video and Live.' },
       { q: 'What is the Syllabus Tree?',
         a: 'It organizes learning content module-wise into subjects, topics, subtopics and chapters. It also supports personal digital short notes and built-in revision tests.' },
       { q: 'Does the app provide mock tests?',
@@ -1471,7 +1472,7 @@
       '<strong>What Aashirwad provides:</strong><br>' +
       '• Expert coaching and structured training for competitive examinations such as Kerala PSC, KTET, CTET, Police exams and Civil Services<br>' +
       '• Comprehensive study materials, mock tests, regular assessments and personalised mentoring<br>' +
-      '• A proven institutional record — 28 PSC first ranks, 5000+ ranks achieved and 15,000+ students guided (figures as displayed on our website)<br><br>' +
+      '• A proven institutional record — 28 PSC first ranks, 10,000+ ranks achieved and 15,000+ students guided (figures as displayed on our website)<br><br>' +
       '<strong>What no coaching institute can do:</strong><br>' +
       'Government and competitive examinations are selection-based, not course-completion-based. A candidate must clear the written examination, physical tests (where applicable) and interview conducted by the recruiting authority. <strong>No educational institution can guarantee a job, a rank or examination success</strong> — that depends on each candidate\'s preparation, performance and the competition in that particular exam cycle.<br><br>' +
       '<strong>What this means for you:</strong><br>Joining a PSC course at Aashirwad gives you the training, materials and guidance to prepare seriously — it does not guarantee employment. What it does guarantee is that you will not prepare alone.<br><br>' +
@@ -1633,7 +1634,7 @@
     }
     if (/\b(free trial|trial)\b/.test(lower)) {
       logEvent('userMsg', { text: text });
-      appendBot('Yes! The Aashirwad EduVerse app provides a <strong>2-day free trial</strong> of premium features - including the Reading, Writing, Audio and Video learning modes.<br><br>Would you like to learn more about the app?');
+      appendBot('Yes! The Aashirwad EduVerse app provides a <strong>2-day free trial</strong> of premium features - including the Reading, Writing, Audio, Video and Live learning modes.<br><br>Would you like to learn more about the app?');
       showApp(); return;
     }
     if (/\b(online|offline|both)\b/.test(lower) && /\b(coach|training|class|study|learn|app|eduverse)\b/.test(lower)) {

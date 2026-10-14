@@ -64,7 +64,7 @@ The Courses page lists nine courses. Descriptions below reflect the visible page
 1. Women Police — Specialized coaching for Women Police constable exams with physical training and mock interviews. Category: Kerala Police recruitment / Women Police Constable.
 2. Police Constable — Complete preparation for Kerala Police Constable exams including written, physical, and viva. Category: Kerala Police recruitment.
 3. LGS (Lower Grade) — Thorough coaching for Lower Grade Servants exams with focus on Kerala PSC syllabus. Category: Kerala PSC.
-4. LDC Clerk — Expert-led coaching for Lower Division Clerk exams with comprehensive study materials. Category: Kerala PSC.
+4. LDC Clerk — Structured coaching for Lower Division Clerk exams with comprehensive study materials. Category: Kerala PSC.
 5. Degree Level — Degree-level PSC exam preparation covering all subjects with expert faculty guidance. Category: Kerala PSC.
 6. Secretariat Assistant — Specialized coaching for Secretariat Assistant exams with focus on Kerala PSC standards. Category: Kerala PSC.
 7. KTET — KTET coaching with mock tests, expert faculty, and comprehensive study materials, described on the page as success-guaranteed. Category: KTET (Kerala Teacher Eligibility Test).
@@ -142,7 +142,7 @@ Lists the available examination preparation courses, each with a short descripti
 
 ### App
 
-Describes the Aashirwad EduVerse application: its purpose, the Google Play and Apple App Store download links, the four learning modes, and features including syllabus organisation, search, exam modes, live contests, the game zone, current affairs and progress tracking.
+Describes the Aashirwad EduVerse application: its purpose, the Google Play and Apple App Store download links, the five learning modes, and features including syllabus organisation, search, exam modes, live contests, the game zone, current affairs and progress tracking.
 
 ### Contact
 

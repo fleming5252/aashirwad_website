@@ -2766,6 +2766,13 @@ responsive
 .wheel-node:nth-child(3) { bottom: 0px; left: 120px; }
 .wheel-node:nth-child(4) { top: 120px;  left: 0px;   }
 
+/* Pentagon layout — 5 nodes 72° apart (ring 320px, radius 120px) */
+.wheel-ring.pentagon .wheel-node:nth-child(1) { top: 0;      left: 120px; right: auto; bottom: auto; }
+.wheel-ring.pentagon .wheel-node:nth-child(2) { top: 83px;   left: 234px; right: auto; bottom: auto; }
+.wheel-ring.pentagon .wheel-node:nth-child(3) { top: 217px;  left: 191px; right: auto; bottom: auto; }
+.wheel-ring.pentagon .wheel-node:nth-child(4) { top: 217px;  left: 49px;  right: auto; bottom: auto; }
+.wheel-ring.pentagon .wheel-node:nth-child(5) { top: 83px;   left: 6px;   right: auto; bottom: auto; }
+
 .node-inner {
   text-align: center;
   transition: transform 0.75s cubic-bezier(0.65, 0, 0.35, 1);
@@ -5071,6 +5078,13 @@ section.app-heading-page h6.app-sub-quote {
   .wheel-node:nth-child(2) { top: 50%;   right: 0%; transform: translate(0, -50%); }
   .wheel-node:nth-child(3) { bottom: 0%; left: 50%; transform: translate(-50%, 0); }
   .wheel-node:nth-child(4) { top: 50%;   left: 0%;  transform: translate(0, -50%); }
+
+  /* Pentagon layout — 5 nodes 72° apart */
+  .wheel-ring.pentagon .wheel-node:nth-child(1) { top: 0%;      left: 50%;    right: auto; bottom: auto; transform: translate(-50%, 0); }
+  .wheel-ring.pentagon .wheel-node:nth-child(2) { top: 38.41%;  left: 85.67%; right: auto; bottom: auto; transform: translate(-50%, -50%); }
+  .wheel-ring.pentagon .wheel-node:nth-child(3) { top: 80.34%;  left: 72.04%; right: auto; bottom: auto; transform: translate(-50%, -50%); }
+  .wheel-ring.pentagon .wheel-node:nth-child(4) { top: 80.34%;  left: 27.96%; right: auto; bottom: auto; transform: translate(-50%, -50%); }
+  .wheel-ring.pentagon .wheel-node:nth-child(5) { top: 38.41%;  left: 14.33%; right: auto; bottom: auto; transform: translate(-50%, -50%); }
 
   .step-dots {
     display: flex;
